@@ -1,0 +1,367 @@
+{
+  "tableau": "Project Resilience Alpha",
+  "url": "https://trello.com/b/6ad5d94a97885fa3827b9d0c",
+  "exporte_le": "2026-10-19",
+  "note": "Snapshot fidele du tableau Trello. Les listes EN COURS / BLOQUE / TERMINE sont volontairement vides : elles servent au suivi manuel pendant la semaine.",
+  "roles": {
+    "P1": "Dev Backend - API metier paiement + Auth (FastAPI + PostgreSQL)",
+    "P2": "Dev Frontend - Front paiement + Dashboard SOC (React/Tailwind)",
+    "P3": "Ops / Infra - Docker Compose, Ansible, Prometheus/Grafana/Loki",
+    "P4": "Cyber - Red Team (attaque) + Blue Team (WAF, SIEM, secrets, durcissement)",
+    "P5": "ML / Data - Detection d'anomalies (IsolationForest) + RAG (Ollama/LangChain)",
+    "P6": "PM / Gouvernance - Pilotage, Kanban, EBIOS/PCA-PRA/NIS2-DORA, livrables"
+  },
+  "listes": [
+    {
+      "liste": "LUNDI - Archi, squelettes, EBIOS",
+      "cartes": [
+        {
+          "id": "L1",
+          "titre": "P1 | Squelette API FastAPI : endpoints /pay et /health (mock) + modele BDD transaction",
+          "roles": [
+            "P1"
+          ],
+          "description": "Objectif : poser le squelette FastAPI sur lequel tout le monde se branchera des mardi.\n\nContenu : endpoints /pay et /health en mock, modele Transaction et migration PostgreSQL initiale.\n\nFait quand : /health repond 200 et /pay renvoie une reponse mockee conforme au contrat d'API fige par P6."
+        },
+        {
+          "id": "L2",
+          "titre": "P2 | Projet React + Tailwind : maquettes ecran Paiement et Dashboard SOC (cables sur mock)",
+          "roles": [
+            "P2"
+          ],
+          "description": "Objectif : deux ecrans cables sur des donnees mock, prets a recevoir l'API reelle mardi.\n\nContenu : projet React + Tailwind initialise, ecran Paiement (formulaire), ecran Dashboard SOC structure mais vide.\n\nFait quand : les deux ecrans s'affichent et consomment le mock sans erreur console."
+        },
+        {
+          "id": "L3",
+          "titre": "P3 | docker-compose.yml : db + api + Prometheus + Grafana + Loki qui demarrent",
+          "roles": [
+            "P3"
+          ],
+          "description": "Objectif : toute la stack demarre en une seule commande.\n\nContenu : services db, api, Prometheus, Grafana et Loki, avec reseau, volumes et variables d'environnement.\n\nFait quand : docker compose up demarre tout et les premieres metriques apparaissent dans Grafana."
+        },
+        {
+          "id": "L4",
+          "titre": "P4 | Preparer le PC Attaquant + choisir le scenario DoS controle",
+          "roles": [
+            "P4"
+          ],
+          "description": "Objectif : disposer d'un poste d'attaque operationnel et d'un scenario valide.\n\nContenu : reseau RESILIENCE-G6, IP 192.168.137.1, outillage DoS installe, choix et documentation du scenario DoS controle.\n\nFait quand : le PC Attaquant joint la cible et le scenario est valide par l'equipe."
+        },
+        {
+          "id": "L5",
+          "titre": "P5 | Collecter la baseline de metriques normales + choisir le modele ML",
+          "roles": [
+            "P5"
+          ],
+          "description": "Objectif : savoir a quoi ressemble un trafic normal, sinon rien n'est detectable.\n\nContenu : collecte des metriques de reference (latence, CPU, taux de requetes), choix du modele (IsolationForest).\n\nFait quand : un jeu de donnees baseline est exporte et le modele est arrete."
+        },
+        {
+          "id": "L6",
+          "titre": "P6 | Figer les 4 contrats d'API, lancer EBIOS RM, ouvrir le Kanban (20 tickets)",
+          "roles": [
+            "P6"
+          ],
+          "description": "Objectif : debloquer le travail en parallele des 6 des mardi matin.\n\nContenu : figer les 4 contrats d'API avec tout le monde, lancer l'analyse de risques EBIOS RM, ouvrir le Kanban avec les 20 tickets.\n\nFait quand : les 4 contrats sont valides par les 6 et le Kanban est rempli."
+        },
+        {
+          "id": "L7",
+          "titre": "SYNC POINT LUNDI (fin de journee) - la stack demarre et les 4 contrats sont valides",
+          "roles": [
+            "JALON"
+          ],
+          "description": "Point de synchronisation de fin de journee, a valider par les 6.\n\nCriteres : docker compose up demarre DB + API + Prometheus, les metriques sont visibles dans Grafana, les 4 contrats d'API sont valides.\n\nConsequence : chacun peut coder en parallele des mardi matin."
+        }
+      ]
+    },
+    {
+      "liste": "MARDI - Production + detection prouvee",
+      "cartes": [
+        {
+          "id": "M1",
+          "titre": "P1 | API complete : une vraie transaction fictive persiste en base + Auth JWT",
+          "roles": [
+            "P1"
+          ],
+          "description": "Objectif : passer du mock au reel.\n\nContenu : une vraie transaction fictive persiste en base PostgreSQL, authentification JWT sur les endpoints proteges.\n\nFait quand : un appel a /pay cree bien une ligne en base et un token JWT valide est exige."
+        },
+        {
+          "id": "M2",
+          "titre": "P2 | Front paiement fonctionnel : formulaire vers API puis affichage du resultat",
+          "roles": [
+            "P2"
+          ],
+          "description": "Objectif : le parcours de paiement marche de bout en bout cote utilisateur.\n\nContenu : formulaire React, appel a l'API reelle, affichage du resultat (succes ou echec) et gestion des erreurs.\n\nFait quand : un paiement saisi dans le front cree bien une transaction en base."
+        },
+        {
+          "id": "M3",
+          "titre": "P3 | Playbooks Ansible de base + /metrics branches sur l'API reelle",
+          "roles": [
+            "P3"
+          ],
+          "description": "Objectif : preparer les briques que le moteur de remediation appellera mercredi.\n\nContenu : playbooks Ansible de base (redemarrage de service, recreation de conteneur), /metrics expose par l'API reelle et scrape par Prometheus.\n\nFait quand : les playbooks s'executent a la main et les metriques applicatives remontent dans Grafana."
+        },
+        {
+          "id": "M4",
+          "titre": "P4 | Script d'attaque DoS fonctionnel et reproductible depuis le PC Attaquant",
+          "roles": [
+            "P4"
+          ],
+          "description": "Objectif : une attaque rejouable a volonte, c'est la base de toutes les demos de la semaine.\n\nContenu : script d'attaque DoS lance depuis le PC Attaquant, parametrable et reproductible.\n\nFait quand : deux lancements successifs produisent le meme effet visible sur la cible."
+        },
+        {
+          "id": "M5",
+          "titre": "P5 | Entrainer le modele + endpoint /anomaly + calibrer le seuil",
+          "roles": [
+            "P5"
+          ],
+          "description": "Objectif : prouver la detection, c'est le jalon critique de mardi.\n\nContenu : entrainement du modele sur la baseline de lundi, endpoint /anomaly, calibrage du seuil pour limiter les faux positifs.\n\nFait quand : /anomaly renvoie anomaly=true pendant l'attaque et false au repos."
+        },
+        {
+          "id": "M6",
+          "titre": "P6 | Dossier NIS2/DORA + PCA/PRA v1 + mise a jour du Kanban",
+          "roles": [
+            "P6"
+          ],
+          "description": "Objectif : avancer les livrables de gouvernance en parallele du technique, pour ne pas les decouvrir jeudi.\n\nContenu : dossier NIS2 et DORA, PCA/PRA v1, mise a jour du Kanban et du registre des risques.\n\nFait quand : les documents v1 sont deposes dans le dossier partage."
+        },
+        {
+          "id": "M7",
+          "titre": "SYNC POINT MARDI (JALON CRITIQUE) - pic visible dans Grafana ET le ML renvoie anomaly=true",
+          "roles": [
+            "JALON"
+          ],
+          "description": "JALON CRITIQUE de la semaine.\n\nCriteres : l'attaque produit un pic visible dans Grafana ET le modele renvoie anomaly=true sur le meme evenement.\n\nSi ce jalon tombe, la detection est prouvee et mercredi peut etre consacre entierement a la remediation.",
+          "checklists": [
+            {
+              "nom": "Criteres du jalon",
+              "items": [
+                "Attaque lancee depuis le PC Attaquant",
+                "Pic visible dans Grafana pendant l'attaque",
+                "Le modele renvoie anomaly=true sur le meme evenement",
+                "Aucun faux positif quand le trafic est normal",
+                "Demonstration refaite devant les 6"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "liste": "MERCREDI - Chaine autonome bout-en-bout",
+      "cartes": [
+        {
+          "id": "W1",
+          "titre": "P3 + P4 | MOTEUR DE REMEDIATION : ML vers Orchestrateur vers playbook Ansible (PRIORITE ABSOLUE)",
+          "roles": [
+            "P3",
+            "P4"
+          ],
+          "description": "PRIORITE ABSOLUE : c'est le point note 5/5 du projet, co-porte par P3 et P4.\n\nChaine : detection ML, puis Orchestrateur, puis playbook Ansible (activation du WAF, recreation du conteneur, healthcheck).\n\nFait quand : la chaine s'execute entierement sans aucune intervention humaine, de l'attaque au service retabli.",
+          "checklists": [
+            {
+              "nom": "Chaine de remediation",
+              "items": [
+                "Detection ML branchee sur l'orchestrateur",
+                "Orchestrateur declenche le playbook Ansible",
+                "Playbook active le WAF (rate-limit et ban IP)",
+                "Playbook recree le conteneur compromis",
+                "Healthcheck valide le retour a la normale",
+                "Transaction temoin rejouee automatiquement",
+                "Boucle complete sans aucune intervention humaine",
+                "Chrono sous 60 s mercredi, sous 45 s jeudi"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "W2",
+          "titre": "P2 | Dashboard SOC timeline live : attaque, detection, remediation, OK + chrono",
+          "roles": [
+            "P2"
+          ],
+          "description": "Objectif : rendre la remediation visible et chronometree pour le jury.\n\nContenu : timeline live attaque, detection, remediation, service OK, avec chrono affiche en direct.\n\nFait quand : la timeline se met a jour en temps reel pendant une attaque reelle."
+        },
+        {
+          "id": "W3",
+          "titre": "P1 | Transaction temoin automatique post-remediation (preuve metier)",
+          "roles": [
+            "P1"
+          ],
+          "description": "Objectif : prouver que le metier est reellement reparti, pas seulement que le conteneur a redemarre.\n\nContenu : transaction fictive jouee automatiquement apres la remediation, resultat remonte au Dashboard SOC.\n\nFait quand : la transaction temoin passe au vert juste apres chaque remediation."
+        },
+        {
+          "id": "W4",
+          "titre": "P4 | WAF (rate-limit, ban IP) + SIEM (correlation logs Grafana/Loki) + secrets SOPS",
+          "roles": [
+            "P4"
+          ],
+          "description": "Contenu : WAF avec rate-limit et bannissement d'IP, SIEM correlant les logs Grafana et Loki, secrets chiffres avec SOPS.\n\nFait quand : l'IP attaquante est bannie automatiquement, la correlation remonte l'incident et plus aucun secret n'est en clair dans le repo."
+        },
+        {
+          "id": "W5",
+          "titre": "P5 | RAG operationnel (interroge la doc du projet) + aide au calibrage ML",
+          "roles": [
+            "P5"
+          ],
+          "description": "Contenu : RAG (Ollama + LangChain) branche sur la documentation du projet, plus appui a P3 et P4 sur le calibrage du modele.\n\nFait quand : une question posee sur la doc du projet obtient une reponse correcte et sourcee."
+        },
+        {
+          "id": "W6",
+          "titre": "P6 | Premiers tests de restauration chronometres + suivi des blocages",
+          "roles": [
+            "P6"
+          ],
+          "description": "Contenu : premiers tests de restauration chronometres au titre du PCA/PRA, releve des temps, suivi et deblocage des points bloquants de l'equipe.\n\nFait quand : les temps de restauration sont mesures et consignes dans le dossier."
+        },
+        {
+          "id": "W7",
+          "titre": "SYNC POINT MERCREDI - la boucle complete tourne sans humain en moins de 60 s",
+          "roles": [
+            "JALON"
+          ],
+          "description": "Criteres : la boucle complete attaque, detection, remediation, service OK tourne sans humain, en moins de 60 secondes, meme imparfaite.\n\nSi ce jalon n'est pas tenu mercredi soir, jeudi devient tres tendu : prevenir tout de suite."
+        }
+      ]
+    },
+    {
+      "liste": "JEUDI - Chaos, recette, GEL DU CODE 17h00",
+      "cartes": [
+        {
+          "id": "J1",
+          "titre": "P3 + P4 | Repeter l'attaque 10 fois, durcir, viser moins de 45 s, corriger les rates",
+          "roles": [
+            "P3",
+            "P4"
+          ],
+          "description": "Objectif : fiabiliser, surtout ne pas ajouter de fonctionnalites.\n\nContenu : rejouer l'attaque 10 fois, durcir la chaine, corriger chaque rate, viser moins de 45 secondes.\n\nFait quand : 5 executions consecutives passent sous 45 secondes."
+        },
+        {
+          "id": "J2",
+          "titre": "P1 | Fiabiliser le healthcheck + la transaction temoin",
+          "roles": [
+            "P1"
+          ],
+          "description": "Contenu : rendre le healthcheck et la transaction temoin robustes aux cas limites (timeout, redemarrage lent, base indisponible).\n\nFait quand : aucun faux positif ni faux negatif sur 10 executions d'affilee."
+        },
+        {
+          "id": "J3",
+          "titre": "P2 | Finaliser le dashboard + script run-demo.sh (reset entre deux prises)",
+          "roles": [
+            "P2"
+          ],
+          "description": "Contenu : finaliser le Dashboard SOC et ecrire run-demo.sh pour remettre l'environnement a zero entre deux prises.\n\nFait quand : run-demo.sh remet la demo a l'etat initial en une seule commande, de facon fiable."
+        },
+        {
+          "id": "J4",
+          "titre": "P5 | Nettoyer le repo (zero secret en clair) + doc ML et RAG",
+          "roles": [
+            "P5"
+          ],
+          "description": "Contenu : nettoyage du depot (zero secret en clair, y compris dans l'historique), documentation du ML et du RAG.\n\nFait quand : un scan de secrets ne remonte rien et la documentation est a jour."
+        },
+        {
+          "id": "J5",
+          "titre": "P6 | Dossier PDF (8-12 pages) + pptx de soutenance",
+          "roles": [
+            "P6"
+          ],
+          "description": "Contenu : dossier PDF de 8 a 12 pages et support pptx de soutenance.\n\nFait quand : les deux fichiers sont relus par l'equipe et deposes dans le dossier Workshop2026-M2-G6."
+        },
+        {
+          "id": "J6",
+          "titre": "P6 | Tournage du Clip Chrono - 3 prises de secours",
+          "roles": [
+            "P6"
+          ],
+          "description": "Objectif : filet de securite si la demo live echoue vendredi.\n\nContenu : tournage du Clip Chrono avec 3 prises de secours exploitables, montees et pretes a diffuser.\n\nFait quand : les 3 prises completes sont sur le poste de presentation."
+        },
+        {
+          "id": "J7",
+          "titre": "TOUS | Repetition du live",
+          "roles": [],
+          "description": "Repetition complete du live : enchainement pitch et demo, repartition de la parole, gestion des imprevus et du passage aux clips de secours."
+        },
+        {
+          "id": "J8",
+          "titre": "TOUS | GEL DU CODE 17h00 puis remise des livrables avant 23h59",
+          "roles": [
+            "JALON"
+          ],
+          "description": "GEL DU CODE a 17h00 : plus aucune modification du code apres cette heure, quelles que soient les envies.\n\nRemise des 4 livrables avant 23h59 dans le dossier Workshop2026-M2-G6.",
+          "checklists": [
+            {
+              "nom": "Les 4 livrables",
+              "items": [
+                "Code gele a 17h00, plus aucun commit",
+                "Dossier PDF de 8 a 12 pages",
+                "Support pptx de soutenance",
+                "Clip Chrono avec les 3 prises de secours",
+                "Repo propre, sans secret en clair, documente",
+                "Tout depose dans Workshop2026-M2-G6 avant 23h59"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "J9",
+          "titre": "SYNC POINT FINAL - 5 executions consecutives reussies sous 45 s + 4 livrables prets",
+          "roles": [
+            "JALON"
+          ],
+          "description": "Criteres : 5 executions consecutives reussies en moins de 45 secondes et les 4 livrables prets dans le dossier Workshop2026-M2-G6.\n\nC'est le dernier point de controle avant le gel du code.",
+          "checklists": [
+            {
+              "nom": "Recette finale",
+              "items": [
+                "Execution 1 reussie sous 45 s",
+                "Execution 2 reussie sous 45 s",
+                "Execution 3 reussie sous 45 s",
+                "Execution 4 reussie sous 45 s",
+                "Execution 5 reussie sous 45 s",
+                "run-demo.sh teste entre deux prises",
+                "Les 4 livrables sont dans le dossier"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "liste": "VENDREDI - Soutenance (aucune production)",
+      "cartes": [
+        {
+          "id": "V1",
+          "titre": "TOUS | Demo live + pitch de soutenance",
+          "roles": [],
+          "description": "Soutenance : demo live et pitch. Aucune production ce jour-la, aucune modification de code.\n\nLa chaine doit tourner seule, du declenchement de l'attaque au service retabli."
+        },
+        {
+          "id": "V2",
+          "titre": "REGLE CLE | Aucune intervention manuelle pendant le live, sinon 0/5 sur la remediation",
+          "roles": [],
+          "description": "Regle cle de l'evaluation : si quelqu'un doit intervenir a la main pour retablir le service pendant le live, la remediation est notee 0/5.\n\nPersonne ne touche au clavier pendant la demo."
+        },
+        {
+          "id": "V3",
+          "titre": "SECURITE | 3 clips de secours prets a diffuser (tournes jeudi)",
+          "roles": [
+            "P6"
+          ],
+          "description": "Les 3 clips de secours tournes jeudi sont prets a etre diffuses si la demo live echoue.\n\nVerifier avant la soutenance qu'ils sont lisibles sur le poste de presentation."
+        }
+      ]
+    },
+    {
+      "liste": "EN COURS",
+      "cartes": []
+    },
+    {
+      "liste": "BLOQUE",
+      "cartes": []
+    },
+    {
+      "liste": "TERMINE",
+      "cartes": []
+    }
+  ]
+}
