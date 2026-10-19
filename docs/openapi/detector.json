@@ -92,6 +92,15 @@
             "type": ["number", "null"],
             "description": "Score du modele (negatif = nouveaute). null tant qu'aucune observation n'a ete scoree ; apres une erreur, garde la derniere valeur."
           },
+          "config": {
+            "type": "object",
+            "required": ["consecutive", "nu"],
+            "properties": {
+              "consecutive": { "type": "integer", "minimum": 1, "description": "Observations anormales d'affilee avant une alerte (DETECTOR_CONSECUTIVE)." },
+              "nu": { "type": ["number", "null"], "description": "nu du OneClassSVM du modele charge ; null tant qu'aucun modele n'est charge." }
+            },
+            "description": "Configuration avec laquelle le detecteur tourne : sans elle une mesure de reprise n'est pas reproductible. Copiee dans la preuve de scripts/acceptance.py."
+          },
           "soc_signals": {
             "type": "array",
             "items": { "$ref": "#/components/schemas/SocSignal" },

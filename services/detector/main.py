@@ -19,7 +19,8 @@ from services.detector.sources import top_sources
 # Observations in a row before an alert. Read once at startup (DETECTOR_CONSECUTIVE, default 3);
 # an invalid value stops the service instead of silently falling back.
 CONSECUTIVE=consecutive_from_env()
-state={'status':'waiting_for_trained_model','features':None,'score':None}
+# `config` makes a measurement reproducible: what the detector ran with (nu is the loaded model's, None until one loads).
+state={'status':'waiting_for_trained_model','features':None,'score':None,'config':{'consecutive':CONSECUTIVE,'nu':None}}
 def build_alert(value,row,sources):
     """The signed alert body. `sources` are the busiest peer addresses seen by the WAF (possibly none)."""
     return json.dumps({'id':str(uuid.uuid4()),'issued_at':time.time(),'score':value,'features':row,'sources':sources},sort_keys=True).encode()
@@ -45,6 +46,7 @@ async def loop():
                 if path.stat().st_mtime!=stamp:
                     # Only trusted local training artifact; never accept uploaded pickle/joblib.
                     model=joblib.load(path); stamp=path.stat().st_mtime
+                    state['config']={'consecutive':CONSECUTIVE,'nu':float(getattr(model[-1],'nu',None) or 0) or None}
                 row=await sample(); value=score(model,row)
                 state.update(status='monitoring',features=dict(zip(FEATURES,row)),score=value)
                 consecutive=next_consecutive(consecutive,value,row)

@@ -32,6 +32,24 @@ Conserver aussi les horodatages d'attaque et du moteur, synchronisés.
 - [ ] Restauration PostgreSQL testée et RTO/RPO mesurés.
 - [ ] ZIP inspecté : aucune .secrets, aucun token, aucune clé privée.
 
+## Preuve d'une reprise : champs de `runtime/evidence/acceptance-*.json`
+`python scripts/acceptance.py` écrit, pour chaque exécution, ce qu'il faut citer dans le PCA/PRA. Les observations
+brutes restent dans le fichier ; le bloc `summary` donne :
+
+| Champ | Contenu |
+|---|---|
+| `incident.steps` | les quatre étapes, avec heure et décalage depuis la détection : `detected` (alerte du détecteur), `containing` (remédiation lancée), `verifying` (healthcheck OK), `recovered` (transaction témoin validée) |
+| `incident.detection_to_recovered_s` | temps total détection → service rétabli, `within_target` face à 60 s : c'est le chrono du tableau de bord |
+| `witness` | verdict de la transaction témoin (`validated`, `failed` ou `absent`), son identifiant et le total du registre |
+| `user_visible_outage.seconds` | de la **première** indisponibilité vue par l'observateur (premier refus) à la première transaction réussie qui suit : c'est la définition du RTO de `08-PCA-PRA.md`. Ce n'est pas le même temps que le chrono (le service peut être utilisable avant que la reprise soit prouvée), au pas de 0,5 s |
+| `ban` | le bannissement d'IP décidé, appliqué ou non (`06-SECURITE.md`, décision 1) |
+| `detector_config` | `consecutive` et `nu` avec lesquels le détecteur tournait : sans eux une mesure n'est pas reproductible |
+| `code_version` | commit et état modifié ou non de l'arbre de travail (trois essais « à version identique » : comparer les commits) |
+| `complete`, `missing` | si la preuve est utilisable telle quelle, sinon ce qui manque |
+
+Une preuve peut être `passed` et pourtant incomplète (par exemple sans la configuration du détecteur) :
+ne citer dans le dossier que des preuves complètes. `python scripts/check_mercredi.py` le vérifie.
+
 ## Reset entre essais, jamais pendant le live
 La politique reste activée après une reprise. Pour un nouvel essai, hors capture :
 1. Arrêter le trafic offensif et conserver les preuves.
