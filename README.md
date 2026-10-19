@@ -60,6 +60,10 @@ datasource Grafana (code 0 si tout est OK, 1 sinon) ; il ne démarre ni ne modif
 Jalon critique de mardi, après avoir lancé l'attaque à la main : `python scripts/check_mardi.py
 --last 120` mesure le pic dans Prometheus et l'`anomaly=true` du détecteur sur cette fenêtre
 et écrit une preuve horodatée dans `runtime/evidence/` (lecture seule, code 0 ou 1).
+Jalon de mercredi, après une exécution de `python scripts/acceptance.py` pendant une attaque :
+`python scripts/check_mercredi.py` juge la dernière preuve (boucle complète, détection → service rétabli
+sous 60 s, aucune intervention humaine, ban d'IP posé et transaction témoin validée, configuration du
+détecteur consignée) ; `--max-seconds 45` pour la cible de jeudi. Lecture seule, code 0 ou 1.
 La commande d'attaque se lance exclusivement sur le second PC autorisé.
 Un état ML « waiting_for_trained_model » et un RAG 503 sont explicites tant que
 baseline/modèle ne sont pas installés ; aucune réussite n'est simulée à l'écran.
