@@ -14,6 +14,7 @@ import httpx
 from fastapi import FastAPI, HTTPException, Request, Depends
 from services.common.security import secret, operator
 from services.common.audit import emit
+from services.remediator import bans
 STORE=Path(os.getenv('STATE_DIR','/state'))/'incidents.sqlite'
 lock=asyncio.Lock()
 tasks=set()
@@ -51,22 +52,52 @@ async def business_verify(incident_id):
                 return {'transaction_id':tx['id'],'total_cents':snap['total_cents']}
             except (httpx.HTTPError,RuntimeError): await asyncio.sleep(1)
     raise RuntimeError('End-to-end business verification failed')
+def alert_data(incident_id):
+    """The signed alert as received (the incident evidence is the alert until the first status update)."""
+    with connection() as c: row=c.execute('SELECT evidence FROM incidents WHERE id=?',(incident_id,)).fetchone()
+    try: data=json.loads(row['evidence']) if row else {}
+    except ValueError: return {}
+    return data if isinstance(data,dict) else {}
 async def recover(incident_id):
     async with lock:
-        update(incident_id,'containing',{'action':'enable_quote_admission'})
+        # The ban is decided from the SIGNED alert only (never a request header) and is best effort:
+        # whatever happens to it, the containment below goes ahead.
+        ban=bans.plan(alert_data(incident_id).get('sources'))
+        update(incident_id,'containing',{'action':'enable_quote_admission','ban':ban})
         try:
             playbook=Path(__file__).resolve().parents[2]/'infra'/'ansible'/'contain.yml'
+            extra=[]
+            try:
+                if ban['eligible']:
+                    files=bans.merged(bans.config()['dir'],ban['eligible'],ban['ttl_s'])
+                    extra=['-e',json.dumps({'ban_ips':ban['eligible'],'ban_list_content':files['list'],'ban_expiry_content':files['expiry']})]
+            except Exception as exc:   # best effort: no ban, same containment
+                ban={**ban,'eligible':[],'note':f'ban preparation failed: {type(exc).__name__}'}
             proc=await asyncio.create_subprocess_exec(sys.executable,'-m','ansible.cli.playbook','-i','localhost,',
-                str(playbook),stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE)
+                str(playbook),*extra,stdout=asyncio.subprocess.PIPE,stderr=asyncio.subprocess.PIPE)
             try: stdout,stderr=await asyncio.wait_for(proc.communicate(),timeout=25)
             except asyncio.TimeoutError:
                 proc.kill(); await proc.wait(); raise RuntimeError('Ansible timeout')
             if proc.returncode: raise RuntimeError('Ansible failed; inspect internal console')
-            update(incident_id,'verifying',{})
+            # What was really written, read back from the ban list: not assumed from the plan.
+            if ban['eligible']:
+                try: ban={**ban,'applied':bans.applied(bans.config()['dir'],ban['eligible'])}
+                except Exception as exc: ban={**ban,'applied':[],'note':f'ban read-back failed: {type(exc).__name__}'}
+            update(incident_id,'verifying',{'ban':ban})
             proof=await business_verify(incident_id)
-            update(incident_id,'recovered',proof)
+            update(incident_id,'recovered',{**proof,'ban':ban})
         except Exception as exc:
-            update(incident_id,'failed',{'error_type':type(exc).__name__,'manual_review_required':True})
+            update(incident_id,'failed',{'error_type':type(exc).__name__,'manual_review_required':True,'ban':ban})
+async def ban_upkeep():
+    """Bans expire: drop them from the ban list once their time is up. Serialised with recoveries by `lock`."""
+    while True:
+        await asyncio.sleep(15)
+        try:
+            cfg=bans.config()
+            if not cfg['enabled']: continue
+            async with lock: removed=bans.prune(cfg['dir'])
+            if removed: emit('remediator','ban_expired',removed=removed)
+        except Exception as exc: emit('remediator','ban_upkeep_error',error_type=type(exc).__name__)
 @asynccontextmanager
 async def lifespan(app):
     # On interrupted recovery, resume the same fixed idempotent operation after restart.
@@ -74,9 +105,11 @@ async def lifespan(app):
         interrupted=[r['id'] for r in c.execute("SELECT id FROM incidents WHERE status IN ('accepted','containing','verifying')")]
     for iid in interrupted:
         task=asyncio.create_task(recover(iid)); tasks.add(task); task.add_done_callback(tasks.discard)
+    upkeep=asyncio.create_task(ban_upkeep())
     yield
+    upkeep.cancel()
     for task in list(tasks): task.cancel()
-    await asyncio.gather(*tasks,return_exceptions=True)
+    await asyncio.gather(upkeep,*tasks,return_exceptions=True)
 app=FastAPI(title='Authorized remediation',lifespan=lifespan)
 @app.post('/alerts',status_code=202)
 async def alert(request: Request):

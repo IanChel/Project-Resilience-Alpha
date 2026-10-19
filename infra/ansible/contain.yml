@@ -3,6 +3,8 @@
   hosts: localhost
   connection: local
   gather_facts: false
+  vars:
+    ban_dir: "{{ lookup('ansible.builtin.env', 'BAN_DIR') | default('/bans', true) }}"
   tasks:
     - name: Enable the quotation admission policy
       ansible.builtin.uri:
@@ -15,6 +17,29 @@
         body: {}
         status_code: 200
       no_log: true
+    # Temporary source ban. Best effort: the containment above never depends on it, so a failure here is
+    # caught by `rescue` and the play still succeeds. `ban_ips` and both contents come from the remediator,
+    # which built them from the SIGNED alert and checked every address (services/remediator/bans.py):
+    # only lab-subnet addresses, never the Host PC, never an internal address. Nothing here reads a request
+    # header. `copy` is idempotent: replaying an already banned address writes the same content, no error.
+    # The WAF reads ban.list; ban.expiry lets the remediator drop each ban when its time is up.
+    - name: Temporary source ban
+      when: ban_ips | default([]) | length > 0
+      block:
+        - name: Write the expiry table first
+          ansible.builtin.copy:
+            content: "{{ ban_expiry_content }}"
+            dest: "{{ ban_dir }}/ban.expiry"
+            mode: "0644"
+        - name: Write the ban list read by the WAF
+          ansible.builtin.copy:
+            content: "{{ ban_list_content }}"
+            dest: "{{ ban_dir }}/ban.list"
+            mode: "0644"
+      rescue:
+        - name: The ban could not be written, the containment stands
+          ansible.builtin.debug:
+            msg: "Ban not applied; admission control is active."
     - name: Verify the database readiness endpoint
       ansible.builtin.uri:
         use_proxy: false

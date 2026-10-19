@@ -96,6 +96,56 @@ Compromis et risques résiduels :
   une identité de service dédiée au rôle minimal serait plus propre. Non faite : elle touche
   l'authentification, la vérification des jetons et le registre.
 
+## Décision 1 : bannissement temporaire de l'adresse de l'attaquant
+**Ce qui est fait.** Après avoir contenu l'attaque, le playbook peut bannir au WAF les adresses
+sources de l'alerte. L'adresse n'est **jamais** lue dans un en-tête de requête : un client qui
+contrôle `X-Forwarded-For` ferait sinon bannir l'adresse de son choix, y compris celle du proxy, ce qui
+couperait tout le service. Le détecteur la mesure à l'adresse du **pair vu par le WAF lui-même**
+(son journal d'accès, expédié à Loki par Alloy), la met dans l'alerte **signée**, et le remédiateur
+filtre : seules les adresses du sous-réseau du lab (`192.168.137.0/24`) sont bannissables, **jamais
+l'hôte** (qui porte l'observateur), jamais une adresse interne Docker (la transaction témoin part du
+conteneur remédiateur, hors de ce sous-réseau), au plus 3 adresses par alerte. Chaque ban expire
+(5 minutes) ; un ban déjà actif garde son échéance, donc le rejeu ne change rien. Le ban est au mieux :
+son échec ne fait jamais échouer le confinement. La preuve est relue dans le fichier (`ban.applied`
+dans `/ops/status`), pas supposée. Code et tests : `services/remediator/bans.py`, `tests/test_ban.py`.
+
+**Ce qui n'est pas vérifié.** Le dépôt prouve la **décision** (adresse, filtres, expiration,
+idempotence, transaction témoin avec un ban actif), pas son **application** au WAF, que personne n'a
+pu exécuter. Elle est donc une surcouche optionnelle, `compose.ban.yaml`, hors de la stack de base, qui
+repose sur trois hypothèses sur l'image du WAF (journal d'accès via `ACCESSLOG`, chargement d'un fichier
+de règles monté, rechargement par `SIGHUP` d'un conteneur à capacité `KILL` seule, sans socket Docker).
+Deuxième incertitude : sous Docker Desktop, le WAF peut voir l'adresse de la passerelle Docker et non
+celle du PC Attaquant ; elle est exclue (hors sous-réseau), donc **aucun ban n'est posé**, sans danger.
+
+**Pour l'activer, et le valider en exécution.** `docker compose -f compose.yaml -f compose.ban.yaml up -d`,
+puis : (1) `/var/log/modsecurity/access.log` existe dans le WAF et sa première colonne est l'adresse du
+client ; (2) pendant l'attaque, Loki renvoie l'adresse du PC Attaquant pour `{service="wafaccess"}` ;
+(3) après l'alerte, `/ops/status` montre `ban.applied` et le PC Attaquant reçoit un 403 du WAF alors que la
+transaction témoin réussit ; (4) après 5 minutes `/bans/ban.list` est vide. Si l'un des quatre échoue,
+ne pas l'activer pour la soutenance : rien d'autre n'en dépend. Risque assumé : un client légitime du
+sous-réseau qui dépasserait 50 requêtes en 10 s pendant une alerte serait banni 5 minutes.
+
+## Décision 2 : on ne recrée pas le conteneur (« pourquoi vous ne redémarrez pas le conteneur ? »)
+**Ce qu'on fait à la place.** Notre moteur ne remplace aucun conteneur : il contient. Il applique dans
+l'application un contrôle d'admission (un devis par identité et par seconde, persisté sur volume et
+idempotent), éventuellement bannit l'adresse de l'attaquant au WAF, puis il **prouve** la reprise par une
+vraie transaction et la conservation du registre, pas par l'état d'un conteneur. Le service n'est jamais
+arrêté : le contrôle agit pendant que l'attaque continue.
+
+**Pourquoi.** Recréer un conteneur exigerait de confier au moteur le socket Docker, c'est-à-dire un pouvoir
+équivalent à root sur la machine hôte, à un service qui traite des entrées venues du réseau. Un moteur
+compromis pourrait alors démarrer n'importe quel conteneur et monter le disque de l'hôte. Le sujet demande
+justement de ne pas introduire « une interface d'administration accessible à n'importe quel composant ».
+Nous lui donnons deux pouvoirs étroits : appeler une action fixe sur le service de paiement avec un secret
+dédié, et écrire une liste de bannissement.
+
+**Ce que ça coûte.** Ce choix traite une saturation qu'on peut contenir. Un conteneur **compromis** (code
+altéré, mémoire corrompue) ne serait pas remplacé : on contient, on ne reconstruit pas. Pour ce cas la
+réponse est une décision d'opérateur, hors du moteur : confinement, investigation, puis reconstruction
+depuis une image saine (le PRA, `08-PCA-PRA.md`, rappelle qu'un simple retour du paiement ne résout pas
+une compromission ; la procédure de reconstruction n'y est pas détaillée). Le `restart: unless-stopped`
+de Docker, lui, n'est pas une remédiation.
+
 ## Écarts avant tout usage industriel
 TLS, OIDC/asymétrie des clés, moindre privilège DB (le rôle de création initial
 a des droits larges dans ce prototype), séparation des capacités métier,

@@ -1,0 +1,52 @@
+# Surcouche OPTIONNELLE : bannissement temporaire d'IP au niveau du WAF (carte W1).
+#   docker compose -f compose.yaml -f compose.ban.yaml up -d
+# Hors du compose.yaml de base a dessein : cette surcouche touche au demarrage du WAF et repose sur des
+# hypotheses sur l'image owasp/modsecurity-crs:nginx que NI le depot NI ses tests ne peuvent verifier.
+# A valider en execution avant de compter dessus (checklist : docs/06-SECURITE.md, decision 1).
+# Sans elle : la stack se comporte comme avant, l'alerte part sans source et aucun ban n'est pose.
+#
+# Hypotheses a verifier (marquees VERIFY) :
+#  1. la variable ACCESSLOG de l'image ecrit le journal d'acces nginx dans ce fichier ;
+#  2. un fichier monte dans /etc/modsecurity.d/owasp-crs/rules/*.conf est charge par l'image ;
+#  3. nginx recoit un SIGHUP du conteneur waf-reload (PID namespace partage, sans socket Docker).
+# Si l'une est fausse, aucun ban n'est pose, le confinement et la transaction temoin ne sont pas affectes.
+services:
+  bans-init:
+    image: busybox:1.37.0
+    user: '0:0'
+    command: ['sh','-c','touch /bans/ban.list /bans/ban.expiry; chown 10001:10001 /bans /bans/ban.list /bans/ban.expiry; chmod 755 /bans; chmod 644 /bans/ban.list /bans/ban.expiry']
+    volumes: ['bans:/bans']
+    network_mode: none
+    restart: 'no'
+  waf:
+    environment:
+      ACCESSLOG: /var/log/modsecurity/access.log   # VERIFY (1): journal d'acces dont le 1er champ est l'adresse du pair
+    volumes:
+      - bans:/bans:ro                                                                   # lecture seule pour le WAF
+      - ./infra/waf/ra-ban.conf:/etc/modsecurity.d/owasp-crs/rules/00-ra-ban.conf:ro    # VERIFY (2)
+    depends_on:
+      bans-init: {condition: service_completed_successfully}
+  # Recharge le WAF quand la liste de bans change. Pas de socket Docker : il partage seulement l'espace de
+  # processus du WAF et n'a que la capacite KILL, pour envoyer un SIGHUP au processus maitre nginx. VERIFY (3)
+  waf-reload:
+    image: busybox:1.37.0
+    user: '0:0'
+    pid: 'service:waf'
+    cap_drop: [ALL]
+    cap_add: [KILL]
+    read_only: true
+    network_mode: none
+    volumes: ['bans:/bans:ro']
+    command: ['sh','-c','last=""; while true; do m=$$(stat -c %Y /bans/ban.list 2>/dev/null); if [ "$$m" != "$$last" ]; then [ -n "$$last" ] && pkill -HUP -f "nginx: master"; last="$$m"; fi; sleep 1; done']
+    depends_on: [waf]
+    restart: unless-stopped
+    mem_limit: 20m
+  remediator:
+    environment:
+      BAN_ENABLED: '1'
+      BAN_DIR: /bans
+    volumes: ['bans:/bans']
+    depends_on:
+      bans-init: {condition: service_completed_successfully}
+volumes:
+  bans: {}

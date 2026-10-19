@@ -170,6 +170,11 @@
             "maxItems": 4,
             "items": { "type": "number" },
             "description": "Dans l'ordre [quote_rate, active_work, capacity_denied_10s, denial_logs_10s], valeurs finies. `capacity_denied_10s` (indice 2) doit etre > 0 : une alerte sans rejet de capacite est refusee."
+          },
+          "sources": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Optionnel. Adresses les plus actives vues par le WAF lui-meme (adresse du pair de son journal d'acces, jamais un en-tete), a bannir temporairement. Le remediateur ne retient que les adresses du sous-reseau du lab, jamais l'hote ni une adresse interne, au plus BAN_MAX_SOURCES. Une valeur absente, vide ou invalide n'empeche ni l'acceptation ni le confinement : aucun ban n'est pose."
           }
         },
         "additionalProperties": true,
@@ -207,7 +212,7 @@
           "updated": { "type": "number", "description": "Secondes depuis l'epoque Unix." },
           "evidence": {
             "type": "string",
-            "description": "Texte contenant du JSON serialise, pas un objet. `accepted` : l'alerte recue ; `containing` : {action} ; `verifying` : {} ; `recovered` : {transaction_id, total_cents} ; `failed` : {error_type, manual_review_required: true}."
+            "description": "Texte contenant du JSON serialise, pas un objet. `accepted` : l'alerte recue ; `containing` : {action, ban} ; `verifying` : {ban} ; `recovered` : {transaction_id, total_cents, ban} ; `failed` : {error_type, manual_review_required: true, ban}. `ban` decrit le bannissement temporaire : {enabled, requested, eligible, excluded: [{ip, reason}], ttl_s, applied, note}. `eligible` ne contient que des adresses du sous-reseau du lab, jamais l'hote ni une adresse interne ; `applied` est relu dans le fichier de ban apres le playbook (absent si rien n'etait a bannir) ; `note` explique l'absence de ban (desactive, configuration invalide, preparation en echec)."
           }
         },
         "title": "Incident"

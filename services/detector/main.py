@@ -15,10 +15,14 @@ from services.common.audit import emit
 from services.detector.model import score, FEATURES, is_anomalous, next_consecutive, alert_due, consecutive_from_env
 from services.detector.telemetry import sample
 from services.detector.soc import signals
+from services.detector.sources import top_sources
 # Observations in a row before an alert. Read once at startup (DETECTOR_CONSECUTIVE, default 3);
 # an invalid value stops the service instead of silently falling back.
 CONSECUTIVE=consecutive_from_env()
 state={'status':'waiting_for_trained_model','features':None,'score':None}
+def build_alert(value,row,sources):
+    """The signed alert body. `sources` are the busiest peer addresses seen by the WAF (possibly none)."""
+    return json.dumps({'id':str(uuid.uuid4()),'issued_at':time.time(),'score':value,'features':row,'sources':sources},sort_keys=True).encode()
 async def soc_loop():
     while True:
         try:
@@ -44,8 +48,7 @@ async def loop():
                 consecutive=next_consecutive(consecutive,value,row)
                 emit('detector','inference',score=value,features=row,consecutive=consecutive)
                 if alert_due(consecutive,CONSECUTIVE) and time.time()-last_alert>30:
-                    payload=json.dumps({'id':str(uuid.uuid4()),'issued_at':time.time(),
-                                        'score':value,'features':row},sort_keys=True).encode()
+                    payload=build_alert(value,row,await top_sources())
                     signature=hmac.new(secret('alert_key').encode(),payload,hashlib.sha256).hexdigest()
                     async with httpx.AsyncClient(trust_env=False,timeout=8) as c:
                         r=await c.post('http://remediator:8000/alerts',content=payload,

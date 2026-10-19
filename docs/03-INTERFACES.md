@@ -16,14 +16,15 @@ par le navigateur. Les exemples de jetons sont des emplacements, pas des secrets
 | GET /anomaly | outil de recette → detector | aucune, réseau interne | anomaly (bool), score (null si non mesuré), status | Interne |
 | POST /rag/ask | opérateur → rag | question 3–1000 caractères | answer, sources ; 429/503 | PA |
 | GET /metrics | Prometheus → payment | aucune, réseau interne | exposition Prometheus | Interne |
-| POST /alerts | detector → remediator | UUID id, issued_at, score négatif, 4 features | 202 accepté/dédupliqué ; 403/413/422 | Interne |
+| POST /alerts | detector → remediator | UUID id, issued_at, score négatif, 4 features, `sources` optionnel (adresses vues par le WAF) | 202 accepté/dédupliqué ; 403/413/422 | Interne |
 | POST /control/contain | Ansible → payment | X-Control-Key ; action fixe | contained=true, changed bool | Interne |
 
 ## Authentification des alertes
 Header `X-Signature = hex(HMAC-SHA256(alert_key, octets JSON exacts))`.
 L'émetteur signe les octets réellement envoyés. Fenêtre temporelle ±30 secondes,
 UUID d'incident et déduplication persistante. Horloges synchronisées nécessaires.
-Une alerte ne contient ni commande, ni nom de conteneur, ni URL de cible.
+Une alerte ne contient ni commande, ni nom de conteneur, ni URL de cible ; elle peut porter des
+adresses sources (optionnelles), filtrées par le moteur avant tout ban.
 Le moteur refuse un score non fini/positif, un vecteur invalide ou sans pression.
 
 ## Erreurs et reprise

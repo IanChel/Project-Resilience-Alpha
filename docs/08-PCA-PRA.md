@@ -23,7 +23,9 @@ reset manuel se font ensuite, entre deux essais.
 2. Le ML produit des observations anormales d'affilée, chacune confirmée par des rejets
    de capacité : trois par défaut, réglable par `DETECTOR_CONSECUTIVE` (docs/05-ML-RAG.md).
 3. Une alerte signée est acceptée et tracée.
-4. Ansible active l'admission fixe, idempotente et persistée sur volume.
+4. Ansible active l'admission fixe, idempotente et persistée sur volume. Avec la surcouche
+   `compose.ban.yaml`, il bannit aussi temporairement les adresses du lab identifiées dans l'alerte
+   (`06-SECURITE.md`, décision 1) ; sans elle, aucun ban n'est posé.
 5. Une vérification de disponibilité DB ne suffit pas : le moteur crée un paiement
    d'un centime par le WAF, vérifie son enregistrement et le total constant.
 6. État recovered uniquement si toutes les vérifications réussissent.

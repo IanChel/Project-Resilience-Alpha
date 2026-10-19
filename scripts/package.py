@@ -10,7 +10,7 @@ if not a.group.isalnum(): p.error('Group must contain letters or digits only')
 name='Workshop2026-M2-G'+a.group
 output=Path(a.output);output.mkdir(parents=True,exist_ok=True)
 allowed_dirs={'services','frontend','infra','scripts','tests','docs','evidence'}
-allowed_files={'README.md','compose.yaml','Dockerfile','Dockerfile.rag','.dockerignore','.gitignore','pytest.ini','requirements.txt','requirements-dev.txt','requirements-rag.txt'}
+allowed_files={'README.md','compose.yaml','compose.ban.yaml','.env.example','Dockerfile','Dockerfile.rag','.dockerignore','.gitignore','pytest.ini','requirements.txt','requirements-dev.txt','requirements-rag.txt'}
 excluded={'node_modules','dist','__pycache__','.pytest_cache','.git','.secrets','.venv'}
 files=[]
 for path in sorted(root.rglob('*')):

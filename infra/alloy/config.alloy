@@ -15,6 +15,12 @@ loki.source.file "waf" {
   targets = [{__path__ = "/waflogs/audit.log", service = "waf", job = "security"}]
   forward_to = [loki.write.local.receiver]
 }
+// Access log of the WAF itself: its first field is the PEER address, the only source address a client cannot
+// forge. Written only when the ban overlay is enabled (compose.ban.yaml); Alloy just waits while it is absent.
+loki.source.file "wafaccess" {
+  targets = [{__path__ = "/waflogs/access.log", service = "wafaccess", job = "security"}]
+  forward_to = [loki.write.local.receiver]
+}
 loki.write "local" {
   endpoint { url = "http://loki:3100/loki/api/v1/push" }
 }
