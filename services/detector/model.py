@@ -17,3 +17,7 @@ def score(model,row):
     if len(row)!=4 or not all(math.isfinite(float(v)) for v in row):
         raise ValueError('Invalid telemetry')
     return float(model.decision_function([row])[0])
+def is_anomalous(value,row):
+    """The one definition of an anomalous observation: model novelty (negative score) AND
+    capacity rejections present. It feeds the alert counter and GET /anomaly alike."""
+    return value<0 and row[2]>0

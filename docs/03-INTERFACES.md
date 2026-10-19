@@ -13,6 +13,7 @@ par le navigateur. Les exemples de jetons sont des emplacements, pas des secrets
 | GET /api/ready | observateur → payment | aucune | DB accessible ; pas une preuve métier | PA |
 | GET /ops/status | opérateur → remediator | Bearer opérateur | incidents, état, preuves | PA lecture seule |
 | GET /ops/ml | opérateur → detector, contrôle auth_request | Bearer opérateur | état modèle, score, features, signaux SOC | PA lecture seule |
+| GET /anomaly | outil de recette → detector | aucune, réseau interne | anomaly (bool), score (null si non mesuré), status | Interne |
 | POST /rag/ask | opérateur → rag | question 3–1000 caractères | answer, sources ; 429/503 | PA |
 | GET /metrics | Prometheus → payment | aucune, réseau interne | exposition Prometheus | Interne |
 | POST /alerts | detector → remediator | UUID id, issued_at, score négatif, 4 features | 202 accepté/dédupliqué ; 403/413/422 | Interne |
@@ -34,11 +35,12 @@ serveur d'idempotence et les accès concurrents.
 Le moteur conserve sa propre clé `recovery-<incident>` entre les essais.
 
 ## Documentation OpenAPI
-Les quatre contrats sont dans `docs/openapi/` (auth, payment, rag, remediator). Ils
+Les cinq contrats sont dans `docs/openapi/` (auth, detector, payment, rag, remediator). Ils
 sont **maintenus à la main** : l'export brut de FastAPI ne décrit ni les réponses,
 ni les codes d'erreur, ni le jeton (HMAC maison, pas un JWT), ni le corps de
 `POST /alerts`. Chaque route y indique `x-exposure` (publiée par le WAF ou interne).
-Le détecteur (`/ops/ml`) n'a pas de spec : voir le tableau ci-dessus.
+Le détecteur publie `/health` sous `/ops/ml` (état brut) et `/anomaly` (verdict de
+l'observation courante, non publié) ; ils lisent le même état.
 
 Pour contrôler qu'un contrat n'a pas dérivé du code, exporter le schéma brut dans un
 autre dossier et comparer chemins, méthodes et champs de requête. Ne jamais écraser

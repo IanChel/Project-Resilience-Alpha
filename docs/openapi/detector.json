@@ -1,0 +1,119 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "ML detector",
+    "version": "0.1.0",
+    "description": "Contrat du service `detector` (services/detector/main.py). Spec maintenue a la main. Le service n'a aucune authentification propre : `/health` est publie par l'edge sous `/ops/ml` derriere un `auth_request` (session operator verifiee par l'edge, voir infra/nginx/default.conf) ; `/anomaly` n'est PAS publie (acces reseau interne). Les deux routes lisent le meme etat (fonction `snapshot()`), mis a jour toutes les 2 s par la boucle d'inference."
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Etat complet du detecteur (publie sous /ops/ml)",
+        "description": "Renvoie l'etat brut : statut, dernieres features, dernier score, et signaux SOC. Ne dit pas si l'observation courante est une anomalie : voir `/anomaly`. Les champs `soc_signals` et `soc_error` n'apparaissent qu'apres le premier cycle SOC (10 s).",
+        "operationId": "health_health_get",
+        "security": [],
+        "x-exposure": "public via /ops/ml (session operator verifiee par l'edge, pas par le service)",
+        "responses": {
+          "200": {
+            "description": "Etat courant.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/DetectorState" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/anomaly": {
+      "get": {
+        "summary": "Verdict sur l'observation courante",
+        "description": "Lecture seule. Une observation est anormale si le score du modele est negatif ET si des rejets de capacite sont presents (`services/detector/model.py: is_anomalous`), la meme regle que celle qui alimente le compteur d'alerte. Le verdict est donc faux au repos meme si le modele est serre. Honnetete : sans modele charge, ou apres une erreur de collecte, `anomaly` vaut false ET `status` l'indique, et `score` vaut null (un score d'un cycle precedent n'est jamais presente comme courant). Un consommateur doit lire `status` avant d'interpreter `anomaly`. Le verdict decrit l'observation courante, pas l'alerte : apres l'envoi d'une alerte le compteur est remis a zero, mais le verdict reste vrai tant que les rejets de capacite continuent.",
+        "operationId": "anomaly_anomaly_get",
+        "security": [],
+        "x-exposure": "internal",
+        "responses": {
+          "200": {
+            "description": "Verdict courant.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AnomalyVerdict" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Status": {
+        "type": "string",
+        "enum": ["waiting_for_trained_model", "monitoring", "telemetry_or_delivery_error"],
+        "description": "`waiting_for_trained_model` : pas de model.joblib (collecter puis entrainer, docs/05-ML-RAG.md). `monitoring` : une observation reelle a ete scoree au dernier cycle. `telemetry_or_delivery_error` : echec de collecte Prometheus/Loki ou de livraison de l'alerte au dernier cycle (le compteur d'alerte est remis a zero)."
+      },
+      "Features": {
+        "type": "object",
+        "required": ["quote_rate", "active_work", "capacity_denied_10s", "denial_logs_10s"],
+        "properties": {
+          "quote_rate": { "type": "number", "description": "Devis acceptes par seconde, fenetre 10 s (Prometheus)." },
+          "active_work": { "type": "number", "description": "Emplacements de capacite occupes (Prometheus)." },
+          "capacity_denied_10s": { "type": "number", "description": "Rejets de capacite sur 10 s (Prometheus)." },
+          "denial_logs_10s": { "type": "number", "description": "Evenements capacity_denied sur 10 s (Loki)." }
+        },
+        "title": "Features"
+      },
+      "SocSignal": {
+        "type": "object",
+        "required": ["rule", "count", "window"],
+        "properties": {
+          "rule": { "type": "string", "description": "repeated_failed_logins, capacity_pressure, ml_alert_delivered ou waf_audit_activity." },
+          "count": { "type": "number" },
+          "window": { "type": "string" }
+        },
+        "title": "SocSignal"
+      },
+      "DetectorState": {
+        "type": "object",
+        "required": ["status", "features", "score"],
+        "properties": {
+          "status": { "$ref": "#/components/schemas/Status" },
+          "features": {
+            "oneOf": [{ "$ref": "#/components/schemas/Features" }, { "type": "null" }],
+            "description": "null tant qu'aucune observation n'a ete scoree. Apres une erreur, garde les valeurs du dernier cycle reussi."
+          },
+          "score": {
+            "type": ["number", "null"],
+            "description": "Score du modele (negatif = nouveaute). null tant qu'aucune observation n'a ete scoree ; apres une erreur, garde la derniere valeur."
+          },
+          "soc_signals": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/SocSignal" },
+            "description": "Regles SOC declenchees au dernier cycle de 10 s."
+          },
+          "soc_error": {
+            "type": "string",
+            "description": "Nom de la classe d'exception du dernier cycle SOC en echec."
+          }
+        },
+        "title": "DetectorState"
+      },
+      "AnomalyVerdict": {
+        "type": "object",
+        "required": ["anomaly", "score", "status"],
+        "properties": {
+          "anomaly": {
+            "type": "boolean",
+            "description": "true seulement si status = monitoring ET score < 0 ET capacity_denied_10s > 0."
+          },
+          "score": {
+            "type": ["number", "null"],
+            "description": "Score de l'observation courante ; null si status n'est pas `monitoring`."
+          },
+          "status": { "$ref": "#/components/schemas/Status" }
+        },
+        "title": "AnomalyVerdict"
+      }
+    }
+  }
+}

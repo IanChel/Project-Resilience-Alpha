@@ -12,7 +12,7 @@ import joblib
 from fastapi import FastAPI
 from services.common.security import secret
 from services.common.audit import emit
-from services.detector.model import score, FEATURES
+from services.detector.model import score, FEATURES, is_anomalous
 from services.detector.telemetry import sample
 from services.detector.soc import signals
 state={'status':'waiting_for_trained_model','features':None,'score':None}
@@ -38,7 +38,7 @@ async def loop():
                     model=joblib.load(path); stamp=path.stat().st_mtime
                 row=await sample(); value=score(model,row)
                 state.update(status='monitoring',features=dict(zip(FEATURES,row)),score=value)
-                consecutive=consecutive+1 if value<0 and row[2]>0 else 0
+                consecutive=consecutive+1 if is_anomalous(value,row) else 0
                 emit('detector','inference',score=value,features=row,consecutive=consecutive)
                 if consecutive>=3 and time.time()-last_alert>30:
                     payload=json.dumps({'id':str(uuid.uuid4()),'issued_at':time.time(),
@@ -61,5 +61,16 @@ async def lifespan(app):
     for task in tasks: task.cancel()
     await asyncio.gather(*tasks,return_exceptions=True)
 app=FastAPI(title='ML detector',lifespan=lifespan)
+def snapshot():
+    """The single reading point of the detector state: /health (published as /ops/ml) and /anomaly both read it."""
+    return state
+def verdict(s):
+    # Only a live measurement counts. Without a model, or after a collection error, the verdict is
+    # false AND status says why; the stale score of an earlier cycle is not returned as current.
+    measured=s['status']=='monitoring' and s['score'] is not None and s['features'] is not None
+    return {'anomaly':bool(measured and is_anomalous(s['score'],[s['features'][f] for f in FEATURES])),
+            'score':s['score'] if measured else None,'status':s['status']}
 @app.get('/health')
-def health(): return state
+def health(): return snapshot()
+@app.get('/anomaly')
+def anomaly(): return verdict(snapshot())
