@@ -1,0 +1,18 @@
+---
+- name: Reproducible lab deployment from WSL
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    project_dir: "{{ playbook_dir }}/../.."
+  tasks:
+    - name: Validate Compose without printing secret contents
+      ansible.builtin.command:
+        argv: [docker, compose, config, --quiet]
+        chdir: "{{ project_dir }}"
+      changed_when: false
+    - name: Build and start the laboratory
+      ansible.builtin.command:
+        argv: [docker, compose, up, -d, --build]
+        chdir: "{{ project_dir }}"
+      changed_when: true

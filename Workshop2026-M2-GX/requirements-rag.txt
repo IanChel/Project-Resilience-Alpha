@@ -1,0 +1,4 @@
+-r requirements.txt
+langchain-core==0.3.59
+langchain-ollama==0.3.2
+ollama==0.6.3

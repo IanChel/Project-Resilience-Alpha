@@ -1,0 +1,9 @@
+fastapi==0.115.12
+uvicorn==0.34.2
+httpx==0.28.1
+prometheus-client==0.21.1
+psycopg[binary]==3.2.6
+numpy==2.2.5
+scikit-learn==1.6.1
+joblib==1.4.2
+ansible-core==2.18.4

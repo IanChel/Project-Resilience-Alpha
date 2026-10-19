@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {@apply bg-slate-950 text-slate-100;}
+input,textarea {@apply bg-slate-950 border border-slate-600 rounded-lg px-3 py-2 w-full;}
+button {@apply bg-cyan-400 text-slate-950 rounded-lg px-4 py-2 font-semibold disabled:opacity-40;}
+.card {@apply rounded-2xl border border-slate-700 bg-slate-900 p-5;}

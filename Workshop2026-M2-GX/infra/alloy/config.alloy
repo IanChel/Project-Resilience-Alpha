@@ -1,0 +1,20 @@
+loki.source.file "business" {
+  targets = [{__path__ = "/logs/*.jsonl", job = "resilience"}]
+  forward_to = [loki.process.business.receiver]
+}
+loki.process "business" {
+  stage.json {
+    expressions = {service = "service", event = "event"}
+  }
+  stage.labels {
+    values = {service = "", event = ""}
+  }
+  forward_to = [loki.write.local.receiver]
+}
+loki.source.file "waf" {
+  targets = [{__path__ = "/waflogs/audit.log", service = "waf", job = "security"}]
+  forward_to = [loki.write.local.receiver]
+}
+loki.write "local" {
+  endpoint { url = "http://loki:3100/loki/api/v1/push" }
+}

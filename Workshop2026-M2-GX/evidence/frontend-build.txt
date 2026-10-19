@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> resilience-dashboard@0.1.0 build
+> vite build
+
+vite v6.2.6 building for production...
+transforming...
+✓ 23 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.36 kB │ gzip:  0.27 kB
+dist/assets/index-CsTaRJQa.css    8.11 kB │ gzip:  2.23 kB
+dist/assets/index-CeXbavFD.js   191.13 kB │ gzip: 60.70 kB
+✓ built in 5.54s

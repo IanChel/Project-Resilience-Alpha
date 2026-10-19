@@ -1,0 +1,26 @@
+---
+- name: Fixed and authorized containment operation
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Enable the quotation admission policy
+      ansible.builtin.uri:
+        use_proxy: false
+        url: "{{ lookup('ansible.builtin.env', 'PAYMENT_URL') | default('http://payment:8000', true) }}/control/contain"
+        method: POST
+        headers:
+          X-Control-Key: "{{ lookup('ansible.builtin.file', (lookup('ansible.builtin.env', 'SECRETS_DIR') | default('/run/secrets', true)) + '/control_key') | trim }}"
+        body_format: json
+        body: {}
+        status_code: 200
+      no_log: true
+    - name: Verify the database readiness endpoint
+      ansible.builtin.uri:
+        use_proxy: false
+        url: "{{ lookup('ansible.builtin.env', 'PAYMENT_URL') | default('http://payment:8000', true) }}/ready"
+        status_code: 200
+      register: readiness
+      retries: 10
+      delay: 1
+      until: readiness.status == 200
