@@ -57,6 +57,9 @@ L'installation complète, le hotspot et l'entraînement sont détaillés dans IN
 Jalon de lundi, une fois la stack levée : `python scripts/check_lundi.py` constate en
 lecture seule les 5 conteneurs, `/health`, `/metrics`, la cible Prometheus et la
 datasource Grafana (code 0 si tout est OK, 1 sinon) ; il ne démarre ni ne modifie rien.
+Jalon critique de mardi, après avoir lancé l'attaque à la main : `python scripts/check_mardi.py
+--last 120` mesure le pic dans Prometheus et l'`anomaly=true` du détecteur sur cette fenêtre
+et écrit une preuve horodatée dans `runtime/evidence/` (lecture seule, code 0 ou 1).
 La commande d'attaque se lance exclusivement sur le second PC autorisé.
 Un état ML « waiting_for_trained_model » et un RAG 503 sont explicites tant que
 baseline/modèle ne sont pas installés ; aucune réussite n'est simulée à l'écran.

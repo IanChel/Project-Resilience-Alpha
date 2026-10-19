@@ -164,6 +164,30 @@ attaque donne un seul délai : en refaire plusieurs. Sur la fixture synthétique
 `nu` entre 0,01 et 0,05 donne le même taux de scores négatifs et `consecutive` est le
 vrai levier ; ce n'est pas une mesure sur le laboratoire, à ne pas supposer.
 
+## Preuve du jalon critique M7
+Le jalon (« le pic est visible **et** le modèle renvoie `anomaly=true` sur le même événement »)
+se prouve par une commande et un fichier, pas par une capture d'écran. Lancer l'attaque à
+la main depuis le PC Attaquant, puis, depuis WSL, sur le PC Hôte :
+`python scripts/check_mardi.py --last 120` (ou `--start`/`--end`, en epoch ou ISO avec fuseau).
+Le script est en lecture seule : il passe par `docker compose exec` sur le détecteur, ne
+lance pas l'attaque et ne modifie rien. Cinq étapes, chacune `OK` ou `ECHEC` avec sa raison :
+1. un modèle entraîné est chargé : `/anomaly` n'est plus `waiting_for_trained_model` et le
+   détecteur mesure (`monitoring`) ;
+2. au repos, `/anomaly` renvoie `anomaly=false` (à lancer une fois l'attaque terminée) ;
+3. Prometheus montre le pic **mesuré** sur la fenêtre : des rejets de capacité, et un débit de
+   devis ou une occupation au-dessus de l'enveloppe normale de la baseline ;
+4. sur la même fenêtre, le détecteur a journalisé au moins une observation anormale (même règle
+   que le compteur d'alerte), avec le délai de la première observation anormale et les alertes livrées ;
+5. la preuve est écrite dans `runtime/evidence/m7-proof-<date UTC>.json`, y compris en cas
+   d'échec (`passed: false`) : un échec documenté vaut mieux qu'une absence de trace.
+
+Ce que la preuve **ne couvre pas** : la démonstration refaite devant les six, et l'absence de
+faux positif sur un trafic normal soutenu (voir Calibration). L'étape 2 ne constate le repos
+qu'à l'instant où elle s'exécute. Prérequis : si aucun devis n'a été émis depuis le démarrage
+de `payment`, la série `lab_requests_total{route="quotes"}` n'existe pas et le détecteur reste
+en `telemetry_or_delivery_error` ; l'étape 1 le signale. Les heures sont lues dans le journal du
+détecteur (horloge du conteneur) : préférer `--last`, ou vérifier l'horloge de WSL.
+
 ## Évaluation à réaliser sur le laboratoire
 - Vérifier le taux de faux positifs sur le holdout normal et une autre session.
 - Mesurer les incidents réellement détectés / incidents injectés sur plusieurs essais.
