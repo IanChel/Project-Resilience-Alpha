@@ -53,6 +53,42 @@ ne pas déclarer le WAF validé si la requête passe. Ne pas désactiver le WAF 
 faire passer le scénario. Les devis valides peuvent passer CRS tout en saturant
 le métier : d'où une admission contextuelle en plus du filtrage de contenu.
 
+## Budget de connexion et chemin de la reprise
+Le service d'authentification limite les connexions à 30 par minute et par adresse
+source qu'il voit (`services/auth/main.py`). Derrière le WAF et l'edge, tous les clients
+publics lui arrivent avec l'adresse de l'edge : l'edge ne pose aucun `X-Forwarded-For` et
+uvicorn n'en approuve aucun hors `127.0.0.1`. Le budget public est donc **partagé par tous
+les clients**.
+
+Risque constaté dans le code : le remédiateur se connectait par le WAF pour vérifier la
+reprise, dans ce même budget. Un flot de connexions publiques pendant l'attaque pouvait
+l'épuiser, la vérification recevait un 429 et l'incident passait en `failed` avec
+`manual_review_required` : l'attaque provoquait ainsi, sans geste humain, le cas qui vaut
+0/5 sur la remédiation.
+
+Choix : le remédiateur obtient son jeton **directement auprès du service d'authentification,
+par le réseau interne `app`** (variable `AUTH_URL`, `http://auth:8000` par défaut). Ce réseau
+est déjà partagé par les deux services et n'est pas publié. L'adresse source vue par `auth`
+est alors celle du conteneur remédiateur, donc un budget distinct par construction. La
+limite publique est conservée : elle protège toujours contre l'essai de mots de passe. La
+preuve métier (paiement puis lecture du registre) continue de passer par le WAF.
+
+Garde-fou : `tests/test_login_budget.py` épuise le budget public (même le bon mot de passe est
+alors refusé en 429) et vérifie que `business_verify` aboutit quand même. Un second test
+rejoue l'ancien couplage et constate l'échec 429, pour prouver que le montage détecte la
+panne ; un troisième interdit à `service_token` de nommer la route publique.
+
+Compromis et risques résiduels :
+- La vérification ne teste plus la connexion à travers le WAF, seulement le paiement.
+- Un attaquant peut toujours verrouiller la **connexion publique** des opérateurs (le
+  tableau de bord) en saturant ce budget partagé. C'est le coût d'une limite par adresse
+  derrière un proxy ; l'amélioration industrielle est une limite par client réel avec une
+  adresse d'origine posée par un proxy de confiance. Se connecter au tableau de bord avant
+  la démonstration.
+- Le remédiateur se connecte avec le compte opérateur `alice` et détient déjà `session_key` ;
+  une identité de service dédiée au rôle minimal serait plus propre. Non faite : elle touche
+  l'authentification, la vérification des jetons et le registre.
+
 ## Écarts avant tout usage industriel
 TLS, OIDC/asymétrie des clés, moindre privilège DB (le rôle de création initial
 a des droits larges dans ce prototype), séparation des capacités métier,

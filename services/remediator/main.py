@@ -27,11 +27,18 @@ def update(incident_id,status,evidence):
         c.execute('UPDATE incidents SET status=?,updated=?,evidence=? WHERE id=?',
                   (status,time.time(),json.dumps(evidence),incident_id))
     emit('remediator',status,incident_id=incident_id,**evidence)
+async def service_token():
+    # The recovery login goes straight to the auth service over the internal network, never through the WAF.
+    # Auth rate-limits per peer address and every public client shares the edge's address: through the WAF,
+    # a flood of public logins would exhaust the budget this recovery needs. The public path stays limited;
+    # only this internal peer has its own budget. The payment proof below still goes through the WAF.
+    async with httpx.AsyncClient(trust_env=False,base_url=os.getenv('AUTH_URL','http://auth:8000'),timeout=5) as c:
+        r=await c.post('/token',json={'username':'alice','password':secret('alice_password')})
+        r.raise_for_status(); return r.json()['access_token']
 async def business_verify(incident_id):
+    token=await service_token()
     # Verify through WAF and reverse proxy, not just the internal health endpoint.
     async with httpx.AsyncClient(trust_env=False,base_url=os.getenv('PUBLIC_URL','http://waf:8080'),timeout=5) as c:
-        r=await c.post('/auth/token',json={'username':'alice','password':secret('alice_password')})
-        r.raise_for_status(); token=r.json()['access_token']
         headers={'Authorization':'Bearer '+token,'Idempotency-Key':'recovery-'+incident_id}
         for _ in range(15):
             try:
