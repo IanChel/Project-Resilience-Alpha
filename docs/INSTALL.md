@@ -104,13 +104,18 @@ métriques ne contiennent plus de rejets de capacité récents. Premier terminal
 python scripts/normal_traffic.py --seconds 240
 ```
 Saisir le mot de passe alice local. Dans un second terminal WSL, après environ
-15 secondes de trafic et de collecte Prometheus/Alloy :
+15 secondes de trafic et de collecte Prometheus/Alloy, collecter la baseline puis
+entraîner (deux commandes, la seconde lit le fichier écrit par la première) :
 ```bash
+docker compose exec detector python -m services.detector.collect_baseline
 docker compose exec detector python -m services.detector.train
 ```
-La collecte dure environ 3 minutes. Relever le rapport et attendre l'état
-`monitoring` dans le dashboard. Si une source manque ou la baseline est polluée,
-le script échoue : résoudre la cause avant de retenter. Pas de fallback fictif.
+La collecte dure environ 3 minutes et écrit `/models/baseline.json` ; l'entraînement
+est immédiat et écrit `/models/model.joblib` et `/models/report.json`. Relever le
+rapport et attendre l'état `monitoring` dans le dashboard. Si une source manque ou la
+baseline est polluée, la collecte échoue sans rien écrire : résoudre la cause avant
+de retenter. Pas de fallback fictif. Si le code du détecteur a changé,
+`docker compose up -d --build detector` d'abord. Détails : docs/05-ML-RAG.md.
 
 Exporter les preuves ML sans exporter de secret :
 ```bash

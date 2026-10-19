@@ -30,6 +30,12 @@ npm-debug.log*
 # === Modeles ML (regeneres par train.py, trop lourds pour git)
 *.joblib
 *.pkl
+# Sorties de services.detector.collect_baseline / train (volume Docker `models`).
+# Les copies exportees pour le dossier (runtime/evidence/ml-*.json) restent suivables.
+baseline.json
+report.json
+model.tmp
+models/
 data/raw/
 data/baseline_*.csv
 
