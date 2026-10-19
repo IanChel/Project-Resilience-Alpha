@@ -55,3 +55,21 @@ def test_forged_and_expired_token(payment):
         assert c.get('/accounts',headers={'Authorization':'Bearer '+forged}).status_code==401
         expired=issue('alice','operator',now=1)
         assert c.get('/accounts',headers={'Authorization':'Bearer '+expired}).status_code==401
+
+def test_the_series_the_detector_queries_exist_before_any_traffic(tmp_path):
+    """A labelled Prometheus series only appears once touched. The detector queries
+    lab_requests_total{route="quotes",status="200"} and collect_baseline refuses an empty result, so right
+    after a restart (what the reset between two runs does) both would fail without the pre-creation.
+    The probe runs in a fresh interpreter: see tests/_metrics_probe.py."""
+    import os, subprocess, sys
+    from pathlib import Path
+    root=Path(__file__).resolve().parents[1]
+    env={**os.environ,'PYTHONPATH':str(root),'PYTHONDONTWRITEBYTECODE':'1',
+         'SQLITE_PATH':str(tmp_path/'ledger.sqlite'),'STATE_DIR':str(tmp_path/'state'),'LOG_DIR':str(tmp_path/'logs')}
+    done=subprocess.run([sys.executable,str(root/'tests'/'_metrics_probe.py')],cwd=root,env=env,capture_output=True,text=True,timeout=120)
+    assert done.returncode==0,done.stderr[-800:]
+    body=done.stdout
+    for route in ('quotes','payments'):
+        assert f'lab_requests_total{{route="{route}",status="200"}} 0.0' in body,(route,[l for l in body.splitlines() if 'lab_requests_total{' in l])
+    for name in ('lab_active_work','lab_capacity_denied_total','lab_contained'):
+        assert any(l.startswith(name+' ') for l in body.splitlines()),name   # unlabelled: present from import

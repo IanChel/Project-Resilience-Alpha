@@ -1,0 +1,11 @@
+{
+  "source": "baseline file /models/baseline.json (live Prometheus and Loki at collection; normal traffic only)",
+  "collected_at": 1792441726.2576997,
+  "nu": 0.03,
+  "n_train": 72,
+  "n_holdout": 18,
+  "holdout_false_positive_fraction": 0.16666666666666666,
+  "sha256_dataset": "0f42ace488f3b26becdc786eac58b6256be03cddb2b51fe0eb15048ac26de9fa",
+  "attack_recall": "NOT MEASURED: run scripts/acceptance.py",
+  "created_at": 1792441736.773516
+}

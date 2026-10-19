@@ -24,6 +24,11 @@ contained=False
 async def lifespan(app):
     global contained
     ledger.init()
+    # Prometheus only knows a LABELLED series once it has been touched. Without this, right after a restart the
+    # detector's query returns nothing and it reports telemetry_or_delivery_error until the first quote; the same
+    # emptiness makes collect_baseline refuse to start. The reset between two runs restarts this service, so the
+    # case is the normal one, not an edge case. Unlabelled metrics below already exist from import.
+    for route in ('quotes','payments'): REQUESTS.labels(route,'200')
     if policy_path.exists(): contained=json.loads(policy_path.read_text())['contained']
     CONTAINED.set(int(contained))
     yield

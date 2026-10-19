@@ -41,18 +41,28 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
 > (chiffrement → déchiffrement, 7/7 identiques). Suite de tests : 250 réussis, 1 échec (test natif, Ansible
 > ne tourne pas sous Windows — sans rapport avec le code).
 
-## Phase 1 — Rendre la détection possible · P5
+## Phase 1 — Rendre la détection possible ✅ **TERMINÉE le 19/10** · P5
 
-- [ ] **1.1** Arbitrage à trancher : pré-créer la série `lab_requests_total{route="quotes"}` au démarrage de
+- [x] **1.1** ~~Arbitrage~~ **tranché** : série pré-créée au démarrage : pré-créer la série `lab_requests_total{route="quotes"}` au démarrage de
       `payment` (1 ligne) **ou** s'astreindre à émettre un devis avant chaque contrôle.
       *Pourquoi* : tant qu'aucun devis n'a été émis, le détecteur reste en `telemetry_or_delivery_error`.
       Et la procédure de reset entre essais redémarre justement `payment`.
-- [ ] **1.2** Générer du trafic normal · `python scripts/normal_traffic.py --seconds 240` (terminal A)
-- [ ] **1.3** Collecter la baseline (terminal B, ~15 s après)
+- [x] **1.2** Générer du trafic normal · `python scripts/normal_traffic.py --seconds 240` (terminal A)
+- [x] **1.3** Collecter la baseline (terminal B, ~15 s après)
       `docker compose exec detector python -m services.detector.collect_baseline`
-- [ ] **1.4** Entraîner le modèle · `docker compose exec detector python -m services.detector.train`
+- [x] **1.4** Entraîner le modèle · `docker compose exec detector python -m services.detector.train`
       *Fait quand* : `/ops/ml` sort de `waiting_for_trained_model` et passe à `monitoring`.
-- [ ] **1.5** Relever le taux de faux positifs dans `report.json` et le consigner.
+- [x] **1.5** Relever le taux de faux positifs et le consigner → **16,7 % (3/18)**, dans `docs/05-ML-RAG.md`
+      et `runtime/evidence/ml-report.json`.
+
+> **Bilan de la phase 1 (19/10).** Un défaut de fond trouvé en mesurant : le générateur de trafic dormait sur un
+> cycle fixe, donc la baseline n'avait **aucune variance** et le modèle s'ajustait au bruit numérique —
+> **100 % de faux positifs**, et un balayage de `nu` erratique (2, 18, 2, 2, 17, 17, 1) : aucune calibration
+> n'aurait pu corriger ça, la donnée était dégénérée. `normal_traffic.py` tire désormais des intervalles
+> exponentiels. Après correction : variance ×4 et **16,7 % de faux positifs**. L'attaque reste détectée à tous
+> les `nu` testés. Le détecteur est en `monitoring`, `anomaly=false` au repos.
+> **Reste à faire** : 16,7 % est encore élevé ; la calibration (case 3.3) doit le réduire, elle exige une
+> fenêtre d'attaque donc elle vient après la phase 3. Le rappel sur attaque n'est pas mesuré.
 
 ## Phase 2 — Monter les deux postes · P3 + P4
 
@@ -61,7 +71,8 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
       `docker compose up -d --force-recreate waf`
 - [ ] **2.3** Règle pare-feu Windows pour le port **8081**, limitée au sous-réseau du groupe
 - [ ] **2.4** PC Attaquant : connecté **uniquement** au PA, Python 3.12 + `httpx`, copier **seulement**
-      `scripts/attack_lab.py` (jamais les secrets)
+      `scripts/attack_lab.py` (jamais les secrets). Le mot de passe `loadbot` s'y tape à la main : c'est
+      volontaire, un humain déclenche l'attaque.
 - [ ] **2.5** Vérifier depuis l'Attaquant que `http://192.168.137.1:8081` répond
 
 ## Phase 3 — Les deux jalons critiques · toute l'équipe

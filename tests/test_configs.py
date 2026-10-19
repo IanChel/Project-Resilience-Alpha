@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 import yaml
 ROOT=Path(__file__).resolve().parents[1]
@@ -83,3 +84,22 @@ def test_a_published_port_requires_a_non_internal_network():
         if not service.get('ports'): continue
         attached=set(service.get('networks') or [])
         assert attached-internal,f'{name} publishes {service["ports"]} but is only on internal networks {sorted(attached)}'
+
+def test_the_password_can_come_from_a_directory_for_automation(tmp_path):
+    """Needed for Thursday's repeated runs and run-demo.sh: getpass reads the console on Windows, so a script
+    cannot feed it through stdin. The default stays interactive."""
+    import pytest
+    m=load_client()
+    (tmp_path/'alice_password').write_text('motdepasse-de-test' + chr(10), encoding='utf-8')
+    assert m.password_for('alice',{'LAB_PASSWORD_DIR':str(tmp_path)})=='motdepasse-de-test'   # trailing newline stripped
+    with pytest.raises(ValueError,match='does not exist'): m.password_for('loadbot',{'LAB_PASSWORD_DIR':str(tmp_path)})
+    (tmp_path/'loadbot_password').write_text('   ' + chr(10), encoding='utf-8')
+    with pytest.raises(ValueError,match='empty'): m.password_for('loadbot',{'LAB_PASSWORD_DIR':str(tmp_path)})
+    asked=[]
+    m.getpass.getpass=lambda prompt='': asked.append(prompt) or 'tape-a-la-main'
+    assert m.password_for('alice',{})=='tape-a-la-main' and asked      # nothing set: still interactive
+def test_the_password_value_never_travels_through_the_environment():
+    text=(ROOT/'scripts/lab_client.py').read_text(encoding='utf-8')
+    assert "env.get('LAB_PASSWORD_DIR')" in text                        # a directory of files...
+    assert not re.search(r"get\(['\"]LAB_PASSWORD['\"]\)",text)         # ...never the value itself
+    assert 'read_text' in text and 'password' not in text.split('def login')[1].split('json=')[0].lower()

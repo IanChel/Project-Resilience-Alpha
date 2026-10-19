@@ -57,13 +57,37 @@ Limites assumées. Nous n'avons pas comparé les deux modèles sur la baseline r
 le choix repose sur l'analyse des données et sur le test unitaire, pas sur un
 benchmark. La séparation collecte/entraînement rend cette comparaison peu coûteuse si
 le temps le permet. Le SVM dépend de `nu`, de `gamma` et de l'échelle, et exige une
-baseline propre (refusée sinon). Sur la fixture synthétique de
-`tests/test_baseline_chain.py` (90 points tirés au hasard, graine 3), 3 des 18
-points normaux de validation sortent de la frontière (environ 17 %) : le modèle est
-serré avec peu de points. C'est une mesure sur données synthétiques, pas sur le
-laboratoire ; elle justifie la double barrière avant remédiation (trois observations
-consécutives négatives et rejets de capacité présents). À remesurer sur la vraie
-baseline, et collecter davantage (`--samples`) avant de toucher à `nu`.
+baseline propre (refusée sinon).
+
+## Mesures sur le laboratoire réel (19/10)
+Première baseline collectée sur la vraie stack, 90 observations, `nu=0,03`.
+Preuves : `runtime/evidence/ml-report.json` et `ml-baseline.json`.
+
+| | Trafic à cadence fixe (1ᵉʳ essai) | Trafic à arrivées aléatoires (retenu) |
+|---|---|---|
+| Écart-type de `quote_rate` | 0,036 (11 valeurs distinctes) | **0,140** (26 valeurs, 0,75 → 1,50) |
+| Faux positifs sur la validation | **18/18 (100 %)** | **3/18 (16,7 %)** |
+| Points d'entraînement déjà négatifs | 62/72 | — |
+| Balayage de `nu` (0,01 → 0,5) | erratique : 2, 18, 2, 2, 17, 17, 1 | à mesurer avec une fenêtre d'attaque |
+
+**Ce que le premier essai a révélé.** Le générateur de trafic dormait sur un cycle fixe
+`[0.1, 0.4, 0.8, 0.2]`, produisant un débit quasi constant. Sans variance, le
+`StandardScaler` amplifie le bruit numérique et la frontière du SVM s'ajuste à ce bruit :
+les scores étaient tous proches de zéro (−0,000 à 0,001) et le balayage de `nu` ne donnait
+aucune courbe exploitable. **Aucune calibration n'aurait pu corriger cela** ; c'est la
+donnée qui était dégénérée, pas le réglage. `scripts/normal_traffic.py` tire désormais
+des intervalles exponentiels (modèle usuel de clients indépendants), avec une graine pour
+la reproductibilité. Même débit moyen, variance réaliste.
+
+**Ce qui reste.** 16,7 % de faux positifs **du modèle seul** : c'est encore élevé et la
+calibration (section suivante) doit le réduire. En pratique aucune fausse alerte ne part,
+car la règle exige en plus des rejets de capacité, toujours nuls en trafic normal — mais
+on ne s'appuie pas sur cette barrière pour juger le modèle. Deux variables sur quatre
+(`capacity_denied_10s`, `denial_logs_10s`) sont constantes à zéro dans une baseline
+saine : c'est voulu, ce sont les signaux de l'incident, et `train_model` refuse une
+baseline qui en contient. `active_work` reste binaire (0 ou 1) : à ce débit, rarement plus
+d'un emplacement occupé. Le rappel sur attaque n'est pas encore mesuré
+(`attack_recall: NOT MEASURED`) : il le sera avec `scripts/acceptance.py`.
 
 ## Séquence d'entraînement, une commande par étape
 Les fichiers vivent dans le volume Docker `models`, monté en `/models` dans le

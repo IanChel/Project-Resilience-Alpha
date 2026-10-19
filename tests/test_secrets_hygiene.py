@@ -26,9 +26,11 @@ def test_only_init_and_unseal_write_secrets_and_only_under_runtime():
         assert re.search(r"^base\s*=.*'\.secrets'",text,re.M) and "base/'runtime'/name" in text
 def test_nothing_else_touches_the_secrets_directory():
     touching={rel(p) for p in sources() if '.secrets' in p.read_text(encoding='utf-8')}
-    # init/unseal create it, secret_files documents it, check_lundi reads the Grafana password, package.py excludes it
+    # init/unseal create it, secret_files documents it, check_lundi reads the Grafana password, package.py excludes it,
+    # lab_client only names it as an example: the directory it reads comes from LAB_PASSWORD_DIR, never hard-coded.
     assert touching<={'scripts/init_secrets.py','scripts/unseal.py','scripts/secret_files.py',
-                      'scripts/check_lundi.py','scripts/package.py'},touching
+                      'scripts/check_lundi.py','scripts/package.py','scripts/lab_client.py'},touching
+    assert not re.search(r"/\s*['\"]\.secrets",(ROOT/'scripts/lab_client.py').read_text(encoding='utf-8'))
 def test_git_ignores_every_secret_path_and_tracks_none():
     if shutil.which('git') is None or not (ROOT/'.git').exists(): pytest.skip('not a git checkout')
     ignored=subprocess.run(['git','check-ignore','.secrets/runtime/db_password','.secrets/age.key','.secrets/secrets.enc.json','.env'],cwd=ROOT,capture_output=True,text=True)
