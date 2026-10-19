@@ -1,3 +1,4 @@
 -r requirements-rag.txt
 pytest==8.3.5
 PyYAML==6.0.2
+jsonschema==4.23.0
