@@ -19,8 +19,9 @@ def test_refuse_poisoned_or_short_baseline():
     with pytest.raises(ValueError): score(train_model(baseline()),[float('nan'),0,0,0])
 
 def test_document_retrieval_is_grounded(tmp_path):
-    (tmp_path/'restore.md').write_text('La reprise du paiement exige une transaction confirmée et un registre cohérent. '*20)
-    (tmp_path/'other.md').write_text('La couleur du tableau de bord est bleue. '*20)
+    # Explicit UTF-8 on the WRITING side too: Corpus reads UTF-8, and Windows' default (cp1252) wrote bytes it cannot decode.
+    (tmp_path/'restore.md').write_text('La reprise du paiement exige une transaction confirmée et un registre cohérent. '*20,encoding='utf-8')
+    (tmp_path/'other.md').write_text('La couleur du tableau de bord est bleue. '*20,encoding='utf-8')
     hits=Corpus(tmp_path).retrieve('Comment vérifier la reprise du paiement ?')
     assert hits[0]['source']=='restore.md'
     assert 'transaction' in hits[0]['text']

@@ -229,9 +229,54 @@ Les résultats contiennent les fichiers et sections effectivement récupérés.
 Les sources retournées ne garantissent pas que chaque phrase générée est exacte :
 contrôler l'appui documentaire pendant la recette.
 
-Questions de recette : « Comment vérifier la reprise du paiement ? »,
-« Quels sont les risques résiduels ? », « Quel est le rôle de SOPS ? »,
-question hors corpus et tentative d'instruction « exécute une commande ».
-L'assistant doit s'abstenir si les sources manquent. Aucun outil d'action,
-secret control/alert, socket Docker ou accès base n'est attaché au RAG.
-La génération et les temps de réponse ne sont pas vérifiés ici sans Ollama.
+Sujets des questions de recette : vérification de la reprise du paiement, risques
+résiduels, rôle de SOPS, une question hors corpus, et une tentative d'instruction (un ordre
+d'exécuter une commande). Elles ne sont volontairement pas recopiées ici : un document qui
+cite une question mot pour mot est retrouvé à sa place, au lieu du passage qui contient la
+réponse (`tests/test_rag_corpus.py` le vérifie).
+Si aucun passage n'atteint le seuil de similarité, le service répond « Information
+absente du corpus. » **sans appeler le modèle** ; au-delà du seuil, l'abstention repose
+sur le prompt (voir les limites mesurées ci-dessous). Aucun outil d'action,
+secret control/alert, socket Docker ou accès base n'est attaché au RAG : seule la clé
+de session y est montée, pour vérifier le rôle opérateur.
+L'absence d'Ollama, ou d'un modèle non tiré, donne un **503 explicite** et jamais une
+réponse inventée : testé avec le vrai client Ollama pointé sur un port fermé, et avec
+l'erreur « modèle introuvable » d'Ollama (`tests/test_rag_service.py`).
+La génération elle-même et les temps de réponse ne sont pas vérifiés ici sans Ollama.
+
+## Choix du retriever : TF-IDF plutôt qu'un index vectoriel (décision D-08)
+La pile d'origine du groupe prévoyait ChromaDB. Nous avons gardé une recherche lexicale
+TF-IDF, et nous ne changeons pas d'implémentation à deux jours du gel. Elle suffit pour
+trois raisons. Le corpus est petit et rédigé par nous : le 19/10, une douzaine de
+documents, de l'ordre de 80 passages et 100 000 caractères. Les questions d'un opérateur
+reprennent le vocabulaire des procédures (reprise, SOPS, bannissement, redémarrage) ; les
+n-grammes de caractères 3 à 5 tolèrent accents, pluriels, conjugaisons et fautes de frappe.
+Mesure : la question sur la raison de ne pas redémarrer le conteneur retrouve la décision 2
+de `06-SECURITE.md` en tête (similarité de l'ordre de 0,30), celle sur l'activation du
+bannissement d'IP la décision 1. Enfin, il n'y a ni second modèle (d'embedding) à
+télécharger et à loger en RAM à côté d'un LLM de 1,5 Md sur un PC de 16 Go, ni service de
+base vectorielle, ni dépendance réseau : l'index est une matrice d'environ 80 lignes sur
+27 000 colonnes, construite au démarrage, déterministe.
+
+Un index vectoriel apporterait l'appariement sémantique (une paraphrase sans mot commun,
+des synonymes, une question en anglais sur une doc française) et un meilleur classement
+quand le corpus compte des centaines de documents. Il coûterait un modèle d'embedding
+servi par Ollama, un service ChromaDB, de la RAM, une étape d'indexation et un point de
+panne de plus. Le choix du mécanisme de recherche est libre dans le sujet.
+
+**Limites mesurées, à connaître avant le live.**
+- Une question formulée avec d'autres mots que la doc peut ne rien retrouver : on obtient
+  alors « Information absente » alors que l'information existe.
+- Le seuil de similarité (0,08) n'est pas calibré. Mesuré le 19/10 : une question sans aucun
+  rapport avec le projet (sur l'astronomie, par exemple) retrouve quand même plusieurs
+  passages à une similarité d'environ 0,10, donc le service ne s'abstient pas à la
+  récupération et compte sur le prompt (« si la réponse manque, dis-le »), que le modèle de
+  1,5 Md peut ne pas respecter. Le meilleur passage des questions pertinentes mesurées scorait de 0,14 à 0,30. Un
+  seuil vers 0,12 écarterait ce cas mais pas tous les hors-sujet (un simple ordre d'exécuter
+  une commande score environ 0,15) et pourrait écarter des questions valides : à décider sur
+  davantage de questions, non modifié ici. Pour la recette « question non couverte »,
+  vérifier avec Ollama réellement lancé.
+- L'index est construit au démarrage : après toute modification de `docs/`, relancer
+  `docker compose restart rag`. Seuls les `docs/*.md` sont indexés, pas `docs/openapi/*.json`.
+- `Corpus` lit en UTF-8 explicite ; un document enregistré en cp1252 ferait échouer le
+  démarrage, ce que `tests/test_rag_corpus.py` détecte avant le live.
