@@ -161,6 +161,23 @@ depuis une image saine (le PRA, `08-PCA-PRA.md`, rappelle qu'un simple retour du
 une compromission ; la procédure de reconstruction n'y est pas détaillée). Le `restart: unless-stopped`
 de Docker, lui, n'est pas une remédiation.
 
+## Décision 3 : jeton de session signé HMAC, pas un JWT
+*Justification rédigée à partir du code et de son commentaire (« lab-only signed session tokens, no
+external identity provider »), à valider par l'équipe.*
+
+**Ce qu'on a fait.** Le service d'authentification émet `base64url(payload).base64url(HMAC-SHA256)`, avec
+l'identité, le rôle, l'audience `resilience-lab` et une expiration à 1 h ; chaque service le vérifie avec la
+même clé `session_key`, un secret Docker (`services/common/security.py`). Il n'y a que deux comptes fictifs et
+aucun fournisseur d'identité : une quarantaine de lignes lisibles, testées (jeton falsifié ou expiré refusé,
+`tests/test_api.py`), plutôt qu'une bibliothèque de jetons standard dont il faut maîtriser les options (algorithmes acceptés,
+clés, rotation) en quatre jours. Le format n'est donc pas standard : le contrat le déclare comme jeton
+`bearer` HMAC maison, jamais comme un jeton standard (`docs/openapi/*.json`).
+
+**Ce que ça coûte.** La clé est symétrique et partagée : **tout service qui la détient peut émettre un jeton
+opérateur**, pas seulement le vérifier. Le remédiateur et le RAG la détiennent (`07-GOUVERNANCE.md`, risque sur le
+RAG). Pas de rotation ni de révocation avant l'expiration. Aucun outil tiers ne sait lire ce format. En contexte
+industriel : OIDC avec clés asymétriques, où seul l'émetteur peut signer (voir ci-dessous).
+
 ## Écarts avant tout usage industriel
 TLS, OIDC/asymétrie des clés, moindre privilège DB (le rôle de création initial
 a des droits larges dans ce prototype), séparation des capacités métier,
