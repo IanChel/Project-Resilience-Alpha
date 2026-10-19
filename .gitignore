@@ -1,0 +1,50 @@
+# === SECRETS - rien de tout ceci ne doit partir dans Workshop2026-M2-G6-Code.zip
+# Dossier genere par scripts/init_secrets.py : mots de passe en clair + cle age.
+.secrets/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/*.yaml
+!secrets/*.enc.yaml
+.sops/
+age-key.txt
+
+# === Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# === Node / React
+node_modules/
+dist/
+build/
+.vite/
+npm-debug.log*
+
+# === Modeles ML (regeneres par train.py, trop lourds pour git)
+*.joblib
+*.pkl
+data/raw/
+data/baseline_*.csv
+
+# === Ansible
+*.retry
+
+# === Livrables / captures (hors git, deposes a part)
+*.mp4
+*.pptx
+!docs/templates/*.pptx
+captures/
+obs/
+
+# === OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
