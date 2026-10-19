@@ -46,4 +46,6 @@ def test_verdict_is_the_alert_rule_for_every_state(monkeypatch):
         assert an['anomaly']==is_anomalous(ops['score'],list(ops['features'].values()))
 def test_the_alert_loop_does_not_keep_its_own_copy_of_the_rule():
     text=(ROOT/'services/detector/main.py').read_text()
-    assert 'is_anomalous(value,row)' in text and not re.search(r'value\s*<\s*0',text)
+    # The loop and /anomaly go through the shared rule: no inline score test, no hard-coded repetition count.
+    assert 'next_consecutive(consecutive,value,row)' in text and 'alert_due(consecutive,CONSECUTIVE)' in text
+    assert not re.search(r'value\s*<\s*0',text) and not re.search(r'consecutive\s*>=\s*\d',text)

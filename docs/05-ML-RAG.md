@@ -89,7 +89,80 @@ conteneur `detector` (`MODEL_DIR=/models`). Ils ne sont jamais dans le dépôt :
   `scripts/acceptance.py` n'a pas été exécuté.
 - Si le code du détecteur change, reconstruire l'image avant de relancer :
   `docker compose up -d --build detector`.
+- `--nu` (ou la variable `DETECTOR_NU`, 0,03 par défaut) fixe le `nu` du SVM ; la valeur
+  utilisée est consignée dans `report.json`. Le choisir : section Calibration ci-dessous.
 - Exporter les preuves : voir `docs/INSTALL.md` §5.
+
+## Verdict courant : GET /anomaly
+Route interne du détecteur, en lecture seule : `{"anomaly": bool, "score": float|null,
+"status": str}`. Elle lit le même état que `/ops/ml` (une seule fonction de lecture) et
+n'a aucune logique propre. `anomaly` vaut vrai seulement si `status` est `monitoring`,
+si le score est négatif **et** si des rejets de capacité sont présents : c'est la règle
+exacte qui alimente le compteur d'alerte (`is_anomalous`). Au repos le verdict est donc
+faux par construction, même si le modèle est serré.
+
+Elle ne ment pas par défaut : sans modèle chargé, ou après une erreur de collecte,
+`anomaly` vaut faux **et** `status` le dit (`waiting_for_trained_model`,
+`telemetry_or_delivery_error`), avec `score` à `null`. Un consommateur lit `status`
+avant d'interpréter `anomaly`. Le verdict décrit l'observation courante, pas l'alerte :
+le compteur repart à zéro après l'envoi d'une alerte, le verdict reste vrai tant que les
+rejets continuent. Contrat : `docs/openapi/detector.json`.
+
+## Calibration : choisir `nu` et `consecutive`
+**Cible chiffrée à atteindre**, à mesurer sur la vraie baseline :
+1. **Zéro faux positif sur une fenêtre de trafic normal soutenu** : au moins 150
+   observations (5 minutes), d'une session distincte de celle de la baseline.
+2. **Détection en moins de 10 secondes** après le début de l'attaque. Le délai mesuré va
+   du début de l'attaque à l'observation qui déclenche l'alerte ; la livraison de
+   l'alerte et la remédiation ont leur propre budget (chaîne totale visée : moins de 45 s).
+
+Deux notions de faux positif, à ne pas confondre. **FPruns** : séries de `N` scores
+négatifs sur du trafic normal, **sans** la barrière « rejets de capacité » ; elle mesure la
+robustesse du couple (`nu`, `consecutive`) par lui-même. **FPgate** : alertes que la règle
+réelle déclencherait. FPgate est trivialement nul tant que le trafic normal n'a aucun
+rejet, il ne distingue donc pas `consecutive=1` de `consecutive=5`. Le critère de la
+cible est FPruns ; la barrière reste un filet de sécurité supplémentaire.
+
+Réglages, sans reconstruire l'image : `DETECTOR_CONSECUTIVE` dans `.env` (lu au démarrage ;
+`docker compose up -d detector` recrée le conteneur) et `nu` à l'entraînement
+(`train --nu 0.05` ou `DETECTOR_NU`). Une valeur invalide arrête le service ou
+l'entraînement avec un message, sans repli silencieux.
+
+Procédure, une commande par étape. Lancer les commandes depuis WSL : son horloge est celle
+des conteneurs (vérifier `date +%s` et `docker compose exec detector date +%s` si Windows
+est sorti de veille). Les heures sont des secondes epoch, ou de l'ISO 8601 avec fuseau ;
+une heure sans fuseau est refusée.
+1. Trafic normal pendant au moins 5 minutes, détecteur actif (modèle entraîné).
+   Au début `T1=$(date +%s)`, à la fin `T2=$(date +%s)`, puis :
+   `docker compose exec detector python -m services.detector.window export --start $T1 --end $T2 --out /models/normal.json`
+2. `A=$(date +%s)` puis lancer l'attaque depuis le PC Attaquant tout de suite ; une
+   minute plus tard :
+   `docker compose exec detector python -m services.detector.window export --start $A --end $((A+60)) --out /models/attack.json`
+   Le détecteur journalise chaque observation ; l'export la relit telle qu'il l'a vue.
+   `--start` doit être l'heure de lancement : un départ plus tôt allonge le délai mesuré.
+3. `mkdir -p runtime/data`, puis `docker compose cp detector:/models/<fichier> runtime/data/`
+   pour `baseline.json`, `normal.json`, `attack.json` (et `model.joblib` pour comparer le
+   modèle déployé ; ne copier qu'un joblib produit par nous).
+4. `python scripts/calibrate_detector.py --baseline runtime/data/baseline.json --normal runtime/data/normal.json --attack runtime/data/attack.json`
+   Le tableau donne, pour chaque (`nu`, `consecutive`), le taux de scores négatifs, FPruns,
+   FPgate, la détection et son délai. La preuve est écrite dans `runtime/evidence/calibration-<date>.json`.
+5. Appliquer le couple proposé (`.env`, recréation du conteneur, réentraînement avec
+   `--nu` si besoin), puis refaire une attaque et vérifier la chaîne (`scripts/check_mardi.py`).
+
+L'outil **mesure et propose, il ne décide pas** : il entraîne des modèles candidats en
+mémoire, ne touche ni au modèle déployé, ni à la baseline, ni à la configuration, et
+n'écrit que son fichier de preuve. Code de sortie 0 seulement si une proposition existe
+et que la fenêtre normale est assez longue pour conclure.
+
+**Si les deux cibles sont incompatibles** sur la vraie baseline, l'outil affiche
+`NO PAIR` avec le couple le plus rapide sans faux positif et celui qui s'appuie sur la
+seule barrière de capacité. Choisir entre les deux, ou collecter plus de baseline, est un
+arbitrage d'équipe : il n'est pas tranché par l'outil.
+
+Limites. Le délai ne modélise pas le refroidissement de 30 s entre deux alertes. Une seule
+attaque donne un seul délai : en refaire plusieurs. Sur la fixture synthétique des tests,
+`nu` entre 0,01 et 0,05 donne le même taux de scores négatifs et `consecutive` est le
+vrai levier ; ce n'est pas une mesure sur le laboratoire, à ne pas supposer.
 
 ## Évaluation à réaliser sur le laboratoire
 - Vérifier le taux de faux positifs sur le holdout normal et une autre session.

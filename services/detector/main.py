@@ -12,9 +12,12 @@ import joblib
 from fastapi import FastAPI
 from services.common.security import secret
 from services.common.audit import emit
-from services.detector.model import score, FEATURES, is_anomalous
+from services.detector.model import score, FEATURES, is_anomalous, next_consecutive, alert_due, consecutive_from_env
 from services.detector.telemetry import sample
 from services.detector.soc import signals
+# Observations in a row before an alert. Read once at startup (DETECTOR_CONSECUTIVE, default 3);
+# an invalid value stops the service instead of silently falling back.
+CONSECUTIVE=consecutive_from_env()
 state={'status':'waiting_for_trained_model','features':None,'score':None}
 async def soc_loop():
     while True:
@@ -38,9 +41,9 @@ async def loop():
                     model=joblib.load(path); stamp=path.stat().st_mtime
                 row=await sample(); value=score(model,row)
                 state.update(status='monitoring',features=dict(zip(FEATURES,row)),score=value)
-                consecutive=consecutive+1 if is_anomalous(value,row) else 0
+                consecutive=next_consecutive(consecutive,value,row)
                 emit('detector','inference',score=value,features=row,consecutive=consecutive)
-                if consecutive>=3 and time.time()-last_alert>30:
+                if alert_due(consecutive,CONSECUTIVE) and time.time()-last_alert>30:
                     payload=json.dumps({'id':str(uuid.uuid4()),'issued_at':time.time(),
                                         'score':value,'features':row},sort_keys=True).encode()
                     signature=hmac.new(secret('alert_key').encode(),payload,hashlib.sha256).hexdigest()
@@ -56,6 +59,7 @@ async def loop():
         await asyncio.sleep(2)
 @asynccontextmanager
 async def lifespan(app):
+    emit('detector','config',consecutive_required=CONSECUTIVE)
     tasks=[asyncio.create_task(loop()),asyncio.create_task(soc_loop())]
     yield
     for task in tasks: task.cancel()

@@ -52,6 +52,9 @@ services:
     depends_on: {init: {condition: service_completed_successfully}}
   detector:
     <<: *app
+    # A local `environment` replaces the x-app one (no deep merge): the shared variables are repeated.
+    # DETECTOR_NU is read by train.py (docker compose exec), DETECTOR_CONSECUTIVE by the alert loop.
+    environment: {LOG_DIR: /logs, STATE_DIR: /state, MODEL_DIR: /models, HOME: /tmp, DETECTOR_NU: '${DETECTOR_NU:-0.03}', DETECTOR_CONSECUTIVE: '${DETECTOR_CONSECUTIVE:-3}'}
     command: ['python','-m','uvicorn','services.detector.main:app','--host','0.0.0.0','--port','8000','--no-access-log']
     secrets: [alert_key]
     volumes: ['logs:/logs','models:/models']
