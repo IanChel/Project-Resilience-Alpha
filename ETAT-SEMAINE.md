@@ -22,7 +22,7 @@ Ansible est impossible sous Windows ; à passer sous Linux).
 | M7 | Jalon critique | RUNTIME | `check_mardi.py` | W7, J1 |
 | W1 | Moteur de remédiation | DIVERGENT ASSUMÉ | 6 items sur 8 faits, recréation écartée (`06`, déc. 2), ban au WAF en surcouche non vérifiée (déc. 1) ; Ansible jamais exécuté en conteneur | W7, J1, le live |
 | W2 | Chrono du dashboard | RUNTIME | `Chrono.jsx`, étapes horodatées côté backend, 12 tests ; jamais vu en direct | le clip, le live |
-| W3 | Transaction témoin | FAIT | `remediator/main.py`, 6 tests dont un ban actif | — |
+| W3 | Transaction témoin | FAIT | `remediator/main.py`, 6 tests, plus un test avec un ban actif (`test_ban.py`) | — |
 | W4 | WAF, SIEM, secrets | PARTIEL | corrélation par incident, secrets testés ; ban au WAF non vérifié ; aucune limite de débit au WAF (`06`) | un ban visible au live |
 | W5 | RAG | DIVERGENT ASSUMÉ | TF-IDF (`docs/05`, D-08), 503 testé, encodage corrigé ; génération non vérifiée sans Ollama | la démo du RAG |
 | W6 | Restauration chronométrée | RUNTIME | `acceptance.py` (preuve complète) ; `backup.py`, `restore.py` jamais exécutés | J5 (PRA) |
