@@ -10,21 +10,36 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
 
 ---
 
-## Phase 0 — Démarrer (bloquant pour tout le reste) · P3 + P4
+## Phase 0 — Démarrer ✅ **TERMINÉE le 19/10** · P3 + P4
 
-- [ ] **0.1** Prérequis sur le PC Hôte : Docker Desktop + WSL2 actifs, `sops` et `age` installés dans WSL
+- [x] **0.1** Prérequis sur le PC Hôte : Docker Desktop + WSL2 actifs, `sops` et `age` installés dans WSL
       → `sops --version && age-keygen --version && docker compose version`
-- [ ] **0.2** Générer les secrets · `python scripts/init_secrets.py`
+- [x] **0.2** Générer les secrets · `python scripts/init_secrets.py`
       *Fait quand* : `.secrets/runtime/` contient les 7 fichiers. **Ne jamais commiter ce dossier** (déjà ignoré).
-- [ ] **0.3** Démarrer la stack · `docker compose up -d --build`
+- [x] **0.3** Démarrer la stack · `docker compose up -d --build`
       Le `--build` est obligatoire : les images embarquent le code modifié cette semaine.
-- [ ] **0.4** Valider le jalon de lundi · `python scripts/check_lundi.py`
+- [x] **0.4** Valider le jalon de lundi · `python scripts/check_lundi.py`
       *Fait quand* : 5/5 OK (conteneurs Up, `/health`, séries `lab_*`, cible Prometheus, datasource Grafana).
-- [ ] **0.5** 🔴 **RISQUE N°1 — Tester Ansible DANS le conteneur du remédiateur**
+- [x] **0.5** 🔴 **RISQUE N°1 — Tester Ansible DANS le conteneur du remédiateur**
       `docker compose exec remediator python -m ansible.cli.playbook -i localhost, infra/ansible/contain.yml --syntax-check`
       Le conteneur tourne non-root avec un système de fichiers en lecture seule. **Si Ansible n'y démarre pas,
       chaque incident finit en `failed` + `manual_review_required` = le scénario à 0/5 de vendredi.**
-      *Fait quand* : la commande sort en code 0. Si elle échoue, **tout s'arrête ici** et on corrige d'abord.
+      ⚠️ **`--syntax-check` ne suffit PAS** : il passait alors que toute exécution échouait. Le vrai test est
+      d'exécuter un module : `docker compose exec remediator python -m ansible.cli.adhoc localhost -i localhost, -c local -m ansible.builtin.ping`
+      *Fait quand* : le module répond `pong`.
+
+> **Bilan de la phase 0 (19/10).** Trois défauts trouvés et corrigés, aucun n'était visible sans exécuter :
+> 1. 🔴 **Ansible échouait dans le conteneur** (« Failed to create temporary directory »). Racine en lecture seule
+>    et `~` résolu via la base passwd, pas `$HOME`. Chaque incident aurait fini en `manual_review_required`,
+>    c'est-à-dire le 0/5 de vendredi. Corrigé dans `compose.yaml` (`ANSIBLE_*_TEMP` sous `/tmp`).
+> 2. 🔴 **Grafana ne pouvait pas publier son port** : un conteneur sur un réseau `internal: true` ne le peut pas,
+>    Docker accepte la déclaration sans jamais l'établir. Grafana est maintenant aussi sur le réseau `mgmt`.
+> 3. **Port 8080 occupé** sur le PC Hôte → le WAF est publié sur **8081** (`LAB_PORT`, configurable).
+>
+> Deux tests figent désormais les points 1 et 2 (`tests/test_configs.py`), vérifiés par mutation.
+> État : 14 services actifs, `check_lundi.py` 5/5, WAF `HTTP 200` sur `127.0.0.1:8081`, chaîne SOPS validée
+> (chiffrement → déchiffrement, 7/7 identiques). Suite de tests : 250 réussis, 1 échec (test natif, Ansible
+> ne tourne pas sous Windows — sans rapport avec le code).
 
 ## Phase 1 — Rendre la détection possible · P5
 
@@ -42,11 +57,12 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
 ## Phase 2 — Monter les deux postes · P3 + P4
 
 - [ ] **2.1** Point d'accès mobile Windows `RESILIENCE-G2`, Hôte en `192.168.137.1`
-- [ ] **2.2** `LAB_BIND=192.168.137.1` dans `.env`, puis `docker compose up -d --force-recreate waf`
-- [ ] **2.3** Règle pare-feu Windows pour le port 8080, limitée au sous-réseau du groupe
+- [ ] **2.2** `LAB_BIND=192.168.137.1` dans `.env` (il contient déjà `LAB_PORT=8081`), puis
+      `docker compose up -d --force-recreate waf`
+- [ ] **2.3** Règle pare-feu Windows pour le port **8081**, limitée au sous-réseau du groupe
 - [ ] **2.4** PC Attaquant : connecté **uniquement** au PA, Python 3.12 + `httpx`, copier **seulement**
       `scripts/attack_lab.py` (jamais les secrets)
-- [ ] **2.5** Vérifier depuis l'Attaquant que `http://192.168.137.1:8080` répond
+- [ ] **2.5** Vérifier depuis l'Attaquant que `http://192.168.137.1:8081` répond
 
 ## Phase 3 — Les deux jalons critiques · toute l'équipe
 
@@ -55,7 +71,7 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
       Attaquant : `python attack_lab.py --lab-authorized --seconds 30`
       *Fait quand* : 5/5 OK — pic **mesuré** dans Prometheus **et** `anomaly=true` sur la même fenêtre.
 - [ ] **3.2** 🔴 **Jalon W7** — la boucle complète sous 60 s
-      Hôte : `python scripts/acceptance.py --url http://192.168.137.1:8080 --seconds 55`, puis attaque,
+      Hôte : `python scripts/acceptance.py --url http://192.168.137.1:8081 --seconds 55`, puis attaque,
       puis `python scripts/check_mercredi.py`
       *Fait quand* : 5/5 OK — boucle complète, < 60 s, aucune intervention humaine, config du détecteur consignée.
 - [ ] **3.3** Si faux positifs ou détection trop lente : calibrer

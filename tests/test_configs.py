@@ -13,13 +13,28 @@ def test_fixed_playbook_has_no_shell_module():
     assert 'ansible.builtin.command' not in text
     assert 'no_log: true' in text
 
-def test_unsafe_lab_urls_refused():
+def load_client():
     import importlib.util
     spec=importlib.util.spec_from_file_location('client',ROOT/'scripts/lab_client.py')
     m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+    return m
+def test_unsafe_lab_urls_refused():
+    m=load_client()
     import pytest
-    for url in ['http://example.com:8080','http://192.168.137.2:8080','http://localhost:8080/other','http://user@localhost:8080']:
+    for url in ['http://example.com:8081','http://192.168.137.2:8081','http://localhost:8081/other','http://user@localhost:8081',
+                'http://localhost:8080']:                                   # the old port is now refused too
         with pytest.raises(ValueError): m.validate_url(url)
+    assert m.validate_url('http://192.168.137.1:8081')=='http://192.168.137.1:8081'
+    assert m.base_url()=='http://127.0.0.1:8081' and m.lab_port()==8081      # published port, not the 8080 inside the stack
+def test_the_published_port_follows_lab_port():
+    import pytest
+    m=load_client()
+    assert m.lab_port({'LAB_PORT':'9090'})==9090 and m.base_url('192.168.137.1',{'LAB_PORT':'9090'})=='http://192.168.137.1:9090'
+    assert m.validate_url('http://127.0.0.1:9090',{'LAB_PORT':'9090'})=='http://127.0.0.1:9090'
+    with pytest.raises(ValueError): m.validate_url('http://127.0.0.1:8081',{'LAB_PORT':'9090'})
+    for bad in ('0','70000','abc','-1','80.5'):
+        with pytest.raises(ValueError): m.lab_port({'LAB_PORT':bad})
+    assert m.lab_port({'LAB_PORT':''})==8081 and m.lab_port({})==8081   # compose passes an empty string when the variable is unset
 
 def load_attack():
     import importlib.util
@@ -29,10 +44,10 @@ def load_attack():
 def test_attack_target_stays_inside_lab():
     import pytest
     m=load_attack()
-    assert m.resolve_target(m.DEFAULT_TARGET_HOST)=='http://192.168.137.1:8080'
-    assert m.resolve_target('192.168.137.20')=='http://192.168.137.20:8080'
-    assert m.resolve_target('localhost')=='http://127.0.0.1:8080'
-    for bad in ['example.com','8.8.8.8','192.168.1.10','10.0.0.5','192.168.137.1:8080','http://192.168.137.1','']:
+    assert m.resolve_target(m.DEFAULT_TARGET_HOST)=='http://192.168.137.1:8081'
+    assert m.resolve_target('192.168.137.20')=='http://192.168.137.20:8081'
+    assert m.resolve_target('localhost')=='http://127.0.0.1:8081'
+    for bad in ['example.com','8.8.8.8','192.168.1.10','10.0.0.5','192.168.137.1:8081','http://192.168.137.1','']:
         with pytest.raises(ValueError): m.resolve_target(bad)
 def test_attack_refuses_without_ack_or_outside_lab(monkeypatch):
     import asyncio,pytest
@@ -46,3 +61,25 @@ def test_attack_refuses_without_ack_or_outside_lab(monkeypatch):
         if env: monkeypatch.setenv('LAB_TARGET',env)
         with pytest.raises(SystemExit) as exc: asyncio.run(m.main())
         assert exc.value.code==2
+
+def compose_services():
+    return yaml.safe_load((ROOT/'compose.yaml').read_text())['services']
+def test_ansible_can_write_its_temp_dir_in_the_remediator():
+    """Ansible resolves ~ from the passwd database (/home/app), not $HOME, and / is read-only: without these
+    variables every module fails with "Failed to create temporary directory", so every incident would end in
+    manual_review_required. `ansible-playbook --syntax-check` passes even when this is broken."""
+    env=compose_services()['remediator']['environment']
+    for key in ('ANSIBLE_LOCAL_TEMP','ANSIBLE_REMOTE_TEMP','ANSIBLE_HOME'):
+        assert env.get(key,'').startswith('/tmp/'),f'{key} must live under the writable tmpfs: {env.get(key)!r}'
+    tmpfs=' '.join(compose_services()['remediator'].get('tmpfs') or [])
+    assert '/tmp' in tmpfs and 'rw' in tmpfs                                  # the only writable path in the container
+    for key in ('LOG_DIR','STATE_DIR','HOME'): assert key in env,f'{key} lost when the x-app environment was overridden'
+def test_a_published_port_requires_a_non_internal_network():
+    """A container attached only to an `internal: true` network cannot publish a port: Docker accepts the
+    declaration and never establishes the binding. Grafana hit exactly this."""
+    compose=yaml.safe_load((ROOT/'compose.yaml').read_text())
+    internal={name for name,net in compose['networks'].items() if (net or {}).get('internal')}
+    for name,service in compose['services'].items():
+        if not service.get('ports'): continue
+        attached=set(service.get('networks') or [])
+        assert attached-internal,f'{name} publishes {service["ports"]} but is only on internal networks {sorted(attached)}'

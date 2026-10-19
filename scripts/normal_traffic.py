@@ -1,8 +1,8 @@
 import argparse
 import time
 import httpx
-from lab_client import validate_url, login
-p=argparse.ArgumentParser(); p.add_argument('--url',default='http://127.0.0.1:8080'); p.add_argument('--seconds',type=int,default=240)
+from lab_client import base_url, validate_url, login
+p=argparse.ArgumentParser(); p.add_argument('--url',default=base_url()); p.add_argument('--seconds',type=int,default=240)
 a=p.parse_args()
 with httpx.Client(trust_env=False,base_url=validate_url(a.url),timeout=5,follow_redirects=False) as c:
     h=login(c,'alice'); end=time.monotonic()+min(a.seconds,600); i=0

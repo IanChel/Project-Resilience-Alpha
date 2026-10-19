@@ -43,8 +43,14 @@ services:
     networks: [app, data, control, observe]
     depends_on: {init: {condition: service_completed_successfully}, db: {condition: service_healthy}}
     healthcheck: {test: ['CMD','python','-c',"import urllib.request; urllib.request.urlopen('http://localhost:8000/ready')"], interval: 5s, timeout: 3s, retries: 12}
+  # Ansible resout son dossier temporaire via la base passwd (/home/app), pas via $HOME, et la racine est en
+  # lecture seule : sans ces trois variables, TOUT module Ansible echoue ("Failed to create temporary directory"),
+  # donc chaque incident finirait en failed/manual_review_required. `--syntax-check` ne le detecte pas.
+  # Un environment local remplace celui de l'ancre x-app : les variables partagees sont repetees.
   remediator:
     <<: *app
+    environment: {LOG_DIR: /logs, STATE_DIR: /state, MODEL_DIR: /models, HOME: /tmp,
+                  ANSIBLE_HOME: /tmp/.ansible, ANSIBLE_LOCAL_TEMP: /tmp/.ansible/tmp, ANSIBLE_REMOTE_TEMP: /tmp/.ansible/tmp}
     command: ['python','-m','uvicorn','services.remediator.main:app','--host','0.0.0.0','--port','8000','--no-access-log']
     secrets: [session_key, alert_key, control_key, alice_password]
     volumes: ['logs:/logs','incident-state:/state']
@@ -83,7 +89,7 @@ services:
       MODSEC_AUDIT_LOG: /var/log/modsecurity/audit.log
       MODSEC_AUDIT_LOG_FORMAT: JSON
       MODSEC_AUDIT_LOG_PARTS: AFZ
-    ports: ['${LAB_BIND:-127.0.0.1}:8080:8080']
+    ports: ['${LAB_BIND:-127.0.0.1}:${LAB_PORT:-8081}:8080']   # port publie configurable : 8080 est pris par un autre service sur le PC Hote
     volumes: ['waflogs:/var/log/modsecurity']
     networks: [front]
     depends_on: [edge]
@@ -112,6 +118,8 @@ services:
     depends_on: [loki]
     restart: unless-stopped
     mem_limit: 250m
+  # Sur `mgmt` EN PLUS de `observe` : un conteneur attache uniquement a un reseau `internal: true` ne peut pas
+  # publier de port (Docker accepte la declaration et ne la realise jamais). `mgmt` ne porte que Grafana.
   grafana:
     image: grafana/grafana:11.6.0
     environment:
@@ -124,7 +132,7 @@ services:
     secrets: [grafana_password]
     ports: ['127.0.0.1:3000:3000']
     volumes: ['./infra/grafana/provisioning:/etc/grafana/provisioning:ro','./infra/grafana/dashboard.json:/var/lib/grafana/dashboards/resilience.json:ro','grafanadata:/var/lib/grafana']
-    networks: [observe]
+    networks: [observe, mgmt]
     restart: unless-stopped
     mem_limit: 400m
   ollama:
@@ -149,6 +157,7 @@ services:
     mem_limit: 700m
 networks:
   front: {}
+  mgmt: {}   # non interne, uniquement pour publier Grafana sur 127.0.0.1 (voir le commentaire du service grafana)
   app: {internal: true}
   data: {internal: true}
   control: {internal: true}

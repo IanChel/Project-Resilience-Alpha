@@ -64,7 +64,8 @@ docker compose logs --tail=50 payment detector remediator alloy
 ```
 Aucun secret ne doit être copié dans un rapport ou un échange avec une IA.
 Les logs d'erreur tiers doivent être relus avant partage.
-Tester http://127.0.0.1:8080/api/ready puis ouvrir http://127.0.0.1:8080.
+Tester http://127.0.0.1:8081/api/ready puis ouvrir http://127.0.0.1:8081.
+(8081 = `LAB_PORT` : le port 8080 est occupé sur le PC Hôte par un service Java.)
 Compte opérateur : alice. Son mot de passe est créé sur votre PC :
 ```bash
 cat .secrets/runtime/alice_password
@@ -139,7 +140,7 @@ docker compose up -d --force-recreate waf
 Vérifier les règles Windows Firewall avec l'équipe INFRA/CYBER. Le PC Attaquant
 ne doit pas conserver une connexion parallèle au réseau du campus.
 Après changement d'adresse, les scripts observateur/trafic demandent
-`--url http://192.168.137.1:8080`. Le navigateur doit aussi utiliser cette URL.
+`--url http://192.168.137.1:8081`. Le navigateur doit aussi utiliser cette URL.
 
 ## 7. Préparer le PC Attaquant
 Copier seulement scripts/attack_lab.py sur ce poste. Python 3.11/3.12 :
@@ -150,14 +151,14 @@ py -3.12 -m venv .venv
 ```
 Le script demande le mot de passe du compte fictif loadbot, transmis localement
 par le groupe. Ne pas copier tous les secrets sur le PC Attaquant. Sa cible par
-défaut est le PC Hôte 192.168.137.1:8080 ; `--target` (ou la variable `LAB_TARGET`)
+défaut est le PC Hôte 192.168.137.1:8081 ; `--target` (ou la variable `LAB_TARGET`)
 n'accepte qu'une IP littérale du sous-réseau 192.168.137.0/24 ou de loopback, tout
 autre hôte est refusé. Il ne scanne rien. Scénario et bornes : docs/04-ATTAQUE.md.
 Attendre que l'observateur du Hôte soit prêt avant de lancer l'attaque.
 
 Sur Hôte, lancer d'abord :
 ```bash
-python scripts/acceptance.py --url http://192.168.137.1:8080 --seconds 55
+python scripts/acceptance.py --url http://192.168.137.1:8081 --seconds 55
 ```
 Au message d'attente, lancer la commande Attaquant. Ouvrir dashboard et Grafana
 à côté. Le fichier runtime/evidence/acceptance-*.json contient le résultat réel.
@@ -175,11 +176,25 @@ La restauration est décrite dans docs/08-PCA-PRA.md et remplace les données.
 
 ## Dépannage ciblé
 - Docker absent sous WSL : vérifier Docker Desktop démarré et intégration Ubuntu.
-- Port 8080 injoignable après LAB_BIND : PA actif et bonne interface, recréer WAF.
+- Port 8081 injoignable après LAB_BIND : PA actif et bonne interface, recréer WAF.
 - API pas prête : logs DB/payment, mounts secrets, droits et espace disque.
 - ML en attente : baseline absente ; lancer trafic normal et entraînement.
 - Erreur télémétrie : cibles Prometheus, Alloy, labels service/event et disponibilité Loki.
 - Alerte mais failed : playbook/control, accès WAF depuis le moteur, DB et registres.
+- **Ansible « Failed to create temporary directory »** : le remédiateur a sa racine en lecture
+  seule et Ansible résout `~` via la base passwd (`/home/app`), pas via `$HOME`. Les variables
+  `ANSIBLE_HOME`, `ANSIBLE_LOCAL_TEMP` et `ANSIBLE_REMOTE_TEMP` doivent pointer sous `/tmp`
+  (c'est fait dans `compose.yaml`). Attention : `--syntax-check` réussit même quand c'est cassé ;
+  pour vraiment tester, exécuter un module :
+  `docker compose exec remediator python -m ansible.cli.adhoc localhost -i localhost, -c local -m ansible.builtin.ping`
+- **Grafana injoignable sur 127.0.0.1:3000 alors que le conteneur tourne** : un conteneur attaché
+  uniquement à un réseau `internal: true` ne peut pas publier de port ; Docker accepte la
+  déclaration et n'établit jamais le binding (`docker inspect` montre `NetworkSettings.Ports` vide).
+  Grafana est donc aussi sur le réseau `mgmt`, non interne. Vérifier avec
+  `docker ps --filter name=grafana --format '{{.Ports}}'` : il doit afficher `127.0.0.1:3000->3000/tcp`.
+- **`init_secrets.py` : permissions POSIX non applicables** : normal si le dépôt est sur `/mnt/c`
+  (volume Windows monté dans WSL). Le script le signale et continue ; la protection vient du profil
+  NTFS, de `.gitignore` et de l'exclusion dans l'archive.
 - Aucun 503 pendant la charge : scénario non démontré ; revoir saturation observée,
   cadence et départ des fenêtres, sans augmenter le périmètre ou dépasser les bornes.
 - RAG 503 : modèle téléchargé, RAM, logs Ollama et URL du PC IA si utilisé.

@@ -12,19 +12,23 @@ def sources():
     return [p for folder in ('scripts','services') for p in (ROOT/folder).rglob('*.py') if '__pycache__' not in p.parts]
 def rel(p): return p.relative_to(ROOT).as_posix()
 
-def test_only_the_two_secret_scripts_write_secret_values_and_only_under_runtime():
-    writers={}
-    for p in sources():
-        lines=[l for l in p.read_text(encoding='utf-8').splitlines() if re.search(r"write_text\(\s*value",l)]
-        if lines: writers[rel(p)]=lines
-    assert set(writers)=={'scripts/init_secrets.py','scripts/unseal.py'}
-    for name in writers:   # the destination of every value is built under .secrets/runtime, never anywhere else
+def test_a_single_helper_writes_secret_values():
+    writers={rel(p) for p in sources() if re.search(r"write_text\(\s*value",p.read_text(encoding='utf-8'))}
+    assert writers=={'scripts/secret_files.py'}                        # one place writes a secret value, and only one
+    helper=(ROOT/'scripts/secret_files.py').read_text(encoding='utf-8')
+    assert 'def write_secret(path,value)' in helper                    # the caller supplies the path
+    assert not re.search(r"/\s*['\"]\.secrets",helper)                 # ...and builds no path of its own
+def test_only_init_and_unseal_write_secrets_and_only_under_runtime():
+    callers={rel(p) for p in sources() if 'write_secret(' in p.read_text(encoding='utf-8') and p.name!='secret_files.py'}
+    assert callers=={'scripts/init_secrets.py','scripts/unseal.py'}
+    for name in callers:   # the destination of every value is built under .secrets/runtime, never anywhere else
         text=(ROOT/name).read_text(encoding='utf-8')
-        assert re.search(r"^base\s*=.*/'\.secrets'\s*$",text,re.M) and "base/'runtime'/name" in text
+        assert re.search(r"^base\s*=.*'\.secrets'",text,re.M) and "base/'runtime'/name" in text
 def test_nothing_else_touches_the_secrets_directory():
     touching={rel(p) for p in sources() if '.secrets' in p.read_text(encoding='utf-8')}
-    # init/unseal create it, check_lundi reads the Grafana password for a read-only check, package.py excludes it
-    assert touching<={'scripts/init_secrets.py','scripts/unseal.py','scripts/check_lundi.py','scripts/package.py'},touching
+    # init/unseal create it, secret_files documents it, check_lundi reads the Grafana password, package.py excludes it
+    assert touching<={'scripts/init_secrets.py','scripts/unseal.py','scripts/secret_files.py',
+                      'scripts/check_lundi.py','scripts/package.py'},touching
 def test_git_ignores_every_secret_path_and_tracks_none():
     if shutil.which('git') is None or not (ROOT/'.git').exists(): pytest.skip('not a git checkout')
     ignored=subprocess.run(['git','check-ignore','.secrets/runtime/db_password','.secrets/age.key','.secrets/secrets.enc.json','.env'],cwd=ROOT,capture_output=True,text=True)

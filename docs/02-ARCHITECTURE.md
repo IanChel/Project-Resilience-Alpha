@@ -76,7 +76,8 @@ la conservation du total. Un incident interrompu est repris au redémarrage par
 la même action idempotente. Les échecs restent visibles, sans fausse réussite.
 
 ## Exposition réseau
-Seul le WAF 8080 est publié sur l'interface choisie ; Grafana 3000 reste localhost.
+Seul le WAF est publié sur l'interface choisie (port `LAB_PORT`, 8081 par défaut : 8080 est pris
+sur le PC Hôte) ; Grafana 3000 reste localhost. Dans la stack, tout parle à `waf:8080`.
 Base, Prometheus, Loki, contrôle et Ollama ne sont pas publiés.
 Les routes externes sont explicites. Aucun chemin public vers /control ou /alerts.
 Le moteur peut joindre le WAF pour vérifier le vrai chemin de paiement.

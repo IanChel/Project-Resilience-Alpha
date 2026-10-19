@@ -10,7 +10,7 @@ import httpx
 # Default = Host PC on the Windows hotspot RESILIENCE-G2 (see docs/04-ATTAQUE.md).
 DEFAULT_TARGET_HOST='192.168.137.1'
 LAB_NETWORK=ipaddress.ip_network('192.168.137.0/24')
-PORT=8080
+PORT=int(os.environ.get('LAB_PORT') or 8081)   # published port of the WAF; 8080 is taken on the Host PC
 def resolve_target(value):
     """Lab-scope guard. The target stays configurable, but only as a literal IP of the
     hotspot subnet (or loopback). No hostname, no campus range, no Internet address."""

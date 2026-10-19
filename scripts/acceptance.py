@@ -11,7 +11,7 @@ import time
 import uuid
 from pathlib import Path
 import httpx
-from lab_client import validate_url, login
+from lab_client import base_url, validate_url, login
 STEPS=('detected','containing','verifying','recovered')   # alert, remediation started, healthcheck OK, witness transaction validated
 TARGET_S=60
 ROOT=Path(__file__).resolve().parents[1]
@@ -60,7 +60,7 @@ def verdict_of(result):
     recovered=[i for row in observed for i in row.get('incidents',[]) if i['status']=='recovered']
     return bool(failures and any(i['created']>=result['started_at'] and i['updated']>=min(failures) for i in recovered) and result['after_status']==200 and result['ledger']['total_cents']==200000)
 def main(argv=None):
-    p=argparse.ArgumentParser(description=__doc__.splitlines()[0]); p.add_argument('--url',default='http://127.0.0.1:8080'); p.add_argument('--seconds',type=int,default=55)
+    p=argparse.ArgumentParser(description=__doc__.splitlines()[0]); p.add_argument('--url',default=base_url()); p.add_argument('--seconds',type=int,default=55)
     a=p.parse_args(argv); result={'observations':[],'started_at':time.time()}; ml_state=None
     with httpx.Client(trust_env=False,base_url=validate_url(a.url),timeout=3,follow_redirects=False) as c:
         h=login(c,'alice')

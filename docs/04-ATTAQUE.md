@@ -15,11 +15,11 @@ consigner (checklist de recette deux PC, `docs/09-RECETTE-RENDU.md`).
 |---|---|
 | Point d'accès | Point d'accès mobile Windows `RESILIENCE-G2` |
 | Sous-réseau | `192.168.137.0/24` |
-| PC Hôte (cible) | `192.168.137.1`, port `8080` : le WAF, seul point d'entrée publié |
+| PC Hôte (cible) | `192.168.137.1`, port **`8081`** (`LAB_PORT`) : le WAF, seul point d'entrée publié. 8080 est occupé sur ce poste par un autre service |
 | PC Attaquant | connecté uniquement à ce point d'accès, sans connexion parallèle au campus |
 | Services non publiés | base, secrets, remédiateur, Ollama : aucun port exposé au réseau du groupe |
 
-La cible est `http://192.168.137.1:8080` par défaut. Elle se change avec `--target`
+La cible est `http://192.168.137.1:8081` par défaut. Elle se change avec `--target`
 ou la variable d'environnement `LAB_TARGET` (la ligne de commande l'emporte), mais
 uniquement vers une **IP littérale** du sous-réseau ci-dessus ou de loopback. Un nom
 d'hôte, une adresse du campus ou une adresse Internet est refusé avant toute connexion
@@ -59,7 +59,7 @@ seconde**, puis le remédiateur rejoue une transaction et contrôle le total du 
 | Durée | `--seconds` de 5 à 35, **30 par défaut** (~600 requêtes à 30 s) | contrôle des arguments |
 | Délai par requête | 2 s | client HTTP |
 | Cible unique | `POST /api/quotes` avec `{"amount_cents": 100}`, après un login `loadbot` | code du script |
-| Périmètre | IP littérale de `192.168.137.0/24` ou loopback, port fixé à 8080 | `resolve_target` |
+| Périmètre | IP littérale de `192.168.137.0/24` ou loopback, port `LAB_PORT` (8081) | `resolve_target` |
 | Accord explicite | `--lab-authorized` **obligatoire**, sinon le script refuse de démarrer | contrôle des arguments |
 
 Aucun scan, aucun exploit, aucune redirection suivie, aucun accès hors du WAF.
@@ -72,7 +72,7 @@ Préparation du PC Attaquant : voir `docs/INSTALL.md` §7 (copier uniquement
 1. Sur le **PC Hôte**, lancer l'observateur, qui vérifie une transaction initiale puis
    attend l'attaque :
    ```bash
-   python scripts/acceptance.py --url http://192.168.137.1:8080 --seconds 55
+   python scripts/acceptance.py --url http://192.168.137.1:8081 --seconds 55
    ```
 2. Au message « Start attack_lab.py on the ATTACKER PC now », sur le **PC Attaquant** :
    ```powershell

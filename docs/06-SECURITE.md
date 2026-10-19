@@ -11,7 +11,7 @@ Aucun scan réseau, vol de données, persistance ou élévation de privilèges.
 
 Le WAF est le seul point d'entrée applicatif. Routes autorisées dans Nginx ;
 base, métriques, logs et contrôle sans publication réseau. Grafana localhost.
-Sur Windows, créer une règle entrante TCP 8080 pour l'interface/adresse locale du
+Sur Windows, créer une règle entrante TCP sur le port publié (`LAB_PORT`, 8081) pour l'interface/adresse locale du
 PA et le sous-réseau du groupe ; vérifier qu'aucune règle Docker plus large ne
 rend le même port accessible via l'IP campus. Les interfaces diffèrent selon le
 poste : inspecter Windows Defender Firewall et tester depuis le PC Attaquant.
@@ -25,6 +25,12 @@ autres réglages. Les images tierces (WAF, base, observabilité, Ollama) peuvent
 un filesystem inscriptible ou des droits différents ; Alloy s'exécute en root pour lire
 les journaux, en lecture seule. Elles ne sont pas décrites comme durcies intégralement.
 Pas de montage docker.sock.
+Conséquence mesurée du durcissement : la racine du remédiateur étant en lecture seule et Ansible
+résolvant `~` via la base passwd (`/home/app`) plutôt que `$HOME`, ses répertoires temporaires sont
+redirigés sous `/tmp` (`ANSIBLE_HOME`, `ANSIBLE_LOCAL_TEMP`, `ANSIBLE_REMOTE_TEMP` dans `compose.yaml`).
+Sans cela, **tout module Ansible échoue** et chaque incident finirait en `manual_review_required` :
+c'est le scénario à 0/5. `--syntax-check` ne détecte pas ce défaut, seule l'exécution d'un module le
+révèle ; `tests/test_configs.py` fige la configuration.
 
 ## Secrets
 SOPS est le choix retenu parmi Vault/SOPS autorisés. age chiffre la clé de données.
@@ -53,7 +59,7 @@ La machine Hôte peut altérer ses logs : aucune preuve d'inaltérabilité indus
 
 ## Test WAF séparé de la reprise principale
 Depuis le PC Attaquant, sur la seule URL du groupe :
-`curl -i 'http://192.168.137.1:8080/api/ready?probe=%3Cscript%3Ealert(1)%3C%2Fscript%3E'`
+`curl -i 'http://192.168.137.1:8081/api/ready?probe=%3Cscript%3Ealert(1)%3C%2Fscript%3E'`
 C'est un marqueur XSS de test dans une query non exécutée par l'application.
 Attendu : rejet CRS (souvent 403) et audit Loki `service="waf"` ; vérifier le résultat,
 ne pas déclarer le WAF validé si la requête passe. Ne pas désactiver le WAF pour
