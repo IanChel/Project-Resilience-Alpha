@@ -1,0 +1,229 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Authorized remediation",
+    "version": "0.1.0",
+    "description": "Contrat du service `remediator` (services/remediator/main.py). Spec maintenue a la main : `app.openapi()` ne decrit pas le corps de `POST /alerts`, lu en octets bruts pour verifier la signature. Seul `GET /status` est publie (WAF/edge, lecture seule, sous `/ops/status`) ; `/alerts` et `/health` sont internes. Une alerte ne contient ni commande, ni nom de conteneur, ni URL de cible : le service n'execute qu'un playbook fixe (infra/ansible/contain.yml)."
+  },
+  "paths": {
+    "/alerts": {
+      "post": {
+        "summary": "Recevoir une alerte du detecteur et lancer la reprise",
+        "description": "Interne : appele par le service detector. Authentifie par signature HMAC-SHA256 (hex) des octets exacts du corps, avec le secret `alert_key`. Controles dans l'ordre : taille (413), signature (403), contenu (422). Une alerte valide declenche la reprise en tache de fond et repond 202 immediatement : le resultat se suit via `GET /status`. Idempotent par identifiant d'incident. Un seul incident actif a la fois.",
+        "operationId": "alert_alerts_post",
+        "security": [],
+        "x-exposure": "internal",
+        "parameters": [
+          {
+            "name": "X-Signature",
+            "in": "header",
+            "required": true,
+            "description": "hex(HMAC-SHA256(alert_key, corps JSON exact tel qu'envoye)). Absent ou incorrect : 403.",
+            "schema": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Alert" }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Alerte prise en compte. Les trois cas renvoient 202 : nouvel incident (`accepted`), identifiant deja connu (`duplicate: true`, statut courant de cet incident), ou autre incident deja actif (`already_running`, avec l'identifiant de l'incident actif).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AlertAccepted" }
+              }
+            }
+          },
+          "403": {
+            "description": "Signature absente ou invalide (`Invalid signature`).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "413": {
+            "description": "Corps de plus de 4096 octets (`Alert too large`), verifie avant la signature.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "422": {
+            "description": "Contenu rejete (`Invalid alert evidence`) : JSON invalide, `id` qui n'est pas un UUID, `issued_at` a plus de 30 s de l'horloge du service, `score` non fini ou >= 0, `features` qui n'a pas 4 valeurs finies, ou `features[2]` (rejets de capacite) <= 0. Corps `{detail: string}`, pas le format de validation FastAPI.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "summary": "Historique des incidents et de leur reprise",
+        "description": "Reserve au role `operator`. Les 30 incidents les plus recents, du plus recent au plus ancien. Publie en lecture seule sous `/ops/status`.",
+        "operationId": "status_status_get",
+        "security": [{ "sessionToken": [] }],
+        "x-exposure": "public read-only (/ops/status)",
+        "responses": {
+          "200": {
+            "description": "Liste des incidents.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StatusResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Session absente, invalide, falsifiee ou expiree.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "403": {
+            "description": "Session valide mais role insuffisant (`Operator required`).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Liveness",
+        "description": "Sans authentification.",
+        "operationId": "health_health_get",
+        "security": [],
+        "x-exposure": "internal",
+        "responses": {
+          "200": {
+            "description": "Processus vivant.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RemediatorHealth" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Jeton de session signe HMAC-SHA256 emis par `POST /auth/token` (services/common/security.py). Ce N'EST PAS un JWT standard : format `base64url(payload).base64url(hmac)` avec payload {sub, role, exp, aud}. Valide 1 h, audience `resilience-lab`, roles `operator` ou `loadbot`."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": ["detail"],
+        "properties": {
+          "detail": { "type": "string" }
+        },
+        "title": "Error"
+      },
+      "RemediatorHealth": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": { "type": "string", "const": "alive" }
+        },
+        "title": "RemediatorHealth"
+      },
+      "Alert": {
+        "type": "object",
+        "required": ["id", "issued_at", "score", "features"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Identifiant de l'incident (deduplication persistante)."
+          },
+          "issued_at": {
+            "type": "number",
+            "description": "Secondes depuis l'epoque Unix. Fenetre acceptee : +/- 30 s autour de l'horloge du service (horloges synchronisees necessaires)."
+          },
+          "score": {
+            "type": "number",
+            "exclusiveMaximum": 0,
+            "description": "Score du modele : strictement negatif (nouveaute), fini."
+          },
+          "features": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": { "type": "number" },
+            "description": "Dans l'ordre [quote_rate, active_work, capacity_denied_10s, denial_logs_10s], valeurs finies. `capacity_denied_10s` (indice 2) doit etre > 0 : une alerte sans rejet de capacite est refusee."
+          }
+        },
+        "additionalProperties": true,
+        "title": "Alert"
+      },
+      "AlertAccepted": {
+        "type": "object",
+        "required": ["id", "status"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "status": {
+            "type": "string",
+            "enum": ["accepted", "containing", "verifying", "recovered", "failed", "already_running"],
+            "description": "`accepted` pour un nouvel incident ; le statut courant de l'incident si `duplicate` ; `already_running` si un autre incident est actif."
+          },
+          "duplicate": {
+            "type": "boolean",
+            "const": true,
+            "description": "Present (true) uniquement si l'identifiant etait deja connu."
+          }
+        },
+        "title": "AlertAccepted"
+      },
+      "Incident": {
+        "type": "object",
+        "required": ["id", "status", "created", "updated", "evidence"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "status": {
+            "type": "string",
+            "enum": ["accepted", "containing", "verifying", "recovered", "failed"],
+            "description": "accepted -> containing -> verifying -> recovered, ou failed. Seul `recovered` prouve la reprise : il suppose la transaction temoin reussie via le WAF et le total du registre egal a 200000 centimes."
+          },
+          "created": { "type": "number", "description": "Secondes depuis l'epoque Unix." },
+          "updated": { "type": "number", "description": "Secondes depuis l'epoque Unix." },
+          "evidence": {
+            "type": "string",
+            "description": "Texte contenant du JSON serialise, pas un objet. `accepted` : l'alerte recue ; `containing` : {action} ; `verifying` : {} ; `recovered` : {transaction_id, total_cents} ; `failed` : {error_type, manual_review_required: true}."
+          }
+        },
+        "title": "Incident"
+      },
+      "StatusResponse": {
+        "type": "object",
+        "required": ["incidents"],
+        "properties": {
+          "incidents": {
+            "type": "array",
+            "maxItems": 30,
+            "items": { "$ref": "#/components/schemas/Incident" }
+          }
+        },
+        "title": "StatusResponse"
+      }
+    }
+  }
+}

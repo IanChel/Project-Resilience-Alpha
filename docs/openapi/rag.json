@@ -1,0 +1,180 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Read-only local RAG",
+    "version": "0.1.0",
+    "description": "Contrat du service `rag` (services/rag/main.py). Spec maintenue a la main a partir de `app.openapi()` puis completee avec les schemas de reponse et les codes d'erreur reellement renvoyes. Assistant documentaire en lecture seule : aucun outil d'action, aucun secret de controle ou d'alerte, aucun acces a la base ni a Docker. Le WAF/edge publie `POST /rag/ask` vers `/ask` ; `/health` n'est pas publie."
+  },
+  "paths": {
+    "/ask": {
+      "post": {
+        "summary": "Interroger la documentation du projet",
+        "description": "Reserve au role `operator`. Recherche lexicale (TF-IDF, trois extraits maximum, seuil de similarite 0,08) dans `docs/*.md`, puis generation par le modele Ollama local a partir des seuls extraits. Une seule inference locale a la fois. Si aucun extrait n'est assez proche, la reponse est 200 avec `Information absente du corpus.` et aucune source : le modele n'est pas appele.",
+        "operationId": "ask_ask_post",
+        "security": [{ "sessionToken": [] }],
+        "x-exposure": "public (/rag/ask)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Question" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reponse et extraits utilises. Les sources indiquent ce qui a ete recupere, pas que chaque phrase generee est exacte.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AskResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Session absente, invalide, falsifiee ou expiree.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "403": {
+            "description": "Session valide mais role insuffisant (`Operator required`).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "422": {
+            "description": "Question absente ou hors de 3..1000 caracteres.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          },
+          "429": {
+            "description": "Une inference est deja en cours (`One local inference at a time`).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "503": {
+            "description": "Ollama injoignable ou modele non telecharge (`Ollama unavailable or model not downloaded`). Aucune reponse n'est presentee comme generee.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Etat du corpus",
+        "description": "Sans authentification. Ne prouve pas que la generation fonctionne : `generation_verified` vaut toujours false.",
+        "operationId": "health_health_get",
+        "security": [],
+        "x-exposure": "internal",
+        "responses": {
+          "200": {
+            "description": "Corpus charge.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/RagHealth" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Jeton de session signe HMAC-SHA256 emis par `POST /auth/token` (services/common/security.py). Ce N'EST PAS un JWT standard : format `base64url(payload).base64url(hmac)` avec payload {sub, role, exp, aud}. Valide 1 h, audience `resilience-lab`, roles `operator` ou `loadbot`."
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": ["detail"],
+        "properties": {
+          "detail": { "type": "string" }
+        },
+        "title": "Error"
+      },
+      "Question": {
+        "type": "object",
+        "required": ["question"],
+        "properties": {
+          "question": { "type": "string", "minLength": 3, "maxLength": 1000, "title": "Question" }
+        },
+        "title": "Question"
+      },
+      "Source": {
+        "type": "object",
+        "required": ["file", "chunk"],
+        "properties": {
+          "file": { "type": "string", "description": "Nom du fichier Markdown du corpus." },
+          "chunk": { "type": "integer", "minimum": 0, "description": "Numero du passage dans le fichier (un passage tous les 1200 caracteres, extrait de 1500 caracteres)." }
+        },
+        "title": "Source"
+      },
+      "AskResponse": {
+        "type": "object",
+        "required": ["answer", "sources"],
+        "properties": {
+          "answer": { "type": "string" },
+          "sources": {
+            "type": "array",
+            "maxItems": 3,
+            "items": { "$ref": "#/components/schemas/Source" }
+          }
+        },
+        "title": "AskResponse"
+      },
+      "RagHealth": {
+        "type": "object",
+        "required": ["status", "chunks", "generation_verified"],
+        "properties": {
+          "status": { "type": "string", "const": "corpus_loaded" },
+          "chunks": { "type": "integer", "minimum": 1 },
+          "generation_verified": { "type": "boolean", "const": false }
+        },
+        "title": "RagHealth"
+      },
+      "HTTPValidationError": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "title": "Detail"
+          }
+        },
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "properties": {
+          "loc": {
+            "type": "array",
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "title": "ValidationError"
+      }
+    }
+  }
+}
