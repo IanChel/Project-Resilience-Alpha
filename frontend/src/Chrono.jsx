@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
-import {chronoModel,TARGET_S,seconds,clock} from './chrono.js';
+import {chronoModel,socFor,TARGET_S,seconds,clock} from './chrono.js';
 // `serverNow` and `fetchedAt` come from the last /ops/status poll (server clock, and performance.now() at that moment).
-export default function Chrono({incident,serverNow,fetchedAt}){
+export default function Chrono({incident,serverNow,fetchedAt,socSignals}){
   const [,tick]=useState(0);
   const running=!!incident&&!['recovered','failed'].includes(incident.status);
   useEffect(()=>{if(!running)return;const id=setInterval(()=>tick(n=>n+1),100);return()=>clearInterval(id);},[running]);
@@ -11,6 +11,7 @@ export default function Chrono({incident,serverNow,fetchedAt}){
   const tone=m.state==='recovered'?'text-green-300':m.state==='failed'?'text-rose-300':'text-amber-300';
   const headline=m.state==='running'?'Reprise en cours…':m.state==='recovered'?'Service rétabli':'Échec de la reprise';
   const applied=m.ban?.applied??[];
+  const soc=socFor(socSignals,m.id);
   return <section className="card space-y-4" aria-label="Chrono de reprise">
     <div className="flex flex-wrap items-baseline justify-between gap-3"><h2 className="text-xl">Chrono de reprise <span className="text-sm text-slate-400">détection → service rétabli</span></h2><span className="text-sm text-slate-400">incident {m.id.slice(0,8)}</span></div>
     <div className="flex flex-wrap items-center gap-4"><strong className={`text-5xl tabular-nums ${tone}`}>{seconds(m.elapsed)}</strong>
@@ -20,6 +21,7 @@ export default function Chrono({incident,serverNow,fetchedAt}){
     <ol className="grid md:grid-cols-4 gap-3">{m.steps.map(step=><li key={step.key} className={`rounded-xl border p-3 ${step.at==null?'border-slate-700 text-slate-500':'border-cyan-700'}`}>
       <p className="text-sm">{step.at==null?'○':'●'} {step.label}</p>
       <p className="tabular-nums text-xs mt-1">{step.at==null?(m.state==='running'?'en attente':'non atteint'):`${clock(step.at)} · +${seconds(step.offset)}`}</p></li>)}</ol>
+    {soc&&<p className={`text-sm ${soc.ok===true?'text-green-300':soc.ok===false?'text-rose-300':'text-slate-300'}`}>Corrélation SOC · {soc.text}</p>}
     {applied.length>0&&<p className="text-sm text-cyan-300">Adresse bannie temporairement : {applied.join(', ')} ({m.ban.ttl_s} s)</p>}
   </section>;
 }

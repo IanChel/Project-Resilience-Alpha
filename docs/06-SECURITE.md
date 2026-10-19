@@ -96,6 +96,21 @@ Compromis et risques résiduels :
   une identité de service dédiée au rôle minimal serait plus propre. Non faite : elle touche
   l'authentification, la vérification des jetons et le registre.
 
+## Limitation de débit : où elle se situe réellement
+État constaté, rien n'est déplacé. **Aucune limitation de débit n'existe au niveau du WAF ni de l'edge** :
+`infra/nginx/default.conf` n'a ni `limit_req` ni `limit_conn`, et ce dépôt ne configure pas la
+protection DoS de CRS. Les limites sont **applicatives** :
+
+| Où | Quoi | Fichier |
+|---|---|---|
+| Authentification | 30 connexions par minute et par adresse vue (celle du proxy, donc partagée) | `services/auth/main.py` |
+| Paiement, capacité | 4 emplacements partagés entre devis et paiements, au-delà `503` : c'est de la capacité, pas une limite par client | `services/payment/main.py` |
+| Paiement, confinement | après la remédiation, un devis par identité et par seconde (`429`) | `services/payment/main.py` |
+| WAF | filtrage de contenu CRS ; la seule réaction par adresse est le ban temporaire de la décision 1, en surcouche optionnelle | `compose.ban.yaml` |
+
+Conséquence à connaître : le WAF ne ralentit pas un flot de requêtes **valides** (un devis valide passe CRS) ;
+c'est le contrôle d'admission applicatif qui le fait, une fois l'incident détecté.
+
 ## Décision 1 : bannissement temporaire de l'adresse de l'attaquant
 **Ce qui est fait.** Après avoir contenu l'attaque, le playbook peut bannir au WAF les adresses
 sources de l'alerte. L'adresse n'est **jamais** lue dans un en-tête de requête : un client qui

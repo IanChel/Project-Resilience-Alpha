@@ -84,3 +84,13 @@ def test_the_stage_log_is_per_incident_and_replacing_a_stage_is_idempotent(tmp_p
 def test_the_chrono_model_tests_pass():
     done=subprocess.run(['node','--test','frontend/src/chrono.test.js'],cwd=ROOT,capture_output=True,text=True,timeout=60)
     assert done.returncode==0,done.stdout[-1500:]+done.stderr[-500:]
+
+def test_stages_that_share_a_timestamp_are_listed_in_the_order_of_the_chain(tmp_path,monkeypatch):
+    # Coarse clocks (about 15 ms on Windows) give `detected` and `accepted` the same value: the order must not depend on the database.
+    monkeypatch.setattr(remediator,'STORE',tmp_path/'incidents.sqlite')
+    with remediator.connection() as c:
+        # A FINISHED incident: the app's lifespan resumes interrupted ones (containing, verifying) and would rewrite their stages.
+        c.execute('INSERT INTO incidents VALUES(?,?,?,?,?)',('same','recovered',5.0,5.0,'{}'))
+        c.executemany('INSERT INTO stages VALUES(?,?,?)',[('same','recovered',5.0),('same','containing',5.0),('same','accepted',5.0),('same','detected',5.0),('same','mystery',5.0)])
+    with TestClient(remediator.app) as client: stages=client.get('/status',headers=OPERATOR()).json()['incidents'][0]['stages']
+    assert list(stages)==['detected','accepted','containing','recovered','mystery']

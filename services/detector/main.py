@@ -14,7 +14,7 @@ from services.common.security import secret
 from services.common.audit import emit
 from services.detector.model import score, FEATURES, is_anomalous, next_consecutive, alert_due, consecutive_from_env
 from services.detector.telemetry import sample
-from services.detector.soc import signals
+from services.detector.soc import signals, changed
 from services.detector.sources import top_sources
 # Observations in a row before an alert. Read once at startup (DETECTOR_CONSECUTIVE, default 3);
 # an invalid value stops the service instead of silently falling back.
@@ -24,10 +24,12 @@ def build_alert(value,row,sources):
     """The signed alert body. `sources` are the busiest peer addresses seen by the WAF (possibly none)."""
     return json.dumps({'id':str(uuid.uuid4()),'issued_at':time.time(),'score':value,'features':row,'sources':sources},sort_keys=True).encode()
 async def soc_loop():
+    memory={}   # last state seen per incident: a correlation is journaled when it changes, not every cycle
     while True:
         try:
             state['soc_signals']=await signals()
-            for signal in state['soc_signals']: emit('soc','security_signal',**signal)
+            for signal in state['soc_signals']:
+                if signal['rule']!='incident_correlation' or changed(signal,memory): emit('soc','security_signal',**signal)
         except Exception as exc:
             state['soc_error']=type(exc).__name__
         await asyncio.sleep(10)

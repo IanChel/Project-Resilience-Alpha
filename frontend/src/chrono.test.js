@@ -68,3 +68,16 @@ test('no browser-side counter: the model and the component never read the browse
   assert.match(view,/serverNow\+\(performance\.now\(\)-fetchedAt\)\/1000/);              // only ever used to advance the SERVER clock between polls
   assert.doesNotMatch(readFileSync(new URL('./main.jsx',import.meta.url),'utf8'),/Date\.now|new Date\(\)/);
 });
+
+import {socFor,SOC_LABELS} from './chrono.js';
+test('the SOC correlation shown is the one of THIS incident, with a readable label',()=>{
+  const signals=[{rule:'capacity_pressure',count:9,window:'30s'},{rule:'incident_correlation',incident_id:'other',state:'stuck'},{rule:'incident_correlation',incident_id:'mine',state:'recovered'}];
+  assert.deepEqual(socFor(signals,'mine'),{state:'recovered',text:SOC_LABELS.recovered.text,ok:true});
+  assert.equal(socFor(signals,'absent'),null);
+  assert.equal(socFor(undefined,'mine'),null); assert.equal(socFor(null,'mine'),null); assert.equal(socFor('x','mine'),null);
+  assert.deepEqual(socFor([{rule:'incident_correlation',incident_id:'mine',state:'something_new'}],'mine'),{state:'something_new',text:'something_new',ok:null});
+});
+test('the failure states are flagged as failures, never as neutral',()=>{
+  for(const state of ['alert_not_handled','stuck','failed','chain_gap','out_of_order','no_alert']) assert.equal(SOC_LABELS[state].ok,false,state);
+  assert.equal(SOC_LABELS.recovered.ok,true);
+});

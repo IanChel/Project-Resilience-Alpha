@@ -114,7 +114,7 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "{service=~\"detector|remediator|payment\"}",
+          "expr": "{service=~\"detector|remediator|payment|soc\"}",
           "queryType": "range"
         }
       ]

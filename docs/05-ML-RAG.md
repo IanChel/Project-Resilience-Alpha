@@ -205,11 +205,19 @@ baseline restent très limités. Le joblib ne doit jamais venir d'une source inc
 
 ## Fonction SOC intégrée
 Règles temporelles sur Loki : au moins cinq échecs de login/minute, pression de
-capacité, livraison d'une alerte ML et activité d'audit WAF. Le service consigne
-les signaux de sécurité et les expose au dashboard ; Grafana permet de comparer
-les sources dans la même fenêtre. L'activité WAF est un signal à examiner, pas
-une preuve que chaque ligne correspond à une attaque. C'est une fonction SOC
-minimale, pas un SIEM complet ni un SOC industriel.
+capacité, livraison d'une alerte ML et activité d'audit WAF. Ce sont des comptes
+isolés. S'y ajoute une **corrélation** qui suit un incident à travers les services par
+son `incident_id` : l'alerte du détecteur, puis chaque étape du remédiateur
+(`containing`, `verifying`, `recovered` ou `failed`). Elle dit si la chaîne est allée
+au bout et signale ce qu'un compte ne voit pas : une alerte jamais traitée
+(`alert_not_handled`, silence du remédiateur au-delà de 15 s), une reprise bloquée
+(`stuck`, aucun état final au-delà de 90 s), une reprise déclarée sans toutes ses étapes
+ou dans un ordre incohérent. Les signaux sont journalisés (`service="soc"`, une ligne par
+changement d'état de corrélation), exposés par `/ops/ml`, tracés dans le panneau de
+chronologie de Grafana, et l'état de corrélation de l'incident courant est affiché sous le
+chrono du tableau de bord. L'activité WAF est un signal à examiner, pas une preuve que
+chaque ligne correspond à une attaque. C'est une fonction SOC minimale, pas un SIEM
+complet ni un SOC industriel : la corrélation ne suit qu'un type d'incident.
 
 ## RAG local
 Le corpus est `docs/*.md`, créé par l'équipe, sans clés ni documents d'entreprise.

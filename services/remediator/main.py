@@ -16,6 +16,9 @@ from services.common.security import secret, operator
 from services.common.audit import emit
 from services.remediator import bans
 STORE=Path(os.getenv('STATE_DIR','/state'))/'incidents.sqlite'
+# The order of a recovery. Two stages can share a timestamp (coarse clocks), then this order decides, so the
+# stages of an incident are always listed in the same order.
+STAGE_ORDER=('detected','accepted','containing','verifying','recovered','failed')
 lock=asyncio.Lock()
 tasks=set()
 def connection():
@@ -153,7 +156,7 @@ def status(user=Depends(operator)):
     for row in rows:
         stages=reached.get(row['id'],{})
         stages.setdefault('detected',row['created']); stages.setdefault(row['status'],row['updated'])   # incidents older than the stage log
-        row['stages']=dict(sorted(stages.items(),key=lambda kv:kv[1]))
+        row['stages']=dict(sorted(stages.items(),key=lambda kv:(kv[1],STAGE_ORDER.index(kv[0]) if kv[0] in STAGE_ORDER else len(STAGE_ORDER))))
     # `now` lets the dashboard measure a running incident against the server clock, not the browser's.
     return {'incidents':rows,'now':time.time()}
 @app.get('/health')

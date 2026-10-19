@@ -67,9 +67,15 @@
         "type": "object",
         "required": ["rule", "count", "window"],
         "properties": {
-          "rule": { "type": "string", "description": "repeated_failed_logins, capacity_pressure, ml_alert_delivered ou waf_audit_activity." },
+          "rule": { "type": "string", "description": "repeated_failed_logins, capacity_pressure, ml_alert_delivered, waf_audit_activity ou incident_correlation." },
           "count": { "type": "number" },
-          "window": { "type": "string" }
+          "window": { "type": "string" },
+          "incident_id": { "type": "string", "description": "Presents pour incident_correlation : l'incident suivi a travers le detecteur et le remediateur." },
+          "state": { "type": "string", "enum": ["recovered", "in_progress", "alert_pending", "alert_not_handled", "stuck", "failed", "chain_gap", "out_of_order", "no_alert", "unavailable"], "description": "incident_correlation. alert_not_handled : alerte livree et remediateur silencieux depuis plus de 15 s. stuck : reprise commencee sans etat final depuis plus de 90 s. chain_gap : reprise declaree sans toutes ses etapes. unavailable : Loki injoignable, les regles ci-dessus restent valables." },
+          "seen": { "type": "array", "items": { "type": "string" }, "description": "Etapes observees, dans l'ordre de la chaine alert_delivered, containing, verifying, recovered." },
+          "missing": { "type": "array", "items": { "type": "string" }, "description": "Etapes attendues et absentes." },
+          "seconds": { "type": ["number", "null"], "description": "Duree de l'alerte a l'etat final, null tant qu'il n'y en a pas." },
+          "error": { "type": "string", "description": "Nom de l'exception quand state vaut unavailable." }
         },
         "title": "SocSignal"
       },
