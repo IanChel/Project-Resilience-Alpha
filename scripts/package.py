@@ -5,7 +5,7 @@ import json
 import zipfile
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--group',default='X');p.add_argument('--output',default=str(root.parent));a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--group',default='2');p.add_argument('--output',default=str(root.parent));a=p.parse_args()
 if not a.group.isalnum(): p.error('Group must contain letters or digits only')
 name='Workshop2026-M2-G'+a.group
 output=Path(a.output);output.mkdir(parents=True,exist_ok=True)

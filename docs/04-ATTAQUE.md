@@ -1,7 +1,7 @@
 # Scénario d'attaque — saturation de capacité par devis
 
 > **Périmètre.** Cette attaque ne s'exécute que sur le réseau de laboratoire isolé
-> `RESILIENCE-G6` (`192.168.137.0/24`), contre le SI fictif du groupe. Jamais sur le
+> `RESILIENCE-G2` (`192.168.137.0/24`), contre le SI fictif du groupe. Jamais sur le
 > réseau du campus, un autre groupe, un équipement tiers ou Internet (sujet, §9).
 > En cas de doute sur le périmètre : arrêter et prévenir le coach.
 
@@ -13,7 +13,7 @@ consigner (checklist de recette deux PC, `docs/09-RECETTE-RENDU.md`).
 
 | Élément | Valeur |
 |---|---|
-| Point d'accès | Point d'accès mobile Windows `RESILIENCE-G6` (adapter au numéro réel du groupe) |
+| Point d'accès | Point d'accès mobile Windows `RESILIENCE-G2` |
 | Sous-réseau | `192.168.137.0/24` |
 | PC Hôte (cible) | `192.168.137.1`, port `8080` : le WAF, seul point d'entrée publié |
 | PC Attaquant | connecté uniquement à ce point d'accès, sans connexion parallèle au campus |

@@ -126,7 +126,7 @@ docker compose cp detector:/models/baseline.json runtime/evidence/ml-baseline.js
 Relire le taux de faux positifs et documenter ses limites (docs/05-ML-RAG.md).
 
 ## 6. Passer au réseau du groupe
-Activer le point d'accès sans fil mobile Windows : nom RESILIENCE-G<numéro>,
+Activer le point d'accès sans fil mobile Windows : nom RESILIENCE-G2,
 mot de passe privé choisi par le groupe. Confirmer que l'IP Hôte du PA est bien
 192.168.137.1. Dans `.env` à la racine du projet :
 ```dotenv

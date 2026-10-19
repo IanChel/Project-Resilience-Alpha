@@ -1,4 +1,4 @@
-# === SECRETS - rien de tout ceci ne doit partir dans Workshop2026-M2-G6-Code.zip
+# === SECRETS - rien de tout ceci ne doit partir dans Workshop2026-M2-G2-Code.zip
 # Dossier genere par scripts/init_secrets.py : mots de passe en clair + cle age.
 .secrets/
 .env

@@ -72,7 +72,7 @@ baseline/modèle ne sont pas installés ; aucune réussite n'est simulée à l'�
 `docs/09-RECETTE-RENDU.md` prépare dossier PDF, slides, vidéo continue <=60s et ZIP.
 Le PDF et le PPTX finaux doivent intégrer vos résultats réels ; la vidéo doit être
 capturée sur vos machines. Ils ne sont pas inclus sous forme de faux rendus terminés.
-Créer l'archive sans secrets : `python scripts/package.py --group 3` (vrai numéro).
+Créer l'archive sans secrets : `python scripts/package.py` (groupe 2 par défaut).
 
 Ce prototype n'est pas une plateforme bancaire de production, une preuve de
 conformité ou un système de haute disponibilité. Les écarts sont détaillés dans

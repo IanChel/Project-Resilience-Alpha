@@ -7,7 +7,7 @@ import os
 import time
 from collections import Counter
 import httpx
-# Default = Host PC on the Windows hotspot RESILIENCE-G<n> (see docs/04-ATTAQUE.md).
+# Default = Host PC on the Windows hotspot RESILIENCE-G2 (see docs/04-ATTAQUE.md).
 DEFAULT_TARGET_HOST='192.168.137.1'
 LAB_NETWORK=ipaddress.ip_network('192.168.137.0/24')
 PORT=8080

@@ -1,10 +1,11 @@
 # Analyse du cahier des charges — RESILIENCE-ALPHA
 
-Version initiale du 19 octobre 2026. Sources : dix photographies transmises,
-IMG_1159(1).jpeg à IMG_1168(1).jpeg, correspondant aux pages imprimées 2 à 11/12.
-Les pages 1 et 12 ne sont pas disponibles : aucune exhaustivité sur ces deux pages
-ne peut être affirmée. Leur réception peut modifier cette matrice.
-Les numéros p. ci-dessous désignent les pages imprimées, pas les numéros d'image.
+Version du 19 octobre 2026. Matrice établie d'abord à partir de dix photographies
+(pages imprimées 2 à 11/12), puis **contrôlée sur le sujet complet en PDF**, présent à
+la racine du poste (non versionné, et exclu de l'archive de rendu). Les pages 1 et 12, qui manquaient, ont été lues : page 1 page de
+couverture, page 12 glossaire (AIOps, ML, IaC, Red/Blue Team, WAF, SIEM, EBIOS RM,
+NIS2, DORA, PCA/PRA, Zero-Touch Recovery). **Elles n'ajoutent aucune exigence** : la
+matrice des 37 lignes est complète. Les numéros p. désignent les pages imprimées.
 
 Le résultat demandé est une chaîne exécutée sur les machines de l'équipe :
 transaction avant incident, attaque depuis un second PC, collecte, détection,
@@ -36,8 +37,8 @@ Un simple redémarrage de conteneur ne démontre pas cette reprise.
 | E21 | PC Hôte Windows Docker Desktop WSL2 | p.6 | Ubuntu WSL, conteneurs Linux | Relever configuration, versions et ressources |
 | E22 | PC Attaquant distinct ; aucun composant défensif dessus | p.6 | Python/httpx seulement pour le scénario | Inventaire des deux postes |
 | E23 | PC IA optionnel, uniquement Ollama/API | p.6 | Variante documentée, RAG reste sur Hôte | Accès restreint à l'IP Hôte, aucun port public |
-| E24 | Point d'accès mobile Windows imposé | p.6 | RESILIENCE-Gn, 192.168.137.0/24 | Hôte .1, Attaquant connecté uniquement au PA |
-| E25 | Aucune attaque campus, autre groupe ou Internet | p.5–6,11 | Script sans cible paramétrable ; URL Hôte fixe | Vérifier route et pare-feu avant l'exercice |
+| E24 | Point d'accès mobile Windows imposé | p.6 | RESILIENCE-G2, 192.168.137.0/24 | Hôte .1, Attaquant connecté uniquement au PA |
+| E25 | Aucune attaque campus, autre groupe ou Internet | p.5–6,11 | Cible paramétrable mais **bornée au sous-réseau du lab** : tout autre hôte refusé avant connexion ; `--lab-authorized` obligatoire | Garde-fou testé (`tests/test_configs.py`) ; vérifier route et pare-feu avant l'exercice |
 | E26 | Analyse EBIOS Risk Manager | p.5,7 | Cadrage et cinq ateliers synthétiques | Scénarios reliés aux composants et arbitrages |
 | E27 | Analyse NIS2/DORA contextualisée | p.5 | Table exigences/preuves/écarts | Aucun label de conformité industrielle inventé |
 | E28 | PCA/PRA : objectifs, rôles, risques résiduels | p.5 | RTO/RPO cibles, restauration et vérifications | Mesures effectives et test de restauration à joindre |
@@ -46,7 +47,7 @@ Un simple redémarrage de conteneur ne démontre pas cette reprise.
 | E31 | Support Pres.pptx | p.8 | Plan 6 slides | Cohérent avec les mesures réellement obtenues |
 | E32 | Clip Chrono MP4 <=60s, séquence continue | p.8 | Storyboard et recette chronométrée | Pas de coupe masquant une correction manuelle |
 | E33 | Archive Code.zip structurée + README, tests, API, scripts | p.8 | scripts/package.py et manifeste SHA256 | Déploiement expliqué, aucun secret en clair |
-| E34 | Noms Workshop2026-M2-G<n>-... et dossier commun | p.8 | GX provisoire, numéro à remplacer | Quatre noms exacts validés avant remise |
+| E34 | Noms de fichiers imposés et dossier commun | p.8 | **Groupe 2**, noms figés : `Workshop2026-M2-G2-Dossier.pdf`, `-Pres.pptx`, `-VidChrono.mp4`, `-Code.zip` dans `Workshop2026-M2-G2/` ; `package.py` utilise 2 par défaut | Quatre noms exacts validés avant remise |
 | E35 | Gel jeudi 17h, remise avant 23h59 | p.7 | Planning et préparation preuves | Aucun développement pendant soutenance vendredi |
 | E36 | Groupe normalement 5, 4/6 sur autorisation coach | p.4 | Répartition 5 responsables, adaptable | Coach valide répartition et architecture |
 | E37 | Usage IA permis ; responsabilité humaine de vérification | p.7 | Statuts de validation explicites | Chacun sait expliquer ses composants et ses choix |

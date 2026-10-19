@@ -62,7 +62,7 @@ Les incidents historiques restent présents ; acceptance.py distingue les nouvea
 Ne jamais utiliser `docker compose down -v` pour rétablir la démo : cela efface le registre.
 
 ## Dossier PDF — plan indicatif de dix pages
-Nom exact `Workshop2026-M2-G<n>-Dossier.pdf`.
+Nom exact `Workshop2026-M2-G2-Dossier.pdf`.
 1. Mission, équipe, rôles et périmètre fictif.
 2. Architecture et flux, implantation des postes.
 3. Fonctionnement métier, authentification, transaction et idempotence.
@@ -77,7 +77,7 @@ Annexes ou liens dépôt : matrice, API, commandes, données/tests et empreintes
 Ce plan prépare le dossier ; aucun PDF final ni résultat de tests Docker inventé.
 
 ## PowerPoint — six diapositives
-Nom exact `Workshop2026-M2-G<n>-Pres.pptx`.
+Nom exact `Workshop2026-M2-G2-Pres.pptx`.
 1. Pourquoi le paiement doit reprendre et objectif de la démonstration.
 2. Architecture et cinq responsabilités, schéma simple.
 3. Scénario et chaîne détecter→agir→vérifier, politique d'autorisation.
@@ -87,7 +87,7 @@ Nom exact `Workshop2026-M2-G<n>-Pres.pptx`.
 Prévoir environ 5min présentation/live et 5min échange au jury local.
 
 ## Clip Chrono — <=60 secondes, capture continue
-Nom exact `Workshop2026-M2-G<n>-VidChrono.mp4`.
+Nom exact `Workshop2026-M2-G2-VidChrono.mp4`.
 Plan visé, à ajuster aux temps réellement mesurés :
 - 0–7s : paiement initial réussi et état nominal.
 - 7–12s : terminal du second PC qui lance le script autorisé.
@@ -108,10 +108,10 @@ fenêtres avant capture est normal ; corriger pendant l'incident ne l'est pas.
 Les sous-titres/titres peuvent expliquer la séquence sans en modifier la continuité.
 
 ## Archive finale
-Dossier commun `Workshop2026-M2-G<n>/` avec les quatre rendus aux noms prescrits.
-`python scripts/package.py --group 3` produit par exemple
-`Workshop2026-M2-G3-Code.zip`, contenant sources/configs/tests/docs et SHA256.
-Remplacer 3 par le vrai numéro. La version livrée utilise GX provisoire.
+Dossier commun `Workshop2026-M2-G2/` avec les quatre rendus aux noms prescrits.
+`python scripts/package.py` produit `Workshop2026-M2-G2-Code.zip`, contenant
+sources/configs/tests/docs et un manifeste SHA256. Le numéro de groupe (2) est la
+valeur par défaut du script ; `--group` ne sert qu'à le surcharger.
 Joindre séparément les preuves réelles relues et anonymisées, sans identifiants
 secrets, après recette. La vidéo doit être capturée sur vos postes ; elle n'est
 pas remplacée par une animation ou un enregistrement fabriqué.

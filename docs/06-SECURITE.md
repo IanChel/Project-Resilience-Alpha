@@ -1,7 +1,7 @@
 # Sécurité du prototype
 
 ## Périmètre et accès
-Réseau du groupe : point d'accès mobile Windows RESILIENCE-G<n>, habituellement
+Réseau du groupe : point d'accès mobile Windows RESILIENCE-G2, habituellement
 192.168.137.0/24, Hôte 192.168.137.1. Vérifier l'adresse réelle. Le PC Attaquant
 n'est connecté qu'à ce PA. Ne pas substituer une IP campus dans les scripts.
 La cible du client offensif est bornée : `--target` (ou `LAB_TARGET`) n'accepte qu'une

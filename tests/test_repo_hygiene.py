@@ -42,3 +42,23 @@ def test_the_secret_path_is_ignored_and_no_secret_file_is_tracked():
 def test_the_repository_is_flat_and_has_no_duplicate_after_removing_the_old_prefix():
     names=[f.removeprefix('Workshop2026-M2-GX/') for f in tracked()]
     assert len(names)==len(set(names))
+
+# The group NUMBER (2) is not the team SIZE (6 people): confusing them once put G6 in the docs and the deliverable
+# names. These names are graded (sujet, section 7), so they are pinned here.
+GROUP='2'
+def test_the_group_number_is_the_same_everywhere():
+    assert f"default='{GROUP}'" in (ROOT/'scripts/package.py').read_text(encoding='utf-8')     # the archive name comes from it
+    wrong=[]
+    for name in tracked():
+        if name.startswith(('Fix à faire/','RAPPORT-','AUDIT-','ETAT-','FIX-')) or name=='trello-snapshot.json': continue
+        try: text=(ROOT/name).read_text(encoding='utf-8')
+        except (UnicodeDecodeError,OSError): continue
+        for number,line in enumerate(text.splitlines(),1):
+            for found in re.findall(r'(?:RESILIENCE-G|Workshop2026-M2-G)([\w<>é]+)',line):
+                if found!=GROUP and not (name=='tests/test_repo_hygiene.py' or found.startswith('X')):   # GX = the removed old directory
+                    wrong.append(f'{name}:{number} -> G{found}')
+    assert not wrong,'group number or placeholder left: '+', '.join(wrong)
+def test_the_four_deliverable_names_are_spelled_out():
+    recette=(ROOT/'docs/09-RECETTE-RENDU.md').read_text(encoding='utf-8')
+    for suffix in ('Dossier.pdf','Pres.pptx','VidChrono.mp4','Code.zip'):
+        assert f'Workshop2026-M2-G{GROUP}-{suffix}' in recette,suffix
