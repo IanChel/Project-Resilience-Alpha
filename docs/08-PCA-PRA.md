@@ -20,7 +20,8 @@ reset manuel se font ensuite, entre deux essais.
 
 ## Reprise automatique couverte
 1. Mesures et journaux révèlent la pression.
-2. ML produit trois observations anormales confirmées par des rejets de capacité.
+2. Le ML produit des observations anormales d'affilée, chacune confirmée par des rejets
+   de capacité : trois par défaut, réglable par `DETECTOR_CONSECUTIVE` (docs/05-ML-RAG.md).
 3. Une alerte signée est acceptée et tracée.
 4. Ansible active l'admission fixe, idempotente et persistée sur volume.
 5. Une vérification de disponibilité DB ne suffit pas : le moteur crée un paiement

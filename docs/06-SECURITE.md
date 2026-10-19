@@ -4,7 +4,9 @@
 Réseau du groupe : point d'accès mobile Windows RESILIENCE-G<n>, habituellement
 192.168.137.0/24, Hôte 192.168.137.1. Vérifier l'adresse réelle. Le PC Attaquant
 n'est connecté qu'à ce PA. Ne pas substituer une IP campus dans les scripts.
-Le client offensif ne prend aucun paramètre cible et n'accepte pas les redirections.
+La cible du client offensif est bornée : `--target` (ou `LAB_TARGET`) n'accepte qu'une
+IP littérale de 192.168.137.0/24 ou de loopback, tout autre hôte est refusé avant
+connexion ; les redirections ne sont pas suivies (`docs/04-ATTAQUE.md`).
 Aucun scan réseau, vol de données, persistance ou élévation de privilèges.
 
 Le WAF est le seul point d'entrée applicatif. Routes autorisées dans Nginx ;
@@ -15,10 +17,14 @@ rend le même port accessible via l'IP campus. Les interfaces diffèrent selon l
 poste : inspecter Windows Defender Firewall et tester depuis le PC Attaquant.
 Ne pas désactiver globalement le pare-feu pour faire fonctionner le prototype.
 
-Apps non-root, root filesystem en lecture seule, capabilities retirées,
-no-new-privileges, limites RAM, journaux Docker bornés. Les images tierces peuvent
-nécessiter un filesystem inscriptible ou des droits différents ; elles ne sont
-pas décrites comme durcies intégralement. Pas de montage docker.sock.
+Les services Python (auth, payment, remediator, detector, rag) sont non-root, avec
+root filesystem en lecture seule, capabilities retirées et no-new-privileges. Tous les
+conteneurs ont une limite de RAM. Les journaux Docker ne sont bornés (2×5 Mo) que pour
+auth, payment, remediator et detector. Le frontal est un nginx non privilégié, sans les
+autres réglages. Les images tierces (WAF, base, observabilité, Ollama) peuvent nécessiter
+un filesystem inscriptible ou des droits différents ; Alloy s'exécute en root pour lire
+les journaux, en lecture seule. Elles ne sont pas décrites comme durcies intégralement.
+Pas de montage docker.sock.
 
 ## Secrets
 SOPS est le choix retenu parmi Vault/SOPS autorisés. age chiffre la clé de données.
@@ -41,7 +47,8 @@ WAF audit AFZ : métadonnées et headers de réponse, pas les corps/headers de r
 Alloy expédie réellement ces fichiers vers Loki. Vérifier en recette qu'aucun
 composant tiers n'ajoute des informations sensibles. Les logs métier JSON sur
 volume ne tournent pas automatiquement dans cette version ; les archiver/purger
-entre essais maîtrisés. Loki conserve 48h, Docker limite ses fichiers à 2×5Mo.
+entre essais maîtrisés. Loki conserve 48h ; les fichiers de journaux Docker de auth,
+payment, remediator et detector sont limités à 2×5Mo.
 La machine Hôte peut altérer ses logs : aucune preuve d'inaltérabilité industrielle.
 
 ## Test WAF séparé de la reprise principale

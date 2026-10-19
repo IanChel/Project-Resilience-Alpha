@@ -47,8 +47,8 @@ cette multiplication est un outil de travail, pas un score EBIOS officiel).
 | Double débit lors d'un retry | 3×4=12 | Transaction DB, verrou, idempotence ; test concurrent | 1×4=4 | Validation PostgreSQL supplémentaire exigée |
 | Abus de remédiation | 3×4=12 | HMAC, horodatage, action fixe, sans socket | 1×4=4 | Tester alertes forgées et redémarrage |
 | Secrets présents dans livrables | 3×4=12 | SOPS/age, exclusion ZIP, revue manifeste | 1×4=4 | Vérifier l'archive finale |
-| Instruction malveillante RAG | 3×3=9 | Corpus contrôlé, aucun outil ni clé d'action | 2×2=4 | Réponse erronée possible ; vérification humaine |
-| Perte du PC Hôte | 2×4=8 | Backup chiffré et copie externe à organiser | 2×4=8 tant que copie absente | Explicitement non résolu par la démo |
+| Instruction malveillante RAG | 3×3=9 | Corpus contrôlé, aucun outil d'action ni secret de contrôle ou d'alerte (le RAG vérifie les sessions avec `session_key`) | 2×2=4 | Réponse erronée possible ; vérification humaine |
+| Perte du PC Hôte | 2×4=8 | Backup pg_dump avec empreinte SHA256 (non chiffré) et copie externe chiffrée à organiser | 2×4=8 tant que copie absente | Explicitement non résolu par la démo |
 | Logs/ML indisponibles | 2×3=6 | État d'erreur explicite ; pas de fausse reprise | 2×3=6 | Prévoir alerte externe et supervision de secours |
 
 Responsables, échéances, acceptation du risque et résultats effectifs à compléter.
