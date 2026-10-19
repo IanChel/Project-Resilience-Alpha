@@ -77,6 +77,13 @@ Plan visé, à ajuster aux temps réellement mesurés :
 - 25–43s : état containing/verifying, correction sans action humaine.
 - 43–55s : transaction vérifiée et paiement manuel de contrôle réussi sous charge.
 - 55–60s : identifiant transaction, intégrité et temps mesuré.
+
+Le temps affiché à l'écran est le **chrono de reprise du tableau de bord** : il part de l'heure de
+l'alerte posée par le détecteur et s'arrête à la transaction témoin validée. Il est calculé à partir
+des étapes horodatées par le remédiateur (`stages` dans `/ops/status`) et de l'horloge du serveur,
+jamais d'un compteur du navigateur. Les quatre étapes (détection, remédiation lancée, healthcheck OK,
+transaction témoin) y sont listées avec leur heure, pour voir où passe le temps. Le filmer plutôt
+qu'un chronomètre extérieur.
 Si la chaîne prend plus de 60s, améliorer et remesurer ; ne pas couper ou accélérer
 pour masquer l'attente ou une correction. Préinstaller, entraîner et ouvrir les
 fenêtres avant capture est normal ; corriger pendant l'incident ne l'est pas.

@@ -22,11 +22,16 @@ def connection():
     STORE.parent.mkdir(parents=True,exist_ok=True)
     c=sqlite3.connect(STORE); c.row_factory=sqlite3.Row
     c.execute('CREATE TABLE IF NOT EXISTS incidents(id TEXT PRIMARY KEY,status TEXT,created REAL,updated REAL,evidence TEXT)')
+    # One row per stage reached, so the dashboard can show where the time goes. `evidence` is overwritten at each
+    # status; this table is not. A separate table keeps the incidents schema (and its positional inserts) unchanged.
+    c.execute('CREATE TABLE IF NOT EXISTS stages(incident_id TEXT,status TEXT,ts REAL,PRIMARY KEY(incident_id,status))')
     return c
 def update(incident_id,status,evidence):
+    now=time.time()
     with connection() as c:
         c.execute('UPDATE incidents SET status=?,updated=?,evidence=? WHERE id=?',
-                  (status,time.time(),json.dumps(evidence),incident_id))
+                  (status,now,json.dumps(evidence),incident_id))
+        c.execute('INSERT OR REPLACE INTO stages VALUES(?,?,?)',(incident_id,status,now))
     emit('remediator',status,incident_id=incident_id,**evidence)
 async def service_token():
     # The recovery login goes straight to the auth service over the internal network, never through the WAF.
@@ -131,12 +136,25 @@ async def alert(request: Request):
         if old: return {'id':iid,'status':old['status'],'duplicate':True}
         busy=c.execute("SELECT id FROM incidents WHERE status IN ('accepted','containing','verifying')").fetchone()
         if busy: return {'id':busy['id'],'status':'already_running'}
-        c.execute('INSERT INTO incidents VALUES(?,?,?,?,?)',(iid,'accepted',time.time(),time.time(),json.dumps(data)))
+        now=time.time()
+        c.execute('INSERT INTO incidents VALUES(?,?,?,?,?)',(iid,'accepted',now,now,json.dumps(data)))
+        # `detected` is the moment the DETECTOR raised the alert (its signed, freshness-checked issued_at), not the
+        # moment this service received it: the chrono starts at the detection.
+        c.executemany('INSERT OR REPLACE INTO stages VALUES(?,?,?)',[(iid,'detected',issued),(iid,'accepted',now)])
     task=asyncio.create_task(recover(iid)); tasks.add(task); task.add_done_callback(tasks.discard)
     return {'id':iid,'status':'accepted'}
 @app.get('/status')
 def status(user=Depends(operator)):
     with connection() as c:
-        return {'incidents':[dict(r) for r in c.execute('SELECT * FROM incidents ORDER BY created DESC LIMIT 30')]}
+        rows=[dict(r) for r in c.execute('SELECT * FROM incidents ORDER BY created DESC LIMIT 30')]
+        reached={}
+        for r in c.execute('SELECT incident_id,status,ts FROM stages WHERE incident_id IN (SELECT id FROM incidents ORDER BY created DESC LIMIT 30)'):
+            reached.setdefault(r['incident_id'],{})[r['status']]=r['ts']
+    for row in rows:
+        stages=reached.get(row['id'],{})
+        stages.setdefault('detected',row['created']); stages.setdefault(row['status'],row['updated'])   # incidents older than the stage log
+        row['stages']=dict(sorted(stages.items(),key=lambda kv:kv[1]))
+    # `now` lets the dashboard measure a running incident against the server clock, not the browser's.
+    return {'incidents':rows,'now':time.time()}
 @app.get('/health')
 def health(): return {'status':'alive'}

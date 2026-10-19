@@ -200,7 +200,7 @@
       },
       "Incident": {
         "type": "object",
-        "required": ["id", "status", "created", "updated", "evidence"],
+        "required": ["id", "status", "created", "updated", "evidence", "stages"],
         "properties": {
           "id": { "type": "string", "format": "uuid" },
           "status": {
@@ -213,14 +213,20 @@
           "evidence": {
             "type": "string",
             "description": "Texte contenant du JSON serialise, pas un objet. `accepted` : l'alerte recue ; `containing` : {action, ban} ; `verifying` : {ban} ; `recovered` : {transaction_id, total_cents, ban} ; `failed` : {error_type, manual_review_required: true, ban}. `ban` decrit le bannissement temporaire : {enabled, requested, eligible, excluded: [{ip, reason}], ttl_s, applied, note}. `eligible` ne contient que des adresses du sous-reseau du lab, jamais l'hote ni une adresse interne ; `applied` est relu dans le fichier de ban apres le playbook (absent si rien n'etait a bannir) ; `note` explique l'absence de ban (desactive, configuration invalide, preparation en echec)."
+          },
+          "stages": {
+            "type": "object",
+            "additionalProperties": { "type": "number" },
+            "description": "Heure (secondes epoque Unix, horloge du serveur) de chaque etape atteinte, de la plus ancienne a la plus recente. `detected` : l'heure de l'alerte posee par le DETECTEUR (issued_at signe), pas celle de sa reception : le chrono du dashboard part de la. `accepted` : reception. `containing` : remediation lancee. `verifying` : playbook et healthcheck /ready termines (healthcheck OK). `recovered` : transaction temoin validee, ou `failed`. Un incident anterieur au journal d'etapes recoit `detected` = created et son statut courant = updated."
           }
         },
         "title": "Incident"
       },
       "StatusResponse": {
         "type": "object",
-        "required": ["incidents"],
+        "required": ["incidents", "now"],
         "properties": {
+          "now": { "type": "number", "description": "Heure du serveur au moment de la reponse. Le dashboard mesure un incident en cours contre cette horloge, jamais contre celle du navigateur." },
           "incidents": {
             "type": "array",
             "maxItems": 30,
