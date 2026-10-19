@@ -1,0 +1,421 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Fictitious payment API",
+    "version": "0.1.0",
+    "description": "Contrat du service `payment` (services/payment/main.py). Spec maintenue a la main a partir de `app.openapi()` puis completee avec les schemas de reponse et les codes d'erreur reellement renvoyes par le code. Les chemins ci-dessous sont ceux du service ; le WAF/edge publie `/api/payments`, `/api/quotes`, `/api/accounts` et `/api/ready` (voir infra/nginx/default.conf). `/health`, `/metrics` et `/control/contain` ne sont PAS publies : acces reseau interne uniquement. Montants en centimes entiers, donnees fictives."
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Liveness",
+        "description": "Sans authentification, ne depend pas de la base : repond tant que le processus tourne. Ne prouve pas que le metier fonctionne (utiliser /ready puis une transaction temoin).",
+        "operationId": "health_health_get",
+        "security": [],
+        "x-exposure": "internal",
+        "responses": {
+          "200": {
+            "description": "Processus vivant.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaymentHealth" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "summary": "Readiness (base de donnees)",
+        "description": "Sans authentification. Lit le registre (`ledger.snapshot()`) : valide l'acces a la base, pas la capacite a traiter un paiement. Publie via le WAF sous `/api/ready`. Si la base est injoignable l'exception n'est pas interceptee : reponse 500 (corps texte), jamais 200.",
+        "operationId": "ready_ready_get",
+        "security": [],
+        "x-exposure": "public (/api/ready)",
+        "responses": {
+          "200": {
+            "description": "Base accessible.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaymentReady" }
+              }
+            }
+          },
+          "500": {
+            "description": "Base de donnees injoignable (erreur non geree, corps `Internal Server Error`)."
+          }
+        }
+      }
+    },
+    "/metrics": {
+      "get": {
+        "summary": "Metriques Prometheus",
+        "description": "Format d'exposition Prometheus (texte), pas du JSON. Series applicatives : lab_requests_total, lab_duration_seconds, lab_active_work, lab_capacity_denied_total, lab_contained.",
+        "operationId": "metrics_metrics_get",
+        "security": [],
+        "x-exposure": "internal",
+        "responses": {
+          "200": {
+            "description": "Exposition Prometheus.",
+            "content": {
+              "text/plain": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts": {
+      "get": {
+        "summary": "Registre des comptes et dernieres transactions",
+        "description": "Reserve au role `operator`. Le total doit rester egal a 200000 centimes (invariant verifie apres reprise).",
+        "operationId": "accounts_accounts_get",
+        "security": [{ "sessionToken": [] }],
+        "x-exposure": "public (/api/accounts)",
+        "responses": {
+          "200": {
+            "description": "Instantane du registre.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AccountsSnapshot" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/OperatorRequired" }
+        }
+      }
+    },
+    "/payments": {
+      "post": {
+        "summary": "Executer une transaction fictive",
+        "description": "Reserve au role `operator`. Debite `alice`, credite `merchant` de maniere atomique. Idempotent : rejouer la meme cle avec le meme contenu renvoie la transaction existante avec `replayed=true`. Un 503 (capacite) survient avant tout debit.",
+        "operationId": "pay_payments_post",
+        "security": [{ "sessionToken": [] }],
+        "x-exposure": "public (/api/payments)",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 80
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Payment" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction enregistree (ou rejouee).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/PaymentResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/OperatorRequired" },
+          "409": {
+            "description": "Conflit : `Idempotency key reused with different payload` (meme cle, contenu different) ou `Insufficient fictitious balance`.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "422": {
+            "description": "Requete invalide (montant hors 1..100000 ou non entier strict, destinataire different de `merchant`, cle d'idempotence absente ou hors 8..80 caracteres).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          },
+          "503": { "$ref": "#/components/responses/CapacityExhausted" }
+        }
+      }
+    },
+    "/quotes": {
+      "post": {
+        "summary": "Demander un devis (partage la capacite du paiement)",
+        "description": "Accessible aux roles `operator` et `loadbot`. Defaut de conception volontaire du laboratoire : un devis lent (0,6 s) occupe l'un des 4 emplacements partages avec les paiements. Apres confinement (`/control/contain`), une identite ne peut obtenir qu'un devis par seconde.",
+        "operationId": "quote_quotes_post",
+        "security": [{ "sessionToken": [] }],
+        "x-exposure": "public (/api/quotes)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Quote" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Devis calcule.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/QuoteResponse" }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "422": {
+            "description": "Montant invalide.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          },
+          "429": {
+            "description": "Confinement actif : un devis par identite et par seconde (`Containment: one quote per identity per second`).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          },
+          "503": { "$ref": "#/components/responses/CapacityExhausted" }
+        }
+      }
+    },
+    "/control/contain": {
+      "post": {
+        "summary": "Activer l'admission ciblee des devis (action de remediation)",
+        "description": "Interne : appele uniquement par le playbook Ansible (infra/ansible/contain.yml) avec le secret `control_key`. Aucune route publique. Idempotent : la politique est persistee dans /state/policy.json, `changed` vaut false si elle etait deja active. Sans corps de requete.",
+        "operationId": "contain_control_contain_post",
+        "security": [{ "controlKey": [] }],
+        "x-exposure": "internal",
+        "responses": {
+          "200": {
+            "description": "Politique d'admission active.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ContainResponse" }
+              }
+            }
+          },
+          "403": {
+            "description": "Cle de controle absente ou incorrecte (`Internal authorization required`).",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "sessionToken": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Jeton de session signe HMAC-SHA256 emis par `POST /auth/token` (services/common/security.py). Ce N'EST PAS un JWT standard : format `base64url(payload).base64url(hmac)` avec payload {sub, role, exp, aud}. Valide 1 h, audience `resilience-lab`, roles `operator` (alice) ou `loadbot`."
+      },
+      "controlKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Control-Key",
+        "description": "Secret interne `control_key` (monte via Docker secrets), connu uniquement du service payment et du remediateur/Ansible."
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Session absente, invalide, falsifiee ou expiree (`Bearer session required` / `Invalid or expired session`).",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        }
+      },
+      "OperatorRequired": {
+        "description": "Session valide mais role insuffisant (`Operator required`) : le role `loadbot` n'a pas acces.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        }
+      },
+      "CapacityExhausted": {
+        "description": "Les 4 emplacements de capacite simulee sont occupes (`Simulated downstream capacity exhausted`). Aucun debit n'a eu lieu.",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "required": ["detail"],
+        "properties": {
+          "detail": { "type": "string" }
+        },
+        "title": "Error"
+      },
+      "PaymentHealth": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": { "type": "string", "const": "alive" }
+        },
+        "title": "PaymentHealth"
+      },
+      "PaymentReady": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": { "type": "string", "const": "ready" }
+        },
+        "title": "PaymentReady"
+      },
+      "Payment": {
+        "type": "object",
+        "required": ["amount_cents", "recipient"],
+        "properties": {
+          "amount_cents": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100000,
+            "description": "Entier strict : un flottant, une chaine ou un booleen est refuse (422).",
+            "title": "Amount Cents"
+          },
+          "recipient": {
+            "type": "string",
+            "pattern": "^merchant$",
+            "title": "Recipient"
+          }
+        },
+        "title": "Payment"
+      },
+      "Quote": {
+        "type": "object",
+        "required": ["amount_cents"],
+        "properties": {
+          "amount_cents": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100000,
+            "description": "Entier strict.",
+            "title": "Amount Cents"
+          }
+        },
+        "title": "Quote"
+      },
+      "QuoteResponse": {
+        "type": "object",
+        "required": ["amount_cents", "fee_cents"],
+        "properties": {
+          "amount_cents": { "type": "integer" },
+          "fee_cents": { "type": "integer", "const": 1 }
+        },
+        "title": "QuoteResponse"
+      },
+      "Transaction": {
+        "type": "object",
+        "required": ["id", "idem", "amount", "recipient", "created"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "idem": { "type": "string", "description": "Cle d'idempotence fournie par le client." },
+          "amount": { "type": "integer", "minimum": 1, "description": "Centimes." },
+          "recipient": { "type": "string" },
+          "created": { "type": "string", "format": "date-time", "description": "UTC, ISO 8601." }
+        },
+        "title": "Transaction"
+      },
+      "PaymentResponse": {
+        "type": "object",
+        "required": ["transaction", "replayed"],
+        "properties": {
+          "transaction": { "$ref": "#/components/schemas/Transaction" },
+          "replayed": {
+            "type": "boolean",
+            "description": "true si la cle d'idempotence existait deja avec le meme contenu."
+          }
+        },
+        "title": "PaymentResponse"
+      },
+      "Account": {
+        "type": "object",
+        "required": ["id", "cents"],
+        "properties": {
+          "id": { "type": "string", "enum": ["alice", "merchant"] },
+          "cents": { "type": "integer", "minimum": 0 }
+        },
+        "title": "Account"
+      },
+      "AccountsSnapshot": {
+        "type": "object",
+        "required": ["accounts", "transactions", "total_cents"],
+        "properties": {
+          "accounts": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Account" }
+          },
+          "transactions": {
+            "type": "array",
+            "maxItems": 20,
+            "description": "Les 20 plus recentes, de la plus recente a la plus ancienne.",
+            "items": { "$ref": "#/components/schemas/Transaction" }
+          },
+          "total_cents": {
+            "type": "integer",
+            "description": "Somme des soldes ; invariant attendu : 200000."
+          }
+        },
+        "title": "AccountsSnapshot"
+      },
+      "ContainResponse": {
+        "type": "object",
+        "required": ["contained", "changed"],
+        "properties": {
+          "contained": { "type": "boolean", "const": true },
+          "changed": {
+            "type": "boolean",
+            "description": "false si le confinement etait deja actif."
+          }
+        },
+        "title": "ContainResponse"
+      },
+      "HTTPValidationError": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "title": "Detail"
+          }
+        },
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "properties": {
+          "loc": {
+            "type": "array",
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "title": "ValidationError"
+      }
+    }
+  }
+}
