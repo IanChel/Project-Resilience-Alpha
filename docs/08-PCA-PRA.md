@@ -2,7 +2,8 @@
 
 ## Objectifs et périmètre
 Fonction prioritaire : paiement fictif exact et traçable.
-RTO cible pour l'incident de capacité : 45 secondes depuis la première
+Définition : RTO signifie *Recovery Time Objective* (objectif de temps de
+rétablissement). RTO cible pour l'incident de capacité : 45 secondes depuis la première
 indisponibilité observée jusqu'à une transaction confirmée. C'est une cible à
 mesurer, pas un résultat obtenu sur les PC de l'équipe.
 RPO cible sur ce scénario sans destruction de DB : 0 transaction déjà confirmée

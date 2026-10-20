@@ -295,9 +295,9 @@ résiduels, rôle de SOPS, une question hors corpus, et une tentative d'instruct
 d'exécuter une commande). Elles ne sont volontairement pas recopiées ici : un document qui
 cite une question mot pour mot est retrouvé à sa place, au lieu du passage qui contient la
 réponse (`tests/test_rag_corpus.py` le vérifie).
-Si aucun passage n'atteint le seuil de similarité, le service répond « Information
-absente du corpus. » **sans appeler le modèle** ; au-delà du seuil, l'abstention repose
-sur le prompt (voir les limites mesurées ci-dessous). Aucun outil d'action,
+Si aucun passage ne satisfait les seuils de similarité et de recouvrement lexical,
+le service répond « Information absente du corpus. » **sans appeler le modèle**.
+Au-delà de ces seuils, l'appui de chaque phrase générée reste à vérifier. Aucun outil d'action,
 secret control/alert, socket Docker ou accès base n'est attaché au RAG : seule la clé
 de session y est montée, pour vérifier le rôle opérateur.
 L'absence d'Ollama, ou d'un modèle non tiré, donne un **503 explicite** et jamais une
@@ -328,15 +328,22 @@ panne de plus. Le choix du mécanisme de recherche est libre dans le sujet.
 **Limites mesurées, à connaître avant le live.**
 - Une question formulée avec d'autres mots que la doc peut ne rien retrouver : on obtient
   alors « Information absente » alors que l'information existe.
-- Le seuil de similarité (0,08) n'est pas calibré. Mesuré le 19/10 : une question sans aucun
-  rapport avec le projet (sur l'astronomie, par exemple) retrouve quand même plusieurs
-  passages à une similarité d'environ 0,10, donc le service ne s'abstient pas à la
-  récupération et compte sur le prompt (« si la réponse manque, dis-le »), que le modèle de
-  1,5 Md peut ne pas respecter. Le meilleur passage des questions pertinentes mesurées scorait de 0,14 à 0,30. Un
-  seuil vers 0,12 écarterait ce cas mais pas tous les hors-sujet (un simple ordre d'exécuter
-  une commande score environ 0,15) et pourrait écarter des questions valides : à décider sur
-  davantage de questions, non modifié ici. Pour la recette « question non couverte »,
-  vérifier avec Ollama réellement lancé.
+- Calibration hors ligne du retriever : `python scripts/evaluate_rag_retrieval.py` compare
+  le seuil cosine historique seul à une seconde barrière demandant deux termes de contenu
+  distincts (ou un sigle explicite en majuscules), après normalisation des accents et retrait
+  des mots génériques, dans le même passage. Sur 20 questions documentées, le rappel d'une source pertinente est resté à
+  **20/20** ; sur 20 questions hors corpus, les passages acceptés sont passés de **16/20 à
+  2/20**. La question testée sur le Soleil est maintenant rejetée avant l'appel au modèle.
+  Cette petite suite étiquetée à la main est un diagnostic, pas une mesure de production.
+  Le recouvrement lexical ne prouve pas que les passages répondent à la question : deux
+  questions hors corpus sur la Lune et l'histoire restent acceptées. Il faut contrôler les
+  sources et le texte généré.
+- Le prompt demande désormais une réponse courte, des références exactes et l'abstention
+  quand les extraits ne donnent pas la réponse ; il interdit de développer un sigle sans
+  définition dans le corpus. La génération est limitée à 220 tokens, et une fin Ollama
+  signalée comme limite de longueur produit un 503 au lieu de livrer une réponse tronquée.
+  Ces consignes ne garantissent pas que le petit modèle les respecte. Le glossaire PCA/PRA
+  définit explicitement RTO comme *Recovery Time Objective*.
 - L'index est construit au démarrage : après toute modification de `docs/`, relancer
   `docker compose restart rag`. Seuls les `docs/*.md` sont indexés, pas `docs/openapi/*.json`.
 - `Corpus` lit en UTF-8 explicite ; un document enregistré en cp1252 ferait échouer le

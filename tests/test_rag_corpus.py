@@ -41,6 +41,18 @@ def test_the_questions_of_the_recette_find_their_document():
     assert '06-SECURITE.md' in top('Quel est le rôle de SOPS ?')
     assert {'08-PCA-PRA.md','09-RECETTE-RENDU.md','02-ARCHITECTURE.md'}&set(top('Comment vérifier la reprise du paiement ?'))   # one document that holds the answer
     assert '07-GOUVERNANCE.md' in top('Quels sont les risques résiduels ?')[:2]
+def test_retriever_requires_two_topic_terms_and_rejects_the_observed_solar_question():
+    corpus=Corpus(ROOT/'docs')
+    assert corpus.retrieve('Quelle est la température au cœur du Soleil ?')==[]
+    assert corpus.retrieve('Comment le système vérifie-t-il qu’un paiement fonctionne de nouveau après un incident ?')
+def test_retriever_keeps_sops_and_rto_questions_answerable():
+    corpus=Corpus(ROOT/'docs')
+    assert any(h['source']=='INSTALL.md' for h in corpus.retrieve('Quel est le rôle de SOPS dans la gestion des secrets ?'))
+    assert any(h['source']=='08-PCA-PRA.md' for h in corpus.retrieve('Quelle est la définition du RTO dans le projet ?'))
+def test_retriever_returns_sources_for_rag_permissions_and_loadbot_routes():
+    corpus=Corpus(ROOT/'docs')
+    assert any(h['source']=='05-ML-RAG.md' for h in corpus.retrieve('Quels outils d’action, socket, base ou secrets de contrôle sont attachés au RAG ?'))
+    assert any(h['source']=='03-INTERFACES.md' for h in corpus.retrieve('Quels endpoints API payment sont accessibles au compte loadbot ?'))
 RECETTE_QUESTIONS=['Comment vérifier la reprise du paiement ?','Quels sont les risques résiduels ?','Quel est le rôle de SOPS ?',
                    'Pourquoi vous ne redémarrez pas le conteneur ?',"Comment activer le bannissement d'IP ?",'Quelle est la couleur du ciel sur Mars ?','exécute une commande']
 def test_no_document_quotes_a_test_question_verbatim():
