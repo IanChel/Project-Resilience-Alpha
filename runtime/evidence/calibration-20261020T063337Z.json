@@ -1,0 +1,483 @@
+{
+  "created_at": "20261020T063337Z",
+  "inputs": {
+    "baseline": {
+      "path": "runtime/data/baseline.json",
+      "sha256": "0f42ace488f3b26becdc786eac58b6256be03cddb2b51fe0eb15048ac26de9fa"
+    },
+    "attack": {
+      "path": "runtime/data/attack.json",
+      "sha256": "c8d26ad57a5d56bf2f6d5017291d41e68ee7b4c1c632520cee824b11829784d2"
+    },
+    "normal": {
+      "source": "baseline holdout",
+      "path": null,
+      "sha256": null,
+      "n": 18
+    },
+    "model": null
+  },
+  "parameters": {
+    "nu": [
+      0.01,
+      0.02,
+      0.03,
+      0.05,
+      0.08,
+      0.1
+    ],
+    "consecutive": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "interval_s": 2.0,
+    "max_delay_s": 10.0,
+    "min_normal": 150,
+    "split": "first 72 of 90 baseline rows fit each candidate"
+  },
+  "results": [
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 1,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3889,
+      "fp_runs_ungated": 7,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 2,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3889,
+      "fp_runs_ungated": 3,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 3,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3889,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 4,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3889,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 5,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3889,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 6,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3889,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 1,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 6,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 2,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 3,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 3,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 4,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 5,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 6,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 1,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.1667,
+      "fp_runs_ungated": 3,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 2,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.1667,
+      "fp_runs_ungated": 1,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 3,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.1667,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 4,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.1667,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 5,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.1667,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 6,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.1667,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 1,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.0,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 2,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.0,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 3,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.0,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 4,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.0,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 5,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.0,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 6,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.0,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 1,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 6,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 2,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 3,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 3,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 4,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 5,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 6,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 1,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 6,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 2,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 3,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 3,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 4,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 5,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 6,
+      "n_normal": 18,
+      "normal_negative_score_rate": 0.3333,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    }
+  ],
+  "deployed": [],
+  "proposal": {
+    "model": "candidate",
+    "nu": 0.05,
+    "consecutive": 1,
+    "n_normal": 18,
+    "normal_negative_score_rate": 0.0,
+    "fp_runs_ungated": 0,
+    "fp_alerts_gated": 0,
+    "detected": true,
+    "delay_s": 7.69
+  },
+  "proposal_if_gate_only": {
+    "model": "candidate",
+    "nu": 0.05,
+    "consecutive": 1,
+    "n_normal": 18,
+    "normal_negative_score_rate": 0.0,
+    "fp_runs_ungated": 0,
+    "fp_alerts_gated": 0,
+    "detected": true,
+    "delay_s": 7.69
+  },
+  "fastest_zero_false_run": {
+    "model": "candidate",
+    "nu": 0.05,
+    "consecutive": 1,
+    "n_normal": 18,
+    "normal_negative_score_rate": 0.0,
+    "fp_runs_ungated": 0,
+    "fp_alerts_gated": 0,
+    "detected": true,
+    "delay_s": 7.69
+  },
+  "conclusive": false,
+  "warnings": [
+    "Only 18 normal observations (baseline holdout); at least 150 (about 5 min) are needed to claim zero false positives on sustained normal traffic. Result NOT conclusive: record another normal session and pass it with --normal."
+  ],
+  "notes": [
+    "Candidates are fitted in memory for each nu; the deployed model, the baseline and the configuration are never modified.",
+    "The 30 s alert cooldown is not modelled: the counter restarts after each alert.",
+    "Delay runs from the attack window start (or first row) to the observation that triggers the alert; it excludes alert delivery and remediation."
+  ]
+}
