@@ -27,7 +27,7 @@ ALLOWED_ORIGINS = frozenset(f'{host}:8081' for host in ('http://192.168.137.1', 
 _guard = threading.RLock()
 _state = {'status': 'idle', 'phase': 'idle', 'started_at': None, 'server_started_at': None,
           'exit_code': None, 'acceptance': None, 'check_mardi': None, 'check_mercredi': None,
-          'details': []}
+          'details': [], 'result_file': None}
 _process: subprocess.Popen[str] | None = None
 _auth_cache: dict[str, tuple[float, str, float | None]] = {}
 
@@ -88,6 +88,15 @@ def _phase_from_line(line: str) -> None:
     global _process
     clean = line.strip()
     with _guard:
+        marker='RECETTE_RESULT_JSON '
+        if clean.startswith(marker):
+            try: result=json.loads(clean[len(marker):])
+            except (ValueError,TypeError): result={}
+            if isinstance(result,dict):
+                _state.update(status='complete' if result.get('status')=='PASS' else 'failed',
+                              phase='complete' if result.get('status')=='PASS' else 'failed',
+                              acceptance=result.get('acceptance'),check_mardi=result.get('check_mardi'),
+                              check_mercredi=result.get('check_mercredi'),result_file=result.get('result_file'))
         # Keep only bounded, useful result/diagnostic lines for the dashboard. The runner never prints
         # credential values, but redact common sensitive fields as defense in depth before retaining output.
         if any(word in clean.casefold() for word in (
@@ -221,7 +230,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             _state.update(status='running', phase='starting', started_at=time.time(),
                           server_started_at=server_now, exit_code=None, acceptance=None,
-                          check_mardi=None, check_mercredi=None, details=[])
+                          check_mardi=None, check_mercredi=None, details=[], result_file=None)
             argv = runner_argv(base)
             try:
                 _process = subprocess.Popen(argv, cwd=ROOT, stdout=subprocess.PIPE,

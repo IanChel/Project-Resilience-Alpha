@@ -17,12 +17,15 @@ cleanly; no password/token/key is ever printed. The alice password is handed to 
 (a directory of files) so its value never passes through this script's output.
 """
 import argparse
+from datetime import datetime, timezone
 import json
 import os
+import re
 import signal
 import subprocess
 import sys
 import time
+import uuid
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, build_opener, ProxyHandler
@@ -118,19 +121,68 @@ def run_check(name,argv):
     return (name,done.returncode,verdict+'\n'+_tail(out,20))
 def _tail(text,n): return '\n'.join(('    '+l) for l in text.strip().splitlines()[-n:])
 
+def _safe_result_lines(detail):
+    """Keep short check output for the run record, redacting likely credential values."""
+    lines=[]
+    for line in detail.splitlines()[-20:]:
+        line=re.sub(r'(?i)\b(password|token|secret|authorization)\b\s*[:=]\s*[^\s,;]+',r'\1=[REDACTED]',line)
+        line=line.replace(str(ROOT/'.secrets'),'[secret-path]')
+        lines.append(line[:500])
+    return lines
+
+def write_recipe_result(started_epoch,url,prep,results,proof=None):
+    """Write a new, non-secret summary for this recipe; never overwrite acceptance/M7 evidence."""
+    ended_epoch=time.time()
+    tests=[]
+    for name,code,detail in results:
+        if name=='acceptance': verdict='PASS' if code==0 else ('NON VERIFIE' if code is None else 'FAIL')
+        else: verdict='PASS' if code==0 else ('NON VERIFIE' if code is None else 'FAIL')
+        lines=detail.splitlines()
+        tests.append({'name':name,'verdict':verdict,'exit_code':code,
+                      'summary':lines[0] if lines else verdict,'details':_safe_result_lines(detail)})
+    overall='PASS' if prep and all(item.get('verdict')=='PASS' for item in prep) and all(t['verdict']=='PASS' for t in tests) else 'FAIL'
+    report={'schema_version':1,'run_id':str(uuid.uuid4()),
+            'started_at_utc':datetime.fromtimestamp(started_epoch,timezone.utc).isoformat().replace('+00:00','Z'),
+            'ended_at_utc':datetime.fromtimestamp(ended_epoch,timezone.utc).isoformat().replace('+00:00','Z'),
+            'started_at_epoch':started_epoch,'ended_at_epoch':ended_epoch,
+            'duration_s':round(ended_epoch-started_epoch,3),'target':url,
+            'attack_launched_by_runner':False,'status':overall,
+            'preparation':prep,'checks':tests,
+            'acceptance_evidence_file':proof.name if proof else None}
+    folder=ROOT/'runtime'/'evidence'
+    folder.mkdir(parents=True,exist_ok=True)
+    path=folder/f"recette-run-{int(started_epoch)}-{report['run_id'][:8]}.json"
+    temp=path.with_suffix('.tmp')
+    temp.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    os.replace(temp,path)
+    # Machine-readable final marker lets the loopback dashboard display final results reliably.
+    marker={'status':overall,'acceptance':next((t['verdict'] for t in tests if t['name']=='acceptance'),None),
+            'check_mardi':next((t['verdict'] for t in tests if t['name']=='check_mardi'),None),
+            'check_mercredi':next((t['verdict'] for t in tests if t['name']=='check_mercredi'),None),
+            'result_file':path.name}
+    print('RECETTE_RESULT_JSON '+json.dumps(marker,separators=(',',':')),flush=True)
+    print(f'Récapitulatif JSON écrit : {path}',flush=True)
+    return path
+
 def recette(seconds,url,auto):
     try: url=validate_url(url)
     except ValueError as exc: raise Step('URL refusee : '+str(exc)) from None
     if not confirm(auto): print('Annule.'); return 2
+    started_epoch=time.time()
+    prep=[]
     results=[]
     print('\n[1/5] Reset : suppression de /state/policy.json (uniquement)')
     r=run(op_reset_policy(),timeout=30)
     if r.returncode!=0: raise Step('reset impossible : '+_tail((r.stderr or r.stdout),4).strip())
+    prep.append({'name':'reset_policy','verdict':'PASS','exit_code':0})
     print('  OK : confinement leve')
     print('[2/5] Redemarrage de payment')
-    if run(op_restart_payment(),timeout=60).returncode!=0: raise Step('redemarrage de payment en echec')
+    restart=run(op_restart_payment(),timeout=60)
+    if restart.returncode!=0: raise Step('redemarrage de payment en echec')
+    prep.append({'name':'restart_payment','verdict':'PASS','exit_code':restart.returncode})
     print('[3/5] Attente de /api/ready (max %ds)'%READY_TIMEOUT_S)
     if not wait_ready(url): raise Step('WAF/payment ne repond pas /api/ready apres %ds : recette interrompue, observateur NON lance.'%READY_TIMEOUT_S)
+    prep.append({'name':'waf_payment_ready','verdict':'PASS','exit_code':0})
     print('  OK : payment repond /ready')
     # 4. observer + the operator launches the attack by hand
     print('\n[4/5] Lancement de l\'observateur (acceptance.py) sur le PC Hote')
@@ -171,6 +223,7 @@ def recette(seconds,url,auto):
         for extra in detail.splitlines()[1:]: print('      '+extra.strip())
     ok=all(code==0 for _,code,_ in results)
     print('\nRecette %s.'%('VALIDE (cote technique)' if ok else 'INCOMPLETE — voir les FAIL ci-dessus'))
+    write_recipe_result(started_epoch,url,prep,results,proof)
     return 0 if ok else 1
 
 def main(argv=None):

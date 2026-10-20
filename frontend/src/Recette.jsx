@@ -52,6 +52,7 @@ export default function Recette({token,incident,remediatorOk,detector,detectorOk
       <p className="font-medium">Lanceur Hôte : <span className={currentStatus==='failed'?'text-rose-300':'text-cyan-200'}>{phaseLabel}</span></p>
       {bridge?.exit_code!==null&&bridge?.exit_code!==undefined&&<p className="text-sm text-slate-300">Code de fin : {bridge.exit_code}</p>}
       {hasRun&&<div className="flex flex-wrap gap-3 text-sm">{[['acceptance',bridge.acceptance],['check_mardi',bridge.check_mardi],['check_mercredi',bridge.check_mercredi]].map(([name,value])=><span key={name}>{name} : {value||'en attente'}</span>)}</div>}
+      {bridge?.result_file&&<p className="text-xs text-slate-400">Récapitulatif enregistré : runtime/evidence/{bridge.result_file}</p>}
       {bridge?.details?.length>0&&<div className="space-y-1 text-sm" role="status" aria-label="Détails de la recette">
         <p className="font-medium">Détails du dernier résultat</p>
         <ul className="list-disc space-y-1 pl-5 text-slate-300">{bridge.details.slice(-12).map((line,index)=><li key={`${index}-${line}`}>{line}</li>)}</ul>

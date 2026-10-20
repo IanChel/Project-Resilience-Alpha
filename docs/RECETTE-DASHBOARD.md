@@ -35,6 +35,13 @@ Le parcours lance `check_mardi.py` sur la fenêtre récente et appelle
 Si acceptance n'écrit pas de nouvelle preuve, le check mercredi est marqué
 **NON VÉRIFIÉ** au lieu de réutiliser une ancienne preuve.
 
+À la fin du parcours, le lanceur écrit aussi un nouveau fichier
+`runtime/evidence/recette-run-<epoch>-<id>.json`. Il récapitule les codes de
+sortie et les verdicts de `acceptance`, `check_mardi` et `check_mercredi`, ainsi
+que le nom de la preuve acceptance associée. Le dashboard affiche ce nom. Ce
+récapitulatif ne remplace ni ne réécrit les preuves `acceptance-*.json` et
+`m7-proof-*.json`.
+
 Ne pas lancer un nouvel essai avant l'arrêt de l'attaque et la conservation des
 preuves de l'essai précédent. Le pont n'expose ni commande libre, ni accès au
 socket Docker, et ne peut pas lancer le script d'attaque.
