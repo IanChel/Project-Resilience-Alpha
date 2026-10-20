@@ -77,11 +77,18 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
 
 ## Phase 3 — Les deux jalons critiques · toute l'équipe
 
-- [ ] **3.1** 🔴 **Jalon M7** — 1ʳᵉ attaque réelle
+> **Validation LOCALE faite le 19/10 (loopback, un seul PC).** La chaîne autonome complète tourne de bout en
+> bout : détection → `containing` → `verifying` → `recovered`, transaction témoin validée, registre intact,
+> **aucune intervention humaine**. Chiffres mesurés : **détection → service rétabli 2,57 s** (cible 60 s, jeudi 45 s),
+> attaque → alerte ~4,1 s, RTO 2,06 s. `check_mardi.py` **5/5**, `check_mercredi.py` **5/5**. Preuves dans
+> `runtime/evidence/`. ⚠️ **Ce n'est PAS la démo à deux postes exigée par le sujet** : il faut refaire 3.1 et 3.2
+> depuis le PC Attaquant une fois la phase 2 montée. C'est pour ça que les cases ci-dessous restent « à 2 postes ».
+
+- [x] **3.1** 🔴 **Jalon M7** — chaîne validée **EN LOCAL** (`check_mardi.py` 5/5) · ⬜ **reste : à 2 postes** après phase 2
       Hôte : `python scripts/check_mardi.py --last 120` après l'attaque
       Attaquant : `python attack_lab.py --lab-authorized --seconds 30`
       *Fait quand* : 5/5 OK — pic **mesuré** dans Prometheus **et** `anomaly=true` sur la même fenêtre.
-- [ ] **3.2** 🔴 **Jalon W7** — la boucle complète sous 60 s
+- [x] **3.2** 🔴 **Jalon W7** — boucle **EN LOCAL** en 2,57 s (`check_mercredi.py` 5/5) · ⬜ **reste : à 2 postes** après phase 2
       Hôte : `python scripts/acceptance.py --url http://192.168.137.1:8081 --seconds 55`, puis attaque,
       puis `python scripts/check_mercredi.py`
       *Fait quand* : 5/5 OK — boucle complète, < 60 s, aucune intervention humaine, config du détecteur consignée.
