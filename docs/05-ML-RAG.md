@@ -2,7 +2,8 @@
 
 ## Détecteur ML
 Modèle réel de nouveauté : pipeline scikit-learn StandardScaler + OneClassSVM
-RBF, nu=0.03. Il apprend le fonctionnement nominal ; aucun modèle préentraîné
+RBF, `nu=0.02` (valeur retenue après calibration ; voir la section Calibration).
+Il apprend le fonctionnement nominal ; aucun modèle préentraîné
 ni résultat fictif de production n'est livré. Pas de classification binaire
 supervisée avec fausses étiquettes d'attaque.
 
@@ -46,9 +47,10 @@ rejets sur 10 s se trouvent donc à 30 unités du nuage et sortent nettement de 
 frontière. Le test unitaire le vérifie : le score de [20, 4, 30, 30] est négatif et
 inférieur à celui de [1, 0, 0, 0].
 
-Avec si peu de points, `nu=0.03` est un réglage lisible : c'est une borne
-supérieure de la fraction de points d'apprentissage laissés hors frontière (environ
-2 sur 72), donc un lien direct avec le taux de fausses alertes toléré. L'apprentissage
+Avant la calibration sur une session normale indépendante, `nu=0.03` était le
+réglage de référence : c'est une borne supérieure de la fraction de points
+d'apprentissage laissés hors frontière (environ 2 sur 72). La calibration décrite
+plus bas a ensuite retenu `nu=0.02`. L'apprentissage
 du SVM est déterministe (même baseline, même modèle), ce qui compte pour une démo
 reproductible ; un IsolationForest exigerait de figer sa graine aléatoire. Le coût
 quadratique du SVM est sans objet à cette taille.
@@ -109,6 +111,15 @@ série** sur les 156 observations normales, et détection en **~11,7 s**. C'est 
 | nu=0,03, cons.=3 (ancien) | 2 | oui | 11,7 s |
 | **nu=0,02, cons.=3 (retenu)** | **0** | **oui** | **11,7 s** |
 | nu=0,05, cons.=1 (1er passage trompeur) | 9 | oui | 7,7 s |
+
+**Interprétation des faux positifs.** Le `runtime/evidence/ml-report.json` actuellement
+présent indique 6 scores négatifs sur les 18 observations du holdout (33,3 %). C'est
+un taux par observation, pas le nombre de séries de trois scores négatifs (`FPruns`)
+mesuré sur la session normale indépendante. Pour le couple retenu, cette session de
+156 observations donne 0 `FPruns`, bien que 14,1 % des scores individuels soient
+négatifs. Le taux de 55,6 % cité dans un ancien compte-rendu ne peut pas être reproduit
+à partir des preuves présentes ; retrouver son rapport source avant de le présenter
+comme la mesure courante.
 
 Les 11,7 s de détection dépassent la cible ambitieuse de 10 s, mais tiennent largement dans le budget
 global (chaîne mesurée : détection → service rétabli 2,57 s ; attaque → alerte ~4,1 s). Le rappel sur

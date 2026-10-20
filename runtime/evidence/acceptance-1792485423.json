@@ -1,0 +1,692 @@
+{
+  "observations": [
+    {
+      "at": 1792485367.8539069,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485368.4631813,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485369.07345,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485369.684851,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485370.2964928,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485370.9258082,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485371.5355918,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485372.159547,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485372.7699516,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485373.3811762,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485374.0066273,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485374.6303823,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485375.2424958,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485375.8530793,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485376.47701,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485377.0997202,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485377.714957,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485378.3264048,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485378.9375448,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485379.5665932,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485380.1753757,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485380.7955294,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485381.4062297,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485382.0358794,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485382.6495254,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485383.2740383,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485383.885086,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485384.5041704,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485385.1243334,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485385.7451694,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485386.3683543,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485386.9788985,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485387.5917363,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485388.2057009,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485388.8167684,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485389.42786,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485390.0367808,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485390.646724,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485391.2890751,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485391.8997061,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485392.5213537,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485393.1481051,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485393.7724185,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485394.3945894,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485395.004938,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485395.6162832,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485396.2285655,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485396.8404212,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485397.4590569,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485398.0874624,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485398.6986961,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485399.3104792,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485399.9226487,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485400.5439532,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485401.1675107,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485401.7895982,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485402.4184403,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485403.0423706,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485403.6533246,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485404.2654004,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485404.8752673,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485405.4864101,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485406.1065392,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485406.731114,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485407.3589144,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485407.9836338,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485408.60209,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485409.2147245,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485409.8278713,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485410.4431965,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485411.0637877,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485411.679802,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485412.2959042,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485412.9200907,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485413.537418,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485414.153372,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485414.770416,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485415.381286,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485415.9922142,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485416.6123843,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485417.2324698,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485417.8630958,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485418.4715507,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485419.0820205,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485419.6911516,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485420.3143651,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485420.9378033,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485421.55104,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485422.1745334,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792485422.7892687,
+      "payment_status": 200,
+      "incidents": []
+    }
+  ],
+  "started_at": 1792485364.8494117,
+  "before": {
+    "transaction": {
+      "id": "350e894d-3807-427e-93db-a8fc17b50e20",
+      "idem": "63120f74-1e18-4715-bb41-9ab434b70b89",
+      "amount": 1,
+      "recipient": "merchant",
+      "created": "2026-10-20T08:36:07.840874+00:00"
+    },
+    "replayed": false
+  },
+  "after_status": 200,
+  "after": {
+    "transaction": {
+      "id": "b54b55ae-6eb3-47c8-8005-24e6e5138f53",
+      "idem": "108c11aa-dbc5-4bfc-912c-0e30249fde57",
+      "amount": 1,
+      "recipient": "merchant",
+      "created": "2026-10-20T08:37:03.531550+00:00"
+    },
+    "replayed": false
+  },
+  "ledger": {
+    "accounts": [
+      {
+        "id": "alice",
+        "cents": 99492
+      },
+      {
+        "id": "merchant",
+        "cents": 100508
+      }
+    ],
+    "transactions": [
+      {
+        "id": "b54b55ae-6eb3-47c8-8005-24e6e5138f53",
+        "idem": "108c11aa-dbc5-4bfc-912c-0e30249fde57",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:37:03.531550+00:00"
+      },
+      {
+        "id": "ef408211-f73d-412d-a1f4-ea1f447b9f9a",
+        "idem": "892ceb37-f935-42ad-a227-41e3bb25dd39",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:37:02.891846+00:00"
+      },
+      {
+        "id": "c00f49ee-e980-4621-92f1-d6e86ac95d70",
+        "idem": "3ee83b54-8d89-4b6d-beb1-0b97c62f1190",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:37:02.280683+00:00"
+      },
+      {
+        "id": "29af75a2-d984-4340-a6a4-8975c8eb97c6",
+        "idem": "1ce9885d-0fa6-4d54-b774-3a3d790ef5b2",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:37:01.662903+00:00"
+      },
+      {
+        "id": "64ec9678-9bb9-44a1-bb88-f8ca61e8aa33",
+        "idem": "f334beba-6882-45db-ae0b-11e794c04390",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:37:01.041367+00:00"
+      },
+      {
+        "id": "86db66c6-1790-4a3c-a383-62ac510b29da",
+        "idem": "28510d58-a6a2-4135-bb6a-bac45aeb50ae",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:37:00.426797+00:00"
+      },
+      {
+        "id": "6e1a4870-6ab6-48b1-bc44-7568d316e604",
+        "idem": "8b39ce5e-7dd4-47b9-8225-7f4c11395b63",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:59.795085+00:00"
+      },
+      {
+        "id": "c454c593-b8b4-42d2-af0d-5ba32499852c",
+        "idem": "60a1a809-b96b-40b1-99a7-1d8eebf5508d",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:59.182731+00:00"
+      },
+      {
+        "id": "72874fb4-be1c-4827-95ec-54023194e158",
+        "idem": "8a58520f-9f64-48fc-be22-4c68c9858ab0",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:58.573792+00:00"
+      },
+      {
+        "id": "a5fc35e0-a9f1-4dc9-9631-fdf0599536ed",
+        "idem": "eda77e29-fd8b-485c-ad67-57982837e70a",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:57.963746+00:00"
+      },
+      {
+        "id": "6949a2ef-e807-4cb0-8ecf-d03b3a37b15f",
+        "idem": "ea283453-2caf-4ac6-bc3c-235ffab72015",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:57.342867+00:00"
+      },
+      {
+        "id": "3f4ef47b-ed9e-4c23-91b6-8768fcf0b3d3",
+        "idem": "62c58cc0-bbf2-433a-bc59-717ca632e99a",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:56.713807+00:00"
+      },
+      {
+        "id": "f4a42d8a-6d14-4ce3-afdc-d289cf73c6a1",
+        "idem": "b7f233e7-42d7-43cb-93a5-dbc154a03bb5",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:56.093295+00:00"
+      },
+      {
+        "id": "0eb30086-e522-4277-aacc-ae467e2d383e",
+        "idem": "362bdd86-9dd3-4ef0-96c9-5a0f1acad0da",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:55.483093+00:00"
+      },
+      {
+        "id": "53cae83b-93ea-4b13-8053-809ea93843e9",
+        "idem": "8b1ff7aa-5791-4f5c-805c-c35f2a1cb880",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:54.872817+00:00"
+      },
+      {
+        "id": "78fb95b1-1fc5-44cd-80be-fc6a6e2c7106",
+        "idem": "a1736c12-41fd-4742-a4ba-313187138a53",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:54.260519+00:00"
+      },
+      {
+        "id": "b0316615-87e8-46f6-934c-70b9ce1db397",
+        "idem": "2506a886-f2f8-49ff-b3dc-878623ce1622",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:53.643080+00:00"
+      },
+      {
+        "id": "8e3e484c-8a24-48a8-9cae-e4a9dc7c78fb",
+        "idem": "901190bd-35c9-4754-94fb-fe2a6be4f1ce",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:53.027036+00:00"
+      },
+      {
+        "id": "e296e6b3-324f-4671-9225-1ca2d0b00c12",
+        "idem": "fe38ce6d-0d3a-47e1-907f-71383b041898",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:52.407404+00:00"
+      },
+      {
+        "id": "5c80377e-520c-41c5-8625-9178ca4e8938",
+        "idem": "446c2fec-49af-45dd-9a04-3b14b03332da",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-20T08:36:51.784558+00:00"
+      }
+    ],
+    "total_cents": 200000
+  },
+  "passed": false,
+  "summary": {
+    "incident": {
+      "id": null,
+      "status": null,
+      "steps": [
+        {
+          "name": "detected",
+          "at": null,
+          "offset_s": null
+        },
+        {
+          "name": "containing",
+          "at": null,
+          "offset_s": null
+        },
+        {
+          "name": "verifying",
+          "at": null,
+          "offset_s": null
+        },
+        {
+          "name": "recovered",
+          "at": null,
+          "offset_s": null
+        }
+      ],
+      "detection_to_recovered_s": null,
+      "within_target": null,
+      "target_s": 60
+    },
+    "witness": {
+      "verdict": "absent",
+      "transaction_id": null,
+      "total_cents": null
+    },
+    "ban": null,
+    "user_visible_outage": {
+      "first_refused_at": null,
+      "first_ok_after_at": null,
+      "seconds": null,
+      "note": "seen by this observer, one probe every 0.5 s"
+    },
+    "ledger_total_cents": 200000,
+    "detector_config": {
+      "consecutive": 3,
+      "nu": 0.02
+    },
+    "code_version": {
+      "commit": "2788a8cd16bb38c9aed8cb7dcf1b4efdf250e745",
+      "dirty": true
+    },
+    "complete": false,
+    "missing": [
+      "stage:detected",
+      "stage:containing",
+      "stage:verifying",
+      "stage:recovered",
+      "witness_transaction_validated"
+    ]
+  }
+}
