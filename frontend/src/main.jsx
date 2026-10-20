@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import Chrono from './Chrono.jsx';
 import Components from './Components.jsx';
+import Recette from './Recette.jsx';
 import './style.css';
 function App(){
  const [token,T]=useState(''),[password,P]=useState(''),[error,E]=useState(''),[amount,A]=useState('100'),[snap,S]=useState(null),[ops,O]=useState([]),[ml,M]=useState(null),[question,Q]=useState('Comment vérifier la reprise du paiement ?'),[answer,R]=useState(null),[busy,B]=useState(false),[tx,X]=useState(null),[clock,K]=useState(null),[probes,PR]=useState({});
@@ -32,6 +33,7 @@ function App(){
   <div className="grid md:grid-cols-3 gap-4"><section className="card"><p className="text-slate-400">État du détecteur ML</p><strong>{ml?.status||'Chargement…'}</strong><p className="text-sm">Score : {ml?.score?.toFixed(4)??'Modèle non entraîné'}</p></section><section className="card"><p className="text-slate-400">Dernière reprise</p><strong className="text-cyan-300">{ops[0]?.status||'Aucun incident traité'}</strong></section><section className="card"><p className="text-slate-400">Conservation du registre</p><strong>{snap?`${snap.total_cents} centimes`:'En attente'}</strong><p className="text-sm">Total attendu : 200 000 centimes</p></section></div>
   <Components probes={probes}/>
   <Chrono incident={ops[0]} serverNow={clock?.now} fetchedAt={clock?.at} socSignals={ml?.soc_signals}/>
+  <Recette token={token} incident={ops[0]} remediatorOk={!!probes.remediator?.ok} detector={ml} detectorOk={!!probes.detector?.ok}/>
   <div className="grid md:grid-cols-2 gap-4"><section className="card space-y-4"><h2 className="text-xl">Transaction fictive</h2><label className="block">Montant en centimes<input type="number" min="1" max="100000" value={amount} onChange={e=>A(e.target.value)}/></label><button disabled={busy} onClick={pay}>Payer le marchand fictif</button>{tx&&<p className="text-green-300 break-all">Transaction confirmée : {tx}</p>}<div>{snap?.accounts.map(a=><p key={a.id}>{a.id} : {a.cents} centimes</p>)}</div></section>
   <section className="card space-y-3"><h2 className="text-xl">Assistant documentaire local</h2><textarea value={question} onChange={e=>Q(e.target.value)}/><button disabled={busy} onClick={ask}>Consulter les procédures</button>{answer&&<div><p className="whitespace-pre-wrap">{answer.answer}</p><p className="text-xs text-cyan-300">{answer.sources.map(s=>s.file+'#'+s.chunk).join(' · ')}</p></div>}</section></div>
   <section className="card"><h2 className="text-xl mb-3">Chronologie des remédiations</h2><div className="overflow-auto"><table className="w-full text-sm text-left"><thead><tr><th>Incident</th><th>État vérifié</th><th>Preuve</th></tr></thead><tbody>{ops.map(i=><tr key={i.id} className="border-t border-slate-700"><td className="py-3">{i.id.slice(0,8)}</td><td>{i.status}</td><td className="max-w-md break-all">{i.evidence}</td></tr>)}</tbody></table></div></section>
