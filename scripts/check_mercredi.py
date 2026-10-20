@@ -69,10 +69,15 @@ def check_no_human(evidence,ctx):
     if problems: raise Check('; '.join(problems))
     return [f'{len(seen)} incident(s), aucun failed ni manual_review_required, detection avant prise en charge, observateur : passed']
 def check_ban(evidence,ctx):
+    # The IP ban is an OPTIONAL overlay (compose.ban.yaml, docs/06-SECURITE.md, decision 1). When it is off, the
+    # autonomous loop is validated without it, so this step passes with a loud N/A rather than failing the milestone.
+    # When it is on, it must really have been posted and the witness must still have succeeded.
     s=evidence['summary']; ban=s.get('ban'); w=s.get('witness') or {}
     if not isinstance(ban,dict): raise Check("aucune information de ban dans la preuve : le remediateur n'a rien consigne")
-    if not ban.get('enabled'): raise Check('bannissement desactive (surcouche compose.ban.yaml non activee) : '+str(ban.get('note','')))
-    if not ban.get('eligible'): raise Check("aucune adresse eligible : le WAF n'a pas vu l'adresse du PC Attaquant, ou elle est exclue ("+'; '.join(f'{e["ip"]}: {e["reason"]}' for e in ban.get('excluded',[]))+') ; voir docs/06-SECURITE.md, decision 1')
+    if not ban.get('enabled'):
+        return ['N/A : bannissement optionnel non active (compose.ban.yaml). La boucle est validee sans lui.',
+                '  Pour la demo AVEC ban, relancer avec la surcouche et revalider cette etape (docs/06-SECURITE.md, decision 1).']
+    if not ban.get('eligible'): raise Check("ban active mais aucune adresse eligible : le WAF n'a pas vu l'adresse du PC Attaquant, ou elle est exclue ("+'; '.join(f'{e["ip"]}: {e["reason"]}' for e in ban.get('excluded',[]))+') ; voir docs/06-SECURITE.md, decision 1')
     if not ban.get('applied'): raise Check(f'adresse eligible {ban["eligible"]} mais absente du fichier de ban apres le playbook : ban non pose')
     if w.get('verdict')!='validated': raise Check('ban pose mais transaction temoin non validee : le ban a pu bloquer la verification')
     return [f'ban pose sur {", ".join(ban["applied"])} (duree {ban.get("ttl_s")} s) ET transaction temoin validee']
@@ -83,7 +88,7 @@ def check_config(evidence,ctx):
     if not isinstance(c,int) or c<1 or not isinstance(nu,(int,float)) or not 0<nu<=1: raise Check(f'configuration incomplete ou invalide : {config}')
     return [f'consecutive={c}, nu={nu:g}']
 STEPS_LIST=[('La boucle est allee de la detection a la transaction temoin',check_loop),('Detection -> service retabli sous la cible',check_time),
-            ('Aucune intervention humaine dans la trace',check_no_human),('Ban d\'IP pose ET transaction temoin validee',check_ban),
+            ('Aucune intervention humaine dans la trace',check_no_human),('Ban d\'IP (si active) pose ET transaction temoin validee',check_ban),
             ('Configuration du detecteur consignee',check_config)]
 def head():
     try: return subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True,timeout=10,check=True).stdout.strip()

@@ -27,14 +27,19 @@ def test_a_complete_run_with_a_ban_validates_the_milestone(monkeypatch,tmp_path,
     folder=produce(monkeypatch,tmp_path,capsys,Lab(ban=BAN)); code,out=judge(folder,capsys)
     assert code==0 and '5/5 verifications OK' in out and 'jalon W7 VALIDE' in out and 'ECHEC' not in out
     assert '6.5 s de la detection' in out and 'consecutive=3, nu=0.03' in out and 'ban pose sur 192.168.137.20' in out and 'transaction temoin tx-77 validee' in out
-def test_without_a_ban_only_the_ban_step_fails_and_says_why(monkeypatch,tmp_path,capsys):
-    folder=produce(monkeypatch,tmp_path,capsys,Lab()); code,out=judge(folder,capsys)
-    assert code==1 and '4/5 verifications OK' in out and 'aucune information de ban' in out and 'NON valide' in out
-    assert verdicts(out)==['OK','OK','OK','ECHEC','OK']
-def test_every_ban_failure_has_its_own_reason(monkeypatch,tmp_path,capsys):
+def test_the_disabled_ban_overlay_is_not_a_failure(monkeypatch,tmp_path,capsys):
+    # The real remediator always writes a ban dict; off by default. The optional overlay being off must NOT fail W7.
+    folder=produce(monkeypatch,tmp_path,capsys,Lab(ban={'enabled':False,'eligible':[],'excluded':[],'note':'bans disabled (BAN_ENABLED not set)'}))
+    code,out=judge(folder,capsys)
+    assert code==0 and '5/5 verifications OK' in out and 'jalon W7 VALIDE' in out
+    assert verdicts(out)==['OK','OK','OK','OK','OK'] and 'N/A : bannissement optionnel non active' in out
+def test_missing_ban_information_is_a_failure(monkeypatch,tmp_path,capsys):
     folder=produce(monkeypatch,tmp_path,capsys,Lab(ban=BAN))
-    cases=[({'enabled':False,'eligible':[],'excluded':[],'note':'bans disabled (BAN_ENABLED not set)'},'surcouche compose.ban.yaml non activee'),
-           ({'enabled':True,'eligible':[],'excluded':[{'ip':'172.18.0.1','reason':'outside the lab network'}]},"WAF n'a pas vu l'adresse du PC Attaquant"),
+    rewrite(folder,lambda d:d['summary'].__setitem__('ban',None)); code,out=judge(folder,capsys)
+    assert code==1 and 'aucune information de ban' in out
+def test_a_ban_that_is_ON_but_broken_has_its_own_reason(monkeypatch,tmp_path,capsys):
+    folder=produce(monkeypatch,tmp_path,capsys,Lab(ban=BAN))
+    cases=[({'enabled':True,'eligible':[],'excluded':[{'ip':'172.18.0.1','reason':'outside the lab network'}]},"WAF n'a pas vu l'adresse du PC Attaquant"),
            ({'enabled':True,'eligible':['192.168.137.20'],'excluded':[],'applied':[]},'ban non pose')]
     for ban,needle in cases:
         rewrite(folder,lambda d,ban=ban:d['summary'].__setitem__('ban',ban)); code,out=judge(folder,capsys)

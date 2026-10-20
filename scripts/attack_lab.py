@@ -6,7 +6,20 @@ import ipaddress
 import os
 import time
 from collections import Counter
+from pathlib import Path
 import httpx
+def loadbot_password():
+    """Interactive by default: a human launches the exercise. For an automated local dry-run of the recovery
+    chain, LAB_PASSWORD_DIR names a directory with one file per account (like .secrets/runtime) -- a directory
+    of files, never the value in a variable, which would show in process listings. This script stays standalone
+    (copied alone to the attacker PC), so it does not import lab_client; the few lines are duplicated on purpose."""
+    folder=os.environ.get('LAB_PASSWORD_DIR')
+    if not folder: return getpass.getpass('loadbot lab password (from your team): ')
+    path=Path(folder)/'loadbot_password'
+    if not path.is_file(): raise SystemExit(f'LAB_PASSWORD_DIR is set but {path} does not exist')
+    value=path.read_text(encoding='utf-8').strip()
+    if not value: raise SystemExit(f'{path} is empty')
+    return value
 # Default = Host PC on the Windows hotspot RESILIENCE-G2 (see docs/04-ATTAQUE.md).
 DEFAULT_TARGET_HOST='192.168.137.1'
 LAB_NETWORK=ipaddress.ip_network('192.168.137.0/24')
@@ -29,7 +42,7 @@ async def main():
     if not 5<=args.seconds<=35: p.error('Duration must be between 5 and 35 seconds')
     try: target=resolve_target(args.target)
     except ValueError as exc: p.error(str(exc))
-    password=getpass.getpass('loadbot lab password (from your team): ')
+    password=loadbot_password()
     counts=Counter(); pending=set(); end=time.monotonic()+args.seconds
     async with httpx.AsyncClient(trust_env=False,base_url=target,timeout=2,follow_redirects=False,limits=httpx.Limits(max_connections=12)) as c:
         r=await c.post('/auth/token',json={'username':'loadbot','password':password}); r.raise_for_status()
