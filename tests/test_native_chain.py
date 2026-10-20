@@ -51,16 +51,31 @@ def test_native_anomaly_to_ansible_to_verified_transaction(tmp_path):
                 h={'Authorization':'Bearer '+operator,'Idempotency-Key':str(uuid.uuid4())}
                 r=await c.post('/api/payments',headers=h,json={'amount_cents':1,'recipient':'merchant'});assert r.status_code==200
                 running=True
+                capacity_seen=asyncio.Event()
                 async def flood():
                     while running:
-                        await c.post('/api/quotes',headers={'Authorization':'Bearer '+loadbot},json={'amount_cents':100})
+                        reply=await c.post('/api/quotes',headers={'Authorization':'Bearer '+loadbot},json={'amount_cents':100})
+                        if reply.status_code==503: capacity_seen.set()
                         await asyncio.sleep(0.05)
                 started=time.monotonic()
                 attackers=[asyncio.create_task(flood()) for _ in range(8)]
                 try:
-                    await asyncio.sleep(0.15)
-                    r=await c.post('/api/payments',headers={**h,'Idempotency-Key':str(uuid.uuid4())},json={'amount_cents':1,'recipient':'merchant'})
-                    assert r.status_code==503
+                    # Synchronize on an observed capacity rejection instead of assuming
+                    # eight local clients saturate the service within a fixed 150 ms.
+                    await asyncio.wait_for(capacity_seen.wait(),timeout=5)
+                    # Capacity can briefly clear between quote batches. Keep
+                    # observing payment attempts while the bounded workload is
+                    # active instead of sampling one instant and flaking.
+                    payment_statuses=[]
+                    deadline=asyncio.get_running_loop().time()+5
+                    while asyncio.get_running_loop().time()<deadline:
+                        reply=await c.post('/api/payments',headers={**h,'Idempotency-Key':str(uuid.uuid4())},
+                                           json={'amount_cents':1,'recipient':'merchant'})
+                        payment_statuses.append(reply.status_code)
+                        if reply.status_code==503: break
+                        assert reply.status_code==200,payment_statuses
+                        await asyncio.sleep(0)
+                    assert 503 in payment_statuses,payment_statuses
                     # Actual telemetry from this service; synthetic clean TRAINING fixture only.
                     rng=np.random.default_rng(7)
                     normal=np.column_stack([rng.uniform(0.5,2,80),rng.integers(0,2,80),np.zeros(80),np.zeros(80)])
