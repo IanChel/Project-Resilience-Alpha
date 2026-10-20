@@ -33,7 +33,10 @@ c'est le scénario à 0/5. `--syntax-check` ne détecte pas ce défaut, seule l'
 révèle ; `tests/test_configs.py` fige la configuration.
 
 ## Secrets
-SOPS est le choix retenu parmi Vault/SOPS autorisés. age chiffre la clé de données.
+SOPS (*Secrets OPerationS*) est un éditeur de fichiers de secrets chiffrés, choisi
+dans le projet parmi Vault/SOPS autorisés. Il chiffre le fichier structuré
+`.secrets/secrets.enc.json` avec age ; la clé publique age sert au chiffrement et
+la clé privée au déchiffrement. age chiffre la clé de données.
 `.secrets/secrets.enc.json` est chiffré ; `.secrets/age.key` est la clé privée et
 ne doit jamais être transmise. `.secrets/runtime/*` contient les fichiers
 nécessaires aux secrets Compose pendant l'exécution. Compose ne chiffre pas

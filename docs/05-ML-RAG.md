@@ -332,7 +332,7 @@ panne de plus. Le choix du mécanisme de recherche est libre dans le sujet.
   le seuil cosine historique seul à une seconde barrière demandant deux termes de contenu
   distincts (ou un sigle explicite en majuscules), après normalisation des accents et retrait
   des mots génériques, dans le même passage. Sur 20 questions documentées, le rappel d'une source pertinente est resté à
-  **20/20** ; sur 20 questions hors corpus, les passages acceptés sont passés de **16/20 à
+  **20/20** ; sur 20 questions hors corpus, les passages acceptés sont passés de **14/20 à
   2/20**. La question testée sur le Soleil est maintenant rejetée avant l'appel au modèle.
   Cette petite suite étiquetée à la main est un diagnostic, pas une mesure de production.
   Le recouvrement lexical ne prouve pas que les passages répondent à la question : deux
