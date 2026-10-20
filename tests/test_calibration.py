@@ -27,11 +27,11 @@ def dataset(path,rows,**extra):
 # ---- configuration
 def test_defaults_and_valid_values(monkeypatch):
     monkeypatch.delenv('DETECTOR_NU',raising=False); monkeypatch.delenv('DETECTOR_CONSECUTIVE',raising=False)
-    assert nu_from_env()==DEFAULT_NU==0.03 and consecutive_from_env()==DEFAULT_CONSECUTIVE==3
+    assert nu_from_env()==DEFAULT_NU==0.02 and consecutive_from_env()==DEFAULT_CONSECUTIVE==3   # nu calibre le 20/10
     monkeypatch.setenv('DETECTOR_NU','0.08'); monkeypatch.setenv('DETECTOR_CONSECUTIVE','5')
     assert nu_from_env()==0.08 and consecutive_from_env()==5
     monkeypatch.setenv('DETECTOR_NU',''); monkeypatch.setenv('DETECTOR_CONSECUTIVE','')
-    assert nu_from_env()==0.03 and consecutive_from_env()==3   # compose passes empty strings when unset
+    assert nu_from_env()==0.02 and consecutive_from_env()==3   # compose passes empty strings when unset -> the default
 @pytest.mark.parametrize('raw',['0','-0.1','1.5','abc','nan'])
 def test_invalid_nu_is_refused_not_defaulted(monkeypatch,raw):
     monkeypatch.setenv('DETECTOR_NU',raw)
@@ -53,7 +53,7 @@ def test_the_detector_reads_consecutive_at_startup(monkeypatch):
 def test_train_uses_nu_flag_then_env_and_records_it(tmp_path,monkeypatch):
     monkeypatch.setenv('MODEL_DIR',str(tmp_path)); dataset(tmp_path/'baseline.json',normal_rows(90,3))
     monkeypatch.delenv('DETECTOR_NU',raising=False)
-    train.main([]); assert json.loads((tmp_path/'report.json').read_text())['nu']==0.03
+    train.main([]); assert json.loads((tmp_path/'report.json').read_text())['nu']==0.02   # the calibrated default
     monkeypatch.setenv('DETECTOR_NU','0.08')
     train.main([]); assert json.loads((tmp_path/'report.json').read_text())['nu']==0.08
     assert joblib.load(tmp_path/'model.joblib')[-1].nu==0.08
@@ -63,7 +63,7 @@ def test_train_uses_nu_flag_then_env_and_records_it(tmp_path,monkeypatch):
 def test_compose_keeps_shared_variables_and_adds_the_two_settings():
     env=yaml.safe_load((ROOT/'compose.yaml').read_text())['services']['detector']['environment']
     assert {k:env[k] for k in ('LOG_DIR','STATE_DIR','MODEL_DIR','HOME')}=={'LOG_DIR':'/logs','STATE_DIR':'/state','MODEL_DIR':'/models','HOME':'/tmp'}
-    assert env['DETECTOR_NU']=='${DETECTOR_NU:-0.03}' and env['DETECTOR_CONSECUTIVE']=='${DETECTOR_CONSECUTIVE:-3}'
+    assert env['DETECTOR_NU']=='${DETECTOR_NU:-0.02}' and env['DETECTOR_CONSECUTIVE']=='${DETECTOR_CONSECUTIVE:-3}'
 def test_every_variable_of_env_example_is_read_by_compose_or_code():
     names=[l.split('=')[0] for l in (ROOT/'.env.example').read_text().splitlines() if l and not l.startswith('#')]
     compose=(ROOT/'compose.yaml').read_text()

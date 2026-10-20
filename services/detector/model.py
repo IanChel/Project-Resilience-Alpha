@@ -8,7 +8,7 @@ FEATURES=['quote_rate','active_work','capacity_denied_10s','denial_logs_10s']
 # train.py fits on the first 80 % and keeps the rest as holdout; train_model needs >= 60 rows.
 MIN_BASELINE_SAMPLES=75
 # Tunable without rebuilding the image: DETECTOR_NU (training time) and DETECTOR_CONSECUTIVE (runtime).
-DEFAULT_NU=0.03
+DEFAULT_NU=0.02   # calibre le 20/10 (156 obs normales) : 0 fausse serie avec consecutive=3 ; voir docs/05-ML-RAG.md
 DEFAULT_CONSECUTIVE=3
 def check_nu(nu):
     if not 0<nu<=1: raise ValueError(f'nu must be in ]0, 1], got {nu}')

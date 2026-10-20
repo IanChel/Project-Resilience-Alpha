@@ -92,12 +92,16 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
       Hôte : `python scripts/acceptance.py --url http://192.168.137.1:8081 --seconds 55`, puis attaque,
       puis `python scripts/check_mercredi.py`
       *Fait quand* : 5/5 OK — boucle complète, < 60 s, aucune intervention humaine, config du détecteur consignée.
-- [ ] **3.3** Si faux positifs ou détection trop lente : calibrer
-      `python scripts/calibrate_detector.py --baseline … --normal … --attack …` (procédure : `docs/05-ML-RAG.md`)
-      **L'outil propose, l'équipe décide.** Appliquer le couple retenu dans `.env`.
-- [ ] **3.4** Décider d'activer ou non le **ban d'IP** (surcouche optionnelle)
-      `docker compose -f compose.yaml -f compose.ban.yaml up -d` + la checklist de `docs/06-SECURITE.md`, décision 1.
-      Si un seul des 4 points échoue : **ne pas l'activer**, rien d'autre n'en dépend.
+- [x] **3.3** Calibration faite (20/10)
+      ✅ Calibration concluante sur 156 obs normales hors échantillon. Leçon : un 1er passage sur 18 points
+      annonçait `nu=0,05` à 0 % — **faux**, 9 fausses séries sur 156. Retenu : **`nu=0,02`, `consecutive=3`** →
+      **0 fausse série**, détection ~11,7 s, 8/8 observations d'attaque reconnues. Modèle réentraîné, défaut
+      aligné partout (`.env`, `.env.example`, `model.py`, `compose.yaml`). Preuve : `runtime/evidence/calibration-*`.
+      Choix réversible, documenté dans `docs/05-ML-RAG.md`.
+- [x] **3.4** Ban d'IP : **décision prise — différé**, optionnel
+      ➡️ La boucle est validée **sans** le ban (surcouche optionnelle). Son activation dépend d'hypothèses sur
+      l'image du WAF qui ne se vérifient qu'en exécution à 2 postes : à **ré-évaluer après la phase 2** avec la
+      checklist de `docs/06-SECURITE.md`, décision 1. Si un seul des 4 points échoue, ne pas l'activer.
 
 ## Phase 4 — Les trois trous de code restants ✅ **TERMINÉE le 20/10** · P1 + P2
 

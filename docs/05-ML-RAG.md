@@ -86,8 +86,34 @@ on ne s'appuie pas sur cette barrière pour juger le modèle. Deux variables sur
 (`capacity_denied_10s`, `denial_logs_10s`) sont constantes à zéro dans une baseline
 saine : c'est voulu, ce sont les signaux de l'incident, et `train_model` refuse une
 baseline qui en contient. `active_work` reste binaire (0 ou 1) : à ce débit, rarement plus
-d'un emplacement occupé. Le rappel sur attaque n'est pas encore mesuré
-(`attack_recall: NOT MEASURED`) : il le sera avec `scripts/acceptance.py`.
+d'un emplacement occupé.
+
+## Calibration concluante et valeur retenue (20/10)
+Première boucle complète exécutée sur loopback, puis calibration sur une **seconde session normale
+hors échantillon de 156 observations** (le minimum de 150 pour conclure). Preuve :
+`runtime/evidence/calibration-20261020T065603Z.json`.
+
+**Leçon méthodologique.** Un premier passage sur le seul holdout de 18 points annonçait `nu=0,05` à
+0 % de faux positifs. **C'était trompeur** : sur 156 observations réelles, `nu=0,05` produit 9 fausses
+séries. Trop peu de points donne une mesure fausse ; c'est pour cela que l'outil refuse de conclure
+sous 150 observations.
+
+**Résultat.** Aucun couple n'atteint à la fois zéro fausse série **et** détection sous 10 s (cible
+ambitieuse). Le meilleur compromis **concluant** est **`nu=0,02`, `consecutive=3`** : **zéro fausse
+série** sur les 156 observations normales, et détection en **~11,7 s**. C'est la valeur retenue
+(`DETECTOR_NU=0,02`, modèle réentraîné ; `consecutive` inchangé à 3). Le déployé précédent
+(`nu=0,03`) laissait 2 fausses séries.
+
+| couple | fausses séries (156 obs) | détecte | délai |
+|---|---|---|---|
+| nu=0,03, cons.=3 (ancien) | 2 | oui | 11,7 s |
+| **nu=0,02, cons.=3 (retenu)** | **0** | **oui** | **11,7 s** |
+| nu=0,05, cons.=1 (1er passage trompeur) | 9 | oui | 7,7 s |
+
+Les 11,7 s de détection dépassent la cible ambitieuse de 10 s, mais tiennent largement dans le budget
+global (chaîne mesurée : détection → service rétabli 2,57 s ; attaque → alerte ~4,1 s). Le rappel sur
+attaque est confirmé : le modèle reconnaît **8 des 8 observations** de la fenêtre d'attaque réelle.
+Choix réversible, à revoir par l'équipe si une session plus longue ou un autre scénario le justifie.
 
 ## Séquence d'entraînement, une commande par étape
 Les fichiers vivent dans le volume Docker `models`, monté en `/models` dans le

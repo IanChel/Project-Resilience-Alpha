@@ -1,0 +1,471 @@
+{
+  "created_at": "20261020T065603Z",
+  "inputs": {
+    "baseline": {
+      "path": "runtime/data/baseline.json",
+      "sha256": "0f42ace488f3b26becdc786eac58b6256be03cddb2b51fe0eb15048ac26de9fa"
+    },
+    "attack": {
+      "path": "runtime/data/attack.json",
+      "sha256": "c8d26ad57a5d56bf2f6d5017291d41e68ee7b4c1c632520cee824b11829784d2"
+    },
+    "normal": {
+      "source": "second normal session",
+      "path": "runtime/data/normal.json",
+      "sha256": "998ad416a2a36266759db1ddaa4481c26d6e073ca0260c22a187a052b6214f4b",
+      "n": 156
+    },
+    "model": null
+  },
+  "parameters": {
+    "nu": [
+      0.01,
+      0.02,
+      0.03,
+      0.05,
+      0.08,
+      0.1
+    ],
+    "consecutive": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "interval_s": 2.0,
+    "max_delay_s": 10.0,
+    "min_normal": 150,
+    "split": "first 72 of 90 baseline rows fit each candidate"
+  },
+  "results": [
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 1,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.4167,
+      "fp_runs_ungated": 65,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 2,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.4167,
+      "fp_runs_ungated": 21,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 3,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.4167,
+      "fp_runs_ungated": 6,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 4,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.4167,
+      "fp_runs_ungated": 3,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 5,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.4167,
+      "fp_runs_ungated": 2,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.01,
+      "consecutive": 6,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.4167,
+      "fp_runs_ungated": 1,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 1,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.141,
+      "fp_runs_ungated": 22,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 2,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.141,
+      "fp_runs_ungated": 4,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 3,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.141,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 4,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.141,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 5,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.141,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.02,
+      "consecutive": 6,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.141,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 1,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1538,
+      "fp_runs_ungated": 24,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 2,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1538,
+      "fp_runs_ungated": 4,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 3,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1538,
+      "fp_runs_ungated": 2,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 4,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1538,
+      "fp_runs_ungated": 1,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 5,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1538,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.03,
+      "consecutive": 6,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1538,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 1,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.0577,
+      "fp_runs_ungated": 9,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 2,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.0577,
+      "fp_runs_ungated": 3,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 3,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.0577,
+      "fp_runs_ungated": 1,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 4,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.0577,
+      "fp_runs_ungated": 1,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 5,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.0577,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.05,
+      "consecutive": 6,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.0577,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 1,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1795,
+      "fp_runs_ungated": 28,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 2,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1795,
+      "fp_runs_ungated": 7,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 3,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1795,
+      "fp_runs_ungated": 1,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 4,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1795,
+      "fp_runs_ungated": 1,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 5,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1795,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.08,
+      "consecutive": 6,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.1795,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 1,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.2372,
+      "fp_runs_ungated": 37,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 7.69
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 2,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.2372,
+      "fp_runs_ungated": 10,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 9.71
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 3,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.2372,
+      "fp_runs_ungated": 2,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 11.74
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 4,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.2372,
+      "fp_runs_ungated": 2,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 13.8
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 5,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.2372,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 15.84
+    },
+    {
+      "model": "candidate",
+      "nu": 0.1,
+      "consecutive": 6,
+      "n_normal": 156,
+      "normal_negative_score_rate": 0.2372,
+      "fp_runs_ungated": 0,
+      "fp_alerts_gated": 0,
+      "detected": true,
+      "delay_s": 17.86
+    }
+  ],
+  "deployed": [],
+  "proposal": null,
+  "proposal_if_gate_only": {
+    "model": "candidate",
+    "nu": 0.05,
+    "consecutive": 1,
+    "n_normal": 156,
+    "normal_negative_score_rate": 0.0577,
+    "fp_runs_ungated": 9,
+    "fp_alerts_gated": 0,
+    "detected": true,
+    "delay_s": 7.69
+  },
+  "fastest_zero_false_run": {
+    "model": "candidate",
+    "nu": 0.02,
+    "consecutive": 3,
+    "n_normal": 156,
+    "normal_negative_score_rate": 0.141,
+    "fp_runs_ungated": 0,
+    "fp_alerts_gated": 0,
+    "detected": true,
+    "delay_s": 11.74
+  },
+  "conclusive": true,
+  "warnings": [],
+  "notes": [
+    "Candidates are fitted in memory for each nu; the deployed model, the baseline and the configuration are never modified.",
+    "The 30 s alert cooldown is not modelled: the counter restarts after each alert.",
+    "Delay runs from the attack window start (or first row) to the observation that triggers the alert; it excludes alert delivery and remediation."
+  ]
+}
