@@ -103,3 +103,14 @@ def test_the_password_value_never_travels_through_the_environment():
     assert "env.get('LAB_PASSWORD_DIR')" in text                        # a directory of files...
     assert not re.search(r"get\(['\"]LAB_PASSWORD['\"]\)",text)         # ...never the value itself
     assert 'read_text' in text and 'password' not in text.split('def login')[1].split('json=')[0].lower()
+
+def test_run_demo_resets_without_destroying_anything():
+    """run-demo.sh resets BETWEEN takes. docs/09 is explicit: never `down -v` (it wipes the ledger), never clear
+    past incidents, never touch the model or the registry."""
+    full=(ROOT/'run-demo.sh').read_text(encoding='utf-8')
+    code='\n'.join(l for l in full.splitlines() if not l.lstrip().startswith('#'))   # ignore the comments that NAME the forbidden commands
+    assert 'down -v' not in code and 'down --volumes' not in code    # would wipe the ledger
+    assert 'incidents.sqlite' not in code                            # incidents are kept; acceptance.py tells new ones apart
+    assert 'restart payment' in code and 'policy.json' in code       # the documented reset: lift containment, restart payment
+    assert 'MSYS_NO_PATHCONV' in code                                # /state/... must not be rewritten to a Windows path
+    for word in ('reset','status'): assert word in code              # the two subcommands

@@ -81,9 +81,19 @@ def test_the_stage_log_is_per_incident_and_replacing_a_stage_is_idempotent(tmp_p
         assert c.execute('SELECT COUNT(*) FROM stages WHERE status=?',('containing',)).fetchone()[0]==2
 
 @pytest.mark.skipif(shutil.which('node') is None,reason='node is not installed')
-def test_the_chrono_model_tests_pass():
-    done=subprocess.run(['node','--test','frontend/src/chrono.test.js'],cwd=ROOT,capture_output=True,text=True,timeout=60)
+@pytest.mark.parametrize('suite',['chrono.test.js','components.test.js'])
+def test_the_frontend_model_tests_pass(suite):
+    done=subprocess.run(['node','--test',f'frontend/src/{suite}'],cwd=ROOT,capture_output=True,text=True,timeout=60)
     assert done.returncode==0,done.stdout[-1500:]+done.stderr[-500:]
+def test_the_dashboard_shows_a_component_panel_from_independent_probes():
+    """Sujet 3.1: observe the components. The dashboard must poll each independently (one down must not hide the
+    others) and clear a transient error on success (defect fixed in phase 4)."""
+    main=(ROOT/'frontend/src/main.jsx').read_text(encoding='utf-8')
+    assert '<Components probes={probes}/>' in main                              # the panel is rendered
+    assert 'Promise.all([probe(' in main and 'async function probe(' in main    # independent probes, not one all-or-nothing call
+    assert "E(p.ok||o.ok||m.ok?''" in main                                      # a success clears the error banner
+    assert 'try{data=await r.json();}catch{data={};}' in main                   # a non-JSON response shows the status, not a parse error
+    for endpoint in ('/api/accounts','/ops/status','/ops/ml'): assert endpoint in main
 
 def test_stages_that_share_a_timestamp_are_listed_in_the_order_of_the_chain(tmp_path,monkeypatch):
     # Coarse clocks (about 15 ms on Windows) give `detected` and `accepted` the same value: the order must not depend on the database.

@@ -99,15 +99,19 @@ Ce qui reste pour un projet **100 % opérationnel**. On coche au fur et à mesur
       `docker compose -f compose.yaml -f compose.ban.yaml up -d` + la checklist de `docs/06-SECURITE.md`, décision 1.
       Si un seul des 4 points échoue : **ne pas l'activer**, rien d'autre n'en dépend.
 
-## Phase 4 — Les trois trous de code restants · P1 + P2
+## Phase 4 — Les trois trous de code restants ✅ **TERMINÉE le 20/10** · P1 + P2
 
-- [ ] **4.1** `run-demo.sh` — **absent**, et indispensable pour réinitialiser entre deux prises du clip
-      *Fait quand* : une seule commande remet l'environnement à l'état initial, de façon fiable.
-- [ ] **4.2** Panneau **état des composants** sur le dashboard
+- [x] **4.1** `run-demo.sh`, et indispensable pour réinitialiser entre deux prises du clip
+      ✅ `./run-demo.sh reset` lève le confinement, redémarre payment, vérifie (série, détecteur). `status`
+      en lecture seule. Jamais de `down -v`, incidents conservés (docs/09). Testé : confinement 1.0 → 0.0.
+- [x] **4.2** Panneau **état des composants** sur le dashboard
       Le sujet l'exige explicitement (§3.1 : « observer les **composants**, les événements, les alertes et
-      l'avancement »). Aujourd'hui on montre le chrono, les incidents, l'état ML et le SOC — pas la santé des services.
-- [ ] **4.3** Deux défauts d'affichage du front : le bandeau d'erreur n'est jamais effacé après une reprise,
+      l'avancement »). ✅ Panneau « État des composants » : API paiement + base, moteur de remédiation, détecteur ML,
+      chacun vert/ambre/rouge d'après une sonde indépendante. Modèle pur testé (node), construit et servi.
+- [x] **4.3** Deux défauts d'affichage du front : le bandeau d'erreur n'est jamais effacé après une reprise,
       et une réponse non JSON (502/504/403 du WAF) affiche une erreur d'analyse au lieu du statut.
+      ✅ Sondes indépendantes (`Promise.all` de probes qui ne lèvent pas) : un composant tombé ne masque plus les
+      autres, l'erreur s'efface au premier succès, et une réponse non JSON montre le code de statut.
 
 ## Phase 5 — Recette et clip (jeudi matin) · toute l'équipe
 
