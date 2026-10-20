@@ -47,16 +47,32 @@ class Corpus:
         self.matrix=self.vectorizer.fit_transform([c['text'] for c in self.chunks])
     def retrieve(self,question,k=3,min_shared_terms=MIN_SHARED_QUERY_TERMS):
         terms=query_terms(question)
-        explicit_acronym=bool(re.search(r'(?<![A-Za-z0-9])[A-Z][A-Z0-9]{1,}(?![A-Za-z0-9])',question))
+        acronym_terms={term.lower() for term in re.findall(r'(?<![A-Za-z0-9])[A-Z][A-Z0-9]{1,}(?![A-Za-z0-9])',question)}
+        explicit_acronym=bool(acronym_terms)
         required=1 if min_shared_terms and explicit_acronym else min_shared_terms
         if len(terms)<required: return []
         scores=cosine_similarity(self.vectorizer.transform([question]),self.matrix)[0]
-        hits=[]
+        candidates=[]
         for i in scores.argsort()[::-1]:
-            if scores[i] <= MIN_COSINE: break
             chunk=self.chunks[i]
             overlap=len(terms & query_terms(chunk['text']))
+            exact_acronym=any(re.search(r'(?<![A-Za-z0-9])'+re.escape(term)+r'(?![A-Za-z0-9])',chunk['text'],re.I)
+                              for term in acronym_terms)
+            # A literal, standalone acronym match is strong evidence even when
+            # a long passage dilutes its cosine score. No unrelated low-score
+            # passage is admitted by this exception.
+            if scores[i] <= MIN_COSINE and not exact_acronym: continue
             if overlap < required: continue
-            hits.append({**chunk,'similarity':float(scores[i]),'matched_terms':overlap})
-            if len(hits)>=k: break
+            candidates.append({**chunk,'similarity':float(scores[i]),'matched_terms':overlap})
+        # Keep the top result from each document before filling remaining slots
+        # with additional passages. This prevents repeated chunks from crowding
+        # out the only answer-bearing source for short acronym queries.
+        hits=[]; repeated=[]; seen_sources=set()
+        for hit in candidates:
+            if hit['source'] in seen_sources: repeated.append(hit)
+            else:
+                hits.append(hit); seen_sources.add(hit['source'])
+                if len(hits)>=k: break
+        if len(hits)<k:
+            hits.extend(repeated[:k-len(hits)])
         return hits

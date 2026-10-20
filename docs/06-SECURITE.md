@@ -35,8 +35,9 @@ révèle ; `tests/test_configs.py` fige la configuration.
 ## Secrets
 SOPS (*Secrets OPerationS*) est un éditeur de fichiers de secrets chiffrés, choisi
 dans le projet parmi Vault/SOPS autorisés. Il chiffre le fichier structuré
-`.secrets/secrets.enc.json` avec age ; la clé publique age sert au chiffrement et
-la clé privée au déchiffrement. age chiffre la clé de données.
+`.secrets/secrets.enc.json` avec le destinataire public age. La clé publique age
+sert au chiffrement ; la clé privée age sert uniquement au déchiffrement. Il ne
+faut jamais chiffrer avec la clé privée. age chiffre la clé de données.
 `.secrets/secrets.enc.json` est chiffré ; `.secrets/age.key` est la clé privée et
 ne doit jamais être transmise. `.secrets/runtime/*` contient les fichiers
 nécessaires aux secrets Compose pendant l'exécution. Compose ne chiffre pas

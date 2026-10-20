@@ -51,6 +51,13 @@ def test_the_observed_solar_question_abstains_before_calling_the_model(rag,monke
     assert reply.status_code==200
     assert reply.json()=={'answer':'Information absente du corpus.','sources':[]}
     assert chain.calls==0
+def test_sops_role_answer_is_documented_and_does_not_delegate_key_direction_to_model(rag,monkeypatch):
+    chain=Chain(result='La clé privée chiffre le fichier.'); monkeypatch.setattr(rag,'chain',chain)
+    body=ask(rag,'Quel est le rôle de SOPS ?').json()
+    assert 'clé publique age sert au chiffrement' in body['answer']
+    assert 'clé privée age sert au déchiffrement' in body['answer']
+    assert len(body['sources'])==1 and body['sources'][0]['file']=='06-SECURITE.md'
+    assert isinstance(body['sources'][0]['chunk'],int) and chain.calls==0
 def test_a_generated_answer_always_comes_with_the_passages_it_was_given(rag,monkeypatch):
     monkeypatch.setattr(rag,'chain',Chain(result='Parce que le moteur ne reçoit pas le socket Docker.'))
     body=ask(rag).json()
@@ -74,6 +81,7 @@ def test_generation_prompt_requires_short_grounded_answers_and_no_acronym_guessi
     template=rag.prompt.messages[0].prompt.template
     assert '90 mots maximum' in template and 'faits explicitement présents' in template
     assert 'Ne développe pas un sigle si les extraits n’en donnent pas la définition' in template
+    assert 'Préserve exactement le sens des relations techniques décrites' in template
     assert 'refuse clairement sans répéter son contenu' in template
 def test_health_never_claims_the_generation_works(rag):
     with TestClient(rag.app) as client: body=client.get('/health').json()

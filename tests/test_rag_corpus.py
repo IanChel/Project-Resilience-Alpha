@@ -49,7 +49,9 @@ def test_retriever_keeps_sops_and_rto_questions_answerable():
     corpus=Corpus(ROOT/'docs')
     hits=corpus.retrieve('Quel est le rôle de SOPS dans la gestion des secrets ?')
     assert any(h['source']=='INSTALL.md' for h in hits)
-    assert any('Secrets OPerationS' in h['text'] and 'fichiers de secrets chiffrés' in h['text'] for h in hits)
+    assert any('Secrets OPerationS' in h['text'] and 'fichiers de secrets chiffrés' in h['text'
+               ] and 'clé publique age' in h['text'] and 'clé privée age sert uniquement au déchiffrement' in h['text']
+               for h in hits)
     assert any(h['source']=='08-PCA-PRA.md' for h in corpus.retrieve('Quelle est la définition du RTO dans le projet ?'))
 def test_retriever_returns_sources_for_rag_permissions_and_loadbot_routes():
     corpus=Corpus(ROOT/'docs')
