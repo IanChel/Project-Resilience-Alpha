@@ -1,0 +1,91 @@
+  x {
+  "schema_version": 1,
+  "run_id": "d857f112-d7b1-4043-abb1-64c5087eb2ed",
+  "started_at_utc": "2026-10-21T07:26:18.661139Z",
+  "ended_at_utc": "2026-10-21T07:27:37.143069Z",
+  "started_at_epoch": 1792567578.6611388,
+  "ended_at_epoch": 1792567657.1430688,
+  "duration_s": 78.482,
+  "target": "http://192.168.137.1:8081",
+  "attack_launched_by_runner": false,
+  "status": "PASS",
+  "preparation": [
+    {
+      "name": "reset_policy",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "restart_payment",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "waf_payment_ready",
+      "verdict": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "acceptance",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS"
+      ]
+    },
+    {
+      "name": "check_mardi",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS",
+        "    [1/5] Detecteur : un modele entraine est charge (/anomaly) ... OK",
+        "          status monitoring, score -0.3200",
+        "    [2/5] Detecteur : au repos, /anomaly renvoie anomaly=false ... OK",
+        "          anomaly=false, score -0.3200",
+        "    [3/5] Prometheus : le pic d'attaque est mesure sur la fenetre ... OK",
+        "          rejets de capacite sur la fenetre : 109.995",
+        "          pic quote_rate 5.58/s, active_work 4.0",
+        "          au-dessus de l'enveloppe normale (90 obs.) : quote_rate 5.58 > 1.37, active_work 4 > 1",
+        "    [4/5] Detecteur : anomaly=true produit sur cette meme fenetre ... OK",
+        "          7 observation(s) anormale(s) sur 54, premiere a +47.41 s du debut de fenetre, compteur max 4",
+        "          alertes livrees : 1 (premiere a +51.53 s)",
+        "    [5/5] Preuve horodatee ecrite dans runtime/evidence/ ... OK",
+        "          preuve ecrite : C:\\Users\\ian chel\\Documents\\GitHub\\Project Resilience Alpha\\runtime\\evidence\\m7-proof-20261021T072736Z.json",
+        "    ",
+        "    5/5 verifications OK : jalon M7 VALIDE (cote technique).",
+        "    Non verifiable par script : la demonstration refaite devant les 6, et zero faux positif sur un trafic normal soutenu (docs/05-ML-RAG.md, Calibration)."
+      ]
+    },
+    {
+      "name": "check_mercredi",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS",
+        "    Preuve lue : C:\\Users\\ian chel\\Documents\\GitHub\\Project Resilience Alpha\\runtime\\evidence\\acceptance-1792567653.json (ecrite il y a 0 min)",
+        "    ATTENTION : la preuve a ete produite avec des modifications non commitees",
+        "    [1/5] La boucle est allee de la detection a la transaction temoin ... OK",
+        "          detection, remediation lancee, healthcheck OK, transaction temoin de1fded5-f237-4fb1-9f86-df3e461d2ea5 validee (total du registre 200000)",
+        "    [2/5] Detection -> service retabli sous la cible ... OK",
+        "          2.82 s de la detection a la transaction temoin (cible sous 60 s) : detected +0.0 s, containing +0.03 s, verifying +2.67 s, recovered +2.82 s",
+        "    [3/5] Aucune intervention humaine dans la trace ... OK",
+        "          1 incident(s), aucun failed ni manual_review_required, detection avant prise en charge, observateur : passed",
+        "    [4/5] Ban d'IP (si active) pose ET transaction temoin validee ... OK",
+        "          N/A : bannissement optionnel non active (compose.ban.yaml). La boucle est validee sans lui.",
+        "            Pour la demo AVEC ban, relancer avec la surcouche et revalider cette etape (docs/06-SECURITE.md, decision 1).",
+        "    [5/5] Configuration du detecteur consignee ... OK",
+        "          consecutive=3, nu=0.02",
+        "    ",
+        "    5/5 verifications OK : jalon W7 VALIDE (cote technique).",
+        "    Non verifiable par script : que PERSONNE n'a touche le clavier pendant l'execution, et la repetabilite (5 executions de suite : jeudi)."
+      ]
+    }
+  ],
+  "acceptance_evidence_file": "acceptance-1792567653.json"
+}

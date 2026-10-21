@@ -1,0 +1,2112 @@
+{
+  "observations": [
+    {
+      "at": 1792571930.9628716,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571931.5777643,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571932.1961067,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571932.819959,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571933.4370885,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571934.05157,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571934.6732795,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571935.1934512,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571935.8108544,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792571936.4281151,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571936.946969,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571937.462869,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571937.9780061,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571938.4925463,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571939.0132964,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571939.5308113,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571940.0476007,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571940.5643208,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571941.0830145,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571941.6016781,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792571942.117691,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "containing",
+          "created": 1792571942.0577228,
+          "updated": 1792571942.0624614,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571942.633591,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "containing",
+          "created": 1792571942.0577228,
+          "updated": 1792571942.0624614,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571943.148674,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "containing",
+          "created": 1792571942.0577228,
+          "updated": 1792571942.0624614,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571943.6638467,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "containing",
+          "created": 1792571942.0577228,
+          "updated": 1792571942.0624614,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571944.179773,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "containing",
+          "created": 1792571942.0577228,
+          "updated": 1792571942.0624614,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571944.8103924,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "verifying",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.7993274,
+          "evidence": "{\"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571945.4280019,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571946.0726619,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571946.689674,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571947.3059323,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571947.9340134,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571948.5517433,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571949.1741302,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571949.8070488,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571950.4281943,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571951.0444467,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571951.6685028,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571952.284219,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571952.906386,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571953.534204,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571954.155499,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571954.7765665,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571955.392498,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571956.0065057,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571956.625477,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571957.2565715,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571957.8705773,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571958.4829159,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571959.1179278,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571959.73273,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571960.3585308,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571960.9829695,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571961.6049619,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571962.2279963,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571962.860808,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571963.4742537,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571964.111834,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571964.7306864,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571965.3476932,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571965.9831178,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571966.6003647,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571967.2126014,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571967.8873436,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571968.508585,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571969.1471498,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571969.772653,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571970.4042113,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571971.0322816,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571971.655413,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571972.2763138,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571972.9119322,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571973.5486476,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571974.1746318,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571974.7992728,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571975.4503922,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571976.0766149,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571976.7005408,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571977.332625,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571977.9599178,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571978.5885098,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571980.972869,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571981.654594,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571982.277027,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571982.9229922,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571983.538426,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571984.157339,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571984.7719672,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571985.38641,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571986.0512438,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571986.6676755,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571987.6199539,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571988.5816228,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571989.2597356,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571989.8960588,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571990.6054974,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571991.3207664,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571992.0334096,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571992.7874637,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571993.499275,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571994.217238,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571994.8586168,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571995.4912488,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571996.203801,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571996.927474,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571997.657279,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571998.3424423,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571998.9812624,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792571999.6405284,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792572000.3534331,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+          "status": "recovered",
+          "created": 1792571942.0577228,
+          "updated": 1792571944.9830868,
+          "evidence": "{\"transaction_id\": \"8bbdc069-d00f-40ba-9b0f-916c5cde2c51\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792571942.0428457,
+            "accepted": 1792571942.0577228,
+            "containing": 1792571942.0624614,
+            "verifying": 1792571944.7993274,
+            "recovered": 1792571944.9830868
+          }
+        }
+      ]
+    }
+  ],
+  "started_at": 1792571930.3706357,
+  "before": {
+    "transaction": {
+      "id": "4da3a8be-ac30-47bc-8949-acb392db8f70",
+      "idem": "3e94fd65-f278-4161-8d87-227a9748a061",
+      "amount": 1,
+      "recipient": "merchant",
+      "created": "2026-10-21T08:38:50.939308+00:00"
+    },
+    "replayed": false
+  },
+  "after_status": 200,
+  "after": {
+    "transaction": {
+      "id": "7186261b-2111-4178-afbd-577b0290f2c5",
+      "idem": "ccb10004-577c-4773-b00e-7d235b0582f3",
+      "amount": 1,
+      "recipient": "merchant",
+      "created": "2026-10-21T08:40:01.237151+00:00"
+    },
+    "replayed": false
+  },
+  "ledger": {
+    "accounts": [
+      {
+        "id": "alice",
+        "cents": 96258
+      },
+      {
+        "id": "merchant",
+        "cents": 103742
+      }
+    ],
+    "transactions": [
+      {
+        "id": "7186261b-2111-4178-afbd-577b0290f2c5",
+        "idem": "ccb10004-577c-4773-b00e-7d235b0582f3",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:40:01.237151+00:00"
+      },
+      {
+        "id": "b45af813-794d-4b16-acbc-29edfb5eab15",
+        "idem": "a926a8ba-5e4b-4bf0-80cb-ba37a59c2da6",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:40:00.521845+00:00"
+      },
+      {
+        "id": "a767b66a-addf-44a3-a47c-c834550b45a8",
+        "idem": "9cf84b13-2b38-4c74-b23f-7c7a8d735989",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:59.801454+00:00"
+      },
+      {
+        "id": "595393dd-915a-4263-869c-f99fc8face4e",
+        "idem": "b51acc8e-620f-4f7f-a799-03b032aca07b",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:59.111607+00:00"
+      },
+      {
+        "id": "3bdb647e-9cd6-4a7b-aba6-deeb495c15d6",
+        "idem": "47088eca-3c6a-4547-b2a5-376bbb2a801d",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:58.459731+00:00"
+      },
+      {
+        "id": "dedf0321-e672-47ad-b022-2cc67121703c",
+        "idem": "6f41fa11-7781-4bf8-bc87-95d833cbdefa",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:57.803894+00:00"
+      },
+      {
+        "id": "9ebfb605-5dae-4af9-b113-48f8ec52191d",
+        "idem": "d1b59759-bb17-47b4-b7d0-d5285098a9aa",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:57.101631+00:00"
+      },
+      {
+        "id": "6c41176f-7a46-419d-af5b-65af52910792",
+        "idem": "4208068e-8a36-4c6b-bd64-81eea5baf5ad",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:56.381524+00:00"
+      },
+      {
+        "id": "6e4bb74b-aa91-42d2-9719-7de4b50392e1",
+        "idem": "6bb33e26-b2f2-4a5c-b1c8-e9171ab2a695",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:55.662456+00:00"
+      },
+      {
+        "id": "4718899d-1e39-481f-809d-3367c4983112",
+        "idem": "cbde1117-df71-436e-8b9d-f1f510936578",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:54.973359+00:00"
+      },
+      {
+        "id": "fa1d1c54-839a-4687-b270-cb93f67c8ade",
+        "idem": "8acbaade-fd31-45fc-ba04-deac189d93ec",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:54.338708+00:00"
+      },
+      {
+        "id": "76f9a78b-9371-4895-9b7f-3a97c97c34ea",
+        "idem": "72a22c0c-81d4-448b-94cb-e7691edeceba",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:53.672220+00:00"
+      },
+      {
+        "id": "92de5f81-5964-47c1-a7f0-a804db425d58",
+        "idem": "cdbd118b-a348-4aa4-afd0-8565c4a060ba",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:52.955676+00:00"
+      },
+      {
+        "id": "227a8769-833c-44a6-a866-37ba49c677c4",
+        "idem": "10aa5afd-d345-4464-a0ed-b2678471fc7a",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:52.206887+00:00"
+      },
+      {
+        "id": "56426bf9-f64d-45b6-a470-e9812bdbe9a6",
+        "idem": "c74f9b19-25b1-44a8-aa6c-94c95cdf0551",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:51.492482+00:00"
+      },
+      {
+        "id": "2a8f9fb5-d680-41f4-8314-ce1bd9e83983",
+        "idem": "e9973563-771b-496f-a791-a3ff0aaa8e4c",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:50.775468+00:00"
+      },
+      {
+        "id": "d2dc8e1b-d278-49ff-85c5-5c4cb50ef8b1",
+        "idem": "9329e347-8bd9-492f-b126-6af71ed17eaa",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:50.053895+00:00"
+      },
+      {
+        "id": "856eb932-2abd-4685-a4a0-fc8b6a884768",
+        "idem": "d8d53e47-d5f9-48b7-a23a-ab6cd64dd3ae",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:49.375584+00:00"
+      },
+      {
+        "id": "d68eaafd-c223-4049-a561-81acdb9b7886",
+        "idem": "82cf2124-2c13-4c9d-9985-267709adfea9",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:48.721412+00:00"
+      },
+      {
+        "id": "0a6577ae-7764-4bdc-bbec-f31228822972",
+        "idem": "93b2294a-f805-44c4-92d8-580ab312a220",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T08:39:47.993720+00:00"
+      }
+    ],
+    "total_cents": 200000
+  },
+  "passed": true,
+  "summary": {
+    "incident": {
+      "id": "b2a7c91f-8f26-40d4-8aa8-27f8d881a3e2",
+      "status": "recovered",
+      "steps": [
+        {
+          "name": "detected",
+          "at": 1792571942.0428457,
+          "offset_s": 0.0
+        },
+        {
+          "name": "containing",
+          "at": 1792571942.0624614,
+          "offset_s": 0.02
+        },
+        {
+          "name": "verifying",
+          "at": 1792571944.7993274,
+          "offset_s": 2.76
+        },
+        {
+          "name": "recovered",
+          "at": 1792571944.9830868,
+          "offset_s": 2.94
+        }
+      ],
+      "detection_to_recovered_s": 2.94,
+      "within_target": true,
+      "target_s": 60
+    },
+    "witness": {
+      "verdict": "validated",
+      "transaction_id": "8bbdc069-d00f-40ba-9b0f-916c5cde2c51",
+      "total_cents": 200000
+    },
+    "ban": {
+      "enabled": false,
+      "requested": [],
+      "eligible": [],
+      "excluded": [],
+      "ttl_s": 300,
+      "note": "bans disabled (BAN_ENABLED not set)"
+    },
+    "user_visible_outage": {
+      "first_refused_at": 1792571934.6732795,
+      "first_ok_after_at": 1792571935.1934512,
+      "seconds": 0.52,
+      "note": "seen by this observer, one probe every 0.5 s"
+    },
+    "ledger_total_cents": 200000,
+    "detector_config": {
+      "consecutive": 3,
+      "nu": 0.02
+    },
+    "code_version": {
+      "commit": "b320b77798b9ce84079a3e1ea78c7e38eceb5383",
+      "dirty": true
+    },
+    "complete": true,
+    "missing": []
+  }
+}
