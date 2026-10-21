@@ -28,10 +28,23 @@ def test_nothing_else_touches_the_secrets_directory():
     touching={rel(p) for p in sources() if '.secrets' in p.read_text(encoding='utf-8')}
     # init/unseal create it, secret_files documents it, check_lundi reads the Grafana password, package.py excludes it,
     # lab_client and attack_lab only name it as an example: the directory they read comes from LAB_PASSWORD_DIR.
+    # run_recette passes that directory to the observer and to its own operator login; recette_bridge only names
+    # it to redact it out of the output it keeps. Neither ever reads a value: the two assertions below pin that.
     assert touching<={'scripts/init_secrets.py','scripts/unseal.py','scripts/secret_files.py','scripts/check_lundi.py',
-                      'scripts/package.py','scripts/lab_client.py','scripts/attack_lab.py'},touching
+                      'scripts/package.py','scripts/lab_client.py','scripts/attack_lab.py',
+                      'scripts/run_recette.py','scripts/recette_bridge.py'},touching
     for name in ('scripts/lab_client.py','scripts/attack_lab.py'):   # named only as an example, never built into a path
         assert not re.search(r"/\s*['\"]\.secrets",(ROOT/name).read_text(encoding='utf-8')),name
+    runner=(ROOT/'scripts/run_recette.py').read_text(encoding='utf-8')
+    # The runner hands the DIRECTORY over (through LAB_PASSWORD_DIR and lab_client.password_for) and never opens
+    # a file under it itself, so no secret value passes through its own code or its output.
+    assert "PASSWORD_DIR=ROOT/'.secrets'/'runtime'" in runner        # one constant, used for the observer and its own login
+    assert "'LAB_PASSWORD_DIR':str(PASSWORD_DIR)" in runner          # the directory travels, never the value
+    assert len(re.findall(r"\.secrets",runner))==2                   # the directory, and the path redacted from results
+    assert not re.search(r"\.secrets'[^\n]*read_text|open\([^\n]*\.secrets",runner)
+    bridge=(ROOT/'scripts/recette_bridge.py').read_text(encoding='utf-8')
+    assert re.search(r"replace\(str\(ROOT / '\.secrets'\),\s*'\[secret-path\]'\)",bridge)   # redaction only
+    assert len(re.findall(r"\.secrets",bridge))==1
 def test_git_ignores_every_secret_path_and_tracks_none():
     if shutil.which('git') is None or not (ROOT/'.git').exists(): pytest.skip('not a git checkout')
     ignored=subprocess.run(['git','check-ignore','.secrets/runtime/db_password','.secrets/age.key','.secrets/secrets.enc.json','.env'],cwd=ROOT,capture_output=True,text=True)

@@ -44,6 +44,21 @@ sops --version
 age-keygen --version
 python scripts/init_secrets.py
 ```
+
+Configure the operator account and Gmail two-step sign-in before starting Docker, after the initial secret setup. The Gmail app password
+is entered only into the hidden terminal prompt; do not paste it into chat, source files, or `.env` files. Gmail must have
+two-step verification enabled and allow app passwords:
+
+```bash
+python scripts/init_secrets.py --configure-operator
+```
+
+Saisissez l'adresse opérateur, un nouveau mot de passe (12 caractères minimum) et le mot de passe d'application Gmail
+de 16 caractères. L'adresse sert d'expéditeur SMTP et de destinataire du code. Pour une installation SOPS existante,
+la même commande met à jour le coffre chiffré et les trois secrets opérateur montés dans Docker.
+Le tableau de bord demande ensuite l'adresse, le mot de passe et un code à six chiffres envoyé par Gmail.
+Les routes techniques `alice` et `loadbot` restent disponibles pour les scripts du laboratoire et ne sont pas le
+parcours de connexion du tableau de bord; ne pas exposer ce laboratoire comme un service de production.
 Si `.secrets` existe déjà, ne pas régénérer au hasard. Restaurer les fichiers
 runtime à partir du chiffré et de la clé : `python scripts/unseal.py`.
 Pour vérifier un cycle SOPS sans afficher les valeurs :
@@ -66,12 +81,9 @@ Aucun secret ne doit être copié dans un rapport ou un échange avec une IA.
 Les logs d'erreur tiers doivent être relus avant partage.
 Tester http://127.0.0.1:8081/api/ready puis ouvrir http://127.0.0.1:8081.
 (8081 = `LAB_PORT` : le port 8080 est occupé sur le PC Hôte par un service Java.)
-Compte opérateur : alice. Son mot de passe est créé sur votre PC :
-```bash
-cat .secrets/runtime/alice_password
-```
-Cette commande affiche une valeur locale uniquement pour la saisir dans le
-navigateur ; ne pas l'enregistrer dans la capture, un terminal partagé ou le dossier.
+Connexion au tableau de bord : utilisez l'adresse et le mot de passe opérateur choisis avec
+`python scripts/init_secrets.py --configure-operator`, puis saisissez le code envoyé à cette adresse.
+Les comptes techniques `alice` et `loadbot` restent réservés aux scripts du laboratoire.
 Grafana : http://127.0.0.1:3000, utilisateur admin ; mot de passe dans
 `.secrets/runtime/grafana_password`. Le dashboard RESILIENCE est provisionné.
 

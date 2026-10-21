@@ -1,0 +1,100 @@
+{
+  "created_at": "20261021T121845Z",
+  "created_at_epoch": 1792585125.6319451,
+  "milestone": "M7",
+  "passed": true,
+  "window_args": [
+    "--last",
+    "111.484"
+  ],
+  "window": {
+    "start": 1792585013.7237732,
+    "end": 1792585125.2077732,
+    "length_s": 111.48
+  },
+  "checks": [
+    {
+      "id": 1,
+      "title": "Detecteur : un modele entraine est charge (/anomaly)",
+      "ok": true,
+      "reason": null,
+      "detail": [
+        "status monitoring, score -0.3200"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Detecteur : au repos, /anomaly renvoie anomaly=false",
+      "ok": true,
+      "reason": null,
+      "detail": [
+        "anomaly=false, score -0.3200"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Prometheus : le pic d'attaque est mesure sur la fenetre",
+      "ok": true,
+      "reason": null,
+      "detail": [
+        "rejets de capacite sur la fenetre : 127.453",
+        "pic quote_rate 6.25/s, active_work 4.0",
+        "au-dessus de l'enveloppe normale (90 obs.) : quote_rate 6.25 > 1.37, active_work 4 > 1"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Detecteur : anomaly=true produit sur cette meme fenetre",
+      "ok": true,
+      "reason": null,
+      "detail": [
+        "7 observation(s) anormale(s) sur 54, premiere a +48.1 s du debut de fenetre, compteur max 4",
+        "alertes livrees : 1 (premiere a +52.19 s)"
+      ]
+    }
+  ],
+  "anomaly_now": {
+    "anomaly": false,
+    "score": -0.3199832693956583,
+    "status": "monitoring"
+  },
+  "report": {
+    "window": {
+      "start": 1792585013.7237732,
+      "end": 1792585125.2077732,
+      "length_s": 111.48
+    },
+    "now": 1792585125.2077816,
+    "prometheus": {
+      "quote_rate": {
+        "peak": 6.249218847644045,
+        "samples": 56
+      },
+      "active_work": {
+        "peak": 4.0,
+        "samples": 55
+      },
+      "denied_increase": 127.45270526793405
+    },
+    "envelope": {
+      "quote_rate_max": 1.3748281464816898,
+      "active_work_max": 1.0,
+      "n": 90
+    },
+    "detector": {
+      "observations": 54,
+      "anomalous": 7,
+      "first_anomalous_s": 48.1,
+      "min_score": -0.31998385867713847,
+      "max_consecutive": 4,
+      "alerts_delivered": 1,
+      "first_alert_s": 52.19
+    }
+  },
+  "clock_skew_host_minus_container_s": 0.42,
+  "notes": [
+    "Prometheus peaks are measured, not read off a screen.",
+    "The detector verdict is computed with the rule of the alert counter (is_anomalous).",
+    "Not covered: the demonstration redone in front of the team, and zero false positives on sustained normal traffic (docs/05-ML-RAG.md, Calibration)."
+  ]
+}

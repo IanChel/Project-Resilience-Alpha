@@ -50,9 +50,12 @@ class FakeObserver:
     def kill(self): self.killed=True; self._done=True
 
 @pytest.fixture
-def patched(monkeypatch):
+def patched(monkeypatch,tmp_path):
     FakeObserver.instances=[]; FakeObserver.code=0
     fake=FakeRun()
+    # The run summary is written under ROOT/runtime/evidence. A test must NEVER drop a simulated summary in the
+    # real evidence folder: a fabricated recette-run-*.json there is indistinguishable from a recorded one.
+    monkeypatch.setattr(rr,'ROOT',tmp_path)
     monkeypatch.setattr(rr,'run',fake)
     monkeypatch.setattr(rr.subprocess,'Popen',FakeObserver)
     monkeypatch.setattr(rr.time,'sleep',lambda *_:None)
@@ -198,5 +201,110 @@ def test_password_dir_is_passed_to_observer_but_value_is_never_in_output(patched
     rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True)
     obs=FakeObserver.instances[-1]
     assert obs.env.get('LAB_PASSWORD_DIR','').endswith('runtime')  # a directory path, not a secret value
-    out=capsys.readouterr().out
+    # Only the DIRECTORY ever travels. The summary path is dropped first: pytest names its temporary directory
+    # after this test, so that one line legitimately contains the word without being about a secret.
+    out='\n'.join(l for l in capsys.readouterr().out.splitlines() if 'evidence' not in l)
     assert 'password' not in out.lower() and 'LAB_PASSWORD_DIR' not in out
+
+# ---- control trial: the window is armed, bounded, and ALWAYS ended again ------------------------------------
+@pytest.fixture
+def trial(monkeypatch):
+    """Records the control-trial calls the runner makes, without any network or stack."""
+    calls=[]
+    def fake_call(url,token,payload):
+        assert token=='operator-session','the window is only ever changed with an operator session'
+        calls.append((url,payload))
+        if payload['action']=='start': return {'active':True,'remaining_s':payload['seconds'],'max_seconds':300}
+        return {'active':False,'closed_reason':'operator_stopped'}
+    monkeypatch.setattr(rr,'op_token',lambda _url:'operator-session')
+    monkeypatch.setattr(rr,'trial_call',fake_call)
+    return calls
+
+def test_a_protected_run_never_touches_the_control_trial_window(patched,trial):
+    assert rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True) in (0,1)
+    assert trial==[]                                  # the documented recette is unchanged, and arms nothing
+
+def test_a_control_run_arms_a_bounded_window_and_ends_it_afterwards(patched,trial):
+    rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode='control')
+    actions=[payload['action'] for _url,payload in trial]
+    assert actions==['start','stop']                  # armed once, ended once
+    _url,start=trial[0]
+    assert start=={'action':'start','confirmed':True,'seconds':rr.trial_seconds(70)}
+    assert rr.TRIAL_MIN_S<=start['seconds']<=rr.TRIAL_MAX_S
+    assert all(url=='http://127.0.0.1:8081' for url,_ in trial)
+
+def test_the_window_is_armed_after_the_reset_and_stays_open_across_the_observation(patched,trial,monkeypatch):
+    order=[]
+    def watched(*a,**k):
+        order.append('observer'); return FakeObserver(*a,**k)
+    def fake_call(url,token,payload):
+        order.append(payload['action'])
+        return {'active':True,'max_seconds':300} if payload['action']=='start' else {'active':False}
+    monkeypatch.setattr(rr.subprocess,'Popen',watched)
+    monkeypatch.setattr(rr,'trial_call',fake_call)
+    rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode='control')
+    assert order.index('start')<order.index('observer')   # the trial covers the observation...
+    assert order.index('observer')<order.index('stop')    # ...and is still open while it runs
+    assert any('policy.json' in c for c in patched.commands())        # the clean state came first
+    assert any('restart payment' in c for c in patched.commands())
+
+@pytest.mark.parametrize('boom',['check_mardi','observer'])
+def test_the_window_is_ended_even_when_a_later_step_fails(patched,trial,monkeypatch,boom):
+    if boom=='check_mardi':
+        monkeypatch.setattr(rr,'run_check',lambda *a,**k:(_ for _ in ()).throw(RuntimeError('boom')))
+    else:
+        def exploding(*a,**k): raise OSError('observer cannot start')
+        monkeypatch.setattr(rr.subprocess,'Popen',exploding)
+    with pytest.raises((RuntimeError,OSError)):
+        rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode='control')
+    assert [p['action'] for _u,p in trial]==['start','stop']   # the remediation came back on the way out
+
+def test_an_interrupted_control_run_still_ends_the_window(patched,trial,monkeypatch):
+    def interrupt(*a,**k): raise KeyboardInterrupt
+    monkeypatch.setattr(rr,'run_check',interrupt)
+    with pytest.raises(KeyboardInterrupt):
+        rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode='control')
+    assert [p['action'] for _u,p in trial]==['start','stop']
+
+def test_a_window_that_cannot_be_armed_stops_before_the_observer_and_keeps_remediation_on(patched,monkeypatch,tmp_path):
+    monkeypatch.setattr(rr,'ROOT',tmp_path)
+    monkeypatch.setattr(rr,'op_token',lambda _url:'operator-session')
+    monkeypatch.setattr(rr,'trial_call',lambda *a,**k:(_ for _ in ()).throw(TimeoutError()))
+    with pytest.raises(rr.Step) as exc:
+        rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode='control')
+    assert 'reste ACTIVE' in exc.value.msg
+    assert FakeObserver.instances==[]                 # the observer was NOT started
+
+def test_a_window_the_service_refuses_to_arm_stops_the_run(patched,monkeypatch,tmp_path):
+    monkeypatch.setattr(rr,'ROOT',tmp_path)
+    monkeypatch.setattr(rr,'op_token',lambda _url:'operator-session')
+    monkeypatch.setattr(rr,'trial_call',lambda url,token,payload:{'active':False,'closed_reason':None})
+    with pytest.raises(rr.Step) as exc:
+        rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode='control')
+    assert 'reste ACTIVE' in exc.value.msg
+    assert FakeObserver.instances==[]
+
+def test_the_observer_gets_the_password_directory_in_both_modes(patched,trial):
+    """Regression: the runner's own operator login reads LAB_PASSWORD_DIR from an explicit env, not from the
+    parent process -- the loopback bridge never sets it."""
+    for mode in ('protected','control'):
+        FakeObserver.instances=[]
+        rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode=mode)
+        assert FakeObserver.instances[-1].env.get('LAB_PASSWORD_DIR','').endswith('runtime'),mode
+    assert rr.password_env()['LAB_PASSWORD_DIR'].endswith('runtime')
+    assert 'LAB_PASSWORD' not in rr.os.environ        # the value itself never goes through the environment
+
+def test_an_unknown_mode_is_refused_before_anything_runs(patched,trial):
+    with pytest.raises(rr.Step):
+        rr.recette(seconds=70,url='http://127.0.0.1:8081',auto=True,mode='disable-everything')
+    assert trial==[] and patched.calls==[]
+
+def test_the_confirmation_spells_out_what_a_control_trial_does(capsys):
+    rr.confirm(True,'control')
+    printed=capsys.readouterr().out
+    assert 'ESSAI TEMOIN SANS REMEDIATION' in printed
+    assert 'restent ACTIFS' in printed                # not presented as switching security off
+    assert 'reactivee' in printed                     # says how the remediation comes back
+    assert 'PASS' in printed                          # says no result will be a PASS
+    rr.confirm(True,'protected')
+    assert 'ESSAI TEMOIN' not in capsys.readouterr().out

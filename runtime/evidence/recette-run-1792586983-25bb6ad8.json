@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "run_id": "25bb6ad8-7ff6-4784-ab7d-160f1e3496d5",
+  "started_at_utc": "2026-10-21T12:49:43.518942Z",
+  "ended_at_utc": "2026-10-21T12:49:43.519524Z",
+  "started_at_epoch": 1792586983.518942,
+  "ended_at_epoch": 1792586983.519524,
+  "duration_s": 0.001,
+  "target": "http://127.0.0.1:8081",
+  "attack_launched_by_runner": false,
+  "status": "FAIL",
+  "preparation": [
+    {
+      "name": "reset_policy",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "restart_payment",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "waf_payment_ready",
+      "verdict": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "acceptance",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS"
+      ]
+    },
+    {
+      "name": "check_mardi",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS"
+      ]
+    },
+    {
+      "name": "check_mercredi",
+      "verdict": "NON VERIFIE",
+      "exit_code": null,
+      "summary": "NON VERIFIE : acceptance n'a produit aucune nouvelle preuve ; aucune preuve historique n'a ete utilisee.",
+      "details": [
+        "NON VERIFIE : acceptance n'a produit aucune nouvelle preuve ; aucune preuve historique n'a ete utilisee."
+      ]
+    }
+  ],
+  "acceptance_evidence_file": null
+}

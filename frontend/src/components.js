@@ -3,6 +3,7 @@
 // operator auth), /ops/status (remediator), /ops/ml (detector). Each is polled independently, so one component
 // being down never hides the others. Pure functions: same input, same output, testable without a browser.
 
+import {groupDigits} from './nav.js';   // one digit grouping for the whole console
 // A probe result is {ok:true, data} or {ok:false, status, detail}. `data` is the parsed JSON when ok.
 export const COMPONENTS=[
   {key:'payment',   label:'API paiement + base', from:'Base de données et traitement des transactions'},
@@ -24,7 +25,7 @@ function one(component,probe){
   if(component.key==='detector') return {...base,...detectorDetail(probe.data)};
   if(component.key==='payment'){
     const total=probe.data&&probe.data.total_cents;
-    return {...base,level:'up',detail:typeof total==='number'?`registre ${total} centimes`:'joignable'};
+    return {...base,level:'up',detail:typeof total==='number'?`registre ${groupDigits(total)} centimes`:'joignable'};
   }
   return {...base,level:'up',detail:'joignable'};   // remediator: /ops/status answered
 }

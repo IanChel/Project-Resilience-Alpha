@@ -20,6 +20,7 @@ export const RECETTE_STATES={
   verifying:            {label:'Vérification de la reprise en cours',                                    tone:'warn', verified:false},
   recovered:            {label:'Reprise vérifiée',                                                       tone:'ok',   verified:true},
   recovered_unconfirmed:{label:'NON VÉRIFIÉ — reprise annoncée sans preuve de transaction témoin',       tone:'warn', verified:false},
+  observed:             {label:'Essai témoin — incident consigné sans remédiation',                      tone:'warn', verified:false},
   failed:               {label:'Échec / délai dépassé — revue manuelle requise',                        tone:'bad',  verified:false},
 };
 export function parseEvidence(text){
@@ -43,6 +44,9 @@ export function recetteModel({incident=null,remediatorOk=false,detector=null,det
     const ok=witnessValidated(incident);const key=ok?'recovered':'recovered_unconfirmed';
     return {key,...RECETTE_STATES[key],incidentId:incident.id,witness:ok?parseEvidence(incident.evidence):null};
   }
+  // `observed` is the remediator's TERMINAL status for a control trial: the incident was detected and
+  // journaled with the remediation deliberately inhibited. It is not a recovery and not a failed recovery.
+  if(status==='observed')     return {key:'observed',     ...RECETTE_STATES.observed,     incidentId:incident.id};
   if(status==='verifying')    return {key:'verifying',    ...RECETTE_STATES.verifying,    incidentId:incident.id};
   if(status==='containing')   return {key:'contained',    ...RECETTE_STATES.contained,    incidentId:incident.id};
   if(status==='detected'||status==='accepted') return {key:'anomaly',...RECETTE_STATES.anomaly,incidentId:incident.id};

@@ -9,7 +9,10 @@ export const STEPS=[
   {key:'verifying',label:'Healthcheck OK'},
   {key:'recovered',label:'Transaction témoin validée'},
 ];
-const FINAL=['recovered','failed'];
+// Terminal statuses: the chrono stops there. `observed` is a CONTROL TRIAL's terminal state — the incident was
+// detected and journaled while the remediation was deliberately inhibited — so the clock must not keep
+// counting as though a recovery were still under way.
+export const FINAL=['recovered','observed','failed'];
 export function parseEvidence(text){
   try{const value=JSON.parse(text);return value&&typeof value==='object'&&!Array.isArray(value)?value:{};}catch{return {};}
 }

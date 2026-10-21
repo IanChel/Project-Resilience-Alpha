@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "run_id": "1f810a17-00e9-4921-83af-dbc9aef02188",
+  "started_at_utc": "2026-10-21T13:16:33.874406Z",
+  "ended_at_utc": "2026-10-21T13:16:33.874406Z",
+  "started_at_epoch": 1792588593.8744056,
+  "ended_at_epoch": 1792588593.8744056,
+  "duration_s": 0.0,
+  "target": "http://127.0.0.1:8081",
+  "attack_launched_by_runner": false,
+  "status": "PASS",
+  "mode": "protected",
+  "remediation_inhibited": false,
+  "control_trial": null,
+  "observed_impact": null,
+  "expected_failures": [],
+  "preparation": [
+    {
+      "name": "reset_policy",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "restart_payment",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "waf_payment_ready",
+      "verdict": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "acceptance",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS"
+      ]
+    },
+    {
+      "name": "check_mardi",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS"
+      ]
+    },
+    {
+      "name": "check_mercredi",
+      "verdict": "PASS",
+      "exit_code": 0,
+      "summary": "PASS",
+      "details": [
+        "PASS"
+      ]
+    }
+  ],
+  "acceptance_evidence_file": "fresh-proof.json"
+}

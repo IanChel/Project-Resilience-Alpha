@@ -87,11 +87,14 @@ def test_the_frontend_model_tests_pass(suite):
     assert done.returncode==0,done.stdout[-1500:]+done.stderr[-500:]
 def test_the_dashboard_shows_a_component_panel_from_independent_probes():
     """Sujet 3.1: observe the components. The dashboard must poll each independently (one down must not hide the
-    others) and clear a transient error on success (defect fixed in phase 4)."""
+    others) and clear a transient error on success (defect fixed in phase 4). The shell owns the polling; the
+    panel itself is rendered by the pages that show it."""
     main=(ROOT/'frontend/src/main.jsx').read_text(encoding='utf-8')
-    assert '<Components probes={probes}/>' in main                              # the panel is rendered
+    panels=[(ROOT/f'frontend/src/{page}').read_text(encoding='utf-8') for page in ('OverviewPage.jsx','SupervisionPage.jsx')]
+    assert all('<Components probes={probes}/>' in panel for panel in panels)    # the panel is rendered, with the probe results
+    assert 'probes={probes}' in main                                            # ...and the shell is what feeds it
     assert 'Promise.all([probe(' in main and 'async function probe(' in main    # independent probes, not one all-or-nothing call
-    assert "E(p.ok||o.ok||m.ok?''" in main                                      # a success clears the error banner
+    assert "setSupervisionError(p.ok||o.ok||m.ok?''" in main                    # a success clears the error banner
     assert 'try{data=await r.json();}catch{data={};}' in main                   # a non-JSON response shows the status, not a parse error
     for endpoint in ('/api/accounts','/ops/status','/ops/ml'): assert endpoint in main
 

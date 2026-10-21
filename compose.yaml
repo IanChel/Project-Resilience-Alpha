@@ -31,9 +31,9 @@ services:
   auth:
     <<: *app
     command: ['python','-m','uvicorn','services.auth.main:app','--host','0.0.0.0','--port','8000','--no-access-log']
-    secrets: [session_key, alice_password, loadbot_password]
+    secrets: [session_key, alice_password, loadbot_password, operator_email, operator_password_hash, gmail_app_password]
     volumes: ['logs:/logs']
-    networks: [app]
+    networks: [app, mail]
     depends_on: {init: {condition: service_completed_successfully}}
   payment:
     <<: *app
@@ -163,6 +163,7 @@ networks:
   control: {internal: true}
   observe: {internal: true}
   ai: {} # Egress only needed to download the local model; no published Ollama port.
+  mail: {} # Outbound SMTP for the operator's email verification code.
 volumes:
   logs: {}
   models: {}
@@ -183,3 +184,6 @@ secrets:
   alice_password: {file: ./.secrets/runtime/alice_password}
   loadbot_password: {file: ./.secrets/runtime/loadbot_password}
   grafana_password: {file: ./.secrets/runtime/grafana_password}
+  operator_email: {file: ./.secrets/runtime/operator_email}
+  operator_password_hash: {file: ./.secrets/runtime/operator_password_hash}
+  gmail_app_password: {file: ./.secrets/runtime/gmail_app_password}

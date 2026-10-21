@@ -19,7 +19,7 @@ test('before the first poll every component is unknown, not down',()=>{
 test('all reachable: everything up',()=>{
   const probes={payment:ok({total_cents:200000}),remediator:ok({incidents:[],now:1}),detector:ok({status:'monitoring',score:-0.4})};
   const rows=by(componentHealth(probes));
-  assert.equal(rows.payment.level,'up'); assert.match(rows.payment.detail,/200000/);
+  assert.equal(rows.payment.level,'up'); assert.match(rows.payment.detail,/200 000/);   // grouped like everywhere else in the console
   assert.equal(rows.remediator.level,'up');
   assert.equal(rows.detector.level,'up'); assert.match(rows.detector.detail,/monitoring.*-0\.400/);
   assert.equal(overallHealth(probes),'up');

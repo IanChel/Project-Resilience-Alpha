@@ -1,7 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body {@apply bg-slate-950 text-slate-100;}
-input,textarea {@apply bg-slate-950 border border-slate-600 rounded-lg px-3 py-2 w-full;}
-button {@apply bg-cyan-400 text-slate-950 rounded-lg px-4 py-2 font-semibold disabled:opacity-40;}
-.card {@apply rounded-2xl border border-slate-700 bg-slate-900 p-5;}
+
+/* Resilience Alpha — internal resilience console.
+   One accent (cyan) for interactive things, one status scale (emerald/amber/rose) for observed state.
+   No decorative gradient, no glow: the colour carries meaning, so it has to stay rare. */
+@layer base{
+  html{@apply antialiased;}
+  body{@apply bg-slate-950 text-slate-100;}
+  /* Keyboard focus is always visible, on every control, including the ones that reset the button style. */
+  :focus-visible{@apply outline-none ring-2 ring-cyan-400 ring-offset-2 ring-offset-slate-950;}
+  h1,h2,h3{@apply tracking-tight;}
+  input,textarea,select{@apply w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-slate-100 placeholder:text-slate-500;}
+  input:hover,textarea:hover,select:hover{@apply border-slate-600;}
+  th{@apply py-2 pr-6 text-xs font-medium uppercase tracking-wider text-slate-400 last:pr-0;}
+  td{@apply py-2 pr-6 align-top last:pr-0;}
+  code{@apply rounded bg-slate-800 px-1.5 py-0.5 text-[0.8125rem] text-cyan-200;}
+  /* Default button = primary action. Variant classes below win on specificity, so the nav and icon
+     buttons can reset it without touching the existing panels that rely on this style. */
+  button{@apply inline-flex items-center justify-center gap-2 rounded-lg bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-40;}
+}
+@layer components{
+  .card{@apply rounded-xl border border-slate-800 bg-slate-900 p-5;}
+  .card-head{@apply mb-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1;}
+  .card-title{@apply text-base font-semibold text-slate-100;}
+  .card-hint{@apply text-sm text-slate-400;}
+  .secondary{@apply border border-slate-700 bg-transparent text-slate-200 hover:bg-slate-800 hover:text-white;}
+  .ghost{@apply bg-transparent text-slate-300 hover:bg-slate-800 hover:text-white;}
+  .nav-item{@apply w-full justify-start gap-3 bg-transparent px-3 py-2 font-medium text-slate-400 hover:bg-slate-800 hover:text-slate-100;}
+  .nav-item-active{@apply bg-slate-800 text-white;}
+  .icon-btn{@apply bg-transparent p-2 text-slate-300 hover:bg-slate-800 hover:text-white;}
+  .tnum{@apply tabular-nums;}
+  .field-label{@apply mb-1.5 block text-sm font-medium text-slate-300;}
+  .kv{@apply flex items-baseline justify-between gap-4 border-b border-slate-800 py-2 last:border-0;}
+  .meta{@apply text-xs text-slate-400;}
+}

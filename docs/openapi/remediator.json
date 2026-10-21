@@ -101,6 +101,86 @@
         }
       }
     },
+    "/control-trial": {
+      "get": {
+        "summary": "Lire la fenetre d'essai temoin",
+        "description": "Reserve au role `operator`. Publie sous `/ops/control-trial`. Un essai temoin (essai SANS remediation automatique) sert a comparer le laboratoire avec et sans la reponse du remediateur : le detecteur continue de mesurer, d'alerter et de journaliser, mais le remediateur n'applique ni confinement, ni ban, ni transaction temoin. Ce n'est pas un interrupteur : la fenetre est bornee dans le temps, fermee par le PREMIER incident observe, et jamais ecrite sur disque (un redemarrage du service revient toujours avec la remediation ACTIVE). Le WAF, le MFA et la limitation des essais de connexion ne sont pas touches.",
+        "operationId": "control_trial_state_get",
+        "security": [{ "sessionToken": [] }],
+        "x-exposure": "public read-only (/ops/control-trial)",
+        "responses": {
+          "200": {
+            "description": "Etat de la fenetre.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/ControlTrial" } }
+            }
+          },
+          "401": {
+            "description": "Session absente, invalide, falsifiee ou expiree.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Error" } }
+            }
+          },
+          "403": {
+            "description": "Session valide mais role insuffisant (`Operator required`).",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Error" } }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Armer ou terminer un essai temoin",
+        "description": "Reserve au role `operator` : un operateur authentifie est la seule entree et la seule sortie manuelle. `start` exige `confirmed: true` et une duree bornee (`seconds`, de 5 a 300) ; `stop` reactive la remediation immediatement. La remediation est AUSSI reactivee automatiquement a l'echeance, des que le premier incident a ete observe, et a tout redemarrage du service. Refuse (409) si une remediation est deja en cours, pour ne pas l'inhiber a mi-parcours.",
+        "operationId": "control_trial_control_post",
+        "security": [{ "sessionToken": [] }],
+        "x-exposure": "public (/ops/control-trial)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": { "schema": { "$ref": "#/components/schemas/ControlTrialRequest" } }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Etat de la fenetre apres l'operation.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/ControlTrial" } }
+            }
+          },
+          "401": {
+            "description": "Session absente, invalide, falsifiee ou expiree.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Error" } }
+            }
+          },
+          "403": {
+            "description": "Session valide mais role insuffisant (`Operator required`).",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Error" } }
+            }
+          },
+          "409": {
+            "description": "Une remediation est en cours (`A remediation is in flight`) : rien n'est arme.",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Error" } }
+            }
+          },
+          "413": {
+            "description": "Corps de plus de 512 octets (`Request too large`).",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Error" } }
+            }
+          },
+          "422": {
+            "description": "`action` absente ou differente de `start`/`stop`, `confirmed` different de `true` sur un `start`, ou `seconds` hors de [5, 300] (`Invalid control trial request`).",
+            "content": {
+              "application/json": { "schema": { "$ref": "#/components/schemas/Error" } }
+            }
+          }
+        }
+      }
+    },
     "/health": {
       "get": {
         "summary": "Liveness",
@@ -187,8 +267,8 @@
           "id": { "type": "string", "format": "uuid" },
           "status": {
             "type": "string",
-            "enum": ["accepted", "containing", "verifying", "recovered", "failed", "already_running"],
-            "description": "`accepted` pour un nouvel incident ; le statut courant de l'incident si `duplicate` ; `already_running` si un autre incident est actif."
+            "enum": ["accepted", "containing", "verifying", "recovered", "observed", "failed", "already_running"],
+            "description": "`accepted` pour un nouvel incident ; le statut courant de l'incident si `duplicate` (`observed` quand il a ete consigne pendant un essai temoin) ; `already_running` si un autre incident est actif."
           },
           "duplicate": {
             "type": "boolean",
@@ -198,6 +278,36 @@
         },
         "title": "AlertAccepted"
       },
+      "ControlTrialRequest": {
+        "type": "object",
+        "required": ["action"],
+        "properties": {
+          "action": { "type": "string", "enum": ["start", "stop"] },
+          "confirmed": { "type": "boolean", "const": true, "description": "Obligatoire et egal a true sur `start` : une confirmation explicite de l'operateur, jamais une valeur par defaut." },
+          "seconds": { "type": "number", "minimum": 5, "maximum": 300, "description": "Duree de la fenetre, bornee. Le lanceur la calcule a partir de la duree de recette courante. Obligatoire sur `start`." }
+        },
+        "additionalProperties": false,
+        "title": "ControlTrialRequest"
+      },
+      "ControlTrial": {
+        "type": "object",
+        "required": ["active", "remaining_s", "armed_at", "armed_by", "min_seconds", "max_seconds", "observed_incident_id", "closed_reason"],
+        "properties": {
+          "active": { "type": "boolean", "description": "true tant que la remediation automatique est inhibee. Une fenetre echue est fermee a la lecture : elle n'est jamais rapportee active." },
+          "remaining_s": { "type": ["number", "null"], "description": "Secondes restantes, ou null quand aucun essai n'est arme." },
+          "armed_at": { "type": ["number", "null"], "description": "Secondes depuis l'epoque Unix." },
+          "armed_by": { "type": ["string", "null"], "description": "Le `sub` de l'operateur qui a arme l'essai (un nom de compte, jamais un jeton ni un secret)." },
+          "min_seconds": { "type": "number" },
+          "max_seconds": { "type": "number", "description": "Plafond en dur du service : un essai ne peut pas etre arme plus longtemps." },
+          "observed_incident_id": { "type": ["string", "null"], "description": "L'incident consigne par le dernier essai, s'il y en a eu un." },
+          "closed_reason": {
+            "type": ["string", "null"],
+            "enum": ["incident_observed", "expired", "operator_stopped", null],
+            "description": "Comment le dernier essai s'est termine : `incident_observed` (un incident a ete consigne, la remediation est revenue), `expired` (echeance atteinte) ou `operator_stopped` (reactivation immediate demandee par l'operateur)."
+          }
+        },
+        "title": "ControlTrial"
+      },
       "Incident": {
         "type": "object",
         "required": ["id", "status", "created", "updated", "evidence", "stages"],
@@ -205,14 +315,14 @@
           "id": { "type": "string", "format": "uuid" },
           "status": {
             "type": "string",
-            "enum": ["accepted", "containing", "verifying", "recovered", "failed"],
-            "description": "accepted -> containing -> verifying -> recovered, ou failed. Seul `recovered` prouve la reprise : il suppose la transaction temoin reussie via le WAF et le total du registre egal a 200000 centimes."
+            "enum": ["accepted", "containing", "verifying", "recovered", "observed", "failed"],
+            "description": "accepted -> containing -> verifying -> recovered, ou failed. Seul `recovered` prouve la reprise : il suppose la transaction temoin reussie via le WAF et le total du registre egal a 200000 centimes. `observed` est l'etat TERMINAL d'un incident consigne pendant un essai temoin : detecte et journalise, mais volontairement NON remedie (aucun confinement, aucun ban, aucune transaction temoin). `observed` ne prouve aucune reprise et ne doit jamais etre lu comme telle."
           },
           "created": { "type": "number", "description": "Secondes depuis l'epoque Unix." },
           "updated": { "type": "number", "description": "Secondes depuis l'epoque Unix." },
           "evidence": {
             "type": "string",
-            "description": "Texte contenant du JSON serialise, pas un objet. `accepted` : l'alerte recue ; `containing` : {action, ban} ; `verifying` : {ban} ; `recovered` : {transaction_id, total_cents, ban} ; `failed` : {error_type, manual_review_required: true, ban}. `ban` decrit le bannissement temporaire : {enabled, requested, eligible, excluded: [{ip, reason}], ttl_s, applied, note}. `eligible` ne contient que des adresses du sous-reseau du lab, jamais l'hote ni une adresse interne ; `applied` est relu dans le fichier de ban apres le playbook (absent si rien n'etait a bannir) ; `note` explique l'absence de ban (desactive, configuration invalide, preparation en echec)."
+            "description": "Texte contenant du JSON serialise, pas un objet. `accepted` : l'alerte recue ; `containing` : {action, ban} ; `verifying` : {ban} ; `recovered` : {transaction_id, total_cents, ban} ; `observed` : {mode: control_trial, remediation_applied: false, note} ; `failed` : {error_type, manual_review_required: true, ban}. `ban` decrit le bannissement temporaire : {enabled, requested, eligible, excluded: [{ip, reason}], ttl_s, applied, note}. `eligible` ne contient que des adresses du sous-reseau du lab, jamais l'hote ni une adresse interne ; `applied` est relu dans le fichier de ban apres le playbook (absent si rien n'etait a bannir) ; `note` explique l'absence de ban (desactive, configuration invalide, preparation en echec)."
           },
           "stages": {
             "type": "object",
@@ -224,9 +334,13 @@
       },
       "StatusResponse": {
         "type": "object",
-        "required": ["incidents", "now"],
+        "required": ["incidents", "now", "control_trial"],
         "properties": {
           "now": { "type": "number", "description": "Heure du serveur au moment de la reponse. Le dashboard mesure un incident en cours contre cette horloge, jamais contre celle du navigateur." },
+          "control_trial": {
+            "allOf": [{ "$ref": "#/components/schemas/ControlTrial" }],
+            "description": "Publie a chaque interrogation : le dashboard avertit sur TOUTES ses pages tant qu'un essai temoin est arme. Un essai ne peut donc pas rester actif sans etre visible."
+          },
           "incidents": {
             "type": "array",
             "maxItems": 30,

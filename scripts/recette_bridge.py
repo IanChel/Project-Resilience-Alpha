@@ -2,6 +2,9 @@
 
 Run on the Windows HOST in a dedicated terminal: `py -3.12 scripts/recette_bridge.py`.
 It exposes no command runner: POST /start can only start scripts/run_recette.py with fixed arguments.
+The only choice the browser has is the MODE: the documented recette (`protected`) or a control trial without
+automatic remediation (`control`). Nothing else from the request reaches the command line, and the trial
+window itself is armed by the runner against the remediator, never by a value carried in this request.
 """
 from __future__ import annotations
 import hashlib
@@ -21,11 +24,15 @@ ROOT = Path(__file__).resolve().parents[1]
 HOST = '127.0.0.1'
 PORT = 8765
 RUN_SECONDS = 70
+MODES = ('protected', 'control')
+# Statuses the RUNNER itself declared through its result marker. The exit code must not overwrite them:
+# a control trial ends non-zero on purpose in some cases, and `no_incident` is a completed quiet observation.
+RUNNER_DECLARED = frozenset({'no_incident', 'control_impact', 'control_no_impact', 'control_not_inhibited'})
 API_TARGETS = ('http://192.168.137.1:8081', 'http://127.0.0.1:8081', 'http://localhost:8081')
 NO_PROXY = build_opener(ProxyHandler({}))
 ALLOWED_ORIGINS = frozenset(f'{host}:8081' for host in ('http://192.168.137.1', 'http://127.0.0.1', 'http://localhost'))
 _guard = threading.RLock()
-_state = {'status': 'idle', 'phase': 'idle', 'started_at': None, 'server_started_at': None,
+_state = {'status': 'idle', 'phase': 'idle', 'mode': None, 'started_at': None, 'server_started_at': None,
           'exit_code': None, 'acceptance': None, 'check_mardi': None, 'check_mercredi': None,
           'details': [], 'result_file': None}
 _process: subprocess.Popen[str] | None = None
@@ -34,13 +41,27 @@ _auth_cache: dict[str, tuple[float, str, float | None]] = {}
 def origin_allowed(origin: str) -> bool:
     return origin in ALLOWED_ORIGINS
 
-def confirmed_request(body: object) -> bool:
-    return isinstance(body, dict) and body == {'confirmed': True}
+def requested_mode(body: object) -> str | None:
+    """The mode the browser asked for, or None to refuse. An explicit confirmation is required, the mode must
+    be one of the two known names, and ANY other key (a command, a path, a URL, a duration) refuses the whole
+    request: nothing outside this allowlist can reach the command line."""
+    if not isinstance(body, dict) or body.get('confirmed') is not True:
+        return None
+    if set(body) - {'confirmed', 'mode'}:
+        return None
+    mode = body.get('mode', 'protected')
+    return mode if mode in MODES else None
 
-def runner_argv(base: str) -> list[str]:
-    # This fixed allowlist is the only operation the browser can launch.
-    return [sys.executable, str(ROOT / 'scripts' / 'run_recette.py'), '--yes',
+def confirmed_request(body: object) -> bool:
+    return requested_mode(body) is not None
+
+def runner_argv(base: str, mode: str = 'protected') -> list[str]:
+    # This fixed allowlist is the only operation the browser can launch. `mode` is validated above and can
+    # only ever be one of two literals; the control trial's duration and bounds belong to the runner and the
+    # remediator, not to this request.
+    argv = [sys.executable, str(ROOT / 'scripts' / 'run_recette.py'), '--yes',
             '--seconds', str(RUN_SECONDS), '--url', base]
+    return argv + (['--mode', 'control'] if mode == 'control' else [])
 
 
 def _operator_target(token: str) -> tuple[str, float | None] | None:
@@ -93,8 +114,14 @@ def _phase_from_line(line: str) -> None:
             try: result=json.loads(clean[len(marker):])
             except (ValueError,TypeError): result={}
             if isinstance(result,dict):
-                _state.update(status='complete' if result.get('status')=='PASS' else 'failed',
-                              phase='complete' if result.get('status')=='PASS' else 'failed',
+                outcome=result.get('status')
+                state_status={'PASS':'complete','NO_INCIDENT':'no_incident',
+                              'CONTROL_IMPACT_OBSERVED':'control_impact',
+                              'CONTROL_NO_IMPACT':'control_no_impact',
+                              'CONTROL_NOT_INHIBITED':'control_not_inhibited'}.get(outcome,'failed')
+                _state.update(status=state_status,
+                              phase='complete' if state_status=='complete' or state_status in RUNNER_DECLARED else 'failed',
+                              mode=result.get('mode') or _state.get('mode'),
                               acceptance=result.get('acceptance'),check_mardi=result.get('check_mardi'),
                               check_mercredi=result.get('check_mercredi'),result_file=result.get('result_file'))
         # Keep only bounded, useful result/diagnostic lines for the dashboard. The runner never prints
@@ -110,7 +137,8 @@ def _phase_from_line(line: str) -> None:
             if not details or details[-1] != safe:
                 details.append(safe)
                 del details[:-30]
-        if '[1/5] Reset' in clean: _state['phase'] = 'resetting'
+        if '[essai temoin]' in clean: _state['phase'] = 'arming_trial'
+        elif '[1/5] Reset' in clean: _state['phase'] = 'resetting'
         elif '[2/5] Redemarrage' in clean: _state['phase'] = 'restarting'
         elif '[3/5] Attente' in clean: _state['phase'] = 'waiting_ready'
         elif '[4/5] Lancement' in clean: _state['phase'] = 'starting_observer'
@@ -139,8 +167,11 @@ def _watch(proc: subprocess.Popen[str]) -> None:
         if _process is proc:
             _process = None
             _state['exit_code'] = code
-            _state['status'] = 'complete' if code == 0 else 'failed'
-            _state['phase'] = 'complete' if code == 0 else 'failed'
+            # Preserve the outcomes the runner stated itself (quiet observation, control trial): a
+            # control trial is not judged by this exit code.
+            if _state.get('status') not in RUNNER_DECLARED:
+                _state['status'] = 'complete' if code == 0 else 'failed'
+                _state['phase'] = 'complete' if code == 0 else 'failed'
             if _state.get('acceptance') is None:
                 _state['acceptance'] = 'FAIL'
 
@@ -220,7 +251,8 @@ class Handler(BaseHTTPRequestHandler):
         except (ValueError, UnicodeDecodeError, json.JSONDecodeError):
             self._send(400, {'error': 'invalid_request'})
             return
-        if not confirmed_request(body):
+        mode = requested_mode(body)
+        if mode is None:
             self._send(400, {'error': 'explicit_confirmation_required'})
             return
         base, server_now = auth
@@ -228,10 +260,10 @@ class Handler(BaseHTTPRequestHandler):
             if _process is not None and _process.poll() is None:
                 self._send(409, {'error': 'run_already_active', **_state})
                 return
-            _state.update(status='running', phase='starting', started_at=time.time(),
+            _state.update(status='running', phase='starting', mode=mode, started_at=time.time(),
                           server_started_at=server_now, exit_code=None, acceptance=None,
                           check_mardi=None, check_mercredi=None, details=[], result_file=None)
-            argv = runner_argv(base)
+            argv = runner_argv(base, mode)
             try:
                 _process = subprocess.Popen(argv, cwd=ROOT, stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT, text=True, encoding='utf-8', errors='replace',

@@ -9,10 +9,10 @@ import time
 from pathlib import Path
 from fastapi import Header, HTTPException
 
-def secret(name):
+def secret(name, minimum_length=24):
     path = Path(os.getenv('SECRETS_DIR', '/run/secrets')) / name
     value = path.read_text().strip()
-    if len(value) < 24:
+    if len(value) < minimum_length:
         raise RuntimeError(f'Secret too short: {name}')
     return value
 

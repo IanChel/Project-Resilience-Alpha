@@ -8,7 +8,8 @@ What protects the secrets on Windows is the NTFS permissions of the user profile
 git-ignored and excluded from the delivery archive (see docs/06-SECURITE.md)."""
 import os
 from pathlib import Path
-NAMES={'db_password','session_key','control_key','alert_key','alice_password','loadbot_password','grafana_password'}
+NAMES={'db_password','session_key','control_key','alert_key','alice_password','loadbot_password','grafana_password',
+       'operator_email','operator_password_hash','gmail_app_password'}
 def harden(path,mode):
     """chmod if the filesystem allows it. Returns True when the mode was really applied."""
     try: os.chmod(path,mode)
