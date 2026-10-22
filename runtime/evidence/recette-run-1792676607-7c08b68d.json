@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "run_id": "7c08b68d-1cff-4530-9053-f3cdae051a72",
+  "started_at_utc": "2026-10-22T13:43:27.132574Z",
+  "ended_at_utc": "2026-10-22T13:49:28.655672Z",
+  "started_at_epoch": 1792676607.1325743,
+  "ended_at_epoch": 1792676968.655672,
+  "duration_s": 361.523,
+  "target": "http://192.168.137.1:8081",
+  "attack_launched_by_runner": false,
+  "status": "FAIL",
+  "mode": "protected",
+  "remediation_inhibited": false,
+  "control_trial": null,
+  "observed_impact": null,
+  "expected_failures": [],
+  "preparation": [
+    {
+      "name": "reset_policy",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "restart_payment",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "waf_payment_ready",
+      "verdict": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "acceptance",
+      "verdict": "FAIL",
+      "exit_code": 1,
+      "summary": "FAIL",
+      "details": [
+        "FAIL"
+      ]
+    },
+    {
+      "name": "check_mardi",
+      "verdict": "NON VERIFIE",
+      "exit_code": null,
+      "summary": "NON VERIFIE : le controle n'a pas rendu de resultat (timeout).",
+      "details": [
+        "NON VERIFIE : le controle n'a pas rendu de resultat (timeout)."
+      ]
+    },
+    {
+      "name": "check_mercredi",
+      "verdict": "NON VERIFIE",
+      "exit_code": null,
+      "summary": "NON VERIFIE : acceptance n'a produit aucune nouvelle preuve ; aucune preuve historique n'a ete utilisee.",
+      "details": [
+        "NON VERIFIE : acceptance n'a produit aucune nouvelle preuve ; aucune preuve historique n'a ete utilisee."
+      ]
+    }
+  ],
+  "acceptance_evidence_file": null
+}

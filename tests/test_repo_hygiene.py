@@ -29,7 +29,7 @@ def test_nothing_in_the_code_or_docs_describes_what_was_dropped():
             for match in pattern.finditer(line): found.append((name,number,match.group(0),line))
     for name,number,term,line in found:
         if term.upper()=='JWT': assert re.search(r"pas un JWT|N'EST PAS un JWT",line),(name,number,line)           # only as a negation
-        elif term.lower().replace(' ','')=='isolationforest': assert name=='docs/05-ML-RAG.md',(name,number)       # only in the written decision D-07
+        elif term.lower().replace(' ','')=='isolationforest': assert name in ('docs/05-ML-RAG.md','docs/dossier/dossier.html'),(name,number)   # only where decision D-07 is written out: its source, and the deliverable dossier that restates it
         else: pytest.fail(f'{name}:{number} still mentions {term!r}: {line.strip()[:100]}')
 def test_dotenv_example_holds_no_secret_and_every_variable_is_read():
     names=[l.split('=')[0] for l in (ROOT/'.env.example').read_text().splitlines() if l and not l.startswith('#')]

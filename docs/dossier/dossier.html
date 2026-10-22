@@ -33,7 +33,7 @@
     font-size:12pt; margin:0 0 2mm; color:var(--accent); font-weight:600;
     letter-spacing:-.1pt; padding-bottom:1.3mm; border-bottom:1.1pt solid var(--accent);
   }
-  h3{ font-size:9.5pt; margin:3mm 0 1mm; font-weight:600; color:#1b2b3d; }
+  h3{ font-size:9.5pt; margin:2.4mm 0 .9mm; font-weight:600; color:#1b2b3d; }
   h4{ font-size:8.8pt; margin:2.4mm 0 .8mm; font-weight:600; color:#2c3a4b; }
   p{ margin:0 0 1.5mm; text-align:justify; hyphens:auto; }
   ul,ol{ margin:0 0 1.7mm; padding-left:4.4mm; }
@@ -42,7 +42,7 @@
         padding:.2mm .8mm; border-radius:1px; color:#17384f; }
   .kicker{ font-size:7.4pt; letter-spacing:1.3pt; text-transform:uppercase; color:var(--soft); font-weight:600; }
   .meta{ font-size:7.6pt; line-height:1.34; color:var(--soft); }
-  table{ width:100%; border-collapse:collapse; font-size:7.7pt; line-height:1.26; margin:1.1mm 0 1.8mm; }
+  table{ width:100%; border-collapse:collapse; font-size:7.7pt; line-height:1.26; margin:1mm 0 1.5mm; }
   th{ text-align:left; background:var(--accent-soft); color:#17384f; font-weight:600;
       padding:1.1mm 1.4mm; border-bottom:.8pt solid var(--rule); vertical-align:bottom; }
   td{ padding:.9mm 1.4mm; border-bottom:.4pt solid var(--line); vertical-align:top; }
@@ -76,7 +76,7 @@
 <section class="page" style="padding-top:34mm">
   <div class="kicker">Workshop EPSI&nbsp;/&nbsp;WIS — BAC+5 — Octobre 2026</div>
   <h1 style="font-size:30pt; line-height:1.1; margin:7mm 0 2mm; font-weight:600; letter-spacing:-.6pt; color:var(--accent); border:0;">
-    Project&nbsp;Resilience-Alpha
+    PROJECT RESILIENCE-ALPHA
   </h1>
   <p style="font-size:14pt; color:#2c3a4b; margin:0 0 1mm; font-family:'Segoe UI',Arial,sans-serif;">
     Dossier d’ingénierie et de gouvernance
@@ -93,25 +93,27 @@
           <td style="border:0;">6 personnes</td></tr>
       <tr><td style="border:0; color:var(--soft);">Livrable</td>
           <td style="border:0;"><code>Workshop2026-M2-G2-Dossier.pdf</code></td></tr>
-      <tr><td style="border:0; color:var(--soft);">Version du code</td>
-          <td style="border:0;">commit <code>c11ec6f</code> (arbre de travail modifié)</td></tr>
+      <tr><td style="border:0; color:var(--soft);">Dépôt</td>
+          <td style="border:0;">commit <code>4a1430d</code>, arbre de travail propre au moment de la mise à jour (seul ce dossier a ensuite été modifié)</td></tr>
+      <tr><td style="border:0; color:var(--soft);">Code des essais</td>
+          <td style="border:0;">commit <code>c11ec6f</code>, <strong>arbre de travail modifié</strong> — c’est la valeur que les preuves enregistrent elles-mêmes, et le dossier s’y tient</td></tr>
       <tr><td style="border:0; color:var(--soft);">Date du dossier</td>
           <td style="border:0;">22 octobre 2026</td></tr>
       <tr><td style="border:0; color:var(--soft);">Périmètre d’essai</td>
-          <td style="border:0;">laboratoire isolé <code>RESILIENCE-G2</code> — <code>192.168.137.0/24</code></td></tr>
+          <td style="border:0;">laboratoire isolé RESILIENCE-G2 — <code>192.168.137.0/24</code></td></tr>
     </table>
   </div>
 
-  <div class="kicker" style="margin-bottom:2.5mm">Auteurs — à compléter avant remise</div>
+  <div class="kicker" style="margin-bottom:2.5mm">Équipe SafeFlow — répartition des responsabilités retenue</div>
   <table style="font-size:9pt;">
     <thead><tr><th style="width:26mm">Réf.</th><th>Nom et prénom</th><th style="width:58mm">Domaine principal</th></tr></thead>
     <tbody>
-      <tr><td>Membre&nbsp;1</td><td><span class="fill">à compléter</span></td><td>Paiement, registre, API</td></tr>
-      <tr><td>Membre&nbsp;2</td><td><span class="fill">à compléter</span></td><td>Infrastructure, Compose, remédiation</td></tr>
-      <tr><td>Membre&nbsp;3</td><td><span class="fill">à compléter</span></td><td>Observabilité, détection ML</td></tr>
-      <tr><td>Membre&nbsp;4</td><td><span class="fill">à compléter</span></td><td>Sécurité, secrets, périmètre d’attaque</td></tr>
-      <tr><td>Membre&nbsp;5</td><td><span class="fill">à compléter</span></td><td>Gouvernance, PCA/PRA, recette</td></tr>
-      <tr><td>Membre&nbsp;6</td><td><span class="fill">à compléter</span></td><td>Interface, assistant documentaire</td></tr>
+      <tr><td>Membre&nbsp;1</td><td>Sofiane CHELGHOUM</td><td>Chef de projet, coordination et gouvernance</td></tr>
+      <tr><td>Membre&nbsp;2</td><td>Yanis KREIR</td><td>API paiement et registre</td></tr>
+      <tr><td>Membre&nbsp;3</td><td>Walid AIT DAOUD</td><td>Infrastructure, Docker Compose et Ansible</td></tr>
+      <tr><td>Membre&nbsp;4</td><td>Gabriel ROBERT</td><td>IA/Data et détection ML</td></tr>
+      <tr><td>Membre&nbsp;5</td><td>Hafsa BELKASMI</td><td>Cybersécurité, authentification, secrets et WAF</td></tr>
+      <tr><td>Membre&nbsp;6</td><td>Hafsa KODAD</td><td>Interface, observabilité et assistant documentaire</td></tr>
     </tbody>
   </table>
 
@@ -121,11 +123,16 @@
     aucun moyen de paiement et aucun système de production ne sont impliqués. Les essais de charge ont été
     conduits sur un réseau de laboratoire isolé, contre le système du groupe uniquement.</p>
   </div>
-  <p class="meta" style="margin-top:4mm">Les affirmations chiffrées renvoient à un fichier de preuve
+  <p class="meta" style="margin-top:3.5mm"><strong>Traçabilité du code.</strong> Les preuves du cycle de
+  référence enregistrent le commit <code>c11ec6f</code> avec un arbre de travail modifié. Le dépôt est
+  actuellement au commit <code>4a1430d</code> ; l’équivalence exacte entre les sources exécutées et ce commit
+  n’est pas établie. Les résultats sont donc rattachés aux preuves horodatées citées, sans présenter cette
+  correspondance comme vérifiée. <span class="tag warn">lien preuve-commit non établi</span></p>
+  <p class="meta" style="margin-top:2.5mm">Les affirmations chiffrées renvoient à un fichier de preuve
   horodaté du dépôt (<code>runtime/evidence/</code>). Les éléments non mesurés sont signalés
   « à confirmer » et ne sont jamais présentés comme des résultats.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 1 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 1 / 17</span></div>
 </section>
 
 <!-- ============================== 2. SOMMAIRE + RÉSUMÉ ============================== -->
@@ -140,11 +147,11 @@
     <li>Détection ML <span class="n">— p.&nbsp;7</span></li>
     <li>Remédiation et preuve de reprise <span class="n">— p.&nbsp;8</span></li>
     <li>Observabilité <span class="n">— p.&nbsp;9</span></li>
-    <li>Sécurité et gouvernance <span class="n">— p.&nbsp;10 et 11</span></li>
-    <li>Résultats des essais <span class="n">— p.&nbsp;12</span></li>
-    <li>PCA/PRA, limites et améliorations <span class="n">— p.&nbsp;13</span></li>
-    <li>Contribution des six membres <span class="n">— p.&nbsp;14</span></li>
-    <li>Annexes A à D <span class="n">— p.&nbsp;15 et 16</span></li>
+    <li>Sécurité et gouvernance <span class="n">— p.&nbsp;10</span></li>
+    <li>Résultats des essais <span class="n">— p.&nbsp;11 et 12</span></li>
+    <li>PCA/PRA, limites et perspectives <span class="n">— p.&nbsp;13</span></li>
+    <li>Contribution des six membres <span class="n">— p.&nbsp;13</span></li>
+    <li>Annexes A à E <span class="n">— p.&nbsp;14 à 17</span></li>
   </ol>
 
   <h2 style="margin-top:7mm">1. Résumé exécutif</h2>
@@ -165,13 +172,16 @@
   attaque distribuée : c’est un générateur de charge mono-poste, mono-identité.</p>
 
   <h3>Résultat principal</h3>
-  <p><strong>21 reprises complètes</strong> sont attestées par les preuves d’exécution
+  <p><strong>22 reprises complètes</strong> sont attestées par les preuves d’exécution
   (<code>runtime/evidence/acceptance-*.json</code>) : incident <code>recovered</code>, transaction témoin
   validée, total du registre exactement à 200&nbsp;000&nbsp;centimes et quatre étapes horodatées présentes.
-  Le délai détection&nbsp;→&nbsp;service rétabli vaut <strong>2,47&nbsp;s au minimum, 2,82&nbsp;s en
-  médiane, 6,62&nbsp;s au maximum</strong> — toutes sous la cible interne de 60&nbsp;s. L’indisponibilité
-  réellement perçue par la sonde métier va de <strong>0,52&nbsp;s à 8,20&nbsp;s</strong> (médiane
-  2,07&nbsp;s).</p>
+  Le délai détection&nbsp;→&nbsp;service rétabli vaut <strong>2,47&nbsp;s au minimum, 2,83&nbsp;s en
+  médiane, 6,88&nbsp;s au maximum</strong> — toutes sous la cible interne de 60&nbsp;s.</p>
+  <p>Le cycle du <strong>22&nbsp;octobre 09:05&nbsp;UTC</strong> est le premier dont les deux côtés sont
+  horodatés : le récapitulatif du PC Attaquant donne le début exact de la charge, ce qui permet enfin de
+  mesurer la chaîne complète plutôt que de l’estimer. <strong>Charge&nbsp;→&nbsp;détection :
+  ~5,5&nbsp;s. Charge&nbsp;→&nbsp;transaction témoin validée : ~12,3&nbsp;s.</strong> Les trois fichiers de
+  preuve de ce cycle se recoupent à la seconde près (§5.4, §10.1).</p>
   <p>Un <strong>mode témoin sans remédiation</strong> a été ajouté pour mesurer l’écart. Dans ce mode, le
   détecteur continue de mesurer, d’alerter et de journaliser, mais le remédiateur n’applique aucun
   confinement pendant une fenêtre bornée. Les deux essais témoins exploitables montrent
@@ -185,14 +195,15 @@
     compromission, ne supprime pas l’attaquant et ne couvre pas une attaque répartie sur plusieurs
     identités.</li>
     <li>Le <strong>rappel de détection n’est pas mesuré</strong> : <code>ml-report.json</code> porte
-    explicitement <code>attack_recall: "NOT MEASURED"</code>. Sur 38 observations d’essai, 14 n’ont vu
+    explicitement <code>attack_recall: "NOT MEASURED"</code>. Sur 39 observations d’essai, 14 n’ont vu
     aucun incident — attaque non lancée ou charge insuffisante.</li>
     <li>Le projet <strong>n’est pas conforme</strong> à NIS2 ou DORA et ne le prétend pas : ces textes ont
     orienté des décisions, les écarts sont listés au §9.6.</li>
     <li>Point de défaillance unique assumé : un seul PC Hôte, une seule base, pas de TLS applicatif.</li>
   </ul>
+  <p class="meta"><strong>Traçabilité du cycle de référence.</strong> La preuve d’acceptance enregistre <code>c11ec6f</code> et <code>dirty: true</code> ; le dépôt est aujourd’hui au commit <code>4a1430d</code>. Le lien exact entre le code exécuté et ce commit n’est pas établi. Les résultats sont rattachés aux preuves citées, sans revendiquer une correspondance vérifiée avec le commit.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 2 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 2 / 17</span></div>
 </section>
 
 <!-- ============================== 3. BESOIN ET PÉRIMÈTRE ============================== -->
@@ -232,7 +243,7 @@
           <td><span class="tag bad">non résolu</span></td></tr>
       <tr><td>Cible interne du chrono</td>
           <td>Détection → transaction témoin validée en moins de 60&nbsp;s (45&nbsp;s objectif resserré).</td>
-          <td><span class="tag ok">tenu sur 21/21</span></td></tr>
+          <td><span class="tag ok">tenu sur 22/22</span></td></tr>
     </tbody>
   </table>
   <p class="meta">RTO et chrono ne mesurent pas la même chose : le chrono part de la
@@ -276,7 +287,7 @@
   l’OS, la mémoire ni le réseau. Une architecture industrielle séparerait les pools devis et paiement,
   avec quotas, files et budgets de ressources dès la conception.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 3 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 3 / 17</span></div>
 </section>
 
 <!-- ============================== 4. ARCHITECTURE ============================== -->
@@ -427,19 +438,11 @@
   (service de paiement) ni vers <code>/alerts</code> (remédiateur).</p>
 
   <h3>3.2 Cloisonnement réseau</h3>
-  <p>Huit réseaux Docker, dont quatre <code>internal: true</code> : ni accès sortant, ni publication
-  possible. Un service n’est joignable que par ceux qui partagent un de ses réseaux.</p>
-  <table>
-    <thead><tr><th style="width:22mm">Réseau</th><th style="width:20mm">Isolé</th><th>Services attachés</th><th style="width:58mm">Ce que le cloisonnement empêche</th></tr></thead>
-    <tbody>
-      <tr><td><code>front</code></td><td>non</td><td>waf, edge, remédiateur</td><td>Seul <code>waf</code> y publie un port.</td></tr>
-      <tr><td><code>app</code></td><td><strong>oui</strong></td><td>auth, paiement, remédiateur, frontend, edge, rag</td><td>Le trafic applicatif ne sort jamais de l’Hôte.</td></tr>
-      <tr><td><code>data</code></td><td><strong>oui</strong></td><td>base, paiement</td><td>La base n’est joignable que par le service de paiement.</td></tr>
-      <tr><td><code>control</code></td><td><strong>oui</strong></td><td>paiement, remédiateur</td><td>L’action de confinement n’est atteignable que depuis le remédiateur.</td></tr>
-      <tr><td><code>observe</code></td><td><strong>oui</strong></td><td>paiement, remédiateur, détecteur, edge, Prometheus, Loki, Alloy, Grafana</td><td>Métriques et journaux restent internes.</td></tr>
-      <tr><td><code>ai</code>, <code>mail</code>, <code>mgmt</code></td><td>non</td><td>ollama + rag ; auth ; Grafana</td><td>IA locale et envoi du code de connexion séparés du reste ; Grafana sur <code>127.0.0.1</code>.</td></tr>
-    </tbody>
-  </table>
+  <p>Huit réseaux Docker, dont <strong>quatre déclarés <code>internal: true</code></strong> : ni accès
+  sortant, ni publication possible. Un service n’est joignable que par ceux qui partagent un de ses
+  réseaux — la base ne l’est que par le paiement, l’action de confinement que par le remédiateur, et les
+  métriques et journaux ne sortent pas de l’Hôte. Le détail réseau par réseau figure en
+  <strong>annexe&nbsp;B</strong>.</p>
 
   <h3>3.3 Chaîne visée, en une phrase</h3>
   <p>Transaction confirmée → charge de devis bornée depuis le second PC → paiements en <code>503</code> →
@@ -447,7 +450,7 @@
   une admission ciblée → transaction témoin vérifiée <em>à travers le WAF</em> → paiement réussi alors que
   la charge est toujours active.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 4 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 4 / 17</span></div>
 </section>
 
 <!-- ============================== 5. COMPOSANTS ============================== -->
@@ -511,7 +514,7 @@
   opérateur</strong>, pas seulement le vérifier — le remédiateur et le RAG la détiennent. Ni rotation, ni
   révocation avant expiration. En contexte industriel : OIDC et clés asymétriques.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 5 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 5 / 17</span></div>
 </section>
 
 <!-- ============================== 6. SCÉNARIO D'INCIDENT ============================== -->
@@ -526,47 +529,49 @@
   compromission, ni une fuite de données, ni une élévation de privilèges.</p>
 
   <h3>5.2 Bornes appliquées par le code</h3>
-  <table>
-    <thead><tr><th style="width:38mm">Borne</th><th style="width:48mm">Valeur</th><th>Où elle est appliquée</th></tr></thead>
-    <tbody>
-      <tr><td>Débit</td><td>20&nbsp;req/s au maximum (une toutes les 50&nbsp;ms)</td><td>boucle d’envoi</td></tr>
-      <tr><td>Concurrence</td><td>12 requêtes en vol, 12 connexions</td><td>boucle d’envoi, <code>httpx.Limits</code></td></tr>
-      <tr><td>Volume total</td><td>700 requêtes</td><td>boucle d’envoi</td></tr>
-      <tr><td>Durée</td><td><code>--seconds</code> de 5 à 35, <strong>30 par défaut</strong></td><td>contrôle des arguments</td></tr>
-      <tr><td>Cible</td><td><code>POST /api/quotes</code>, corps <code>{"amount_cents": 100}</code></td><td>code du script</td></tr>
-      <tr><td>Périmètre, accord</td><td>IP littérale de <code>192.168.137.0/24</code> ou loopback ; <code>--lab-authorized</code> obligatoire</td><td><code>resolve_target</code>, contrôle des arguments</td></tr>
-    </tbody>
-  </table>
+  <p>Le client de charge est borné <em>par son propre code</em>, pas par une consigne : 20&nbsp;requêtes/s
+  au maximum, 12&nbsp;en vol, 700&nbsp;au total, une durée de 5 à 35&nbsp;secondes (30 par défaut), une
+  cible unique <code>POST /api/quotes</code>, une IP littérale du sous-réseau du laboratoire, et l’option
+  <code>--lab-authorized</code> obligatoire. Le tableau complet, avec le point d’application de chaque
+  borne, est en <strong>annexe&nbsp;B</strong>.</p>
 
   <h3>5.3 Symptômes HTTP observés, et ce qu’ils désignent</h3>
   <div class="callout">
-    <p><strong>Deux séries de codes HTTP ne doivent pas être confondues.</strong> Les codes mesurés par
+    <p><strong>Deux séries de codes HTTP ne doivent pas être confondues.</strong> Les codes de
     l’<strong>observateur sur l’Hôte</strong> portent sur ses propres <strong>paiements fictifs</strong>
-    (<code>POST /api/payments</code>, une sonde toutes les 0,5&nbsp;s) : ce sont eux, et eux seuls, que ce
-    dossier cite au §10. Les codes du <strong>récapitulatif du client de charge</strong>, lui, portent sur
-    ses <strong>devis</strong> (<code>/api/quotes</code>), où un <code>429</code> après confinement est
-    <em>attendu</em>. Ce fichier reste sur le PC Attaquant et <strong>n’a pas été rapatrié</strong> :
-    aucun chiffre ne lui est emprunté. <span class="tag warn">à confirmer</span></p>
+    (<code>POST /api/payments</code>, une sonde toutes les 0,5&nbsp;s) : ils mesurent l’<em>impact
+    métier</em>. Ceux du <strong>récapitulatif du client de charge</strong> portent sur ses
+    <strong>devis</strong> (<code>POST /api/quotes</code>) et mesurent l’<em>effet de l’attaque</em>, un
+    <code>429</code> y étant <em>attendu</em> après confinement. Le dossier cite les deux, toujours en
+    nommant leur route. Ce récapitulatif reste sur le PC Attaquant et n’est pas versionné : ses chiffres
+    proviennent de la fiche de l’essai, pas du dépôt. <span class="tag warn">source non versionnée</span></p>
   </div>
 
-  <h3>5.4 Chronologie d’un essai protégé</h3>
-  <p>Déroulé reconstitué depuis les étapes horodatées de <code>acceptance-1792585122.json</code> (essai du
-  21&nbsp;octobre 2026, 12:17:31&nbsp;UTC — le plus rapide des 21).</p>
+  <h3>5.4 Chronologie mesurée — cycle protégé du 22 octobre 2026</h3>
+  <p>Premier cycle dont les <strong>deux côtés</strong> sont horodatés. Les heures viennent du récapitulatif
+  du PC Attaquant (run <code>92119f71</code>), des étapes signées de <code>acceptance-1792659988.json</code>
+  et de la fenêtre de <code>m7-proof-20261022T090634Z.json</code>.</p>
   <table>
-    <thead><tr><th class="num" style="width:20mm">Décalage</th><th style="width:48mm">Événement</th><th>Observation ou preuve</th></tr></thead>
+    <thead><tr><th class="num" style="width:21mm">Heure UTC</th><th class="num" style="width:15mm">Δ charge</th><th style="width:34mm">Événement</th><th>Observation et source</th></tr></thead>
     <tbody>
-      <tr><td class="num">avant</td><td>Transaction initiale, puis lancement manuel de la charge</td><td>Paiement fictif <code>200</code> : service sain. La charge démarre sur le PC Attaquant au message « Start attack_lab.py ».</td></tr>
-      <tr><td class="num">—</td><td>Saturation</td><td>16 paiements fictifs refusés <code>503</code> sur 115 sondes ; <code>lab_capacity_denied_total</code> et <code>lab_active_work</code> montent ; journaux <code>capacity_denied</code> dans Loki.</td></tr>
-      <tr><td class="num">t₀ = 0,00&nbsp;s</td><td><code>detected</code></td><td>Heure d’émission signée de l’alerte par le détecteur, après 3 observations anormales consécutives.</td></tr>
-      <tr><td class="num">+0,02&nbsp;s</td><td><code>containing</code></td><td>Alerte acceptée, playbook lancé. <strong>L’alerte est prise en charge en 20&nbsp;ms.</strong></td></tr>
-      <tr><td class="num">+2,31&nbsp;s</td><td><code>verifying</code></td><td>Playbook terminé, admission ciblée active et persistée ; healthcheck <code>/ready</code> passé.</td></tr>
-      <tr><td class="num">+2,47&nbsp;s</td><td><code>recovered</code></td><td>Transaction témoin d’un centime créée <em>à travers le WAF</em>, retrouvée au registre, total à 200&nbsp;000&nbsp;centimes.</td></tr>
-      <tr><td class="num">après</td><td>Service rétabli sous charge</td><td>Paiement final <code>200</code> alors que la charge est toujours active ; le <code>loadbot</code> reçoit des <code>429</code>.</td></tr>
+      <tr><td class="num">09:05:08,46</td><td class="num">—</td><td>Préparation</td><td>Reset de la politique, redémarrage du paiement, <code>/api/ready</code> vérifié. <span class="meta">recette-run</span></td></tr>
+      <tr><td class="num">09:05:15,99</td><td class="num">—</td><td>Observateur prêt</td><td>Transaction initiale <code>200</code> : le service est sain avant la charge. <span class="meta">acceptance</span></td></tr>
+      <tr><td class="num">09:05:23,04</td><td class="num">0,00&nbsp;s</td><td><strong>Charge lancée à la main</strong></td><td>521 requêtes <code>POST /api/quotes</code> en 30,4&nbsp;s depuis le PC Attaquant. <span class="meta">récapitulatif attaquant</span></td></tr>
+      <tr><td class="num">09:05:24,01</td><td class="num">+0,97&nbsp;s</td><td>Premier paiement refusé</td><td>La capacité partagée sature : <code>503</code> sur <code>/api/payments</code>. <span class="meta">acceptance</span></td></tr>
+      <tr><td class="num">09:05:24,38</td><td class="num">+1,35&nbsp;s</td><td>1ʳᵉ observation anormale</td><td>Score négatif <em>et</em> rejets de capacité présents. <span class="meta">M7, <code>first_anomalous_s</code></span></td></tr>
+      <tr><td class="num">09:05:28,50</td><td class="num"><strong>+5,46&nbsp;s</strong></td><td><code>detected</code></td><td>3ᵉ observation anormale consécutive : alerte signée émise. <span class="meta">étape <code>detected</code></span></td></tr>
+      <tr><td class="num">09:05:28,57</td><td class="num">+5,53&nbsp;s</td><td><code>containing</code></td><td>Alerte acceptée, playbook lancé : <strong>prise en charge en 67&nbsp;ms</strong>. Concorde avec <code>first_alert_s</code> = 48,09&nbsp;s de la fenêtre M7.</td></tr>
+      <tr><td class="num">09:05:34,95</td><td class="num">+11,91&nbsp;s</td><td><code>verifying</code></td><td>Admission ciblée active et persistée ; healthcheck <code>/ready</code> passé.</td></tr>
+      <tr><td class="num">09:05:35,38</td><td class="num"><strong>+12,35&nbsp;s</strong></td><td><code>recovered</code></td><td>Transaction témoin <code>695ef145</code> créée <em>à travers le WAF</em>, inscrite au registre, total à 200&nbsp;000&nbsp;centimes.</td></tr>
+      <tr><td class="num">09:05:53,47</td><td class="num">+30,44&nbsp;s</td><td>Fin de la charge</td><td>Service rétabli alors que la charge tournait encore : <strong>321 des 521 requêtes ont reçu <code>429</code></strong>, ce que seule l’admission ciblée produit.</td></tr>
     </tbody>
   </table>
-  <p class="meta">Le chrono part de l’heure signée <code>issued_at</code> du détecteur, pas de sa réception
-  par le remédiateur. Le délai <em>charge → alerte</em> n’est pas isolé dans ces preuves : la seule mesure
-  disponible est le délai calibré par rejeu (§6), ~11,7&nbsp;s. <span class="tag warn">à confirmer sur l’Hôte</span></p>
+  <p class="meta">Le chrono interne (<strong>6,88&nbsp;s</strong>, détection → témoin) part de l’heure signée
+  <code>issued_at</code>, pas de sa réception par le remédiateur. Les deux horloges diffèrent : M7 mesure un
+  écart Hôte − conteneur de <strong>0,8&nbsp;s</strong>, à retrancher des deltas « Δ charge » comme marge
+  d’incertitude. Le délai de détection ainsi mesuré (~5,5&nbsp;s) et le délai calibré par rejeu de
+  ~11,7&nbsp;s (§6.4) ne se comparent pas directement : le rejeu part du début d’une fenêtre d’attaque
+  reconstituée, pas de l’heure réelle de lancement.</p>
 
   <h3>5.5 Signaux utilisés pour décider</h3>
   <p>La décision n’utilise <strong>aucune signature de requête</strong>. Elle combine quatre mesures (débit
@@ -575,7 +580,7 @@
   d’autorisation qui évite de corriger une nouveauté inoffensive, sans remplacer le modèle ni servir à
   juger sa qualité (§6).</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 6 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 6 / 17</span></div>
 </section>
 
 <!-- ============================== 7. DÉTECTION ML ============================== -->
@@ -583,11 +588,11 @@
   <h2>6. Détection ML</h2>
 
   <h3>6.1 Modèle réellement implémenté</h3>
-  <p>Vérifié dans <code>services/detector/model.py</code>&nbsp;: un pipeline scikit-learn
-  <code>make_pipeline(StandardScaler(), OneClassSVM(kernel='rbf', gamma='scale', nu=nu))</code>. C’est un
-  modèle de <strong>détection de nouveauté à une seule classe</strong> : il apprend le fonctionnement
-  nominal, sans étiquette d’attaque. Il n’y a <strong>ni classification binaire supervisée, ni
-  IsolationForest, ni modèle préentraîné</strong>. Un score négatif signale une nouveauté.</p>
+  <p>Vérifié dans <code>services/detector/model.py</code> : un pipeline scikit-learn
+  <code>make_pipeline(StandardScaler(), OneClassSVM(kernel='rbf', gamma='scale', nu=nu))</code> — un modèle
+  de <strong>détection de nouveauté à une seule classe</strong>, qui apprend le fonctionnement nominal sans
+  étiquette d’attaque. <strong>Ni classification binaire supervisée, ni IsolationForest, ni modèle
+  préentraîné.</strong> Un score négatif signale une nouveauté.</p>
 
   <h3>6.2 Entrées</h3>
   <table>
@@ -608,37 +613,45 @@
   <h3>6.3 Règle d’alerte</h3>
   <p>Une observation est <em>anormale</em> si — et seulement si — le score est négatif <strong>et</strong>
   que des rejets de capacité sont présents. Une alerte part après <strong>3 observations anormales
-  consécutives</strong>, avec un refroidissement de <strong>30&nbsp;s</strong> entre deux alertes et aucun
-  réentraînement pendant l’incident. Une seule fonction sert au compteur d’alerte, à la route de diagnostic
-  <code>GET /anomaly</code> et au rejeu de calibration : il n’existe qu’une définition.</p>
+  consécutives</strong>, avec un refroidissement de <strong>30&nbsp;s</strong> et aucun réentraînement
+  pendant l’incident. Une seule fonction sert au compteur, à <code>GET /anomaly</code> et au rejeu de
+  calibration : il n’existe qu’une définition.</p>
 
   <h3>6.4 Calibration — et une leçon de méthode</h3>
-  <p>Baseline de <strong>90 observations</strong> collectées sur la pile réelle, 72 pour l’apprentissage et
-  les 18 suivantes en validation chronologique (<code>ml-report.json</code>, SHA-256 <code>0f42ace4…</code>).
-  Un premier balayage mené <em>sur ce seul holdout de 18&nbsp;points</em> proposait <code>nu=0,05</code>,
-  <code>consecutive=1</code> à 0&nbsp;% de fausses séries. <strong>C’était trompeur</strong> : rejoué sur une
-  session normale indépendante de <strong>156 observations</strong>, ce couple produit <strong>9 fausses
-  séries</strong>. L’outil refuse désormais de conclure sous 150 observations, et ce premier fichier porte
+  <p>Baseline de <strong>90 observations</strong> sur la pile réelle, 72 pour l’apprentissage et les 18
+  suivantes en validation chronologique (<code>ml-report.json</code>, SHA-256 <code>0f42ace4…</code>). Un
+  premier balayage mené <em>sur ce seul holdout de 18&nbsp;points</em> proposait <code>nu=0,05</code>,
+  <code>consecutive=1</code> à 0&nbsp;% de fausses séries. <strong>C’était trompeur</strong> : rejoué sur
+  156 observations normales indépendantes, ce couple produit <strong>9 fausses séries</strong>. L’outil
+  refuse désormais de conclure sous 150 observations, et ce premier fichier porte
   <code>conclusive: false</code>.</p>
   <table>
     <thead><tr><th>Couple</th><th class="num" style="width:30mm">Fausses séries<br>(156 obs. normales)</th><th class="num" style="width:26mm">Scores négatifs<br>par observation</th><th class="num" style="width:20mm">Détecte</th><th class="num" style="width:20mm">Délai</th></tr></thead>
     <tbody>
-      <tr><td><code>nu=0,05</code>, <code>consecutive=1</code> — proposition trompeuse du 1ᵉʳ passage</td><td class="num">9</td><td class="num">5,8&nbsp;%</td><td class="num">oui</td><td class="num">7,7&nbsp;s</td></tr>
+      <tr><td><code>nu=0,05</code>, <code>cons.=1</code> — proposition trompeuse du 1ᵉʳ passage</td><td class="num">9</td><td class="num">5,8&nbsp;%</td><td class="num">oui</td><td class="num">7,7&nbsp;s</td></tr>
       <tr><td><code>nu=0,03</code>, <code>consecutive=3</code> — réglage précédent</td><td class="num">2</td><td class="num">15,4&nbsp;%</td><td class="num">oui</td><td class="num">11,7&nbsp;s</td></tr>
       <tr style="background:#edf6f0"><td><strong><code>nu=0,02</code>, <code>consecutive=3</code> — retenu et déployé</strong></td><td class="num"><strong>0</strong></td><td class="num"><strong>14,1&nbsp;%</strong></td><td class="num"><strong>oui</strong></td><td class="num"><strong>11,7&nbsp;s</strong></td></tr>
     </tbody>
   </table>
-  <p class="meta">Preuve : <code>calibration-20261020T065603Z.json</code> (<code>conclusive: true</code>,
-  156 observations normales hors échantillon). Les valeurs déployées sont les défauts du code
-  (<code>DEFAULT_NU = 0.02</code>, <code>DEFAULT_CONSECUTIVE = 3</code>). Le délai va du début de la fenêtre
-  d’attaque à l’observation qui déclenche l’alerte : il exclut la livraison de l’alerte et la remédiation.</p>
+  <p class="meta">Preuve : <code>calibration-20261020T065603Z.json</code> (<code>conclusive: true</code>).
+  Les valeurs déployées sont les défauts du code (<code>DEFAULT_NU = 0.02</code>,
+  <code>DEFAULT_CONSECUTIVE = 3</code>). Le délai va du début de la fenêtre d’attaque à l’observation qui
+  déclenche l’alerte ; il exclut la livraison et la remédiation.</p>
 
   <h3>6.5 Ce que le modèle fait sur une attaque réelle</h3>
-  <p>Sur les 17 preuves de jalon M7 validées, le détecteur a journalisé entre <strong>7 et 19 observations
-  anormales</strong> par fenêtre d’une cinquantaine, score minimal autour de <strong>−0,32</strong>. Le pic
-  est <em>mesuré</em>, pas lu sur un écran : débit de devis de <strong>4,88 à 6,63&nbsp;req/s</strong> contre
-  une enveloppe normale plafonnant à <strong>1,37&nbsp;req/s</strong>, occupation à <strong>4,0</strong>
-  contre <strong>1,0</strong>, et <strong>81 à 398 rejets de capacité</strong> sur la fenêtre.</p>
+  <p>Sur les <strong>18 preuves de jalon M7 validées</strong> (sur 23 produites), le détecteur a journalisé
+  entre <strong>7 et 19 observations anormales</strong> par fenêtre d’une cinquantaine, score minimal autour
+  de <strong>−0,32</strong>. Le pic est <em>mesuré</em>, pas lu sur un écran : débit de devis de
+  <strong>4,88 à 6,63&nbsp;req/s</strong> contre une enveloppe normale plafonnant à
+  <strong>1,37&nbsp;req/s</strong>, occupation à <strong>4,0</strong> contre <strong>1,0</strong>, et
+  <strong>81 à 398 rejets de capacité</strong> sur la fenêtre.</p>
+  <p>Le cycle du 22&nbsp;octobre (<code>m7-proof-20261022T090634Z.json</code>, 4 contrôles sur 4) illustre
+  le cas nominal : <strong>9 observations anormales sur 53</strong>, compteur maximal 6, pic à
+  <strong>6,25&nbsp;req/s</strong>, <strong>130,4 rejets de capacité</strong>, une alerte livrée. C’est le
+  seul cycle où l’heure de lancement de la charge est connue : le délai mesuré
+  charge&nbsp;→&nbsp;détection y vaut <strong>~5,5&nbsp;s</strong>, sous la cible de 10&nbsp;s, à
+  ±0,8&nbsp;s d’horloge près (§5.4). <strong>Une mesure ne fait pas une performance</strong> : il faut la
+  refaire sur plusieurs cycles.</p>
 
   <h3>6.6 Limites du détecteur, sans détour</h3>
   <ul>
@@ -647,14 +660,12 @@
     fenêtre d’attaque rejouée, pas quelle fraction d’incidents il détecterait en général.</li>
     <li><strong>14,1&nbsp;% des scores sont négatifs sur du trafic normal.</strong> Aucune fausse alerte ne
     part, car la règle exige en plus des rejets de capacité — nuls en trafic normal — mais ce filet n’est
-    pas une qualité du modèle. Les fenêtres se chevauchant, le holdout de 18 points reste un diagnostic :
-    son taux (33,3&nbsp;% par observation) n’est pas comparable aux « fausses séries » ci-dessus.</li>
+    pas une qualité du modèle. Les fenêtres se chevauchant, le holdout de 18 points reste un diagnostic.</li>
     <li><strong>Non couverts</strong> : attaques lentes, dérive de charge, identités multiples,
-    compromission de la télémétrie. Deux variables sur quatre sont constantes à zéro dans une baseline
-    saine — c’est voulu, ce sont les signaux de l’incident — et le volume de baseline reste très limité.</li>
+    compromission de la télémétrie. Le volume de baseline reste très limité.</li>
   </ul>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 7 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 7 / 17</span></div>
 </section>
 
 <!-- ============================== 8. REMÉDIATION ============================== -->
@@ -714,17 +725,19 @@
   <h3>7.4 Ce que la preuve de reprise ne couvre pas</h3>
   <ul>
     <li>Le bannissement d’adresse est une <strong>surcouche optionnelle</strong>
-    (<code>compose.ban.yaml</code>). Le dépôt prouve la <em>décision</em> — filtrage au sous-réseau du lab,
-    exclusion de l’Hôte et des adresses internes, expiration à 5&nbsp;min, idempotence, transaction témoin
-    réussie avec un ban actif — mais <strong>pas son application au WAF</strong>, que personne n’a pu
-    exécuter. Sous Docker Desktop, le WAF peut ne voir que l’adresse de la passerelle, hors périmètre :
-    aucun ban n’est alors posé. <span class="tag warn">à confirmer en exécution</span></li>
+    (<code>compose.ban.yaml</code>) et <strong>il était désactivé dans tous les cycles mesurés</strong> : la
+    preuve du 22/10 le consigne explicitement (<code>ban.enabled: false</code>,
+    <em>« bans disabled (BAN_ENABLED not set) »</em>). Les reprises démontrées ici le sont donc
+    <strong>sans aucun bannissement</strong>. Le dépôt prouve la <em>décision</em> — filtrage au sous-réseau
+    du lab, exclusion de l’Hôte et des adresses internes, expiration à 5&nbsp;min, idempotence — mais
+    <strong>pas son application au WAF</strong>, que personne n’a exécutée.
+    <span class="tag warn">à confirmer en exécution</span></li>
     <li>La vérification ne teste plus la <em>connexion</em> à travers le WAF, seulement le paiement.</li>
     <li>Le remédiateur utilise le compte opérateur <code>alice</code> et détient déjà la clé de session ;
     une identité de service dédiée au rôle minimal serait plus propre.</li>
   </ul>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 8 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 8 / 17</span></div>
 </section>
 
 <!-- ============================== 9. OBSERVABILITÉ ============================== -->
@@ -732,16 +745,12 @@
   <h2>8. Observabilité</h2>
 
   <h3>8.1 Ce que Prometheus mesure</h3>
-  <table>
-    <thead><tr><th style="width:52mm">Série</th><th style="width:20mm">Type</th><th>Signification</th></tr></thead>
-    <tbody>
-      <tr><td><code>lab_requests_total{route,status}</code></td><td>compteur</td><td>Réponses métier par route et par code. Les séries sont pré-touchées au démarrage : sans cela, après un redémarrage, la requête du détecteur ne renvoie rien et il se déclare en erreur de télémétrie.</td></tr>
-      <tr><td><code>lab_capacity_denied_total</code></td><td>compteur</td><td>Requêtes rejetées parce que la capacité est épuisée. Signal direct de l’incident.</td></tr>
-      <tr><td><code>lab_active_work</code></td><td>jauge</td><td>Emplacements de capacité aval simulée occupés (0 à 4).</td></tr>
-      <tr><td><code>lab_contained</code></td><td>jauge</td><td>1 quand l’admission ciblée est active. Permet de distinguer « avant » et « après » confinement sur un graphique.</td></tr>
-      <tr><td><code>lab_duration_seconds{route}</code></td><td>histogramme</td><td>Temps de traitement par route.</td></tr>
-    </tbody>
-  </table>
+  <p>Cinq séries décrivent le service : le nombre de réponses par route et par code, les rejets de capacité
+  — signal direct de l’incident —, l’occupation des quatre emplacements, un indicateur disant si
+  l’admission ciblée est active, et le temps de traitement par route. Les séries étiquetées sont
+  <em>pré-touchées</em> au démarrage : sans cela, après un redémarrage, la requête du détecteur ne renvoie
+  rien et il se déclare en erreur de télémétrie plutôt que de lire un zéro. Noms et types exacts :
+  <strong>annexe&nbsp;B</strong>.</p>
 
   <h3>8.2 Ce que le détecteur consigne lui-même</h3>
   <p>Chaque observation scorée est journalisée comme un événement <code>inference</code> portant le score,
@@ -807,7 +816,7 @@
     d’horloge constaté.</li>
   </ul>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 9 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 9 / 17</span></div>
 </section>
 
 <!-- ============================== 10. SÉCURITÉ ET GOUVERNANCE ============================== -->
@@ -861,30 +870,18 @@
   WAF ne ralentit pas un flot de requêtes <em>valides</em> ; c’est le contrôle d’admission applicatif qui
   le fait, une fois l’incident détecté.</p>
 
-  <h3>9.5 Risques et traitement — synthèse EBIOS&nbsp;RM</h3>
-  <table>
-    <thead><tr><th>Risque</th><th class="num" style="width:15mm">V×G<br>initial</th><th>Traitement et preuve</th><th class="num" style="width:15mm">Résiduel</th></tr></thead>
-    <tbody>
-      <tr><td>Indisponibilité devis/paiement</td><td class="num">4×3</td><td>Détection ML, admission ciblée, transaction de vérification</td><td class="num">2×3</td></tr>
-      <tr><td>Double débit lors d’un rejeu</td><td class="num">3×4</td><td>Transaction base, verrou ordonné, idempotence ; test concurrent 40 appels</td><td class="num">1×4</td></tr>
-      <tr><td>Abus de remédiation</td><td class="num">3×4</td><td>HMAC, fraîcheur, action fixe, aucun socket Docker</td><td class="num">1×4</td></tr>
-      <tr><td>Secrets dans les livrables</td><td class="num">3×4</td><td>SOPS/age, exclusion de l’archive, revue de manifeste</td><td class="num">1×4</td></tr>
-      <tr><td>Instruction malveillante via le RAG</td><td class="num">3×3</td><td>Corpus contrôlé, aucun outil d’action, aucun secret de contrôle</td><td class="num">2×2</td></tr>
-      <tr style="background:#fbeef0"><td><strong>Perte du PC Hôte</strong></td><td class="num">2×4</td><td>Sauvegarde avec empreinte ; copie externe chiffrée <strong>à organiser</strong></td><td class="num"><strong>2×4</strong></td></tr>
-      <tr style="background:#fbeef0"><td><strong>Journaux ou ML indisponibles</strong></td><td class="num">2×3</td><td>État d’erreur explicite ; aucune fausse reprise</td><td class="num"><strong>2×3</strong></td></tr>
-    </tbody>
-  </table>
-  <p class="meta">Échelle qualitative 1 (faible) à 4 (critique). Le produit V×G hiérarchise en interne,
-  ce <strong>n’est pas un score EBIOS officiel</strong>. Les deux lignes grisées sont des risques
-  explicitement <em>non résolus</em> par la démonstration. Responsables, échéances et acceptation formelle
-  du risque restent <span class="tag warn">à compléter</span>.</p>
+  <h3>9.5 Risques, traitement et risques résiduels</h3>
+  <p>L’analyse EBIOS&nbsp;RM conduite sur le démonstrateur est résumée en <strong>annexe&nbsp;E</strong>,
+  avec sa matrice vraisemblance × gravité. Cinq risques sur sept sont ramenés à un niveau résiduel faible
+  par des mesures dont ce dossier cite la preuve : détection et admission ciblée pour l’indisponibilité,
+  transaction et idempotence pour le double débit, signature et action fixe pour l’abus de remédiation,
+  SOPS/age pour les secrets, corpus clos et absence d’outil d’action pour l’assistant.</p>
+  <p><strong>Deux risques restent explicitement non résolus</strong>, et le dossier ne prétend pas le
+  contraire : la <strong>perte du PC Hôte</strong>, tant qu’aucune copie de sauvegarde externe chiffrée
+  n’est organisée, et l’<strong>indisponibilité des journaux ou du ML</strong>, que le système signale par
+  un état d’erreur explicite sans jamais fabriquer de reprise. La matrice reste une analyse pédagogique :
+  l’acceptation formelle des risques par une direction et des responsables désignés n’a pas été réalisée.</p>
 
-
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 10 / 16</span></div>
-</section>
-
-<section class="page">
-  <h2>9 <span style="font-weight:400;font-size:9.5pt">(suite)</span> — Gouvernance du risque</h2>
   <h3>9.6 NIS2 et DORA : comment ces cadres ont orienté les décisions</h3>
   <div class="callout bad">
     <p><strong>Ce prototype n’est pas conforme à NIS2 ou DORA, et ne peut pas l’être.</strong> L’entreprise
@@ -893,252 +890,195 @@
     formulation retenue est : <em>démonstrateur aligné sur des thèmes de résilience, avec écarts
     identifiés</em>.</p>
   </div>
-  <table>
-    <thead><tr><th style="width:34mm">Thème</th><th>Ce que le prototype apporte</th><th style="width:48mm">Écart industriel</th></tr></thead>
-    <tbody>
-      <tr><td>Gouvernance du risque TIC</td><td>EBIOS synthétique, un responsable par domaine, décisions tracées avec leur coût</td><td>Validation direction, politique formelle, contrôles indépendants</td></tr>
-      <tr><td>Gestion d’incident</td><td>Détection, chronologie horodatée, action autorisée, états <code>recovered</code>/<code>failed</code> distincts</td><td>Qualification réglementaire, procédure formelle de notification</td></tr>
-      <tr><td>Continuité et restauration</td><td>Objectifs RTO/RPO écrits, sauvegarde et contrôle d’empreinte</td><td>Sites indépendants, exercices réguliers, sauvegardes hors machine testées</td></tr>
-      <tr><td>Tests de résilience</td><td>Scénario borné, 407 tests automatisés, preuves de reprise conservées</td><td>Programme de tests proportionné aux exigences applicables</td></tr>
-      <tr><td>Accès et secrets</td><td>Sessions signées, rôles, SOPS/age, double authentification opérateur</td><td>IAM complet, rotation et revue des droits, TLS</td></tr>
-      <tr><td>Prestataires TIC</td><td>Inventaire des images, du modèle et des dépendances</td><td>Diligence, contrats, registre réglementaire, stratégie de sortie</td></tr>
-      <tr><td>Signalement</td><td>Journal d’incident pédagogique</td><td><strong>Aucun signalement réel</strong> ; rôles, seuils et délais à valider</td></tr>
-    </tbody>
-  </table>
+  <p>Ces cadres ont servi de grille de lecture, pas de référentiel de conformité. Ils ont orienté trois
+  décisions concrètes : tracer chaque incident de bout en bout avec des états <code>recovered</code> et
+  <code>failed</code> distincts plutôt qu’un simple indicateur de disponibilité ; écrire des objectifs
+  RTO/RPO <em>avant</em> de mesurer, pour pouvoir constater un écart ; et tenir un inventaire des images,
+  du modèle et des dépendances. Le tableau thème par thème, avec l’écart industriel correspondant, figure
+  en <strong>annexe&nbsp;E</strong>. Le point le plus net : <strong>aucun signalement réglementaire n’est
+  démontré</strong> ni démontrable par un webhook interne.</p>
   <p class="meta">Références consultées le 19/10/2026 : directive (UE) 2022/2555, art.&nbsp;4, 20, 21, 23 ;
   règlement (UE) 2022/2554, applicable depuis le 17&nbsp;janvier&nbsp;2025 ; méthode EBIOS&nbsp;RM (ANSSI).</p>
 
-  <h3>9.7 Points de sécurité que le dépôt ne vérifie pas</h3>
-  <p>Trois contrôles sont écrits et documentés, mais n’ont pas été exécutés. Les citer est préférable à
-  les laisser croire acquis.</p>
-  <table>
-    <thead><tr><th style="width:52mm">Contrôle prévu</th><th>Ce qui est attendu</th><th style="width:28mm">État</th></tr></thead>
-    <tbody>
-      <tr><td>Filtrage WAF, testé séparément de la reprise</td><td>Un marqueur de test XSS dans une requête, non exécuté par l’application, doit être rejeté par CRS (souvent <code>403</code>) et tracé dans l’audit Loki. <strong>Si la requête passe, le WAF ne doit pas être déclaré validé</strong>, et il ne doit jamais être désactivé pour faire passer le scénario.</td><td><span class="tag warn">à exécuter</span></td></tr>
-      <tr><td>Bannissement temporaire d’adresse</td><td>Quatre vérifications en exécution : journal d’accès du WAF lisible, adresse du PC Attaquant visible dans Loki, <code>ban.applied</code> publié avec transaction témoin réussie, liste vidée après 5&nbsp;minutes.</td><td><span class="tag warn">à exécuter</span></td></tr>
-      <tr><td>Chaîne d’approvisionnement</td><td>Relever puis figer les digests d’images après le premier téléchargement réussi, et passer un scan de vulnérabilités. Le tag du WAF est mobile ; aucun digest n’est inventé dans cette livraison.</td><td><span class="tag bad">non fait</span></td></tr>
-    </tbody>
-  </table>
-  <p class="meta">Un quatrième point est structurel et ne se « vérifie » pas : la machine Hôte peut altérer
-  ses propres journaux. Aucune preuve d’inaltérabilité industrielle n’est apportée, et aucune ne peut
-  l’être dans cette architecture.</p>
-
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 11 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 10 / 17</span></div>
 </section>
 
 <!-- ============================== 11. RÉSULTATS ============================== -->
 <section class="page">
   <h2>10. Résultats des essais</h2>
   <p>Essais conduits sur le laboratoire réel, l’attaque lancée à la main depuis le PC Attaquant.
-  L’observateur sonde <code>POST /api/payments</code> toutes les 0,5&nbsp;s : les codes cités sont ceux de
-  <strong>paiements fictifs</strong>, jamais ceux des devis du client de charge.</p>
+  <strong>Deux séries de codes HTTP, à ne jamais mélanger</strong> : l’observateur sonde
+  <code>POST /api/payments</code> toutes les 0,5&nbsp;s (impact métier), tandis que le client de charge
+  compte ses propres requêtes <code>POST /api/quotes</code> (effet de l’attaque).</p>
 
-  <h3>10.1 Essais de reprise protégée</h3>
+  <h3>10.1 Cycle protégé de référence — 22 octobre 2026, 09:05 UTC</h3>
+  <p>Quatre sources indépendantes décrivent le même cycle, et leur concordance a été vérifiée plutôt que
+  supposée : la fenêtre M7 (09:04:40&nbsp;→&nbsp;09:06:33) couvre l’attaque et l’incident, son
+  <code>first_alert_s</code> de 48,09&nbsp;s tombe sur l’étape <code>containing</code> à 09:05:28,57, et le
+  récapitulatif de recette désigne nommément la preuve d’observation qu’il a produite.</p>
+  <p>Le récapitulatif <code>recette-run-1792659908-c3ab69b0.json</code> rend un cycle de 86,0&nbsp;s en mode
+  <code>protected</code>, préparation 3/3 et <strong><code>acceptance</code>, <code>check_mardi</code> et
+  <code>check_mercredi</code> tous les trois en <code>PASS</code></strong>, avec
+  <code>attack_launched_by_runner: false</code>. La preuve <code>acceptance-1792659988.json</code> consigne
+  <strong>101 paiements fictifs</strong> sondés — 91&nbsp;<code>200</code> et 10&nbsp;<code>503</code> —, un
+  incident <code>recovered</code> en quatre étapes horodatées, la transaction témoin <code>695ef145</code>
+  validée et le registre à <strong>200&nbsp;000&nbsp;centimes</strong> : détection&nbsp;→&nbsp;témoin en
+  <strong>6,88&nbsp;s</strong>. La preuve <code>m7-proof-20261022T090634Z.json</code> valide ses
+  <strong>4 contrôles sur 4</strong> : pic <em>mesuré</em> à 6,25&nbsp;req/s et occupation 4,0 contre une
+  enveloppe normale de 1,37 et 1,0, <strong>130,4 rejets de capacité</strong>, 9 observations anormales sur
+  53, une alerte livrée, écart d’horloge Hôte − conteneur de 0,8&nbsp;s.</p>
+  <p>Enfin le récapitulatif du PC Attaquant (run <code>92119f71</code>) compte <strong>521 requêtes
+  <code>POST /api/quotes</code></strong> en 30,4&nbsp;s sans aucune erreur réseau :
+  84&nbsp;<code>200</code>, 116&nbsp;<code>503</code> et <strong>321&nbsp;<code>429</code></strong>. Ce
+  dernier code n’existe qu’une fois l’admission ciblée active : il prouve que le confinement a mordu
+  <em>pendant</em> que la charge continuait. <strong>Ce cycle établit une boucle complète sans intervention
+  humaine, avec une reprise prouvée par une transaction métier</strong> — pas par l’état d’un conteneur. Il
+  n’établit ni un rappel de détection, ni une résistance à une attaque distribuée : la charge vient d’un
+  poste unique et d’une seule identité.</p>
+
+  <h3>10.2 Agrégat des essais de reprise protégée</h3>
   <table>
     <thead><tr>
-      <th style="width:33mm">Preuve</th><th class="num" style="width:15mm">Date UTC</th>
-      <th class="num" style="width:14mm">503 /<br>sondes</th><th class="num" style="width:16mm">Détect.→<br>rétabli</th>
-      <th class="num" style="width:14mm">Indispo.<br>perçue</th><th>Conclusion réellement permise</th>
+      <th style="width:32mm">Preuve</th><th class="num" style="width:15mm">Date UTC</th>
+      <th class="num" style="width:14mm">503 /<br>sondes</th><th class="num" style="width:16mm">Détect.→<br>témoin</th>
+      <th>Conclusion réellement permise</th>
     </tr></thead>
     <tbody>
-      <tr><td><code>acceptance-<br>1792584548</code></td><td class="num">21/10<br>12:07</td><td class="num">13 / 115</td><td class="num">2,79&nbsp;s</td><td class="num">1,03&nbsp;s</td><td><span class="tag ok">témoin validé</span> Reprise complète : 4 étapes horodatées, total à 200&nbsp;000.</td></tr>
-      <tr><td><code>acceptance-<br>1792584771</code></td><td class="num">21/10<br>12:11</td><td class="num">12 / 115</td><td class="num">2,71&nbsp;s</td><td class="num">3,10&nbsp;s</td><td><span class="tag ok">témoin validé</span> Essai répété à l’identique.</td></tr>
-      <tr><td><code>acceptance-<br>1792585122</code></td><td class="num">21/10<br>12:17</td><td class="num">16 / 115</td><td class="num">2,47&nbsp;s</td><td class="num">2,58&nbsp;s</td><td><span class="tag ok">témoin validé</span> Le plus rapide des 21 ; chronologie au §5.4.</td></tr>
-      <tr style="background:#eaf0f6"><td><strong>Agrégat des<br>21 reprises</strong></td><td class="num">19→21/10</td><td class="num">12 à 19</td><td class="num"><strong>2,47<br>2,82<br>6,62&nbsp;s</strong></td><td class="num"><strong>0,52<br>2,07<br>8,20&nbsp;s</strong></td><td><strong>Reprise autonome reproductible, 21/21 sous la cible de 60&nbsp;s.</strong> Minimum, médiane, maximum.</td></tr>
-      <tr><td><code>recette-run-<br>1792575980</code></td><td class="num">21/10<br>09:46</td><td class="num">0 / 99</td><td class="num">—</td><td class="num">—</td><td><span class="tag bad">FAIL</span> Aucun incident : l’attaque n’a pas saturé. <strong>Ne prouve rien.</strong></td></tr>
-      <tr><td><code>recette-run-<br>1792576538</code></td><td class="num">21/10<br>09:55</td><td class="num">0 / 98</td><td class="num">—</td><td class="num">—</td><td><span class="tag warn">NO_INCIDENT</span> Observation calme menée à son terme ; reprise non testée.</td></tr>
+      <tr style="background:#eaf0f6"><td><code>acceptance-<br>1792659988</code></td><td class="num">22/10<br>09:05</td><td class="num">10 / 101</td><td class="num"><strong>6,88&nbsp;s</strong></td><td><strong>Cycle de référence ci-dessus.</strong> Le plus lent des 22 : l’étape <code>verifying</code> y a pris 6,4&nbsp;s contre 2,3 à 2,6&nbsp;s les 21/10.</td></tr>
+      <tr><td><code>acceptance-<br>1792585122</code></td><td class="num">21/10<br>12:17</td><td class="num">16 / 115</td><td class="num">2,47&nbsp;s</td><td>Le plus rapide des 22 ; même chaîne, même témoin validé.</td></tr>
+      <tr><td><strong>Agrégat des<br>22 reprises</strong></td><td class="num">19→22/10</td><td class="num">10 à 19</td><td class="num"><strong>2,47<br>2,83<br>6,88&nbsp;s</strong></td><td><strong>Reprise autonome reproductible : 22 cycles sur 22 sous la cible de 60&nbsp;s</strong> (minimum, médiane, maximum).</td></tr>
+      <tr><td><code>recette-run-<br>1792575980</code></td><td class="num">21/10<br>09:46</td><td class="num">0 / 99</td><td class="num">—</td><td><span class="tag bad">FAIL</span> Aucun incident : l’attaque n’a pas saturé. <strong>Ne prouve rien.</strong></td></tr>
+      <tr><td><code>recette-run-<br>1792576538</code></td><td class="num">21/10<br>09:55</td><td class="num">0 / 98</td><td class="num">—</td><td><span class="tag warn">NO_INCIDENT</span> Observation calme menée à son terme ; reprise non testée.</td></tr>
     </tbody>
   </table>
-  <p class="meta">Agrégat calculé sur les 21 preuves où l’incident est <code>recovered</code>, le témoin
-  <code>validated</code>, le total exactement 200&nbsp;000&nbsp;centimes et les quatre étapes présentes
-  (<code>complete: true</code>). Sur les 38 preuves du dépôt, <strong>14 n’ont vu aucun incident</strong> :
-  attaque non lancée, interrompue, ou charge insuffisante. Elles sont conservées et comptées.</p>
+  <p class="meta"><strong>Périmètre du calcul, et pourquoi deux décomptes coexistent.</strong> L’agrégat
+  porte sur les <strong>22 fichiers <code>acceptance-*.json</code></strong> — un par cycle d’observation,
+  sans doublon — où <em>toutes</em> les conditions sont réunies : incident <code>recovered</code>, témoin
+  <code>validated</code>, total exactement 200&nbsp;000&nbsp;centimes, quatre étapes présentes
+  (<code>complete: true</code>). Les 39 preuves du dépôt se répartissent exactement en <strong>22 reprises
+  complètes + 14 observations sans aucun incident + 3 liées aux essais témoins</strong> ; aucune n’est
+  laissée de côté. Un <em>autre</em> décompte apparaît ailleurs dans ce dossier : les
+  <strong>14 récapitulatifs <code>recette-run-*.json</code></strong> lisibles. Il est plus petit parce
+  qu’il ne couvre que les cycles pilotés par le lanceur hôte, écrit le 21/10 : les 13 reprises des 19 et
+  20/10 proviennent de <code>acceptance.py</code> lancé directement, sans récapitulatif. Les 10 cycles
+  hôtes en mode protégé se répartissent en <strong>8 <code>PASS</code>, 1 <code>FAIL</code>,
+  1 <code>NO_INCIDENT</code></strong>.</p>
 
-  <h3>10.2 Essais témoins sans remédiation</h3>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 11 / 17</span></div>
+</section>
+
+<section class="page">
+  <h2>10 <span style="font-weight:400;font-size:9.5pt">(suite)</span> — Essais témoins et contrôles</h2>
+  <h3>10.3 Essais témoins sans remédiation — mesure d’impact uniquement</h3>
   <table>
     <thead><tr>
-      <th style="width:33mm">Récapitulatif</th><th class="num" style="width:15mm">Date UTC</th>
-      <th class="num" style="width:14mm">503 /<br>sondes</th><th style="width:26mm">Statut</th><th>Conclusion réellement permise</th>
+      <th style="width:32mm">Récapitulatif</th><th class="num" style="width:15mm">Date UTC</th>
+      <th class="num" style="width:14mm">503 /<br>sondes</th><th style="width:25mm">Statut</th><th>Conclusion réellement permise</th>
     </tr></thead>
     <tbody>
-      <tr><td><code>recette-run-<br>1792653302</code></td><td class="num">22/10<br>07:15</td><td class="num"><strong>54 / 121</strong></td><td><span class="tag warn">CONTROL_IMPACT_<br>OBSERVED</span></td><td>Deux incidents, tous deux <code>observed</code> : aucune remédiation. 45&nbsp;% des paiements refusés. <strong>Impact constaté sans remédiation — pas une reprise.</strong></td></tr>
-      <tr><td><code>recette-run-<br>1792590023</code></td><td class="num">21/10<br>13:40</td><td class="num"><strong>48 / 121</strong></td><td><span class="tag warn">CONTROL_IMPACT_<br>OBSERVED</span></td><td>Essai répété : 40&nbsp;% des paiements refusés ; <code>check_mardi</code> passe, la charge est bien mesurée.</td></tr>
+      <tr><td><code>recette-run-<br>1792653302</code></td><td class="num">22/10<br>07:15</td><td class="num"><strong>54 / 121</strong></td><td><span class="tag warn">CONTROL_IMPACT_<br>OBSERVED</span></td><td>Deux incidents, tous deux <code>observed</code> : aucune remédiation. 45&nbsp;% des paiements refusés. <strong>Impact constaté — pas une reprise.</strong></td></tr>
+      <tr><td><code>recette-run-<br>1792590023</code></td><td class="num">21/10<br>13:40</td><td class="num"><strong>48 / 121</strong></td><td><span class="tag warn">CONTROL_IMPACT_<br>OBSERVED</span></td><td>Essai répété : 40&nbsp;% refusés ; <code>check_mardi</code> passe, la charge est bien mesurée.</td></tr>
       <tr><td><code>recette-run-<br>1792589548</code></td><td class="num">21/10<br>13:32</td><td class="num">54 / 122</td><td><span class="tag bad">CONTROL_NOT_<br>INHIBITED</span></td><td><strong>Essai invalide, conservé comme tel.</strong> Deux incidents : l’un <code>observed</code>, l’autre <strong><code>recovered</code></strong>.</td></tr>
       <tr><td><code>recette-run-<br>1792589278</code></td><td class="num">21/10<br>13:27</td><td class="num">0 / 113</td><td><span class="tag neutral">CONTROL_NO_<br>IMPACT</span></td><td>Aucun rejet de capacité, aucun incident. <strong>N’établit aucun impact.</strong></td></tr>
     </tbody>
   </table>
   <div class="callout warn">
-    <p><strong>Lecture du 3ᵉ essai, et correction apportée.</strong> <code>acceptance.py</code> y a rendu
-    <code>passed: true</code>, parce qu’un incident <code>recovered</code> existait bel et bien.
-    <strong>Ce « succès » ne doit être lu ni comme une reprise démontrée, ni comme un essai témoin
-    valide</strong> — c’est la confusion que <code>CONTROL_NOT_INHIBITED</code> sert à empêcher. La fenêtre
-    se refermait alors sur le premier incident et l’alerte suivante était remédiée normalement. La
-    sémantique a depuis été corrigée : la fenêtre reste ouverte toute sa durée et consigne <em>tous</em> les
-    incidents qu’elle couvre — les essais du 21/10 13:40 et du 22/10 le confirment.</p>
+    <p><strong>Lecture du 3ᵉ essai.</strong> <code>acceptance.py</code> y a rendu <code>passed: true</code>,
+    parce qu’un incident <code>recovered</code> existait bel et bien. <strong>Ce « succès » ne doit être lu
+    ni comme une reprise démontrée, ni comme un essai témoin valide</strong> — c’est la confusion que
+    <code>CONTROL_NOT_INHIBITED</code> sert à empêcher. La fenêtre se refermait alors sur le premier
+    incident et l’alerte suivante était remédiée normalement ; elle reste désormais ouverte toute sa durée
+    et consigne <em>tous</em> les incidents qu’elle couvre.</p>
   </div>
 
-  <h3>10.3 L’écart entre les deux modes</h3>
+  <h3>10.4 L’écart entre les deux modes</h3>
   <table>
-    <thead><tr><th style="width:40mm">Grandeur comparée</th><th class="num" style="width:30mm">Mode protégé</th><th class="num" style="width:30mm">Mode témoin</th><th>Lecture</th></tr></thead>
+    <thead><tr><th style="width:38mm">Grandeur comparée</th><th class="num" style="width:28mm">Mode protégé</th><th class="num" style="width:28mm">Mode témoin</th><th>Lecture</th></tr></thead>
     <tbody>
-      <tr><td>Paiements fictifs refusés</td><td class="num">12 à 19 / ~115<br>(10 à 17&nbsp;%)</td><td class="num">48 et 54 / ~121<br>(40 et 45&nbsp;%)</td><td>Sous charge comparable, l’admission ciblée divise par ~4 la proportion de paiements refusés.</td></tr>
+      <tr><td>Paiements fictifs refusés</td><td class="num">10 à 19 / ~101–115<br>(10 à 17&nbsp;%)</td><td class="num">48 et 54 / ~121<br>(40 et 45&nbsp;%)</td><td>Sous charge comparable, l’admission ciblée divise par ~4 la proportion de paiements refusés.</td></tr>
       <tr><td>État final de l’incident</td><td class="num"><code>recovered</code></td><td class="num"><code>observed</code></td><td>Deux états terminaux distincts, impossibles à confondre.</td></tr>
-      <tr><td>Transaction témoin</td><td class="num">validée (21/21)</td><td class="num">absente</td><td>Aucune reprise n’est prouvée en mode témoin, et aucune n’est revendiquée.</td></tr>
+      <tr><td>Transaction témoin</td><td class="num">validée (22/22)</td><td class="num">absente</td><td>Aucune reprise n’est prouvée en mode témoin, et aucune n’est revendiquée.</td></tr>
       <tr><td>Total du registre</td><td class="num">200&nbsp;000 c.</td><td class="num">200&nbsp;000 c.</td><td>L’intégrité tient dans les deux modes : la charge dégrade la disponibilité, pas les données.</td></tr>
     </tbody>
   </table>
 
-  <h3>10.4 Contrôles automatisés</h3>
-  <p>Au 22&nbsp;octobre 2026 : <strong>352 tests Python</strong> et <strong>55 tests de modèle
-  frontend</strong> réussis, construction Vite réussie. <strong>Deux échecs connus</strong> subsistent et ne
-  sont pas masqués : la chaîne d’intégration native échoue dans l’environnement de rédaction, où Ansible ne
-  peut pas s’exécuter, et deux routes d’authentification du code ne sont pas encore décrites dans leur
-  contrat OpenAPI. <span class="tag warn">à corriger avant remise</span></p>
+  <h3>10.5 Vérifications automatisées</h3>
+  <p><strong>354 tests Python sont collectés dans l’état actuel du dépôt.</strong> La dernière exécution
+  complète consignée le 22/10 en a réussi 352 et échoué 2 : la chaîne native Ansible dans l’environnement
+  de rédaction, et le contrat OpenAPI d’authentification, où les routes challenge/verify du code ne sont
+  pas décrites. Ces échecs restent visibles et ne sont pas comptés comme des succès.</p>
+  <p>Côté interface, <strong>55 tests sur 55 réussissent</strong>. Le build Vite exécuté pour ce dossier
+  aboutit (241,48&nbsp;kB de JavaScript et 22,08&nbsp;kB de CSS).</p>
+  <p class="meta">Cette revue a reconfirmé les 354 tests par une collecte, mais n’a pas terminé une nouvelle
+  exécution complète de la suite Python dans l’environnement de rédaction. La trace historique
+  <code>evidence/pytest.txt</code> du dépôt, datée du 19/10, ne décrit pas cette version.</p>
+  <p class="meta"><strong>Traçabilité du code.</strong> La preuve d’acceptance de référence enregistre
+  <code>c11ec6f</code> avec <code>dirty: true</code> ; le dépôt actuel est au commit <code>4a1430d</code>.
+  L’équivalence exacte entre le code exécuté et ce commit n’est pas établie.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 12 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 12 / 17</span></div>
 </section>
 
 <!-- ============================== 12. PCA/PRA ============================== -->
 <section class="page">
-  <h2>11. PCA/PRA, limites et améliorations</h2>
+  <h2>11. PCA/PRA, limites et perspectives</h2>
 
   <h3>11.1 Écart aux objectifs</h3>
   <table>
-    <thead><tr><th style="width:44mm">Objectif</th><th class="num" style="width:24mm">Cible</th><th class="num" style="width:30mm">Mesuré</th><th>Écart</th></tr></thead>
+    <thead><tr><th style="width:44mm">Objectif</th><th class="num" style="width:20mm">Cible</th><th class="num" style="width:26mm">Mesuré</th><th>Écart</th></tr></thead>
     <tbody>
-      <tr><td>Détection → service rétabli<br><span class="meta">cible resserrée : 45&nbsp;s</span></td><td class="num">&lt; 60&nbsp;s</td><td class="num">2,47 à 6,62&nbsp;s</td><td><span class="tag ok">tenu, large marge</span> sur 21 essais, y compris sous la cible resserrée</td></tr>
-      <tr><td>Délai de détection depuis le début de la charge</td><td class="num">&lt; 10&nbsp;s</td><td class="num">~11,7&nbsp;s<br><span class="meta">rejeu calibré</span></td><td><span class="tag warn">dépassé</span> de ~1,7&nbsp;s ; non isolé sur l’Hôte</td></tr>
-      <tr><td><strong>RTO</strong> : 1ʳᵉ indisponibilité → transaction confirmée</td><td class="num">&lt; 45&nbsp;s</td><td class="num">0,52 à 8,20&nbsp;s<br><span class="meta">indispo. perçue</span></td><td><span class="tag warn">cohérent, non équivalent</span> — voir ci-dessous</td></tr>
-      <tr><td><strong>RPO</strong> transaction confirmée / perte Hôte</td><td class="num">0 perdue</td><td class="num">0</td><td><span class="tag ok">tenu</span> (total à 200&nbsp;000) ; <span class="tag bad">non mesuré</span> pour la perte Hôte, la restauration n’ayant jamais été exécutée</td></tr>
+      <tr><td>Détection → service rétabli<br><span class="meta">cible resserrée : 45&nbsp;s</span></td><td class="num">&lt; 60&nbsp;s</td><td class="num">2,47 à 6,88&nbsp;s<br><span class="meta">médiane 2,83</span></td><td><span class="tag ok">tenu, large marge</span> sur 22 cycles, y compris sous la cible resserrée</td></tr>
+      <tr><td>Charge → détection, puis <strong>chaîne complète</strong> jusqu’au témoin validé</td><td class="num">&lt; 10&nbsp;s<br>&lt; 45&nbsp;s</td><td class="num">~5,5&nbsp;s<br>~12,3&nbsp;s<br><span class="meta">1 cycle, ±0,8&nbsp;s</span></td><td><span class="tag ok">tenus</span> sur le seul cycle où l’heure de lancement est connue — première mesure de bout en bout. <strong>Une mesure ne fait pas une moyenne</strong> : à répéter</td></tr>
+      <tr><td><strong>RTO</strong> : 1ʳᵉ indisponibilité → transaction confirmée</td><td class="num">&lt; 45&nbsp;s</td><td class="num">—</td><td><span class="tag warn">non mesuré formellement</span> — voir ci-dessous</td></tr>
+      <tr><td><strong>RPO</strong> transaction confirmée / perte Hôte</td><td class="num">0 perdue</td><td class="num">0</td><td><span class="tag ok">tenu</span> (total à 200&nbsp;000 sur 22 cycles) ; <span class="tag bad">non mesuré</span> pour la perte Hôte, la restauration n’ayant jamais été exécutée</td></tr>
     </tbody>
   </table>
-  <div class="callout">
-    <p><strong>Pourquoi le RTO n’est pas déclaré « atteint ».</strong> L’indisponibilité perçue est mesurée
-    par une sonde toutes les 0,5&nbsp;s, entre le premier <code>503</code> et le premier <code>200</code>
-    qui le suit. C’est une borne honnête, mais elle n’est pas identique à la définition du RTO retenue au
-    §2.3, et le remédiateur peut avoir rétabli le service entre deux sondes. Le RTO est donc rapporté comme
-    <strong>cohérent avec la cible</strong>, non comme formellement mesuré. <span class="tag warn">à confirmer par une mesure dédiée</span></p>
-  </div>
+  <p class="meta"><strong>Pourquoi le RTO n’est pas déclaré mesuré.</strong> Le champ
+  <code>user_visible_outage</code> donne l’écart entre le <em>premier</em> paiement refusé et le
+  <em>premier</em> servi qui le suit — 0,57&nbsp;s le 22/10. Sous saturation le service refuse par
+  intermittence : cet écart mesure la première interruption, <strong>pas la durée totale de
+  dégradation</strong>. La chaîne complète mesurée (~12,3&nbsp;s) est cohérente avec la cible de
+  45&nbsp;s, mais une mesure dédiée reste à faire. <span class="tag warn">à confirmer</span></p>
 
   <h3>11.2 Dépendances et points de défaillance</h3>
-  <ul>
-    <li><strong>Un seul PC Hôte, une seule base</strong> : pas de haute disponibilité physique. Si Docker
-    Desktop ou Windows s’arrête, il n’y a aucune continuité de service. Le service de paiement exige en
-    outre <strong>un seul worker</strong>, le contrôle de capacité étant en mémoire.</li>
-    <li><strong>Pas de TLS applicatif</strong>, et clé de session <strong>symétrique et partagée</strong>
-    (§4, D-3) : usage limité au point d’accès privé du groupe, aucun secret d’entreprise. TLS, OIDC et
-    cycle de vie des certificats sont des écarts à résoudre avant tout usage hors prototype.</li>
-    <li>Le budget de connexion public étant partagé derrière le proxy, un attaquant peut encore
-    <strong>verrouiller la connexion des opérateurs</strong> en le saturant : se connecter avant la
-    démonstration. La sauvegarde reste sur l’Hôte, <strong>sa perte n’est pas couverte</strong> tant qu’une
-    copie externe chiffrée n’est pas organisée.</li>
-  </ul>
+  <p><strong>Un seul PC Hôte, une seule base</strong> : pas de haute disponibilité physique ; si Docker
+  Desktop ou Windows s’arrête, il n’y a aucune continuité. Le paiement exige <strong>un seul
+  worker</strong>, le contrôle de capacité étant en mémoire. <strong>Pas de TLS applicatif</strong>, et clé
+  de session <strong>symétrique et partagée</strong> (§4, D-3). Le budget de connexion public étant partagé
+  derrière le proxy, un attaquant peut encore <strong>verrouiller la connexion des opérateurs</strong> en
+  le saturant — se connecter avant la démonstration. Enfin la sauvegarde reste sur l’Hôte :
+  <strong>sa perte n’est pas couverte</strong> tant qu’une copie externe chiffrée n’est pas organisée.</p>
 
-  <h3>11.3 Faux positifs, non détectés</h3>
-  <p><strong>Faux positifs.</strong> Aucune fausse alerte n’a été produite : sur 156 observations de trafic
-  normal indépendant, le couple déployé donne <strong>zéro fausse série</strong>. Mais 14,1&nbsp;% des
-  scores individuels y sont négatifs, et la barrière « rejets de capacité » y contribue sans être une
-  qualité du modèle.</p>
-  <p><strong>Non détectés.</strong> Sur 38 observations, <strong>14 n’ont vu aucun incident</strong> — ce
-  n’est pas un taux de non-détection : l’attaque n’y avait pas saturé le service (quatre preuves M7 le
-  confirment) et il n’y avait rien à détecter. <strong>Le vrai taux de non-détection reste inconnu</strong>,
-  et c’est la limite la plus importante de l’évaluation : <code>attack_recall</code> vaut explicitement
-  <code>NOT MEASURED</code>. Sont aussi mal couvertes les attaques lentes, la dérive de charge, les
-  identités multiples et la compromission de la télémétrie.</p>
+  <h3>11.3 Limites et perspectives</h3>
+  <p>Aucune fausse alerte n’a été produite : sur 156 observations de trafic normal indépendant, le couple
+  déployé donne <strong>zéro fausse série</strong> — sans que cela vaille absence générale de faux positifs
+  (§6.6). À l’inverse, sur 39 preuves, <strong>14 n’ont vu aucun incident</strong>, l’attaque n’y ayant pas
+  saturé le service : ce n’est pas un taux de non-détection. <strong>Le vrai taux reste inconnu</strong> —
+  <code>attack_recall</code> vaut <code>NOT MEASURED</code>, limite la plus importante de l’évaluation.</p>
 
-  <h3>11.4 Tests de résilience restant à mener</h3>
-  <p>Incident principal répété trois fois de suite ; redémarrage du paiement avec politique conservée ;
-  redémarrage du remédiateur <em>pendant</em> <code>containing</code> ; indisponibilité de Loki ou de
-  Prometheus ; clé d’alerte invalide ; base indisponible ; restauration d’une sauvegarde sur une base de
-  test. Les quatre vérifications du bannissement d’adresse sont aussi à exécuter — ou la surcouche reste
-  désactivée, ce dont rien d’autre ne dépend.</p>
+  <p>Pour un contexte industriel, les prolongements les plus utiles seraient de mesurer le rappel de
+  détection sur davantage de cycles, de séparer les ressources des devis et des paiements pour supprimer
+  leur compétition, et de tester une restauration depuis une sauvegarde chiffrée hors de l’Hôte.</p>
 
-  <h3>11.5 Améliorations réalistes, par ordre de valeur</h3>
-  <table>
-    <thead><tr><th style="width:46mm">Amélioration</th><th>Pourquoi, et ce qu’elle change</th><th style="width:16mm">Effort</th></tr></thead>
-    <tbody>
-      <tr><td><strong>Séparer les pools devis et paiement</strong></td><td>Supprime la cause racine : un devis ne peut plus consommer la capacité d’un paiement. Quotas, files et budgets par fonction métier.</td><td>moyen</td></tr>
-      <tr><td><strong>Mesurer le rappel sur plusieurs incidents</strong></td><td>Transforme « le modèle a détecté cet essai » en mesure défendable. Dix essais suffiraient à donner un intervalle.</td><td>faible</td></tr>
-      <tr><td><strong>Copie de sauvegarde externe chiffrée</strong></td><td>Ferme le seul risque explicitement non résolu de la matrice (perte de l’Hôte).</td><td>faible</td></tr>
-      <tr><td>TLS applicatif et OIDC à clés asymétriques</td><td>Retire la clé symétrique partagée : seul l’émetteur peut signer. Prérequis de tout usage hors laboratoire.</td><td>élevé</td></tr>
-      <tr><td>Limitation de débit au WAF ; digests d’images figés</td><td>Ralentir un flot de requêtes valides avant saturation applicative ; maîtriser la chaîne d’approvisionnement, dont le tag mobile du WAF.</td><td>faible</td></tr>
-      <tr><td>Identité de service dédiée au remédiateur</td><td>Lui retire le compte opérateur et la clé de session : moindre privilège réel.</td><td>moyen</td></tr>
-    </tbody>
-  </table>
-
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 13 / 16</span></div>
-</section>
-
-<!-- ============================== 13. CONTRIBUTIONS ============================== -->
-<section class="page">
-  <h2>12. Contribution des six membres</h2>
-  <p>Le tableau ci-dessous associe chaque membre au domaine effectivement couvert par le dépôt et nomme
-  l’élément démontrable correspondant. <strong>Les noms et la répartition nominative restent à compléter et
-  à valider par l’équipe</strong> : le dépôt n’enregistre pas qui a écrit quoi, et aucune attribution
-  individuelle n’est inventée ici.</p>
-
+  <h2 style="margin-top:5mm">12. Contribution des six membres</h2>
+  <p class="meta">Répartition des responsabilités retenue par l’équipe. Elle rend visibles les rôles
+  convenus par SafeFlow ; l’historique Git ne permet pas d’en déduire les contributions individuelles.</p>
   <table>
     <thead><tr>
-      <th style="width:22mm">Membre</th><th style="width:34mm">Nom</th><th style="width:40mm">Domaine</th>
-      <th>Tâches couvertes par le dépôt</th><th style="width:44mm">Élément démontrable</th>
+      <th style="width:54mm">Nom</th><th style="width:56mm">Responsabilité retenue</th>
+      <th>Domaine de travail</th>
     </tr></thead>
     <tbody>
-      <tr>
-        <td><strong>Membre&nbsp;1</strong></td><td><span class="fill">à compléter</span></td>
-        <td>Paiement, registre, API</td>
-        <td>Registre atomique, idempotence, capacité partagée volontaire, contrôle d’admission applicatif, contrats OpenAPI du service de paiement.</td>
-        <td>Total du registre à 200&nbsp;000 sur les 21 reprises ; test de concurrence 40 appels même clé.</td>
-      </tr>
-      <tr>
-        <td><strong>Membre&nbsp;2</strong></td><td><span class="fill">à compléter</span></td>
-        <td>Infrastructure et remédiation</td>
-        <td>Compose 15 services et 8 réseaux, durcissement, playbook Ansible fixe, machine à états du remédiateur, reprise d’incident interrompu.</td>
-        <td>Étapes <code>containing</code> → <code>verifying</code> → <code>recovered</code> horodatées ; alerte prise en charge en 20&nbsp;ms.</td>
-      </tr>
-      <tr>
-        <td><strong>Membre&nbsp;3</strong></td><td><span class="fill">à compléter</span></td>
-        <td>Observabilité et détection ML</td>
-        <td>Métriques et journaux, collecte de baseline, entraînement OneClassSVM, calibration, journal d’observations, contrôle de jalon M7.</td>
-        <td><code>calibration-20261020T065603Z.json</code> : 0 fausse série sur 156 observations ; 17 preuves M7 validées.</td>
-      </tr>
-      <tr>
-        <td><strong>Membre&nbsp;4</strong></td><td><span class="fill">à compléter</span></td>
-        <td>Sécurité, secrets, périmètre</td>
-        <td>SOPS/age, durcissement des conteneurs, WAF et routes, double authentification opérateur, bornes du client de charge, tests d’hygiène.</td>
-        <td>Aucun secret suivi par git ; refus de périmètre couverts par test ; code à 6&nbsp;chiffres expirant en 5&nbsp;min.</td>
-      </tr>
-      <tr>
-        <td><strong>Membre&nbsp;5</strong></td><td><span class="fill">à compléter</span></td>
-        <td>Gouvernance, PCA/PRA, recette</td>
-        <td>EBIOS&nbsp;RM, analyse NIS2/DORA, objectifs RTO/RPO, sauvegarde et restauration, lanceur de recette, mode témoin sans remédiation.</td>
-        <td>13 récapitulatifs d’essai horodatés avec leur mode ; échecs conservés (<code>FAIL</code>, <code>NO_INCIDENT</code>, <code>CONTROL_NOT_INHIBITED</code>).</td>
-      </tr>
-      <tr>
-        <td><strong>Membre&nbsp;6</strong></td><td><span class="fill">à compléter</span></td>
-        <td>Interface et assistant</td>
-        <td>Console React à barre latérale, chrono sur horloge serveur, panneau de recette, bandeau d’avertissement du mode témoin, RAG TF-IDF et abstention hors corpus.</td>
-        <td>55 tests de modèle frontend ; abstention « Information absente du corpus » sans appel au modèle.</td>
-      </tr>
+      <tr><td><strong>Sofiane CHELGHOUM</strong></td><td>Chef de projet</td><td>Coordination et gouvernance</td></tr>
+      <tr><td><strong>Yanis KREIR</strong></td><td>Développement</td><td>API paiement et registre</td></tr>
+      <tr><td><strong>Walid AIT DAOUD</strong></td><td>Infrastructure</td><td>Docker Compose et Ansible</td></tr>
+      <tr><td><strong>Gabriel ROBERT</strong></td><td>IA/Data</td><td>Détection ML</td></tr>
+      <tr><td><strong>Hafsa BELKASMI</strong></td><td>Cybersécurité</td><td>Authentification, secrets et WAF</td></tr>
+      <tr><td><strong>Hafsa KODAD</strong></td><td>Interface et supervision</td><td>Observabilité et assistant documentaire</td></tr>
     </tbody>
   </table>
 
-  <h3>12.1 Éléments transverses à répartir explicitement</h3>
-  <p>Trois sujets traversent les domaines et méritent un responsable nommé au moment de la soutenance :
-  la <strong>chronologie de la démonstration</strong> (qui lance quoi, et dans quel ordre, sur les deux
-  postes), la <strong>conservation des preuves</strong> entre deux essais, et la <strong>décision d’arrêt
-  </strong> si le périmètre réseau devient douteux. Le document de plan d’équipe
-  (<code>docs/04-PLAN-EQUIPE.md</code>) attribue cinq domaines ; l’équipe comptant six personnes, la
-  sixième attribution et l’accord de chacun sur son périmètre restent
-  <span class="tag warn">à confirmer</span></p>
-
-  <div class="callout">
-    <p><strong>Note d’intégrité.</strong> Ce dossier a été rédigé à partir du code et des fichiers de
-    preuve du dépôt. Lorsqu’une information n’était pas vérifiable — répartition nominative des tâches,
-    rappel de détection, application effective du bannissement d’adresse, récapitulatif du client de charge
-    — elle est marquée « à compléter » ou « à confirmer » plutôt que comblée par une estimation.</p>
-  </div>
-
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 14 / 16</span></div>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 13 / 17</span></div>
 </section>
 
 <!-- ============================== 14. ANNEXES ============================== -->
@@ -1171,7 +1111,11 @@
     historiques sont conservés ; l’observateur distingue les nouveaux.</p>
   </div>
 
-  <h2 style="margin-top:6mm">Annexe B — Extrait de configuration : routes publiées</h2>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 14 / 17</span></div>
+</section>
+
+<section class="page">
+  <h2>Annexe B — Extrait de configuration : routes publiées</h2>
   <p class="meta">Extrait non sensible de <code>infra/nginx/default.conf</code>. Toute route non énumérée
   renvoie <code>404</code>.</p>
   <table>
@@ -1189,7 +1133,45 @@
   paiement) ni vers <code>/alerts</code> (remédiateur) : ce sont les deux seuls points de contrôle, et ils
   restent sur des réseaux internes, protégés l’un par un secret dédié, l’autre par une signature HMAC.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 15 / 16</span></div>
+  <h3>Cloisonnement réseau (§3.2)</h3>
+  <table>
+    <thead><tr><th style="width:22mm">Réseau</th><th style="width:20mm">Isolé</th><th>Services attachés</th><th style="width:58mm">Ce que le cloisonnement empêche</th></tr></thead>
+    <tbody>
+      <tr><td><code>front</code></td><td>non</td><td>waf, edge, remédiateur</td><td>Seul <code>waf</code> y publie un port.</td></tr>
+      <tr><td><code>app</code></td><td><strong>oui</strong></td><td>auth, paiement, remédiateur, frontend, edge, rag</td><td>Le trafic applicatif ne sort jamais de l’Hôte.</td></tr>
+      <tr><td><code>data</code></td><td><strong>oui</strong></td><td>base, paiement</td><td>La base n’est joignable que par le service de paiement.</td></tr>
+      <tr><td><code>control</code></td><td><strong>oui</strong></td><td>paiement, remédiateur</td><td>L’action de confinement n’est atteignable que depuis le remédiateur.</td></tr>
+      <tr><td><code>observe</code></td><td><strong>oui</strong></td><td>paiement, remédiateur, détecteur, edge, Prometheus, Loki, Alloy, Grafana</td><td>Métriques et journaux restent internes.</td></tr>
+      <tr><td><code>ai</code>, <code>mail</code>, <code>mgmt</code></td><td>non</td><td>ollama + rag ; auth ; Grafana</td><td>IA locale et envoi du code de connexion séparés du reste ; Grafana sur <code>127.0.0.1</code>.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Bornes du client de charge (§5.2)</h3>
+  <table>
+    <thead><tr><th style="width:38mm">Borne</th><th style="width:48mm">Valeur</th><th>Où elle est appliquée</th></tr></thead>
+    <tbody>
+      <tr><td>Débit</td><td>20&nbsp;req/s au maximum (une toutes les 50&nbsp;ms)</td><td>boucle d’envoi</td></tr>
+      <tr><td>Concurrence</td><td>12 requêtes en vol, 12 connexions</td><td>boucle d’envoi, <code>httpx.Limits</code></td></tr>
+      <tr><td>Volume, durée</td><td>700 requêtes ; <code>--seconds</code> de 5 à 35, <strong>30 par défaut</strong></td><td>boucle d’envoi, contrôle des arguments</td></tr>
+      <tr><td>Cible</td><td><code>POST /api/quotes</code>, corps <code>{"amount_cents": 100}</code></td><td>code du script</td></tr>
+      <tr><td>Périmètre, accord</td><td>IP littérale de <code>192.168.137.0/24</code> ou loopback ; <code>--lab-authorized</code> obligatoire</td><td><code>resolve_target</code>, contrôle des arguments</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Séries Prometheus (§8.1)</h3>
+  <table>
+    <thead><tr><th style="width:52mm">Série</th><th style="width:20mm">Type</th><th>Signification</th></tr></thead>
+    <tbody>
+      <tr><td><code>lab_requests_total{route,status}</code></td><td>compteur</td><td>Réponses métier par route et par code. Les séries sont pré-touchées au démarrage : sans cela, après un redémarrage, la requête du détecteur ne renvoie rien et il se déclare en erreur de télémétrie.</td></tr>
+      <tr><td><code>lab_capacity_denied_total</code></td><td>compteur</td><td>Requêtes rejetées parce que la capacité est épuisée. Signal direct de l’incident.</td></tr>
+      <tr><td><code>lab_active_work</code></td><td>jauge</td><td>Emplacements de capacité aval simulée occupés (0 à 4).</td></tr>
+      <tr><td><code>lab_contained</code></td><td>jauge</td><td>1 quand l’admission ciblée est active. Permet de distinguer « avant » et « après » confinement sur un graphique.</td></tr>
+      <tr><td><code>lab_duration_seconds{route}</code></td><td>histogramme</td><td>Temps de traitement par route.</td></tr>
+    </tbody>
+  </table>
+
+
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 15 / 17</span></div>
 </section>
 
 <section class="page">
@@ -1197,20 +1179,26 @@
   <table>
     <thead><tr><th style="width:58mm">Fichier</th><th style="width:22mm">Rôle</th><th>Ce qu’il établit</th></tr></thead>
     <tbody>
-      <tr><td><code>acceptance-1792584548 / 71 / 1792585122.json</code></td><td>reprise protégée</td><td>Trois reprises complètes détaillées au §10.1 ; chronologie du §5.4.</td></tr>
-      <tr><td>21 <code>acceptance-*.json</code> avec témoin validé</td><td>agrégat</td><td>Délais 2,47 / 2,82 / 6,62&nbsp;s ; indisponibilité 0,52 / 2,07 / 8,20&nbsp;s.</td></tr>
-      <tr><td><code>recette-run-1792653302 / 1792590023</code></td><td>essai témoin</td><td>48 et 54 paiements refusés sans remédiation ; incidents <code>observed</code>.</td></tr>
+      <tr style="background:#eaf0f6"><td><code>recette-run-1792659908-c3ab69b0.json</code><br><code>acceptance-1792659988.json</code><br><code>m7-proof-20261022T090634Z.json</code></td><td>cycle protégé de référence<br>22/10 09:05</td><td>Cycle complet recoupé : <code>PASS</code> sur les trois contrôles, reprise en 6,88&nbsp;s, témoin validé, registre à 200&nbsp;000, M7 4/4 avec 130,4 rejets de capacité. §5.4 et §10.1.</td></tr>
+      <tr><td>Récapitulatif du PC Attaquant<br><span class="meta">run <code>92119f71</code>, non versionné</span></td><td>charge</td><td>521 requêtes <code>/api/quotes</code> en 30,4&nbsp;s : 84 <code>200</code>, 116 <code>503</code>, 321 <code>429</code>. Fournit l’heure de lancement, sans laquelle la chaîne complète ne pouvait pas être mesurée.</td></tr>
+      <tr><td>22 <code>acceptance-*.json</code> avec témoin validé</td><td>agrégat</td><td>Détection → témoin : 2,47 / 2,83 / 6,88&nbsp;s. 22 cycles sur 22 sous la cible de 60&nbsp;s.</td></tr>
+      <tr><td><code>recette-run-1792653302</code> / <code>1792590023</code></td><td>essai témoin</td><td>48 et 54 paiements refusés sans remédiation ; incidents <code>observed</code>.</td></tr>
       <tr><td><code>recette-run-1792589548-4afbab60.json</code></td><td>essai invalide</td><td>Remédiation appliquée malgré l’essai ; conservé comme échec.</td></tr>
       <tr><td><code>calibration-20261020T065603Z.json</code></td><td>calibration</td><td><code>nu=0,02</code>, <code>consecutive=3</code> : 0 fausse série sur 156 observations.</td></tr>
       <tr><td><code>ml-report.json</code>, <code>ml-baseline.json</code></td><td>modèle</td><td>90 observations, 72/18, SHA-256 du jeu, <code>attack_recall: NOT MEASURED</code>.</td></tr>
-      <tr><td>17 <code>m7-proof-*.json</code> validées sur 22</td><td>détection</td><td>Pic mesuré 4,88–6,63&nbsp;req/s contre 1,37 en enveloppe ; 7 à 19 observations anormales.</td></tr>
-      <tr><td><code>evidence/pytest.txt</code>, <code>evidence/frontend-build.txt</code></td><td>contrôles</td><td>Trace d’exécution de la suite de tests et de la construction de l’interface.</td></tr>
+      <tr><td>18 <code>m7-proof-*.json</code> validées sur 23</td><td>détection</td><td>Pic mesuré 4,88–6,63&nbsp;req/s contre 1,37 en enveloppe ; 7 à 19 observations anormales.</td></tr>
     </tbody>
   </table>
-  <p class="meta"><strong>Avertissement sur le dossier de preuves.</strong> Il contient aussi
-  35 récapitulatifs <code>recette-run-*</code> d’une durée inférieure à 10&nbsp;ms, écrits par la suite de
-  tests automatisés et non par un essai réel. Ils sont identifiables à cette durée et à leurs horodatages
-  groupés, et ne sont pas utilisés dans ce dossier. Les 13 essais réels durent de 78 à 87&nbsp;s.</p>
+  <p class="meta"><strong>Trois avertissements sur le dossier de preuves.</strong> Sur les
+  50 fichiers <code>recette-run-*</code>, <strong>35 ont une durée inférieure à 10&nbsp;ms</strong> : ils
+  ont été écrits par la suite de tests automatisés, pas par un cycle réel, et ne sont pas utilisés ici — les
+  cycles réels durent de 78 à 87&nbsp;s. <strong>Un fichier est illisible</strong>
+  (<code>recette-run-1792567578-d857f112.json</code>, JSON invalide, caractères parasites en tête) : le
+  cycle correspondant du 21/10 07:26 a bien eu lieu et sa preuve <code>acceptance-1792567653.json</code>
+  est valide et comptée, mais son récapitulatif ne peut pas être relu — d’où 14 récapitulatifs exploitables
+  pour 15 cycles tentés. Enfin <code>evidence/pytest.txt</code> et
+  <code>evidence/frontend-build.txt</code> datent du 19/10 et d’un environnement Linux : traces
+  <em>historiques</em>, remplacées par l’exécution du 22/10 (§10.5).</p>
 
   <h2 style="margin-top:6mm">Annexe D — Documents de référence du dépôt</h2>
   <p><code>docs/01-EXIGENCES.md</code> exigences et critères de preuve · <code>02-ARCHITECTURE.md</code>
@@ -1221,7 +1209,44 @@
   <code>09-RECETTE-RENDU.md</code> checklist de recette et livrables · <code>INSTALL.md</code> installation ·
   <code>VALIDATION.md</code> état des validations réellement exécutées.</p>
 
-  <div class="foot"><span>SafeFlow — Project Resilience-Alpha</span><span>Page 16 / 16</span></div>
+
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 16 / 17</span></div>
+</section>
+
+<section class="page">
+  <h2>Annexe E — Matrices de gouvernance</h2>
+  <p class="meta">Tableaux détaillés du §9.5 et du §9.6. Échelle qualitative 1 (faible) à 4 (critique) ; le
+  produit V×G hiérarchise en interne et <strong>n’est pas un score EBIOS officiel</strong>. Les deux lignes
+  grisées sont les risques explicitement <em>non résolus</em> par la démonstration.</p>
+  <table>
+    <thead><tr><th>Risque</th><th class="num" style="width:15mm">V×G<br>initial</th><th>Traitement et preuve</th><th class="num" style="width:15mm">Résiduel</th></tr></thead>
+    <tbody>
+      <tr><td>Indisponibilité devis/paiement</td><td class="num">4×3</td><td>Détection ML, admission ciblée, transaction de vérification</td><td class="num">2×3</td></tr>
+      <tr><td>Double débit lors d’un rejeu</td><td class="num">3×4</td><td>Transaction base, verrou ordonné, idempotence ; test concurrent 40 appels</td><td class="num">1×4</td></tr>
+      <tr><td>Abus de remédiation</td><td class="num">3×4</td><td>HMAC, fraîcheur, action fixe, aucun socket Docker</td><td class="num">1×4</td></tr>
+      <tr><td>Secrets dans les livrables</td><td class="num">3×4</td><td>SOPS/age, exclusion de l’archive, revue de manifeste</td><td class="num">1×4</td></tr>
+      <tr><td>Instruction malveillante via le RAG</td><td class="num">3×3</td><td>Corpus contrôlé, aucun outil d’action, aucun secret de contrôle</td><td class="num">2×2</td></tr>
+      <tr style="background:#fbeef0"><td><strong>Perte du PC Hôte</strong></td><td class="num">2×4</td><td>Sauvegarde avec empreinte ; copie externe chiffrée <strong>à organiser</strong></td><td class="num"><strong>2×4</strong></td></tr>
+      <tr style="background:#fbeef0"><td><strong>Journaux ou ML indisponibles</strong></td><td class="num">2×3</td><td>État d’erreur explicite ; aucune fausse reprise</td><td class="num"><strong>2×3</strong></td></tr>
+    </tbody>
+  </table>
+  <h3>NIS2 / DORA — thèmes, apports et écarts</h3>
+  <table>
+    <thead><tr><th style="width:34mm">Thème</th><th>Ce que le prototype apporte</th><th style="width:48mm">Écart industriel</th></tr></thead>
+    <tbody>
+      <tr><td>Gouvernance du risque TIC</td><td>EBIOS synthétique, un responsable par domaine, décisions tracées avec leur coût</td><td>Validation direction, politique formelle, contrôles indépendants</td></tr>
+      <tr><td>Gestion d’incident</td><td>Détection, chronologie horodatée, action autorisée, états <code>recovered</code>/<code>failed</code> distincts</td><td>Qualification réglementaire, procédure formelle de notification</td></tr>
+      <tr><td>Continuité et restauration</td><td>Objectifs RTO/RPO écrits, sauvegarde et contrôle d’empreinte</td><td>Sites indépendants, exercices réguliers, sauvegardes hors machine testées</td></tr>
+      <tr><td>Tests de résilience</td><td>Scénario borné, tests automatisés et preuves de reprise conservées</td><td>Programme de tests proportionné aux exigences applicables</td></tr>
+      <tr><td>Accès et secrets</td><td>Sessions signées, rôles, SOPS/age, double authentification opérateur</td><td>IAM complet, rotation et revue des droits, TLS</td></tr>
+      <tr><td>Prestataires TIC</td><td>Inventaire des images, du modèle et des dépendances</td><td>Diligence, contrats, registre réglementaire, stratégie de sortie</td></tr>
+      <tr><td>Signalement</td><td>Journal d’incident pédagogique</td><td><strong>Aucun signalement réel</strong> ; rôles, seuils et délais à valider</td></tr>
+    </tbody>
+  </table>
+
+
+  <p class="meta">La machine Hôte peut altérer ses propres journaux ; cette architecture de laboratoire ne démontre pas l’inaltérabilité industrielle des preuves.</p>
+  <div class="foot"><span>SafeFlow — PROJECT RESILIENCE-ALPHA</span><span>Page 17 / 17</span></div>
 </section>
 
 </body>

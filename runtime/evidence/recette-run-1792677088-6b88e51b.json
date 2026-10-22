@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "run_id": "6b88e51b-6aac-4f80-b93c-01fd088ef34d",
+  "started_at_utc": "2026-10-22T13:51:28.772084Z",
+  "ended_at_utc": "2026-10-22T13:52:52.048771Z",
+  "started_at_epoch": 1792677088.7720838,
+  "ended_at_epoch": 1792677172.0487707,
+  "duration_s": 83.277,
+  "target": "http://192.168.137.1:8081",
+  "attack_launched_by_runner": false,
+  "status": "NO_INCIDENT",
+  "mode": "protected",
+  "remediation_inhibited": false,
+  "control_trial": null,
+  "observed_impact": null,
+  "expected_failures": [],
+  "preparation": [
+    {
+      "name": "reset_policy",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "restart_payment",
+      "verdict": "PASS",
+      "exit_code": 0
+    },
+    {
+      "name": "waf_payment_ready",
+      "verdict": "PASS",
+      "exit_code": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "acceptance",
+      "verdict": "FAIL",
+      "exit_code": 1,
+      "summary": "FAIL",
+      "details": [
+        "FAIL"
+      ]
+    },
+    {
+      "name": "check_mardi",
+      "verdict": "FAIL",
+      "exit_code": 1,
+      "summary": "FAIL",
+      "details": [
+        "FAIL",
+        "    [1/5] Detecteur : un modele entraine est charge (/anomaly) ... OK",
+        "          status monitoring, score -0.3200",
+        "    [2/5] Detecteur : au repos, /anomaly renvoie anomaly=false ... OK",
+        "          anomaly=false, score -0.3200",
+        "    [3/5] Prometheus : le pic d'attaque est mesure sur la fenetre ... ECHEC : aucun rejet de capacite sur la fenetre : l'attaque n'a pas sature le service, ou la fenetre est mal placee",
+        "    [4/5] Detecteur : anomaly=true produit sur cette meme fenetre ... ECHEC : 53 observations mais aucune anormale (score minimal -0.320, compteur max 0) : le modele ne reconnait pas cette attaque, ou la fenetre ne la couvre pas",
+        "    [5/5] Preuve horodatee ecrite dans runtime/evidence/ ... OK",
+        "          preuve ecrite : C:\\Users\\ian chel\\Documents\\GitHub\\Project Resilience Alpha\\runtime\\evidence\\m7-proof-20261022T135251Z.json",
+        "    ",
+        "    3/5 verifications OK : jalon M7 NON valide.",
+        "    Non verifiable par script : la demonstration refaite devant les 6, et zero faux positif sur un trafic normal soutenu (docs/05-ML-RAG.md, Calibration)."
+      ]
+    },
+    {
+      "name": "check_mercredi",
+      "verdict": "FAIL",
+      "exit_code": 1,
+      "summary": "FAIL",
+      "details": [
+        "FAIL",
+        "    Preuve lue : C:\\Users\\ian chel\\Documents\\GitHub\\Project Resilience Alpha\\runtime\\evidence\\acceptance-1792677165.json (ecrite il y a 0 min)",
+        "    ATTENTION : la preuve a ete produite avec des modifications non commitees",
+        "    [1/5] La boucle est allee de la detection a la transaction temoin ... ECHEC : etapes absentes : detected, containing, verifying, recovered. La boucle ne va pas de la detection a la transaction temoin.",
+        "    [2/5] Detection -> service retabli sous la cible ... ECHEC : temps detection -> service retabli absent de la preuve",
+        "    [3/5] Aucune intervention humaine dans la trace ... ECHEC : l'observateur n'a pas juge l'execution reussie (passed=false); aucun incident observe : rien ne prouve que la reprise a ete declenchee par le systeme",
+        "    [4/5] Ban d'IP (si active) pose ET transaction temoin validee ... ECHEC : aucune information de ban dans la preuve : le remediateur n'a rien consigne",
+        "    [5/5] Configuration du detecteur consignee ... OK",
+        "          consecutive=3, nu=0.02",
+        "    ",
+        "    1/5 verifications OK : jalon W7 NON valide.",
+        "    Non verifiable par script : que PERSONNE n'a touche le clavier pendant l'execution, et la repetabilite (5 executions de suite : jeudi)."
+      ]
+    }
+  ],
+  "acceptance_evidence_file": "acceptance-1792677165.json"
+}
