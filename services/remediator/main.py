@@ -24,9 +24,9 @@ tasks=set()
 # ---- control trial (essai temoin) --------------------------------------------------------------------------
 # A CONTROL TRIAL lets the team compare the lab WITH and WITHOUT the automatic response: the detector keeps
 # measuring, alerting and journaling exactly as usual, and the incident is recorded with its real detection
-# time, but this service applies NO containment, NO ban and NO witness transaction for ONE incident.
-# It is deliberately NOT a switch: it is bounded in time (TRIAL_MAX_S), closed by the first incident it
-# observes, operator-only, and never written to disk -- a restart of this service always comes back with
+# time, but this service applies NO containment, NO ban and NO witness transaction to incidents observed
+# during the bounded window. It is deliberately NOT an open-ended switch: it is bounded in time
+# (TRIAL_MAX_S), operator-only, and never written to disk -- a restart of this service always comes back with
 # remediation ENABLED. The WAF, the MFA login, the attempt budget and every other defence are untouched.
 TRIAL_MIN_S=5.0
 TRIAL_MAX_S=300.0
@@ -36,7 +36,7 @@ def trial_open(seconds,who):
     trial.update(active=True,until=now+seconds,armed_at=now,armed_by=who,incident_id=None,closed=None)
     emit('remediator','control_trial_armed',seconds=seconds,armed_by=who)
 def trial_close(reason,incident_id=None):
-    """Remediation comes back ON: called by the first observed incident, by the deadline, or by the operator."""
+    """Remediation comes back ON at the deadline, on operator stop, or when this process restarts."""
     if not trial['active']: return False
     trial.update(active=False,until=0.0,closed=reason,incident_id=incident_id or trial['incident_id'])
     emit('remediator','control_trial_closed',reason=reason,incident_id=trial['incident_id'])
@@ -106,10 +106,11 @@ def alert_data(incident_id):
 async def recover(incident_id):
     async with lock:
         if trial_active():
-            # CONTROL TRIAL: journal the incident and stop there. No containment, no ban, no witness
-            # transaction -- `observed` is a terminal status and never reads as a recovery. The trial closes
-            # on this one incident, so remediation is back ON for whatever happens next.
-            trial_close('incident_observed',incident_id)
+            # CONTROL TRIAL: journal every incident in the bounded observation window and stop there. No
+            # containment, no ban, no witness transaction -- `observed` is terminal and never reads as a
+            # recovery. Keep the window open so a sustained attack is observed for its full duration; the
+            # deadline, operator stop, launcher finally, or process restart restores remediation.
+            if trial['incident_id'] is None: trial['incident_id']=incident_id
             update(incident_id,'observed',{'mode':'control_trial','remediation_applied':False,
                 'note':'Essai temoin : confinement non applique. Impact observe sans remediation ; '
                        'ce resultat n est PAS une reprise.'})
@@ -214,8 +215,8 @@ def control_trial_state(user=Depends(operator)):
 @app.post('/control-trial')
 async def control_trial_control(request: Request,user=Depends(operator)):
     """Arm (`start`) or end (`stop`) a control trial. Operator only: an authenticated operator is the only
-    way in and the only way out, besides the deadline and the first observed incident. `start` demands an
-    explicit confirmation and a bounded duration, so no caller can leave remediation off."""
+    way in and the only way out, besides the deadline and process restart. `start` demands an explicit
+    confirmation and a bounded duration, so no caller can leave remediation off."""
     raw=await request.body()
     if len(raw)>512: raise HTTPException(413,'Request too large')
     try:

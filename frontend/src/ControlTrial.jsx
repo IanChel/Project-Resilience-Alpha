@@ -21,7 +21,7 @@ export default function ControlTrialBanner({window:w,onEnd,busy}){
           <p className="font-semibold text-amber-100">Essai témoin en cours — remédiation automatique inhibée</p>
           <p className="mt-1 text-sm text-amber-200">
             Le détecteur continue de mesurer, d’alerter et de journaliser. Le remédiateur n’appliquera aucun
-            confinement pour un incident. Le WAF, la connexion opérateur et la limitation des essais restent actifs.
+            confinement aux incidents pendant la fenêtre. Le WAF, la connexion opérateur et la limitation des essais restent actifs.
           </p>
           <p className="meta mt-1.5 text-amber-200/80">
             {left?`Réactivation automatique dans ${left}`:'Réactivation automatique à l’échéance de la fenêtre'}
@@ -48,7 +48,7 @@ export function TrialLauncher({window:w,status,onStart,starting,canStart,checks}
     <p className="text-sm text-slate-300">
       Mesure l’effet de la charge de requêtes de devis sur <code>/api/quotes</code> quand la résolution
       automatique n’intervient pas. Le détecteur détecte et journalise comme d’habitude ; le remédiateur
-      n’applique pas son confinement, pour un seul incident et pour une durée bornée. Les paiements fictifs sur
+      n’applique pas son confinement aux incidents pendant toute la fenêtre bornée. Les paiements fictifs sur
       <code>/api/payments</code> servent à mesurer l’impact métier.
     </p>
     {outcome&&<div className="space-y-1">

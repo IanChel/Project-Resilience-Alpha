@@ -5,7 +5,7 @@ on the ATTACKER PC. This script never runs attack_lab.py.
 Two modes, chosen with --mode:
   protected (default) the recette as documented: the remediator answers the alert and the recovery is judged.
   control             an essai temoin: the detector still measures, alerts and journals, but the remediator
-                      applies NO containment for ONE incident, so the team can see what the quote load does
+                      applies NO containment to incidents during the bounded observation window, so the team can see what the quote load does
                       WITHOUT the automatic response. The window is armed on the remediator with an operator
                       session, is bounded in time, and is ended again in a finally -- including when a step
                       fails. A control trial is NEVER a PASS: it inhibits the very recovery the PASS criteria
@@ -110,7 +110,7 @@ def end_trial(url,token):
 def end_control_trial(url,token,previous=None,quiet=False):
     """End the trial and report the window as the SERVICE sees it. Safe to call twice: `stop` on a window that
     is already closed just returns its state. A failure is announced, never swallowed -- the remediator still
-    closes the window on its own deadline and on the first incident it observed, so remediation comes back
+    closes the window on its own deadline, so remediation comes back
     even if this host process dies here."""
     if token is None: return previous
     try:
@@ -119,7 +119,7 @@ def end_control_trial(url,token,previous=None,quiet=False):
         return state
     except (OSError,TimeoutError,ValueError,KeyError,json.JSONDecodeError) as exc:
         print('  ATTENTION : fin d\'essai temoin non confirmee (%s). La remediation revient a l\'echeance de '
-              'la fenetre (au plus %gs) et des le premier incident observe.'%(type(exc).__name__,TRIAL_MAX_S),flush=True)
+              'la fenetre (au plus %gs) ou au redemarrage du remediateur.'%(type(exc).__name__,TRIAL_MAX_S),flush=True)
         return {**(previous or {}),'closed_confirmed':False,'close_error':type(exc).__name__}
 
 def new_tally():
@@ -211,7 +211,7 @@ def confirm(auto,mode='protected'):
     if mode=='control':
         print('  ESSAI TEMOIN SANS REMEDIATION :')
         print('  - le detecteur continue de mesurer, d\'alerter et de journaliser ;')
-        print('  - le remediateur n\'appliquera AUCUN confinement pour UN incident, le temps de cet essai ;')
+        print('  - le remediateur n\'appliquera AUCUN confinement aux incidents pendant la fenetre bornee ;')
         print('  - WAF, MFA, limitation des essais de connexion et autres defenses restent ACTIFS ;')
         print('  - la remediation est reactivee a la fin de l\'essai, a l\'echeance, ou si ce lanceur echoue ;')
         print('  - ce n\'est pas une recette protegee : aucun resultat ne sera marque PASS.')
@@ -358,7 +358,7 @@ def _observe_and_check(seconds,url,mode,prep,results,tally,started_epoch):
         # The clean state above is the reset the protected recette already uses; the window is armed only once
         # the service answers /api/ready, so the trial covers the observation and not the preparation.
         if mode=='control':
-            print('\n[essai temoin] Inhibition de la remediation automatique pour UN incident')
+            print('\n[essai temoin] Inhibition de la remediation automatique pendant la fenetre bornee')
             window=trial_seconds(seconds)
             try:
                 token=op_token(url)

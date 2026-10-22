@@ -69,16 +69,18 @@ rendent la perte visible (503). Le mode protégé reste inchangé.
 Ce que l'essai inhibe, et ce qu'il n'inhibe pas :
 - le détecteur continue de mesurer, de détecter, d'alerter et de journaliser ; l'incident est enregistré avec sa
   vraie heure de détection ;
-- le remédiateur n'applique **ni confinement, ni ban, ni transaction témoin** pour **un seul** incident, qui
-  termine dans le statut `observed` ;
+- le remédiateur n'applique **ni confinement, ni ban, ni transaction témoin** aux incidents observés pendant
+  toute la fenêtre bornée ; chaque incident concerné termine dans le statut `observed` ;
 - le WAF, la connexion opérateur (e-mail + mot de passe + code), la limitation des essais de connexion et les
   autres défenses restent **actifs**. Ce n'est pas un arrêt de la sécurité.
 
 Garde-fous (`services/remediator/main.py`, `trial_*`) :
 - la fenêtre est **bornée** : 5 à 300 s, plafond appliqué par le service lui-même ;
-- elle se ferme **au premier incident observé** — un essai, un incident ;
+- elle reste ouverte après les incidents observés afin de couvrir toute la fenêtre de test ;
 - elle se ferme **à l'échéance**, y compris si personne ne lit l'état (vérifié dans `recover()` et par la boucle
   d'entretien) ;
+- le lanceur la ferme aussi à la fin de l'observation et des contrôles, via `finally` ; l'opérateur peut la fermer
+  immédiatement depuis le bandeau ;
 - elle n'est **jamais écrite sur disque** : tout redémarrage du remédiateur revient avec la remédiation active ;
 - seul un **opérateur authentifié** peut l'armer ou y mettre fin (`POST /ops/control-trial`) ;
 - le lanceur y met fin dans un `finally`, même si une étape échoue ou si on l'interrompt ;

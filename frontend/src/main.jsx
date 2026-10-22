@@ -25,12 +25,13 @@ function App(){
  const [trial,setTrial]=useState(null);
  // shell + forms
  const [page,setPage]=useState(DEFAULT_PAGE),[navOpen,setNavOpen]=useState(false);
- const [amount,setAmount]=useState('100'),[tx,setTx]=useState(null);
+ const [amount,setAmount]=useState('100'),[paymentResult,setPaymentResult]=useState(null);
  const [question,setQuestion]=useState('Comment vérifier la reprise du paiement ?'),[answer,setAnswer]=useState(null);
  async function api(path,body,extra={}){
    const r=await fetch(path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{}),...extra},...(body?{body:JSON.stringify(body)}:{})});
    let data; try{data=await r.json();}catch{data={};}   // a 403 from the WAF or a 502/504 is not JSON: show the status, not a parse error
-   if(!r.ok)throw new Error(`${r.status} — ${data.detail||r.statusText||'Service indisponible'}`);return data;
+   if(!r.ok){const error=new Error(`${r.status} — ${data.detail||r.statusText||'Service indisponible'}`);
+     error.status=r.status;error.detail=typeof data.detail==='string'?data.detail:'';throw error;}return data;
  }
  // Probe one component without throwing: a failure returns a status, so one component being down never hides the others.
  async function probe(path){
@@ -56,9 +57,17 @@ function App(){
    if(p.ok)setSnap(p.data); if(o.ok){setOps(o.data.incidents);setClock({now:o.data.now,at:performance.now()});setTrial(o.data.control_trial||null);} if(m.ok)setMl(m.data);
    setSupervisionError(p.ok||o.ok||m.ok?'':'Supervision injoignable — voir l’état des composants.');   // a success clears the transient error; a total failure names where to look
  };refresh();const id=setInterval(refresh,2000);return()=>{alive=false;clearInterval(id);};},[token]);
- async function pay(){setBusy(true);setActionError('');setTx(null);
-   try{const t=await api('/api/payments',{amount_cents:Number(amount),recipient:'merchant'},{'Idempotency-Key':Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,'0')).join('')});setTx(t.transaction.id);}
-   catch(e){setActionError(e.message);}finally{setBusy(false);}}
+ async function pay(){setBusy(true);setActionError('');setPaymentResult({kind:'pending'});
+   try{const t=await api('/api/payments',{amount_cents:Number(amount),recipient:'merchant'},{'Idempotency-Key':Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,'0')).join('')});
+     setPaymentResult({kind:'success',transactionId:t.transaction.id});}
+   catch(e){
+     const message=e.status===503?'Service indisponible ou saturé (HTTP 503).':
+       e.status===429?'Requête limitée (HTTP 429).':
+       Number.isInteger(e.status)?`Paiement refusé (HTTP ${e.status})${e.detail?` — ${e.detail}`:'.'}`:
+       'Aucune confirmation reçue du serveur. Vérifie les dernières transactions avant de réessayer.';
+     setPaymentResult({kind:'failure',message});
+   }finally{setBusy(false);}}
+ function changeAmount(value){setAmount(value);setPaymentResult(null);}
  async function ask(){setBusy(true);setActionError('');
    try{setAnswer(await api('/rag/ask',{question}));}catch(e){setActionError(e.message);}finally{setBusy(false);}}
  // Bring the automatic remediation back now. `stop` is the ONLY write the browser makes to the window: a trial
@@ -68,7 +77,7 @@ function App(){
  function logout(){
    setToken('');setAccount('');setChallengeId('');setPendingEmail('');
    setSnap(null);setOps([]);setMl(null);setClock(null);setProbes({});setTrial(null);
-   setTx(null);setAnswer(null);setActionError('');setSupervisionError('');
+   setPaymentResult(null);setAnswer(null);setActionError('');setSupervisionError('');
    setPage(DEFAULT_PAGE);setNavOpen(false);
  }
  if(!token)return <Login awaitingCode={!!challengeId} busy={busy} error={actionError}
@@ -88,7 +97,7 @@ function App(){
     {actionError&&<Alert>{actionError}</Alert>}
     {supervisionError&&<Alert tone="warn">{supervisionError}</Alert>}
     {current.key==='overview'&&<OverviewPage probes={probes} ml={ml} ops={ops} snap={snap} clock={clock} onNavigate={navigate}/>}
-    {current.key==='payment'&&<PaymentPage amount={amount} onAmount={setAmount} onPay={pay} busy={busy} tx={tx} snap={snap}
+    {current.key==='payment'&&<PaymentPage amount={amount} onAmount={changeAmount} onPay={pay} busy={busy} paymentResult={paymentResult} snap={snap}
       probes={probes} token={token} incident={ops[0]} ml={ml} clock={clock} trialWindow={trialWindow}/>}
     {current.key==='supervision'&&<SupervisionPage probes={probes} ml={ml} ops={ops} clock={clock}
       question={question} onQuestion={setQuestion} onAsk={ask} answer={answer} busy={busy} trialWindow={trialWindow}/>}

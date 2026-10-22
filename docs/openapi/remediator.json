@@ -131,7 +131,7 @@
       },
       "post": {
         "summary": "Armer ou terminer un essai temoin",
-        "description": "Reserve au role `operator` : un operateur authentifie est la seule entree et la seule sortie manuelle. `start` exige `confirmed: true` et une duree bornee (`seconds`, de 5 a 300) ; `stop` reactive la remediation immediatement. La remediation est AUSSI reactivee automatiquement a l'echeance, des que le premier incident a ete observe, et a tout redemarrage du service. Refuse (409) si une remediation est deja en cours, pour ne pas l'inhiber a mi-parcours.",
+        "description": "Reserve au role `operator` : un operateur authentifie est la seule entree et la seule sortie manuelle. `start` exige `confirmed: true` et une duree bornee (`seconds`, de 5 a 300) ; `stop` reactive la remediation immediatement. Pendant toute la fenetre, chaque incident est consigne en `observed` sans confinement, ban ni transaction temoin. La remediation est reactivee automatiquement a l'echeance ou a tout redemarrage du service. Refuse (409) si une remediation est deja en cours, pour ne pas l'inhiber a mi-parcours.",
         "operationId": "control_trial_control_post",
         "security": [{ "sessionToken": [] }],
         "x-exposure": "public (/ops/control-trial)",
@@ -302,8 +302,8 @@
           "observed_incident_id": { "type": ["string", "null"], "description": "L'incident consigne par le dernier essai, s'il y en a eu un." },
           "closed_reason": {
             "type": ["string", "null"],
-            "enum": ["incident_observed", "expired", "operator_stopped", null],
-            "description": "Comment le dernier essai s'est termine : `incident_observed` (un incident a ete consigne, la remediation est revenue), `expired` (echeance atteinte) ou `operator_stopped` (reactivation immediate demandee par l'operateur)."
+            "enum": ["expired", "operator_stopped", null],
+            "description": "Comment le dernier essai s'est termine : `expired` (echeance atteinte) ou `operator_stopped` (reactivation immediate demandee par l'operateur)."
           }
         },
         "title": "ControlTrial"

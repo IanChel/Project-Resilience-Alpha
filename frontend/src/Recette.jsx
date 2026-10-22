@@ -11,7 +11,7 @@ const PHASE={idle:'Prêt',starting:'Démarrage du lanceur',resetting:'Réinitial
 const CONFIRM={
   protected:'Un nouvel essai va supprimer uniquement la politique de confinement, redémarrer payment, puis lancer acceptance. Confirmez que l’attaque précédente est arrêtée et qu’aucune recette n’est en cours. L’attaque devra être lancée manuellement sur le PC Attaquant.',
   control:'ESSAI TÉMOIN SANS REMÉDIATION AUTOMATIQUE.\n\n'+
-    'Le détecteur continue de mesurer, de détecter et de journaliser. Le remédiateur n’appliquera AUCUN confinement pour UN incident, pendant une fenêtre bornée dans le temps.\n\n'+
+    'Le détecteur continue de mesurer, de détecter et de journaliser. Le remédiateur n’appliquera AUCUN confinement aux incidents pendant toute la fenêtre bornée de l’essai.\n\n'+
     'Le WAF, la connexion opérateur, la limitation des essais et les autres défenses restent ACTIFS. Ce n’est pas un arrêt de la sécurité.\n\n'+
     'La remédiation est réactivée à la fin de l’essai, à l’échéance de la fenêtre, si le lanceur échoue, ou immédiatement depuis le bandeau d’avertissement.\n\n'+
     'Aucun résultat ne sera marqué PASS : acceptance et check_mercredi vérifient une reprise, volontairement inhibée ici.\n\n'+

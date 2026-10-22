@@ -5,8 +5,10 @@ import {groupDigits,shortId} from './nav.js';
 import {Card,Row,Action,Empty,Badge,Status} from './ui.jsx';
 // The payment workspace: run a fictitious transaction, read the ledger the API returns, drive the recette and
 // read the recovery chrono. No value here is computed in the browser; all of it comes from /api/accounts.
-export default function PaymentPage({amount,onAmount,onPay,busy,tx,snap,probes,token,incident,ml,clock,trialWindow}){
+export default function PaymentPage({amount,onAmount,onPay,busy,paymentResult,snap,probes,token,incident,ml,clock,trialWindow}){
   const paymentOk=!!probes.payment?.ok;
+  const amountValue=Number(amount);
+  const amountValid=Number.isInteger(amountValue)&&amountValue>=1&&amountValue<=100000;
   const total=groupDigits(snap?.total_cents);
   const intact=snap&&snap.total_cents===200000;
   return <div className="space-y-5">
@@ -19,12 +21,16 @@ export default function PaymentPage({amount,onAmount,onPay,busy,tx,snap,probes,t
               value={amount} onChange={e=>onAmount(e.target.value)}/>
             <p className="meta mt-1.5">Entre 1 et 100 000 centimes.</p>
           </div>
-          <Action busy={busy} busyLabel="Paiement en cours…" onClick={onPay} disabled={!paymentOk}>
+          <Action busy={busy} busyLabel="Paiement en cours…" onClick={onPay} disabled={!amountValid}>
             Payer le marchand fictif</Action>
-          {!paymentOk&&<p className="meta">Le service de paiement est injoignable : l’action est désactivée.</p>}
-          {tx&&<div className="rounded-lg border border-emerald-800 bg-emerald-950/30 p-3">
-            <Status tone="ok" className="text-sm">Transaction confirmée</Status>
-            <p className="mt-1 break-all font-mono text-xs text-emerald-200">{tx}</p>
+          {probes.payment&&!paymentOk&&<p className="meta">La supervision ne joint pas l’API paiement. Tu peux tenter un paiement pour obtenir sa réponse réelle.</p>}
+          {paymentResult?.kind==='success'&&<div role="status" className="rounded-lg border border-emerald-800 bg-emerald-950/30 p-3">
+            <Status tone="ok" className="text-sm">Transaction réussie — confirmation du serveur reçue</Status>
+            <p className="mt-1 break-all font-mono text-xs text-emerald-200">Référence : {paymentResult.transactionId}</p>
+          </div>}
+          {paymentResult?.kind==='failure'&&<div role="alert" className="rounded-lg border border-rose-800 bg-rose-950/30 p-3">
+            <Status tone="bad" className="text-sm">Transaction échouée</Status>
+            <p className="mt-1 text-sm text-rose-200">{paymentResult.message}</p>
           </div>}
         </div>
       </Card>

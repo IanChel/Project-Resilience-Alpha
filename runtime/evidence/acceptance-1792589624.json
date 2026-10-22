@@ -1,0 +1,2908 @@
+{
+  "observations": [
+    {
+      "at": 1792589553.3699486,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792589553.9861603,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792589554.6111536,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792589555.223751,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792589555.851997,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792589556.4685266,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589556.9830315,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792589557.59763,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589558.1147757,
+      "payment_status": 200,
+      "incidents": []
+    },
+    {
+      "at": 1792589558.7545261,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589559.269736,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589559.7915592,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589560.311343,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589560.8300953,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589561.3477294,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589561.865529,
+      "payment_status": 503,
+      "incidents": []
+    },
+    {
+      "at": 1792589562.3803315,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589562.9141073,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589563.4453554,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589563.9684768,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589564.483708,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589565.0035825,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589565.5232992,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589566.0456185,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589566.5615926,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589567.0767024,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589567.5915396,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589568.111554,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589568.6271677,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589569.1437695,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589569.6593683,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589570.1746001,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589570.6899738,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589571.2055008,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589571.7272344,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589572.2456815,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589572.7771845,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589573.3049128,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589573.831796,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589574.3486283,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589574.8645568,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589575.380228,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589575.8995695,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589576.417547,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589576.9330904,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589577.4504297,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589577.9701595,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589578.48513,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589579.0027916,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589579.521046,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589580.036501,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589580.6561973,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589581.170943,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589581.6892734,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589582.2072518,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589582.7271867,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589583.2433596,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589583.7619278,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589584.277583,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589584.7996867,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589585.317817,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589585.8435934,
+      "payment_status": 503,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589586.3981478,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589587.0146472,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589587.6377382,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589588.2528214,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589588.8991756,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589589.5307024,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589590.1440444,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589590.7643747,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589591.378916,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589592.011032,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589592.6257339,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589593.2405453,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "containing",
+          "created": 1792589592.8330965,
+          "updated": 1792589592.8365777,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589593.8575773,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "containing",
+          "created": 1792589592.8330965,
+          "updated": 1792589592.8365777,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589594.4860506,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "containing",
+          "created": 1792589592.8330965,
+          "updated": 1792589592.8365777,
+          "evidence": "{\"action\": \"enable_quote_admission\", \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589595.1130824,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "verifying",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.1902547,
+          "evidence": "{\"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589595.7441444,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589596.3589897,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589596.979883,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589597.6051075,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589598.2241886,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589598.849472,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589599.4642575,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589600.0810606,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589600.721279,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589601.3597636,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589601.972702,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589602.6177664,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589603.232219,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589603.8569977,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589604.482914,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589605.1083198,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589605.7264583,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589606.338435,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589606.9577203,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589607.5853615,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589608.2049553,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589608.825497,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589609.441183,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589610.0564303,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589610.6717422,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589611.312953,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589611.9249418,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589612.5502186,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589613.1716428,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589613.7959871,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589614.4165282,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589615.0445275,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589615.6615613,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589616.2865746,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589616.9384134,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589617.561988,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589618.188037,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589618.815668,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589619.4348495,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589620.064133,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589620.6929536,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589621.3084948,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589621.9862835,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589622.6020668,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    },
+    {
+      "at": 1792589623.2153704,
+      "payment_status": 200,
+      "incidents": [
+        {
+          "id": "a57c0026-bf2b-458d-84ab-acc7265508f5",
+          "status": "recovered",
+          "created": 1792589592.8330965,
+          "updated": 1792589595.410767,
+          "evidence": "{\"transaction_id\": \"6d8869f7-7803-4368-aec1-9781a66b8660\", \"total_cents\": 200000, \"ban\": {\"enabled\": false, \"requested\": [], \"eligible\": [], \"excluded\": [], \"ttl_s\": 300, \"note\": \"bans disabled (BAN_ENABLED not set)\"}}",
+          "stages": {
+            "detected": 1792589592.821419,
+            "accepted": 1792589592.8330965,
+            "containing": 1792589592.8365777,
+            "verifying": 1792589595.1902547,
+            "recovered": 1792589595.410767
+          }
+        },
+        {
+          "id": "c33315c5-0078-4972-bd68-64672617668d",
+          "status": "observed",
+          "created": 1792589562.38965,
+          "updated": 1792589562.4038486,
+          "evidence": "{\"mode\": \"control_trial\", \"remediation_applied\": false, \"note\": \"Essai temoin : confinement non applique. Impact observe sans remediation ; ce resultat n est PAS une reprise.\"}",
+          "stages": {
+            "detected": 1792589562.3727887,
+            "accepted": 1792589562.38965,
+            "observed": 1792589562.4038486
+          }
+        }
+      ]
+    }
+  ],
+  "started_at": 1792589552.7869706,
+  "before": {
+    "transaction": {
+      "id": "419e8758-a822-4403-b7f0-d68eb4d0e872",
+      "idem": "794b20e1-b141-4e75-a85c-9c97c4d6c0ab",
+      "amount": 1,
+      "recipient": "merchant",
+      "created": "2026-10-21T13:32:33.348555+00:00"
+    },
+    "replayed": false
+  },
+  "after_status": 200,
+  "after": {
+    "transaction": {
+      "id": "ceb7182e-3038-4c47-920b-043c81ee9c23",
+      "idem": "9486a262-bb86-4e30-8308-a3a163552f33",
+      "amount": 1,
+      "recipient": "merchant",
+      "created": "2026-10-21T13:33:43.934019+00:00"
+    },
+    "replayed": false
+  },
+  "ledger": {
+    "accounts": [
+      {
+        "id": "alice",
+        "cents": 95466
+      },
+      {
+        "id": "merchant",
+        "cents": 104534
+      }
+    ],
+    "transactions": [
+      {
+        "id": "ceb7182e-3038-4c47-920b-043c81ee9c23",
+        "idem": "9486a262-bb86-4e30-8308-a3a163552f33",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:43.934019+00:00"
+      },
+      {
+        "id": "8265c050-c49b-483a-be1d-f0f266fc4aae",
+        "idem": "04468813-e7e0-4786-8f40-1bb3ec96e344",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:43.318787+00:00"
+      },
+      {
+        "id": "ca3c78c2-a91b-47d2-9153-4f971eab38f7",
+        "idem": "5c6fe701-ad27-41fc-8996-ffd2e29fbfdf",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:42.705164+00:00"
+      },
+      {
+        "id": "4e588301-7867-449a-8b2f-df75d1db9d7e",
+        "idem": "43693a33-3dbb-46ce-ad45-e98fffe2f59e",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:42.089867+00:00"
+      },
+      {
+        "id": "243047f3-7577-421c-9400-e7a5a6457cee",
+        "idem": "79a2e254-46d7-4c22-b019-4fd2b384c91a",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:41.468535+00:00"
+      },
+      {
+        "id": "97494365-54e7-46ab-9817-3465e7d2c0af",
+        "idem": "064097f4-601c-422b-8376-8b706e1b8c55",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:40.797553+00:00"
+      },
+      {
+        "id": "2c7c3f79-dd63-477a-a60a-e0231d227e3f",
+        "idem": "f603700d-39ae-404d-b2d7-f00bb190a7c8",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:40.177179+00:00"
+      },
+      {
+        "id": "9282caa6-bf83-4a46-9bf5-59c2ca396691",
+        "idem": "77f55f16-36a3-45de-bcf1-df6a1eae1123",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:39.541485+00:00"
+      },
+      {
+        "id": "60ba8d62-cfe8-405e-ada7-6937a2df5eb2",
+        "idem": "12222508-9c71-412a-b8cd-3a4b741d48c4",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:38.922269+00:00"
+      },
+      {
+        "id": "494785df-88bf-4778-9108-bb7b57c59769",
+        "idem": "b6b013e0-8cc1-452e-a828-48507247cce4",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:38.294107+00:00"
+      },
+      {
+        "id": "c44fbf12-c0db-4525-ada9-075a63aca892",
+        "idem": "ebb779d9-bf77-4376-9866-7fa6b54c661c",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:37.673999+00:00"
+      },
+      {
+        "id": "5902b7ea-d090-40e7-920e-70a60be15075",
+        "idem": "f2608830-fa91-4dd8-bc97-e3be81c5c75f",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:37.041023+00:00"
+      },
+      {
+        "id": "b84877ab-3cc7-4609-bba9-eed7c6a8f8d4",
+        "idem": "bb1cd00e-9ac7-4b48-b815-c9232e092059",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:36.424180+00:00"
+      },
+      {
+        "id": "ea1a2ee4-791a-4d73-92a9-d017ba5dc042",
+        "idem": "7485ae1c-9112-47e4-9118-9e815a560f12",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:35.770467+00:00"
+      },
+      {
+        "id": "5dda7bc0-1174-4d9d-aa8a-1e5a44adece5",
+        "idem": "ca7f5286-4e57-46ba-9df8-3a19396dd509",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:35.150954+00:00"
+      },
+      {
+        "id": "111aaccf-ab06-499a-a388-45729aa20310",
+        "idem": "3e66e97d-5d4c-4993-b5c3-ef9d6f7877f6",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:34.522998+00:00"
+      },
+      {
+        "id": "3b851b30-8fc1-4d32-9f14-5f6c16e11e5d",
+        "idem": "4ee0a88e-e651-4583-b763-9b7cc7dc4953",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:33.903228+00:00"
+      },
+      {
+        "id": "a1d57eab-7d45-4268-a68f-e8a45809bee7",
+        "idem": "fbb6c3fd-177d-4b33-a50e-ffd36dc1ff13",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:33.274531+00:00"
+      },
+      {
+        "id": "238f7d69-b3c6-4d0a-ba2d-1e239a445b7f",
+        "idem": "e83c11a1-d447-4b8d-a6c6-1963f4762716",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:32.658339+00:00"
+      },
+      {
+        "id": "3ed28312-a866-447d-8732-2fa6980c7883",
+        "idem": "848bf84b-8646-4acd-8cbd-ce9b60c6686d",
+        "amount": 1,
+        "recipient": "merchant",
+        "created": "2026-10-21T13:33:32.028540+00:00"
+      }
+    ],
+    "total_cents": 200000
+  },
+  "passed": true,
+  "summary": {
+    "incident": {
+      "id": "c33315c5-0078-4972-bd68-64672617668d",
+      "status": "observed",
+      "steps": [
+        {
+          "name": "detected",
+          "at": 1792589562.3727887,
+          "offset_s": 0.0
+        },
+        {
+          "name": "containing",
+          "at": null,
+          "offset_s": null
+        },
+        {
+          "name": "verifying",
+          "at": null,
+          "offset_s": null
+        },
+        {
+          "name": "recovered",
+          "at": null,
+          "offset_s": null
+        }
+      ],
+      "detection_to_recovered_s": null,
+      "within_target": null,
+      "target_s": 60
+    },
+    "witness": {
+      "verdict": "absent",
+      "transaction_id": null,
+      "total_cents": null
+    },
+    "ban": null,
+    "user_visible_outage": {
+      "first_refused_at": 1792589556.4685266,
+      "first_ok_after_at": 1792589556.9830315,
+      "seconds": 0.51,
+      "note": "seen by this observer, one probe every 0.5 s"
+    },
+    "ledger_total_cents": 200000,
+    "detector_config": {
+      "consecutive": 3,
+      "nu": 0.02
+    },
+    "code_version": {
+      "commit": "c11ec6f8d9dfe30fd9a9b7da470785f7ba4f9f48",
+      "dirty": true
+    },
+    "complete": false,
+    "missing": [
+      "stage:containing",
+      "stage:verifying",
+      "stage:recovered",
+      "witness_transaction_validated"
+    ]
+  }
+}

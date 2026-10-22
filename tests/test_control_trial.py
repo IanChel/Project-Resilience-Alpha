@@ -1,8 +1,8 @@
-"""The control trial ("essai temoin"): the remediation is inhibited for ONE incident, for a BOUNDED time, and
+"""The control trial ("essai temoin"): remediation is inhibited for incidents during a BOUNDED window, and
 only by an authenticated operator. What these tests pin down:
   - the protected mode is unchanged: a normal alert still contains, verifies and recovers;
   - the inhibition applies ONLY while the window holds, and only to the remediator's own response;
-  - the window reopens remediation on its own -- first observed incident, deadline, operator, restart -- even
+  - the window reopens remediation on its own -- deadline, operator, restart -- even
     when something went wrong;
   - an operator session is required to arm it AND to end it;
   - a trial result is never reported as a recovery, and never as a protected PASS.
@@ -118,19 +118,24 @@ def test_during_a_trial_the_incident_is_journaled_but_never_contained(lab):
     assert 'ban' not in evidence                                       # no ban was planned, let alone applied
 
 
-def test_the_trial_covers_one_incident_only_and_then_remediation_is_back(lab):
+def test_the_trial_covers_multiple_incidents_until_stopped_then_remediation_is_back(lab):
     with TestClient(remediator.app) as client:
         client.post('/control-trial', headers=OPERATOR(), json={'action': 'start', 'confirmed': True, 'seconds': 120})
         assert client.post('/alerts', **signed(alert())).status_code == 202
         first = wait_final(client)['incidents'][0]
         assert first['status'] == 'observed'
         window = client.get('/control-trial', headers=OPERATOR()).json()
-        assert window['active'] is False                               # closed by the incident, not by the clock
-        assert window['closed_reason'] == 'incident_observed'
+        assert window['active'] is True                                # the incident does not end the window
         assert window['observed_incident_id'] == first['id']
         assert client.post('/alerts', **signed(alert())).status_code == 202
         second = wait_final(client)['incidents'][0]
-    assert second['status'] == 'recovered'                             # the NEXT incident is remediated normally
+        assert second['status'] == 'observed'                          # incidents inside the window stay unremediated
+        assert client.get('/control-trial', headers=OPERATOR()).json()['active'] is True
+        stopped = client.post('/control-trial', headers=OPERATOR(), json={'action': 'stop'}).json()
+        assert stopped['active'] is False and stopped['closed_reason'] == 'operator_stopped'
+        assert client.post('/alerts', **signed(alert())).status_code == 202
+        third = wait_final(client)['incidents'][0]
+        assert third['status'] == 'recovered'                          # remediation is back after the window
     assert lab['contained'] and lab['witnesses']
 
 
@@ -229,7 +234,8 @@ def test_the_window_is_never_an_open_ended_switch(lab):
         # A second arming cannot extend an already running remediation...
         assert client.post('/alerts', **signed(alert())).status_code == 202
         wait_final(client)
-        assert client.get('/control-trial', headers=OPERATOR()).json()['active'] is False
+        assert client.get('/control-trial', headers=OPERATOR()).json()['active'] is True
+        assert client.post('/control-trial', headers=OPERATOR(), json={'action': 'stop'}).json()['active'] is False
 
 
 def test_a_trial_is_refused_while_a_remediation_is_in_flight(lab, monkeypatch):
@@ -375,7 +381,7 @@ def test_the_summary_records_the_mode_and_the_impact_without_inventing_one(tmp_p
                     incident_status={'i': 'observed'})
     path = runner.write_recipe_result(time.time(), 'http://127.0.0.1:8081', prep, result(check_mardi=0),
                                       mode='control', tally=counted,
-                                      trial={'active': False, 'closed_reason': 'incident_observed'})
+                                      trial={'active': False, 'closed_reason': 'operator_stopped'})
     report = json.loads(path.read_text(encoding='utf-8'))
     assert report['mode'] == 'control' and report['remediation_inhibited'] is True
     assert report['status'] == runner.CONTROL_IMPACT and report['status'] != 'PASS'
@@ -383,7 +389,7 @@ def test_the_summary_records_the_mode_and_the_impact_without_inventing_one(tmp_p
     assert report['observed_impact']['payment_refused_503'] == 4
     assert report['observed_impact']['incident_statuses'] == ['observed']
     assert 'reprise' not in report['observed_impact']['note'].lower().replace('pas une reprise', '')
-    assert report['control_trial']['closed_reason'] == 'incident_observed'
+    assert report['control_trial']['closed_reason'] == 'operator_stopped'
     assert report['attack_launched_by_runner'] is False
 
 
@@ -481,14 +487,14 @@ def test_the_bridge_keeps_the_runners_own_control_verdict_instead_of_the_exit_co
 
 def test_the_bridge_reports_the_arming_phase():
     bridge._state.update(status='running', phase='starting')
-    bridge._phase_from_line('[essai temoin] Inhibition de la remediation automatique pour UN incident')
+    bridge._phase_from_line('[essai temoin] Inhibition de la remediation automatique pendant la fenetre bornee')
     assert bridge._state['phase'] == 'arming_trial'
 
 
 # ---- the trial inhibits the remediator's response and NOTHING else -----------------------------------------
 def test_the_trial_touches_no_other_defence():
     """WAF, operator login (e-mail + password + code), the attempt budget and the containment control itself
-    are untouched: the only thing a trial changes is whether the remediator answers one incident."""
+    are untouched: the only thing a trial changes is whether the remediator answers incidents during its window."""
     window = (ROOT / 'services/remediator/main.py').read_text(encoding='utf-8')
     window = window.split('trial={')[1].split('def in_flight')[0]
     for untouched in ('/control/contain', 'control_key', 'httpx', 'auth', 'attempts', 'nginx', 'waf'):
@@ -498,7 +504,7 @@ def test_the_trial_touches_no_other_defence():
     branch = (ROOT / 'services/remediator/main.py').read_text(encoding='utf-8')
     branch = branch.split('if trial_active():')[1].split('        # The ban is decided')[0]
     code = '\n'.join(line for line in branch.splitlines() if not line.lstrip().startswith('#'))
-    assert 'trial_close(' in code and "update(incident_id,'observed'" in code
+    assert 'trial_close(' not in code and "update(incident_id,'observed'" in code
     for forbidden in ('create_subprocess_exec', 'business_verify', 'bans.', 'contain('):
         assert forbidden not in code, f'the inhibited branch must not call {forbidden}'
 
